@@ -1,6 +1,5 @@
 package com.problems.stack;
 
-import java.util.List;
 import java.util.Stack;
 
 /**
