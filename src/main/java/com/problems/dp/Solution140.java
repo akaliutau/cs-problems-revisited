@@ -56,8 +56,9 @@ public class Solution140 {
             }
 
             // quick check on the sets of characters
-            if (!wordCharSet.containsAll(stringCharSet))
+            if (!wordCharSet.containsAll(stringCharSet)) {
                 return new ArrayList<>();
+            }
 
             int len = s.length();
             // contains a list of all possible cuts for [0,l)

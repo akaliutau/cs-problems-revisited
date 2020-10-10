@@ -16,6 +16,14 @@ public class Solution588 {
             abstract boolean isFile();
             abstract StringBuilder getContent();
             abstract HashMap<String, Entry> getFiles();
+            
+            public Entry find(String[] d, int depth) {
+            	Entry e = this;
+            	for (int i = 1; i < depth; i++) {
+                	e = e.getFiles().get(d[i]);
+                }
+                return e;
+            }
         }
 
         class Dir extends Entry {
@@ -70,12 +78,9 @@ public class Solution588 {
             List<String> files = new ArrayList<>();
             if (!path.equals("/")) {
                 String[] d = path.split("/");
-                int len = d.length;
-                for (int i = 1; i < len; i++) {
-                    t = t.getFiles().get(d[i]);
-                }
+                t = root.find(d, d.length);
                 if (t.isFile()) {
-                    files.add(d[len - 1]);
+                    files.add(d[d.length - 1]);
                     return files;
                 }
             }
@@ -96,12 +101,11 @@ public class Solution588 {
         }
 
         public void addContentToFile(String filePath, String content) {
-            Entry t = root;
+            
             String[] d = filePath.split("/");
             int len = d.length;
-            for (int i = 1; i < len - 1; i++) {
-                t = t.getFiles().get(d[i]);
-            }
+            Entry t = root.find(d, len);
+            
             if (!t.getFiles().containsKey(d[len - 1])) {
                 t.getFiles().put(d[len - 1], new File());
             }
@@ -110,11 +114,9 @@ public class Solution588 {
         }
 
         public String readContentFromFile(String filePath) {
-            Entry t = root;
+            
             String[] d = filePath.split("/");
-            for (int i = 1; i < d.length - 1; i++) {
-                t = t.getFiles().get(d[i]);
-            }
+            Entry t = root.find(d, d.length - 1);
             return t.getFiles().get(d[d.length - 1]).getContent().toString();
         }
     }

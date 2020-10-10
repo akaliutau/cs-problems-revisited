@@ -8,32 +8,41 @@ import java.util.Set;
 /**
  * DP
  * 
+ * 1
  * 
- * map which contains key:valuekey:value pairs such that keykey refers to the
- * position at which a stone is present and valuevalue is a set containing the
- * jumpsizejumpsize which can lead to the current stone position
+ * 0    1     3    5 
+ * 
+ * 0    1     1
  * 
  */
 public class Solution403 {
-	
+
 	public boolean canCross(int[] stones) {
-        Map<Integer, Set<Integer>> map = new HashMap<>();
-        int len = stones.length;
-        for (int i = 0; i < len; i++) {
-            map.put(stones[i], new HashSet<Integer>());
-        }
-        map.get(0).add(0);
-        for (int i = 0; i < len; i++) {
-            for (int k : map.get(stones[i])) {
-                for (int step = k - 1; step <= k + 1; step++) {
-                    if (step > 0 && map.containsKey(stones[i] + step)) {
-                        map.get(stones[i] + step).add(step);
-                    }
-                }
-            }
-        }
-        return map.get(stones[len - 1]).size() > 0;
-    }
+		int len = stones.length;
+		// key refers to the position at which a stone is present and
+		// value is a set containing the jumpsize which can lead to the current stone
+		// position
+		Map<Integer, Set<Integer>> map = new HashMap<>();
+
+		for (int i = 0; i < len; i++) {
+			map.put(stones[i], new HashSet<Integer>());// stone positions
+		}
+		map.get(0).add(0);
+		for (int i = 0; i < len; i++) {
+
+			for (int k : map.get(stones[i])) {// the size of possible jumps
+				for (int jumpsize = k - 1; jumpsize <= k + 1; jumpsize ++) {
+					// can jump only forward and check for stone at landing position
+					int landingPos = stones[i] + jumpsize;
+					if (jumpsize > 0 && map.containsKey(landingPos)) {
+						map.get(landingPos).add(jumpsize);// collect jump sizes for future use
+					}
+				}
+			}
+
+		}
+		return map.get(stones[len - 1]).size() > 0;
+	}
 
 	public static void main(String[] arg) {
 		System.out.println(true);
