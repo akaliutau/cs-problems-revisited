@@ -11,22 +11,17 @@ import java.util.Map;
  * Union Find
  * 
  * 
- * Input: accounts = 
- * [
- * ["John", "johnsmith@mail.com", "john00@mail.com"],
- * ["John", "johnnybravo@mail.com"], 
- * ["John", "johnsmith@mail.com", "john_newyork@mail.com"], 
- * ["Mary", "mary@mail.com"]] 
+ * Input: accounts = [ ["John", "johnsmith@mail.com", "john00@mail.com"],
+ * ["John", "johnnybravo@mail.com"], ["John", "johnsmith@mail.com",
+ * "john_newyork@mail.com"], ["Mary", "mary@mail.com"]]
  * 
- * Output: [
- * ["John", "john00@mail.com", "john_newyork@mail.com", "johnsmith@mail.com"], 
- * ["John", "johnnybravo@mail.com"], 
- * ["Mary", "mary@mail.com"]] 
+ * Output: [ ["John", "john00@mail.com", "john_newyork@mail.com",
+ * "johnsmith@mail.com"], ["John", "johnnybravo@mail.com"], ["Mary",
+ * "mary@mail.com"]]
  * 
- * Explanation: The first
- * and third John's are the same person as they have the common email
- * "johnsmith@mail.com". The second John and Mary are different people as none
- * of their email addresses are used by other accounts. 
+ * Explanation: The first and third John's are the same person as they have the
+ * common email "johnsmith@mail.com". The second John and Mary are different
+ * people as none of their email addresses are used by other accounts.
  */
 public class Solution721 {
 
@@ -54,31 +49,28 @@ public class Solution721 {
 	public List<List<String>> accountsMerge(List<List<String>> accounts) {
 		Graph g = new Graph();
 		Map<String, String> emailToName = new HashMap<>();
-		Map<String, Integer> emailToID = new HashMap<>();
-		int id = 0;
+		Map<String, Integer> emailToID = new HashMap<>();// replace unique string with unique int id
+		int uuid = 0;
 		for (List<String> account : accounts) {
-			String name = "";
-			for (String email : account) {
-				if (name == "") {
-					name = email;
-					continue;
-				}
+			String name = account.get(0);
+			for (int i = 1; i < account.size(); i++) {
+				String email = account.get(i);
 				emailToName.put(email, name);
 				if (!emailToID.containsKey(email)) {
-					emailToID.put(email, id++);
+					emailToID.put(email, uuid ++);
 				}
-				g.union(emailToID.get(account.get(1)), emailToID.get(email));
+				g.union(emailToID.get(account.get(1)), emailToID.get(email));// if sets intersected, then union them
 			}
 		}
 
-		Map<Integer, List<String>> ans = new HashMap<>();
+		Map<Integer, List<String>> ans = new HashMap<>();// map parent id => all emails in set
 		for (String email : emailToName.keySet()) {
 			int index = g.find(emailToID.get(email));
 			ans.computeIfAbsent(index, x -> new ArrayList<>()).add(email);
 		}
 		for (List<String> component : ans.values()) {
 			Collections.sort(component);
-			component.add(0, emailToName.get(component.get(0)));
+			component.add(0, emailToName.get(component.get(0)));// sort and attach name at pos=0
 		}
 		return new ArrayList<>(ans.values());
 	}

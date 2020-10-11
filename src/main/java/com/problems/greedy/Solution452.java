@@ -8,8 +8,6 @@ import java.util.List;
  * 
  * Greedy
  * 
- * The idea of greedy algorithm is to pick the locally optimal move at each
- * step, that will lead to the globally optimal solution
  */
 public class Solution452 {
 

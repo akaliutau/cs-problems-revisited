@@ -11,18 +11,22 @@ import java.util.List;
  */
 public class Solution15 {
 	
-	void twoSumII(int[] nums, int i, List<List<Integer>> res) {
-        int lo = i + 1, hi = nums.length - 1;
+	void twoSums(int[] nums, int i, List<List<Integer>> results) {
+        int lo = i + 1;// 2nd number
+        int hi = nums.length - 1;// 3rd number
         while (lo < hi) {
             int sum = nums[i] + nums[lo] + nums[hi];
-            if (sum < 0) {
+            if (sum < 0) {// too small, increase the lowest one
                 ++lo;
-            } else if (sum > 0) {
+            } else if (sum > 0) {// too big, decrease the highest one
                 --hi;
             } else {
-                res.add(Arrays.asList(nums[i], nums[lo++], nums[hi--]));
-                while (lo < hi && nums[lo] == nums[lo - 1])
+            	results.add(Arrays.asList(nums[i], nums[lo], nums[hi]));
+            	lo++;
+            	hi--;
+                while (lo < hi && nums[lo] == nums[lo - 1]) {// omit equal numbers
                     ++lo;
+                }
             }
         }
     }
@@ -30,10 +34,11 @@ public class Solution15 {
     public List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);
         List<List<Integer>> res = new ArrayList<>();
-        for (int i = 0; i < nums.length && nums[i] <= 0; ++i)
+        for (int i = 0; i < nums.length && nums[i] <= 0; ++i) {
             if (i == 0 || nums[i - 1] != nums[i]) {
-                twoSumII(nums, i, res);
+            	twoSums(nums, i, res);
             }
+        }
         return res;
     }
     
