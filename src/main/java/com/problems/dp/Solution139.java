@@ -11,30 +11,32 @@ import java.util.Queue;
  * catsanddog
  * 
  * dict = [cat, cats, and, dog ]
- * 
- * 
+ *             catsanddog
+ *            /         \
+ * 		   sanddog     anddog
+ *        		
  * 
  */
 public class Solution139 {
 
 	public boolean wordBreak(String s, List<String> wordDict) {
-		Queue<Integer> queue = new LinkedList<>();
+		Queue<Integer> positions = new LinkedList<>();//
 		int n = s.length();
-		boolean visited[] = new boolean[n];
+		boolean visitedPositions[] = new boolean[n];
 		int pos = 0;
-		queue.add(pos);
-		visited[0] = true;
-		while (!queue.isEmpty()) {
-			pos = queue.poll();
+		positions.add(pos);
+		visitedPositions[0] = true;
+		while (!positions.isEmpty()) {
+			pos = positions.poll();
 			for (String word : wordDict) {
 				if (s.startsWith(word, pos)) {
-					int next = pos + word.length();
-					if (n == next) {
+					int nextPos = pos + word.length();
+					if (n == nextPos) {
 						return true;
 					}
-					if (!visited[next]) {
-						queue.add(next);
-						visited[next] = true;
+					if (!visitedPositions[nextPos]) {
+						positions.add(nextPos);
+						visitedPositions[nextPos] = true;
 					}
 				}
 			}
