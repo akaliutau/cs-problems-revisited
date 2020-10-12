@@ -9,7 +9,11 @@ import java.util.Queue;
 import java.util.Set;
 
 /**
- * BFS
+ * BFS 
+ * 
+ * We perform a breadth first search on bus numbers. When we start at S,
+ * originally we might be able to board many buses, and if we end at T we may
+ * have many targets for our goal state.
  */
 public class Solution815 {
 
@@ -37,15 +41,15 @@ public class Solution815 {
             }
             if (route1[i] < route2[j]) {
                 i++;
-            }else {
+            } else {
                 j++;
             }
         }
         return false;
     }
 
-    public int numBusesToDestination(int[][] routes, int s, int t) {
-        if (s == t) {
+    public int numBusesToDestination(int[][] routes, int src, int dest) {
+        if (src == dest) {
             return 0;
         }
         int n = routes.length;
@@ -75,11 +79,11 @@ public class Solution815 {
         // queue handles our breadth first search.
         // targets is the set of goal states we have.
         for (int i = 0; i < n; ++i) {
-            if (Arrays.binarySearch(routes[i], s) >= 0) {
+            if (Arrays.binarySearch(routes[i], src) >= 0) {
                 seen.add(i);
                 queue.offer(new Point(i, 0));
             }
-            if (Arrays.binarySearch(routes[i], t) >= 0)
+            if (Arrays.binarySearch(routes[i], dest) >= 0)
                 targets.add(i);
         }
 
