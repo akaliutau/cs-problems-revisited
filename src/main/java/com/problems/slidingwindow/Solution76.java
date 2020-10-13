@@ -1,8 +1,5 @@
 package com.problems.slidingwindow;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * 
  * Sliding window
@@ -50,7 +47,12 @@ import java.util.Map;
  * 
  */
 public class Solution76 {
-
+	
+	static class Result {
+		int len = 0;
+		int l = 0, r = 0;
+	}
+	
 	public String minWindow(String s, String t) {
 
 		if (s.length() == 0 || t.length() == 0) {
@@ -58,13 +60,16 @@ public class Solution76 {
 		}
 
 		// Dictionary which keeps a count of all the unique characters in t.
-		Map<Character, Integer> have = new HashMap<>();
+		int[] have = new int[256];
 		for (int i = 0; i < t.length(); i++) {
-			int count = have.getOrDefault(t.charAt(i), 0);
-			have.put(t.charAt(i), count + 1);
+			have[t.charAt(i)] ++;
 		}
-
-		int required = have.size();
+		int required = 0;
+		for (int i = 0; i < 256; i++) {
+			if (have[i] > 0) {
+				required ++;
+			}
+		}
 
 		int l = 0, r = 0;
 
@@ -75,29 +80,29 @@ public class Solution76 {
 		int formed = 0;
 
 		// count of all the unique characters in the current window.
-		Map<Character, Integer> windowCounts = new HashMap<>();
+		int[] windowCounts = new int[256];
 
-		int[] ans = { -1, 0, 0 };
+		Result ans = new Result();
 
 		while (r < s.length()) {
 			char c = s.charAt(r);
-			int count = windowCounts.getOrDefault(c, 0);
-			windowCounts.put(c, count + 1);
+			windowCounts[c] ++;
 
-			if (have.containsKey(c) && windowCounts.get(c).intValue() == have.get(c).intValue()) {
+			if (have[c] > 0 && windowCounts[c] == have[c]) {
 				formed++;
 			}
 
 			while (l <= r && formed == required) {
 				c = s.charAt(l);
-				if (ans[0] == -1 || r - l + 1 < ans[0]) {
-					ans[0] = r - l + 1;
-					ans[1] = l;
-					ans[2] = r;
+				// update stat
+				if (ans.len == 0 || ans.len > r - l + 1) {// found smaller or first time
+					ans.len = r - l + 1;
+					ans.l = l;
+					ans.r = r;
 				}
 
-				windowCounts.put(c, windowCounts.get(c) - 1);
-				if (have.containsKey(c) && windowCounts.get(c).intValue() < have.get(c).intValue()) {
+				windowCounts[c] --;
+				if (have[c] > 0 && windowCounts[c] < have[c]) {
 					formed--;
 				}
 				l++;
@@ -105,7 +110,7 @@ public class Solution76 {
 			r++;
 		}
 
-		return ans[0] == -1 ? "" : s.substring(ans[1], ans[2] + 1);
+		return ans.len == 0 ? "" : s.substring(ans.l, ans.r + 1);
 	}
 
 	public static void main(String[] arg) {
