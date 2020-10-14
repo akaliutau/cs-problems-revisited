@@ -3,9 +3,9 @@ package com.problems.dp;
 /**
  * DP
  * 
- * O(n*k)
+ * O(n) + O(k)
  */
-public class Solution55 {
+public class Solution55opt {
 
     public boolean canJump(int[] nums) {
         int n = nums.length;
@@ -19,7 +19,6 @@ public class Solution55 {
             return false;
         }
 
-        boolean[] coverMap = new boolean[n];
         for (int i = 0; i < n - 1; i++) {
             int dist = nums[i];
             if (dist == 0) {// check wall presence
@@ -27,19 +26,14 @@ public class Solution55 {
                     return false;
                 }
             }
-            for (int range = i; range <= i + dist; range++) {
-                if (range > -1 && range < n) {
-                    if (range == n - 1) {
-                        return true;
-                    }
-                    coverMap[range] = true;
-                    if (maxNumberCovered < range) {
-                        maxNumberCovered = range;
-                    }
-                }
+            int maxJump = i + dist;
+            if (maxJump >= n - 1) {
+                return true;
             }
+            maxNumberCovered = Math.max(maxNumberCovered, maxJump);
+            
         }
-        return coverMap[n - 1];
+        return maxNumberCovered >= n - 1;
 
     }
 
