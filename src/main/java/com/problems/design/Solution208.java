@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Design
+ * Implement a trie with insert, search, and startsWith methods.
  */
 public class Solution208 {
 

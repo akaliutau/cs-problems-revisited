@@ -1,7 +1,7 @@
 package com.problems.dp;
 
 /**
- * DP
+ * Given a string s, return the longest palindromic substring in s.
  * 
  * vabbaa
  *   ||

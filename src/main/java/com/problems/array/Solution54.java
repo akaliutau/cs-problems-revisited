@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Array 
+ * Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
  * 
  * [
  * [1, 1, 1, 1, 1, 1, 1], <- top layer    1, 1, 1, 1, 1, 1, 1

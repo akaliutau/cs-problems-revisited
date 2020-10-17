@@ -3,7 +3,8 @@ package com.problems.dividenconquer;
 import com.problems.model.ListNode;
 
 /**
- * Divide and conquer
+ * You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.
+ * 
  */
 public class Solution23 {
 

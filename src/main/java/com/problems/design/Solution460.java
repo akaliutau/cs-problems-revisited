@@ -7,174 +7,189 @@ import java.util.Map;
 /**
  * https://en.wikipedia.org/wiki/Least_frequently_used
  * 
+ * Design and implement a data structure for Least Frequently Used (LFU) cache.
+ * It should support the following operations: get and put.
+ * 
+ * get(key) - Get the value (will always be positive) of the key if the key
+ * exists in the cache, otherwise return -1. put(key, value) - Set or insert the
+ * value if the key is not already present. When the cache reaches its capacity,
+ * it should invalidate the least frequently used item before inserting a new
+ * item. For the purpose of this problem, when there is a tie (i.e., two or more
+ * keys that have the same frequency), the least recently used key would be
+ * evicted.
+ * 
+ * Note that the number of times an item is used is the number of calls to the
+ * get and put functions for that item since it was inserted. This number is set
+ * to zero when the item is removed.
+ * 
  */
 public class Solution460 {
 
-    class LFUCache {
+	class LFUCache {
 
-        // node with statistics
-        class Node {
-            int key;
-            int value;
-            int count;
+		// node with statistics
+		class Node {
+			int key;
+			int value;
+			int count;
 
-            Node prev;
-            Node next;
+			Node prev;
+			Node next;
 
-            Node(int key, int value) {
-                this.key = key;
-                this.value = value;
-            }
+			Node(int key, int value) {
+				this.key = key;
+				this.value = value;
+			}
 
-            // attach to this node the next one
-            void chain(Node node) {
-                node.prev = this;
-                next = node;
-            }
+			// attach to this node the next one
+			void chain(Node node) {
+				node.prev = this;
+				next = node;
+			}
 
-            // remove from 2-linked list
-            void remove() {
-                if (next != null) {
-                    next.prev = prev;
-                }
+			// remove from 2-linked list
+			void remove() {
+				if (next != null) {
+					next.prev = prev;
+				}
 
-                if (prev != null) {
-                    prev.next = next;
-                }
-            }
-        }
+				if (prev != null) {
+					prev.next = next;
+				}
+			}
+		}
 
-        int maxSize;
-        int size;
+		int maxSize;
+		int size;
 
-        Map<Integer, LinkedList<Node>> counter;// for statistics
-        Map<Integer, Node> nodeMap;// for fast access
+		Map<Integer, LinkedList<Node>> counter;// for statistics
+		Map<Integer, Node> nodeMap;// for fast access
 
-        Node head;
-        Node tail;
+		Node head;
+		Node tail;
 
-        int minCount;
+		int minCount;
 
-        public LFUCache(int capacity) {
-            maxSize = capacity;
-            minCount = 0;
-            size = 0;
+		public LFUCache(int capacity) {
+			maxSize = capacity;
+			minCount = 0;
+			size = 0;
 
-            counter = new HashMap<>();
-            nodeMap = new HashMap<>();
+			counter = new HashMap<>();
+			nodeMap = new HashMap<>();
 
-            head = null;
-        }
+			head = null;
+		}
 
-        public int get(int key) {
-            if (!nodeMap.containsKey(key)) {
-                return -1;
-            }
+		public int get(int key) {
+			if (!nodeMap.containsKey(key)) {
+				return -1;
+			}
 
-            Node node = nodeMap.get(key);
+			Node node = nodeMap.get(key);
 
-            LinkedList<Node> nodes = counter.get(node.count);
-            nodes.remove(node);
+			LinkedList<Node> nodes = counter.get(node.count);
+			nodes.remove(node);
 
-            if (nodes.size() > 0) {
-                Node node1 = nodes.peekFirst();
-                node.chain(node1);
-                if (node == tail) {
-                    tail = node1;
-                }
-            }
+			if (nodes.size() > 0) {
+				Node node1 = nodes.peekFirst();
+				node.chain(node1);
+				if (node == tail) {
+					tail = node1;
+				}
+			}
 
-            node.count += 1;
-            if (!counter.containsKey(node.count)) {
-                counter.put(node.count, new LinkedList<>());
-            }
+			node.count += 1;
+			if (!counter.containsKey(node.count)) {
+				counter.put(node.count, new LinkedList<>());
+			}
 
-            LinkedList<Node> updatesNodes = counter.get(node.count);
-            if (updatesNodes.size() > 0) {
-                Node node1 = updatesNodes.peekLast();
-                node1.chain(node);
-                if (node1 == tail) {
-                    tail = node;
-                }
-            }
+			LinkedList<Node> updatesNodes = counter.get(node.count);
+			if (updatesNodes.size() > 0) {
+				Node node1 = updatesNodes.peekLast();
+				node1.chain(node);
+				if (node1 == tail) {
+					tail = node;
+				}
+			}
 
-            updatesNodes.offer(node);
+			updatesNodes.offer(node);
 
-            return node.value;
-        }
+			return node.value;
+		}
 
-        public void put(int key, int value) {
-            if (maxSize == 0) {
-                return;
-            }
+		public void put(int key, int value) {
+			if (maxSize == 0) {
+				return;
+			}
 
-            if (nodeMap.containsKey(key)) {
-                get(key);
+			if (nodeMap.containsKey(key)) {
+				get(key);
 
-                Node node = nodeMap.get(key);
-                node.value = value;
-                return;
-            }
+				Node node = nodeMap.get(key);
+				node.value = value;
+				return;
+			}
 
-            if (size == maxSize) {
-                int count = tail.count;
-                Node node = counter.get(count).pollFirst();
-                remove(node);
+			if (size == maxSize) {
+				int count = tail.count;
+				Node node = counter.get(count).pollFirst();
+				remove(node);
 
-                nodeMap.remove(node.key);
+				nodeMap.remove(node.key);
 
-                counter.get(node.count).remove(node);
-            }
+				counter.get(node.count).remove(node);
+			}
 
-            Node node = addToTail(key, value);
+			Node node = addToTail(key, value);
 
-            nodeMap.put(key, node);
+			nodeMap.put(key, node);
 
-            if (!counter.containsKey(node.count)) {
-                counter.put(node.count, new LinkedList<>());
-            }
+			if (!counter.containsKey(node.count)) {
+				counter.put(node.count, new LinkedList<>());
+			}
 
-            counter.get(node.count).offer(node);
-        }
+			counter.get(node.count).offer(node);
+		}
 
-        void remove(Node node) {
-            node.remove();
+		void remove(Node node) {
+			node.remove();
 
-            if (head == node) {
-                head = head.next;
-                if (head != null) {
-                    head.prev = null;
-                }
-            }
+			if (head == node) {
+				head = head.next;
+				if (head != null) {
+					head.prev = null;
+				}
+			}
 
-            if (tail == node) {
-                tail = node.prev;
-            }
+			if (tail == node) {
+				tail = node.prev;
+			}
 
-            size--;
-        }
+			size--;
+		}
 
-        Node addToTail(int key, int value) {
-            Node node = new Node(key, value);
+		Node addToTail(int key, int value) {
+			Node node = new Node(key, value);
 
-            if (head == null) {
-                head = node;
-                tail = head;
-            } else {
-                tail.chain(node);
-                tail = node;
-            }
+			if (head == null) {
+				head = node;
+				tail = head;
+			} else {
+				tail.chain(node);
+				tail = node;
+			}
 
-            size++;
+			size++;
 
-            return node;
-        }
-    }
+			return node;
+		}
+	}
 
-    public static void main(String[] arg) {
+	public static void main(String[] arg) {
 
-        System.out.println("D");
+		System.out.println("D");
 
-    }
+	}
 
 }

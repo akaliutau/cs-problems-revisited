@@ -1,7 +1,7 @@
 package com.problems.string;
 
 /**
- * String
+ * Convert a non-negative integer num to its English words representation.
  */
 public class Solution273 {
 

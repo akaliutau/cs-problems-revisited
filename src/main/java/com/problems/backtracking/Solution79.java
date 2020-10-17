@@ -2,14 +2,18 @@ package com.problems.backtracking;
 
 /**
  * 
- * Backtracking
+ * Given a 2D board and a word, find if the word exists in the grid.
+ * 
+ * The word can be constructed from letters of sequentially adjacent cells,
+ * where "adjacent" cells are horizontally or vertically neighboring. The same
+ * letter cell may not be used more than once.
+ * 
  * 
  */
 public class Solution79 {
 
 	int[] rowOffsets = { 0, 1, 0, -1 };
 	int[] colOffsets = { 1, 0, -1, 0 };
-
 
 	public boolean backtrack(char[][] board, int row, int col, int rows, int cols, String word, int index) {
 		if (index >= word.length()) {
@@ -35,7 +39,6 @@ public class Solution79 {
 		return found;
 	}
 
-
 	boolean exist(char[][] board, String word) {
 		int rows = board.length;
 		int cols = 0;
@@ -52,7 +55,6 @@ public class Solution79 {
 		}
 		return false;
 	}
-	
 
 	public static void main(String[] arg) {
 		System.out.println(true);

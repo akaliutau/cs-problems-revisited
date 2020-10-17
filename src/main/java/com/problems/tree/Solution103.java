@@ -21,7 +21,12 @@ import com.problems.model.TreeNode;
  *     9  20 
  *    / \ 
  *   15  7
- * return its zigzag level order traversal as: [ [3], [20,9], [15,7] ]
+ * return its zigzag level order traversal as: 
+ * [ 
+ * [3], 
+ * [20,9], 
+ * [15,7] 
+ * ]
  */
 public class Solution103 {
 

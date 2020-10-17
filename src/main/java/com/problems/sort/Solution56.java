@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 /**
  * 
- * Sort
+ * Given a collection of intervals, merge all overlapping intervals.
  * 
  * Idea:
  * 
