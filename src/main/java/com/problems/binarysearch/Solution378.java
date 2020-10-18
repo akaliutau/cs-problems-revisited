@@ -34,7 +34,7 @@ public class Solution378 {
                 // as matrix[row][col] is less than or equal to the mid, let's keep track of the
                 // biggest number less than or equal to the mid
                 smallLargePair[0] = Math.max(smallLargePair[0], matrix[row][col]);
-                count += row + 1;
+                count += row + 1;// ate least all elems on [0,row] are smaller
                 col++;
             }
         }
@@ -49,10 +49,12 @@ public class Solution378 {
         while (start < end) {
 
             int mid = start + (end - start) / 2;
-            // first number is the smallest and the second number is the largest
+            // first number is the smallest elem on range
+            // second number is the largest elem on range
+            
             int[] smallLargePair = { matrix[0][0], matrix[n - 1][n - 1] };
 
-            int count = this.countOnRangeLE(matrix, mid, smallLargePair);
+            int count = countOnRangeLE(matrix, mid, smallLargePair);
 
             if (count == k)
                 return smallLargePair[0];

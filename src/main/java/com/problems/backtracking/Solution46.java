@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Backtracking
+ * Given a collection of distinct integers, return all possible permutations.
  * 
  *             123          +1 new
  *         32 1   13 2      +2 new
