@@ -54,8 +54,6 @@ public class Solution199 {
 	        return rightside;
 	    }
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+	
 
 }

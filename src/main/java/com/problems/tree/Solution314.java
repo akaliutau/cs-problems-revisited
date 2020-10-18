@@ -90,8 +90,5 @@ public class Solution314 {
 		return output;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
-
+	
 }
