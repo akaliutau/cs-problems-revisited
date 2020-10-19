@@ -31,7 +31,7 @@ package com.problems.slidingwindow;
  * 
  * 
  */
-public class Solution1003 {
+public class Solution1004 {
 
     public int longestOnes(int[] arr, int k) {
         int left = 0, right;

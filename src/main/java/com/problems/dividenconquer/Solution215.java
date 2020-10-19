@@ -20,27 +20,27 @@ public class Solution215 {
 		nums[b] = tmp;
 	}
 
-	// Partition the array into 2 halves using a pivot
-	// The left half will contain all elements greater than the pivot
-	// The right half will contain all elements smaller than the pivot
-
+	// Partition the array into 2 halves using a middle
+	// The left half will contain all elements greater than the middle
+	// The right half will contain all elements smaller than the middle
+	// returns number of elems smaller than mid
 	int partition(int left, int right) {
 		int mid = (left + right) / 2;
-		int pivot = nums[mid];
+		int middle = nums[mid];
+		int rank = left;
+		
 		swap(mid, right);
 
-		int curr = left;
-
 		for (int i = left; i < right; i++) {
-			if (nums[i] > pivot) {
-				swap(i, curr);
-				curr++;
+			if (nums[i] > middle) {// if smaller, left in place, else bubble down
+				swap(i, rank);
+				rank++;
 			}
 		}
 
-		swap(curr, right);
+		swap(rank, right);// result: array with asymmetric mid @rank
 
-		return curr;
+		return rank;
 	}
 
 	public int findKthLargest(int[] nums, int k) {
@@ -48,23 +48,19 @@ public class Solution215 {
         this.nums = nums;
 
 		while (left < right) {
-			// Partition the array into 2 halves using a pivot
+			// Partition the array into 2 halves using a middle
 			int partition = partition(left, right);
-			// After partition, we know the rank of the pivot
-			// so just compare the rank of that pivot with k, if equal then we found the
-			// element
-			if (partition == k - 1)
+			// After partition, we know the rank of the middle
+			// compare the rank of that middle with k, if equal then we found element
+			if (partition == k - 1) {
 				return nums[partition];
+			}
 
-			// If the pivot has the higher rank (notice that the smaller the index, the
-			// higher the rank)
-			// we search the left half of the array, since we know that the element cannot
-			// be in the other half
-			else if (partition < k - 1)
+			if (partition < k - 1) {// shift middle to the right
 				left = partition + 1;
-			// Otherwise we go right
-			else
+			}else {
 				right = partition - 1;
+			}
 		}
 
 		return nums[left];
