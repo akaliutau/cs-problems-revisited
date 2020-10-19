@@ -11,6 +11,7 @@ package com.problems.binarysearch;
  * |                  |                       |
  *               pivotElement       
  * 
+ * O(log(n) + log(m))
  */
 public class Solution74opt {
 
