@@ -43,7 +43,7 @@ public class Solution301 {
             }
 
         int left = 0;
-        int last = -1;
+        int last = -1;// first time: starting from 0, then from i
         for (int i = 0; i < s.length(); i++) {
             left += left(s.charAt(i));
             if (left < 0) {// too much )
