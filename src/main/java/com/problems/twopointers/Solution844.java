@@ -1,7 +1,12 @@
 package com.problems.twopointers;
 
 /**
- *
+ * Given two strings S and T, return if they are equal when both are typed into
+ * empty text editors. # means a backspace character. Note that after
+ * backspacing an empty text, the text will continue empty. 
+ * 
+ * Example 1: Input: S
+ * = "ab#c", T = "ad#c" Output: true Explanation: Both S and T become "ac".
  */
 public class Solution844 {
 
@@ -25,10 +30,10 @@ public class Solution844 {
                 if (str[pos] == '#') {// omit #, count it
                     toSkip++;
                     pos--;
-                } else if (toSkip > 0) {
+                } else if (toSkip > 0) {// if pressed #, then skip
                     toSkip--;
                     pos--;
-                } else
+                } else// found it!
                     break;
             }
         }
