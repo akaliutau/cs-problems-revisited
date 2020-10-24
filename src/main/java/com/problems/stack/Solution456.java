@@ -36,7 +36,7 @@ public class Solution456 {
 			int min0j = min[j];
 			if (nums[j] > min0j) {
 				// find elem on stackKthElem which is > min0j
-				while (!stackKthElem.isEmpty() && stackKthElem.peek() <= min0j) {
+				while (!stackKthElem.isEmpty() && stackKthElem.peek() <= min0j) {// first, find number on stack which satisfy j > i
 					stackKthElem.pop();
 				}
 				// stackKthElem is 1) empty OR 2) contains elem > min0j

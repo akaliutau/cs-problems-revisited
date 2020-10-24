@@ -15,13 +15,13 @@ import com.problems.model.TreeNode;
  * the node's key. Both the left and right subtrees must also be binary search
  * trees.
  * 
- *                    4  - 30
+ *                    4             -30
  *                 /    \
- *                1      6  -21
+ *                1      6          -21
  *               / \    / \
- *              0   2  5   7 -15
+ *              0   2  5   7        -15
  *                  \       \
- *                   3        8 - 8
+ *                   3        8     - 8
  *                   
  *           36  35  33 26
  *             

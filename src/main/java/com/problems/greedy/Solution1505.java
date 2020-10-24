@@ -37,10 +37,6 @@ public class Solution1505 {
         return new String(arr);
     }
 
-    public static void main(String[] arg) {
 
-        System.out.println();
-
-    }
 
 }
