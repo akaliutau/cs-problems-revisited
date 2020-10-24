@@ -1,11 +1,12 @@
 package com.problems.dp;
 
 /**
- * There are N piles of stones arranged in a row. The i-th pile has stones[i]
+ * 
+ * There are n piles of stones arranged in a row. The i-th pile has stones[i]
  * stones.
  * 
- * A move consists of merging exactly K consecutive piles into one pile, and the
- * cost of this move is equal to the total number of stones in these K piles.
+ * A move consists of merging exactly k consecutive piles into one pile, and the
+ * cost of this move is equal to the total number of stones in these k piles.
  * 
  * Find the minimum cost to merge all piles of stones into one pile. If it is
  * impossible, return -1.
@@ -14,74 +15,56 @@ package com.problems.dp;
  * 
  * Example 1:
  * 
- * Input: stones = [3,2,4,1], K = 2 Output: 20 
+ * Input: stones = [3,2,4,1], k = 2 Output: 20 
  * 
- * Explanation: 
- * We start with [3, 2, 4, 1]. 
+ * Explanation: We start with [3, 2, 4, 1]. 
  * We merge [3, 2] for a cost of 5, and we are left with [5, 4, 1]. 
  * We merge [4, 1] for a cost of 5, and we are left with [5, 5]. 
  * We merge [5, 5] for a cost of 10, and we are left with [10]. 
+ * 
  * The total cost was 20, and this
  * is the minimum possible.
  * 
  * 
  */
 public class Solution1000 {
-	
-	int process(int left, int right, int part, int[] arr, int k, int[] preSum, int[][][] dp) {
-		if (dp[left][right][part] != 0) {
-			return dp[left][right][part];
-		}
 
-		if (left == right) {
-			return part == 1 ? 0 : -1;
-		}
+	public int mergeStones(int[] stones, int k) {
+		// 1. check for feasibility
+		int n = stones.length;
 
-		if (part == 1) {
-			int next = process(left, right, k, arr, k, preSum, dp);
-			if (next == -1) {
-				return -1;
-			} else {
-				return next + preSum[right + 1] - preSum[left];
-			}
-		} else {
-
-			int ans = Integer.MAX_VALUE;
-			for (int mid = left; mid < right; mid += k - 1) {
-				int next1 = process(left, mid, 1, arr, k, preSum, dp);
-				int next2 = process(mid + 1, right, part - 1, arr, k, preSum, dp);
-				if (next1 != -1 && next2 != -1) {
-
-					ans = Math.min(ans, next1 + next2);
-				}
-			}
-			dp[left][right][part] = ans;
-			return ans;
-		}
-
-	}
-
-	public int mergeStones(int[] arr, int k) {
-
-		int N = arr.length;
-		if ((N - 1) % (k - 1) > 0) {
+		if ((n - 1) % (k - 1) != 0) {
 			return -1;
 		}
-		int[] preSum = new int[N + 1];
-		for (int i = 0; i < N; i++) {
-			preSum[i + 1] = preSum[i] + arr[i];
+		// calculate partial sums
+		int[] sum = new int[n + 1];
+		for (int i = 0; i < n; i++) {
+			sum[i + 1] = sum[i] + stones[i];// sum[i] = sum of stones [0,i]
 		}
+		
+		// 2. populate dp
+		int[][] dp = new int[n][n];// dp[i][j] - cost of merge of piles on [i,j]
+		
+		for (int l = k; l <= n; l++) {
+			// analyse all intervals of length l 
+			// [3,2,4,1]
+			// l = 2: [3,2], [2,4], [4,1]
 
-		int[][][] dp = new int[N][N][k + 1];
-
-		return process(0, N - 1, 1, arr, k, preSum, dp);
-
-	}
-
-	
-
-	public static void main(String[] arg) {
-		System.out.println(true);
+			for (int i = 0; i <= n - l; i++) {// analysis of all [i,j] of length =l
+				int j = i + l - 1;
+				dp[i][j] = Integer.MAX_VALUE;
+				// mid cuts i-j into blocks of min possible length (i.e. k)
+				for (int mid = i; mid < j; mid += k - 1) {
+					int cost = dp[i][mid] + dp[mid + 1][j];
+					dp[i][j] = Math.min(dp[i][j], cost);
+				}
+				if ((j - i) % (k - 1) == 0) {// also add the total cost - last 1 elem, because length = 1 omitted in cycle
+					dp[i][j] += sum[j + 1] - sum[i];
+				}
+			}
+		}
+		// 3. return result
+		return dp[0][n - 1];
 	}
 
 }

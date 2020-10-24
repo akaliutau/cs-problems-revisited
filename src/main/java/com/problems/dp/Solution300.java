@@ -29,7 +29,7 @@ public class Solution300 {
         for (int i = 1; i < n; i++) {
             int maxval = 0;
             int cur = nums[i];
-            for (int j = 0; j < i; j++) {
+            for (int j = 0; j < i; j++) {// looking for the best seq on [0,i]
                 if (cur > nums[j]) {// each time the order find update the length
                     maxval = Math.max(maxval, dp[j]);// choose the best available seq
                 }
