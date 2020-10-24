@@ -24,9 +24,12 @@ import java.util.Map;
  * how many diffCount elements there are in the window, and add and remove elements in a queue-like fashion.
  * 
  * Create two windows with a 'given end ptr' --> Note, this is very important. End ptr will always be fixed and same for the two windows in any given iteration.
- * i. First window is where the startPtr points such that the given subArray has <= K distinct integers
- * ii. Second window is where the startPtr points such that the given subArray has < K distinct integers
- * VERY IMPORTANT - For a given array of length 'N' and 'always ending with last element', number of possible sub-arrays = N
+ * i. 1st window is where the startPtr points such that the given subArray has <= K distinct integers
+ * ii. 2nd window is where the startPtr points such that the given subArray has < K distinct integers (needed to remove all sunarrays smaller than K)
+ * 
+ * 2nd always < 1st by size
+ * 
+ * IMPORTANT - For a given array of length N and 'always ending with last element', number of possible sub-arrays = N
  * i. Number of possible sub-arrays of first window = N (with <= K distinct integers)
  * ii. Number of possible sub-arrays of second window = M (with < K distinct integers)
  * Total number of sub-arrays with 'exactly' K distinct integers = N - M,
