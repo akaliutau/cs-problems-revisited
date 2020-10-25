@@ -35,8 +35,5 @@ public class Solution56 {
 		return merged.toArray(new int[merged.size()][]);
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
-
+	
 }
