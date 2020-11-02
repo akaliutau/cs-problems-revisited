@@ -1,6 +1,7 @@
 package com.problems.dfs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -86,7 +87,7 @@ public class Solution417 {
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < m; j++) {
 				if (memo[i][j] == 3) {// meeting point
-					res.add(List.of(i, j));
+					res.add(Arrays.asList(i, j));
 				}
 			}
 		}
