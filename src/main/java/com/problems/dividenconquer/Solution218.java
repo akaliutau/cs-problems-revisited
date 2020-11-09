@@ -35,7 +35,7 @@ public class Solution218 {
 		int pL = 0, pR = 0;
 		int mergedY = 0, leftY = 0, rightY = 0;
 		int x, maxY;
-		List<List<Integer>> output = new ArrayList<List<Integer>>();
+		List<List<Integer>> output = new ArrayList<>();
 
 		// while we're in the region where both skylines are present
 		while ((pL < nL) && (pR < nR)) {

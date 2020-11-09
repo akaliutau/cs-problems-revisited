@@ -38,7 +38,13 @@ public class Solution215 {
 			}
 		}
 
-		swap(rank, right);// result: array with asymmetric mid @rank
+		swap(rank, right);
+		// result: array with asymmetric mid @rank 
+		// smth like [2,1,3,5,6,7,2] -> 
+        // smth like [2,1,3,2,6,7,5] -> 
+		// [2,1,3,2, [5], 7,6] NOTE: order distorted
+		// return 4 = number of elems < 5
+		//                 
 
 		return rank;
 	}

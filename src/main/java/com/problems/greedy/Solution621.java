@@ -24,10 +24,18 @@ import java.util.Arrays;
  * Maximum possible number of idle slots is defined by the frequency of the most
  * frequent task: idle_time <= (f_max - 1) * n.
  * 
+ * Example:
+ * ABCA, cooling=2
+ * 
+ * |AAAA|B   |C   |
+ * cooling
+ * 
+ * just calculate #empty + tot_len  of letters
+ * 
  */
 public class Solution621 {
 
-	public int leastInterval(char[] tasks, int n) {
+	public int leastInterval(char[] tasks, int cooling) {
 		// frequencies of the tasks
 		int[] frequencies = new int[26];
 		for (int t : tasks) {
@@ -38,7 +46,7 @@ public class Solution621 {
 
 		// max frequency - the last one
 		int maxFreq = frequencies[25];
-		int idle = (maxFreq - 1) * n;// max # of available (empty) slots
+		int idle = (maxFreq - 1) * cooling;// max # of available (empty) slots
 
 		for (int i = frequencies.length - 2; i >= 0 && idle > 0; --i) {
 			idle -= Math.min(maxFreq - 1, frequencies[i]);// decrease the number of empty slots, because they will be filled by some task

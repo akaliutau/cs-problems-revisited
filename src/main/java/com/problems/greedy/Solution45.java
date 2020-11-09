@@ -18,7 +18,13 @@ package com.problems.greedy;
  * reach the last index is 2. Jump 1 step from index 0 to 1, then 3 steps to the
  * last index.
  * 
- * [2,3,1,1,4] 2: 0 -> 3 -> 4
+ * [2,3,1,1,4] 2: 
+ * 0 -> 3 -> 4
+ * 
+ * IDEA:
+ * use 2 vars:
+ * 1) max radius of reachability maxReachablePos - cal on each step
+ * 2) radius of reachability achieved from last jump
  */
 public class Solution45 {
 
@@ -31,23 +37,20 @@ public class Solution45 {
 		int maxReachablePos = nums[0];
 		// max number of 1-steps one could do
 		// inside this jump
-		int maxPosForLastJump = nums[0];
+		int maxPosInsideLastJump = nums[0];
 
 		int jumps = 1;
-		for (int i = 1; i < n; ++i) {
+		for (int pos = 1; pos < n; ++pos) {
 			// if to reach this point
 			// one needs one more jump
-			if (maxPosForLastJump < i) {
+			if (maxPosInsideLastJump < pos) {
 				++jumps;// need one more jump
-				maxPosForLastJump = maxReachablePos;
+				maxPosInsideLastJump = maxReachablePos;
 			}
-			maxReachablePos = Math.max(maxReachablePos, nums[i] + i);
+			maxReachablePos = Math.max(maxReachablePos, pos + nums[pos]);
 		}
 		return jumps;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
 
 }

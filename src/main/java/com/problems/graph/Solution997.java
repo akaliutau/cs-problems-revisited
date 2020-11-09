@@ -30,16 +30,16 @@ public class Solution997 {
 			return -1;
 		}
 
-		int[] in = new int[n + 1];
-		int[] out = new int[n + 1];
+		int[] trustee = new int[n + 1];
+		int[] truster = new int[n + 1];
 
 		for (int[] relation : trust) {
-			out[relation[0]]++;
-			in[relation[1]]++;
+			truster[relation[0]]++;
+			trustee[relation[1]]++;
 		}
 
 		for (int i = 1; i <= n; i++) {
-			if (in[i] == n - 1 && out[i] == 0) {
+			if (trustee[i] == n - 1 && truster[i] == 0) {
 				return i;
 			}
 		}

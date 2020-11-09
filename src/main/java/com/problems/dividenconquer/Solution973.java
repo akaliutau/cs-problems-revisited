@@ -33,7 +33,7 @@ public class Solution973 {
 
 		public Point(int[] p) {
 			this.p = p;
-			this.dist = p[0] * p[0] + p[1] * p[1];
+			this.dist = (int) Math.sqrt(p[0] * p[0] + p[1] * p[1]);
 		}
 	}
 

@@ -42,10 +42,10 @@ public class Solution134 {
 
 		for (int i = 0; i < n; i++) {
 
-			sum += gas[i] - cost[i];
-			gasTank += gas[i] - cost[i];
+			sum += gas[i] - cost[i];// global state of tank after transition i -> i + 1
+			gasTank += gas[i] - cost[i];// state of tank after transition i -> i + 1
 
-			if (gasTank < 0) {
+			if (gasTank < 0) {// we can try to start from point (i + 1) -> 0 -> i, i <-> i+1 is a broken chain in a circle
 				start = i + 1;
 				gasTank = 0;
 			}

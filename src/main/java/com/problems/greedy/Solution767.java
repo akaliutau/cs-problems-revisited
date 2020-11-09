@@ -14,6 +14,8 @@ import java.util.PriorityQueue;
  * 
  * Input: S = "aab" Output: "aba"
  * 
+ * IDEA:
+ * use the most frequent letters first
  * 
  */
 public class Solution767 {
@@ -67,8 +69,5 @@ public class Solution767 {
 		return ans.toString();
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
 
 }

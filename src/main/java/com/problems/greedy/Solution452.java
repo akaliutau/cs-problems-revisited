@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 /**
- * 
+ * How many arrows is needed to burst balloons
  * Greedy
  * 
  */
@@ -19,11 +19,12 @@ public class Solution452 {
 		Arrays.sort(points, byEnd);
 
 		int arrows = 1;
-		int xStart, xEnd, firstEnd = points[0][1];
+		int xStart, xEnd;
+		int firstEnd = points[0][1];// the same as p[1] in the beginning
 		for (int[] p : points) {
 			xStart = p[0];
 			xEnd = p[1];
-			if (firstEnd < xStart) {
+			if (firstEnd < xStart) {// no intersection, need more arrows
 				arrows++;
 				firstEnd = xEnd;
 			}
@@ -32,8 +33,6 @@ public class Solution452 {
 		return arrows;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }

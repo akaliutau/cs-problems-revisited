@@ -40,7 +40,7 @@ public class Solution253 {
 
 			// If the ending of {all added intervals} already in the past relatively
 			// interval [i], use that time slot
-			if (intervals[i][0] >= endings.peek()) {
+			if (intervals[i][0] >= endings.peek()) {// start_of_current_interval >= end of all previous ones
 				endings.poll();
 			}
 			// If a new slot is to be assigned, then also we add to the heap,
@@ -54,10 +54,5 @@ public class Solution253 {
 		return endings.size();
 	}
 
-	public static void main(String[] arg) {
-
-		System.out.println();
-
-	}
 
 }
