@@ -26,15 +26,21 @@ package com.problems.dp;
  * finish the last job, total difficulty = 1. The difficulty of the schedule = 6
  * + 1 = 7
  * 
- * 
- * 
+ * [6,5,4,3,2,1]
+ *      |
+ *      
+ * [6,5,4] [3,2,1]
+ *  
+ * [6,5] [4,3,2,1]
+ *          max = the most difficult job seen so far
+ *  
  */
 public class Solution1335 {
 
 	public int minDifficulty(int[] jobDifficulty, int d) {
 		int n = jobDifficulty.length;
 
-		// dp[d][i] - difficulty of schedule for all jobs [0,i] during week from d days
+		// dp[d][i] - difficulty of schedule for all jobs [0,i] during week consisting from d days (==baskets)
 		int[][] dp = new int[d][n];
 
 		dp[0][0] = jobDifficulty[0];
@@ -50,9 +56,9 @@ public class Solution1335 {
 			for (int job = 1; job < n; job++) {
 				dp[day][job] = -1;
 				if (dp[day - 1][job - 1] != -1) {
-					dp[day][job] = dp[day - 1][job - 1] + jobDifficulty[job];
+					dp[day][job] = dp[day - 1][job - 1] + jobDifficulty[job];// by definition of schedule(day) = schedule(without cur day) + job difficulty at cur day
 					int max = jobDifficulty[job];
-					for (int prev = job - 2; prev >= 0; prev--) {
+					for (int prev = job - 2; prev >= 0; prev--) {//go through all combinations (dp[day][j], max difficulty of job on (j..n))
 						max = Math.max(max, jobDifficulty[prev + 1]);
 						if (dp[day - 1][prev] != -1) {
 							dp[day][job] = Math.min(dp[day][job], dp[day - 1][prev] + max);
