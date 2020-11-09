@@ -80,7 +80,7 @@ public class Solution642 {
 
 	class AutocompleteSystem {
 		private Map<String, Integer> freq = new HashMap<>();// freq sentence => times
-		private String curSentence = "";
+		private String curSentence = "";// sentence typed by user
 
 		public AutocompleteSystem(String[] sentences, int[] times) {
 			for (int i = 0; i < sentences.length; i++) {
@@ -90,7 +90,7 @@ public class Solution642 {
 
 		public List<String> input(char c) {
 			List<String> res = new ArrayList<>();
-			if (c == '#') {
+			if (c == '#') {// user clicked search again
 				freq.put(curSentence, freq.getOrDefault(curSentence, 0) + 1);// update statistics and reset
 				curSentence = "";
 			} else {
@@ -122,8 +122,5 @@ public class Solution642 {
 	 * List<String> param_1 = obj.input(c);
 	 */
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
 
 }

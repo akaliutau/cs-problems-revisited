@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other
+ * The n-queens puzzle is the problem of placing n queens on an nXn chessboard such that no two queens attack each other
  * 
  */
 public class Solution51 {
 
     boolean isValid(List<Integer> combination, int col, int row) {
-        for (int r = 0; r < combination.size(); r++) {
+        for (int r = 0; r < combination.size(); r++) {// check all rows
             if (combination.get(r) == col) {
                 return false;
             }

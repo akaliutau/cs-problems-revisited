@@ -61,7 +61,7 @@ public class Solution407 {
             int i = p.i;
             int j = p.j;
 
-            for (int k = 0; k < dir.length; k++) {// compare with neighboures
+            for (int k = 0; k < dir.length; k++) {// compare with neighbors
                 int ni = i + dir[k][0];
                 int nj = j + dir[k][1];
 
@@ -70,7 +70,7 @@ public class Solution407 {
                 }
                 int neighbourHeight = height[ni][nj]; 
                 if (neighbourHeight < curHeight) {
-                    volume += (curHeight - neighbourHeight);// because its global
+                    volume += (curHeight - neighbourHeight);// because its global min
                     minheap.add(new Pos(curHeight, ni, nj));
                 } else {
                     minheap.add(new Pos(neighbourHeight, ni, nj));

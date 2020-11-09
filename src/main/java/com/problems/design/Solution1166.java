@@ -23,35 +23,35 @@ public class Solution1166 {
 
     static class FileSystem {
 
-        static class Dir {
-            Map<String, Dir> subDirs;
+        static class FSNode {
+            Map<String, FSNode> subNodes;
             int val;
 
-            Dir() {
-                subDirs = new HashMap<>();
+            FSNode() {
+                subNodes = new HashMap<>();
                 val = -1;
             }
         }
 
-        Dir root;
+        FSNode root;
 
         public FileSystem() {
-            root = new Dir();
+            root = new FSNode();
         }
 
         public boolean createPath(String path, int value) {
-            Dir cur = root;
+            FSNode cur = root;
             String[] paths = path.split("/");
             for (int i = 1; i < paths.length; ++i) {
                 String p = paths[i];
-                if (!cur.subDirs.containsKey(p)) {
+                if (!cur.subNodes.containsKey(p)) {
                     if (i != paths.length - 1) {
                         return false;
                     } else {
-                        cur.subDirs.put(p, new Dir());
+                        cur.subNodes.put(p, new FSNode());
                     }
                 }
-                cur = cur.subDirs.get(p);
+                cur = cur.subNodes.get(p);
             }
             if (cur.val != -1) {
                 return false;
@@ -61,14 +61,14 @@ public class Solution1166 {
         }
 
         public int get(String path) {
-            Dir cur = root;
+            FSNode cur = root;
             String[] paths = path.split("/");
             for (int i = 1; i < paths.length; ++i) {
                 String p = paths[i];
-                if (!cur.subDirs.containsKey(p)) {
+                if (!cur.subNodes.containsKey(p)) {
                     return -1;
                 }
-                cur = cur.subDirs.get(p);
+                cur = cur.subNodes.get(p);
             }
             return cur.val;
         }

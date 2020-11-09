@@ -1,4 +1,4 @@
-package com.problems.binarysearch;
+package com.problems.design;
 
 import java.util.TreeMap;
 
@@ -19,7 +19,7 @@ public class Solution352 {
 
     class SummaryRanges {
 
-        private TreeMap<Integer, Integer> intervals;// [start => end]
+        private TreeMap<Integer, Integer> intervals;// [start => end] describes [start, end]
 
         /** Initialize your data structure here. */
         public SummaryRanges() {
@@ -58,10 +58,5 @@ public class Solution352 {
         }
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
-
+ 
 }

@@ -34,9 +34,10 @@ public class Solution146 {
 		private void addNode(Node node) {
 			node.prev = head;
 			node.next = head.next;
-
+			
 			head.next.prev = node;
 			head.next = node;
+
 		}
 
 		private void removeNode(Node node) {

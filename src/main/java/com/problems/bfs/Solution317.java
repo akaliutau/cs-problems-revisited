@@ -87,7 +87,7 @@ public class Solution317 {
 		int min = Integer.MAX_VALUE;
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
-				if (grid[i][j] == 0 && buildingCount == reachableBuildings[i][j]) {
+				if (grid[i][j] == 0 && buildingCount == reachableBuildings[i][j]) {// count only when possible to reach all buildings
 					min = Math.min(min, accDistToBuild[i][j]);
 				}
 			}

@@ -39,28 +39,28 @@ public class Solution117 {
 
         // Initialize a queue data structure which contains
         // just the root of the tree
-        Queue<Node> Q = new LinkedList<>();
-        Q.add(root);
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
 
         // Outer while loop which iterates over
         // each level
-        while (Q.size() > 0) {
-            int size = Q.size();
+        while (q.size() > 0) {
+            int size = q.size();
             // Iterate over all the nodes on the current level
             for (int i = 0; i < size; i++) {
 
                 // Pop a node from the front of the queue
-                Node node = Q.poll();
+                Node node = q.poll();
                 if (i < size - 1) {// connect all on the same level
-                    node.next = Q.peek();
+                    node.next = q.peek();
                 }
 
                 // Add the children, if any
                 if (node.left != null) {
-                    Q.add(node.left);
+                    q.add(node.left);
                 }
                 if (node.right != null) {
-                    Q.add(node.right);
+                    q.add(node.right);
                 }
             }
         }

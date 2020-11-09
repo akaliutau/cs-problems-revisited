@@ -48,7 +48,7 @@ public class Solution465 {
         
         int ans = Integer.MAX_VALUE;
         for (int i = index + 1; i < list.size(); i++) {// index -> [index + 1 , n]
-            if (list.get(i) * balance > 0) {// do not transfer if balance on one side
+            if (list.get(i) * balance > 0) {// do not transfer if balance on one side, f.e. both in negatice zone or both lenders
                 continue;
             }
             int temp = list.get(i);

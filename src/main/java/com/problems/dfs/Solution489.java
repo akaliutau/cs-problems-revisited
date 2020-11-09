@@ -84,10 +84,6 @@ public class Solution489 {
         backtrack(0, 0, 0);
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
+   
 
 }

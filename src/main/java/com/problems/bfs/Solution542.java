@@ -63,7 +63,7 @@ public class Solution542 {
 				int nc = y + dir[i][1];
 				if (nr >= 0 && nc >= 0 && nr < rows && nc < cols) {
 					if (dist[nr][nc] > dist[x][y] + 1) {// update cell if and only if it was contacted by lengthy path the from cur cell
-						dist[nr][nc] = dist[x][y] + 1;
+						dist[nr][nc] = dist[x][y] + 1;// there is a shorter dist
 						q.add(new int[] { nr, nc });
 					}
 				}

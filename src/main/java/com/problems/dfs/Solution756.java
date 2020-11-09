@@ -54,7 +54,7 @@ public class Solution756 {
         }
         
         List<String> nextBottoms = new ArrayList<>();
-        generateNextBottoms(bottom, nextBottoms, "", 0);
+        generateNextBottoms(bottom, nextBottoms, "", 0);// gen level using sliding window of len=2
         for (String next : nextBottoms) {// check all variants
             if (dfs(next)) {
                 return true;

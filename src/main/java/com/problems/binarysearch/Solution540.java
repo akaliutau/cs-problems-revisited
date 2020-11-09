@@ -15,8 +15,7 @@ package com.problems.binarysearch;
  *    
  * [1,1,2,3,3,4,4,8,8]
  *  |       |       |
- *          mid(4) 
- *          != mid +1 => missing number is to the left of mid!
+ *          mid(4) != mid +1 => missing number is to the left of mid!
  *          
  */
 public class Solution540 {

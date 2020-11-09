@@ -40,8 +40,6 @@ public class Solution394 {
 		return decode(s.toCharArray());
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+	
 
 }

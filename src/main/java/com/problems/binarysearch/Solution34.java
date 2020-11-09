@@ -10,12 +10,8 @@ public class Solution34 {
     static void search(int[] nums, int left, int right, int target, int[] result) {
         if (left >= right) {
             if (nums[left] == target) {
-                if (result[0] > left) {
-                    result[0] = left;
-                }
-                if (result[1] < left) {
-                    result[1] = left;
-                }
+                result[0] = Math.min(result[0], left);
+                result[1] = Math.max(result[1], left);
             }
             return;
         }

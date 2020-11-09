@@ -152,10 +152,6 @@ public class Solution588 {
 		}
 	}
 
-	public static void main(String[] arg) {
-
-		System.out.println("D");
-
-	}
+	
 
 }

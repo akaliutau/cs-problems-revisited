@@ -30,7 +30,7 @@ import com.problems.model.TreeNode;
  */
 public class Solution337 {
 
-	int[] helper(TreeNode node) {
+	int[] helper(TreeNode node) {// returns the cost of action in the form [ifRob, ifNotRob]
 		// return [rob this node, not rob this node]
 		if (node == null) {
 			return new int[] { 0, 0 };
@@ -38,9 +38,9 @@ public class Solution337 {
 		int left[] = helper(node.left);
 		int right[] = helper(node.right);
 		// if we rob this node, we cannot rob its children
-		int rob = node.val + left[1] + right[1];
+		int rob = node.val + left[1] + right[1];// == cost if rob this and do not rob neighbors
 		// else, we free to choose rob its children or not
-		int notRob = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
+		int notRob = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);// == cost of to rob/not to rob neighbors
 
 		return new int[] { rob, notRob };
 	}

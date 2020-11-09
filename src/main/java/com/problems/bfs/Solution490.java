@@ -37,7 +37,7 @@ public class Solution490 {
 			for (int[] dir : dirs) {
 				int x = s[0] + dir[0];
 				int y = s[1] + dir[1];
-				while (x >= 0 && y >= 0 && x < n && y < m && maze[x][y] == 0) {
+				while (x >= 0 && y >= 0 && x < n && y < m && maze[x][y] == 0) {// until hit the wall
 					x += dir[0];
 					y += dir[1];
 				}

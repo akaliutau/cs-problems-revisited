@@ -21,10 +21,13 @@ import java.util.Set;
  * [["happy","joy"],["sad","sorrow"],["joy","cheerful"]], text = "I am happy
  * today but was sad yesterday" 
  * 
- * Output: ["I am cheerful today but was sad
- * yesterday", "I am cheerful today but was sorrow yesterday", "I am happy today
- * but was sad yesterday", "I am happy today but was sorrow yesterday", "I am
- * joy today but was sad yesterday", "I am joy today but was sorrow yesterday"]
+ * Output: [
+ * "I am cheerful today but was sad yesterday", 
+ * "I am cheerful today but was sorrow yesterday", 
+ * "I am happy today but was sad yesterday", 
+ * "I am happy today but was sorrow yesterday", 
+ * "I am joy today but was sad yesterday", 
+ * "I am joy today but was sorrow yesterday"]
  */
 public class Solution1258 {
 
@@ -66,7 +69,7 @@ public class Solution1258 {
         if (graph.containsKey(cur)) {
             List<String> syn = new ArrayList<>();
             Set<String> visited = new HashSet<>();
-            getSynFor(syn, visited, cur);
+            getSynFor(syn, visited, cur);// returns syn for happy + happy itself
             Collections.sort(syn);
             for (String neigh : syn) {
                 placeHolder[idx] = neigh;

@@ -57,8 +57,4 @@ public class Solution384 {
 		}
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
-
 }

@@ -1,7 +1,7 @@
 package com.problems.binarysearch;
 
 /**
- * Binary search
+ * Binary search in sorted 2d matrix
  * 
  * 1   3   5   7
  * 10  11  16  20
@@ -40,10 +40,6 @@ public class Solution74 {
         
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
+   
 
 }

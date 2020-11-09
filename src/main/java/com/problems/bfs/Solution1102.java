@@ -1,4 +1,4 @@
-package com.problems.dfs;
+package com.problems.bfs;
 
 import java.util.PriorityQueue;
 
@@ -39,7 +39,7 @@ public class Solution1102 {
 		visited[0][0] = true;
 
 		while (!pq.isEmpty()) {
-			int[] pair = pq.poll();
+			int[] pair = pq.poll();// the cell with max score of a path so far, result: the first path which reaches the dest is a max one
 			int row = pair[0];
 			int col = pair[1];
 			if (row == m - 1 && col == n - 1) {
@@ -61,8 +61,5 @@ public class Solution1102 {
 		return -1;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
 
 }

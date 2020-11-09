@@ -18,7 +18,11 @@ package com.problems.binarysearch;
  * 
  * Input: weights = [1,2,3,4,5,6,7,8,9,10], D = 5 Output: 15 Explanation: A ship
  * capacity of 15 is the minimum to ship all the packages in 5 days like this:
- * 1st day: 1, 2, 3, 4, 5 2nd day: 6, 7 3rd day: 8 4th day: 9 5th day: 10
+ * 1st day: 1, 2, 3, 4, 5 
+ * 2nd day: 6, 7 
+ * 3rd day: 8 
+ * 4th day: 9 
+ * 5th day: 10
  * 
  * Note that the cargo must be shipped in the order given, so using a ship of
  * capacity 14 and splitting the packages into parts like (2, 3, 4, 5), (1, 6,
@@ -43,7 +47,7 @@ public class Solution1011 {
 
 	public int shipWithinDays(int[] weights, int d) {
 		int right = 0, left = 0;
-		for (int weight : weights) {
+		for (int weight : weights) {// calculate boundaries
 			right += weight;
 			left = Math.max(left, weight);
 		}

@@ -81,7 +81,7 @@ public class Solution417 {
 			flow(matrix, n - 1, j, memo, 0, 2);
 		}
 
-		// coordinates => pacific_val: 1 + atlantic_val 2 == 3
+		// coordinates => pacific_val: 1 + atlantic_val: 2 == 3
 		List<List<Integer>> res = new ArrayList<>();
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < m; j++) {

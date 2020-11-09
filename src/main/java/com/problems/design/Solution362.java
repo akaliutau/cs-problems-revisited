@@ -51,7 +51,7 @@ public class Solution362 {
 		 */
 		public void hit(int timestamp) {
 
-			lookUp.put(timestamp, lookUp.getOrDefault(timestamp, 0) + 1);
+			lookUp.put(timestamp, lookUp.getOrDefault(timestamp, 0) + 1);// EDGE case:  hits arrive roughly at the same time, then value in lookUp map > 1
 		}
 
 		/**
@@ -76,10 +76,6 @@ public class Solution362 {
 		}
 	}
 
-	public static void main(String[] arg) {
-
-		System.out.println();
-
-	}
+	
 
 }

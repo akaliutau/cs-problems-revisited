@@ -48,6 +48,8 @@ import java.util.Set;
  * The 3-sequence ("home", "cart", "home") was visited at least once by 1 user.
  * The 3-sequence ("home", "maps", "home") was visited at least once by 1 user.
  * The 3-sequence ("cart", "maps", "home") was visited at least once by 1 user.
+ * 
+ * IDEA: generate smart statistics
  */
 public class Solution1152 {
 
@@ -113,7 +115,7 @@ public class Solution1152 {
 
 		// backtracking, found all possible patterns
 		Map<List<String>, Integer> freqMap = new HashMap<>();
-		for (List<String> list : nameToWebsiteVisit.values()) {
+		for (List<String> list : nameToWebsiteVisit.values()) {// for each user
 			helper(0, list, new ArrayList<>(), freqMap, new HashSet<>());
 		}
 		// find the lower freq pattern and return it

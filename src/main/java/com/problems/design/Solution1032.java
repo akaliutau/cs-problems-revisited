@@ -45,9 +45,7 @@ public class Solution1032 {
                 TrieNode node = trie;
                 String reversedWord = new StringBuilder(word).reverse().toString();
                 for (char ch : reversedWord.toCharArray()) {
-                    if (!node.children.containsKey(ch)) {
-                        node.children.put(ch, new TrieNode());
-                    }
+                    node.children.computeIfAbsent(ch, key -> new TrieNode());
                     node = node.children.get(ch);
                 }
                 node.word = true;

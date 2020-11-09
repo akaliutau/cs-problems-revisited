@@ -22,13 +22,13 @@ public class Solution1214 {
     Set<Integer> inHashset(TreeNode r, int target, Set<Integer> s) {
         if (r == null)
             return s;
-        inHashset(r.left, target, s);
         s.add(target - r.val);// add complementary
+        inHashset(r.left, target, s);
         inHashset(r.right, target, s);
         return s;
     }
 
-    boolean inCheck(TreeNode r, Set<Integer> s) {
+    boolean inCheck(TreeNode r, Set<Integer> s) {// s from the 1st tree, check on the 2nd
         if (r == null)
             return false;
         return inCheck(r.left, s) || s.contains(r.val) || inCheck(r.right, s);

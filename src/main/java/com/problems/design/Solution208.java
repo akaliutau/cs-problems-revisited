@@ -32,7 +32,7 @@ public class Solution208 {
             Elem elem = null;
             for (char c : word.toCharArray()) {
                 elem = letters.computeIfAbsent(c, ch -> new Elem(ch));
-                letters = letters.get(c).elems;
+                letters = elem.elems;
             }
             if (elem != null) {
                 elem.terminal = true;
@@ -71,10 +71,5 @@ public class Solution208 {
         }
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
-
+ 
 }

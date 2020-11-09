@@ -18,7 +18,14 @@ import java.util.Map;
  * 
  * Return all critical connections in the network in any order
  * 
- * 
+ * IDEA:
+ * critical conn = node which has been passed twice (at least)
+ * 1) relaxation decrease min time to the lowest time on the loop (if any)
+ *  f.e. A->B->C->A
+ *       1  2  3  1
+ *       1  1  1  1
+ *       C->D
+ *       1  4
  */
 public class Solution1192 {
 
@@ -33,7 +40,8 @@ public class Solution1192 {
 			if (!visited[neighbor]) {
 				dfs(graph, visited, time, curNode, neighbor, curTime + 1, results);
 			}
-			time[curNode] = Math.min(time[curNode], time[neighbor]);
+			time[curNode] = Math.min(time[curNode], time[neighbor]);// relaxation equation
+			// comapare time AFTER relaxation
 			if (time[neighbor] > curTime) {
 				results.add(Arrays.asList(curNode, neighbor));
 			}
@@ -46,10 +54,8 @@ public class Solution1192 {
 		for (List<Integer> connection : connections) {
 			int cur = connection.get(0);
 			int ref = connection.get(1);
-			graph.putIfAbsent(cur, new ArrayList<>());
-			graph.putIfAbsent(ref, new ArrayList<>());
-			graph.get(cur).add(ref);
-			graph.get(ref).add(cur);
+			graph.putIfAbsent(cur, new ArrayList<>()).add(ref);
+			graph.putIfAbsent(ref, new ArrayList<>()).add(cur);
 		}
 		int[] time = new int[n];
 		for (int i = 0; i < n; ++i) {

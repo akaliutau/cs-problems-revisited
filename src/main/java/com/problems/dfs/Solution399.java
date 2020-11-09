@@ -3,6 +3,7 @@ package com.problems.dfs;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * 
@@ -30,6 +31,18 @@ import java.util.Map;
  * b / c = 3.0 queries are: a / c = ?, b / a = ?, a / e = ?, a / a = ?, x / x =
  * ? return: [6.0, 0.5, -1.0, 1.0, -1.0 ]
  * 
+ * IDEA:
+ * 
+ * a/c = a/b * b/c
+ * 
+ * have : a/b, b/c, b/d =>
+ * a/b, b/a, b/c, c/b, b/d, d/b
+ * 
+ * a -> b
+ * b -> [a,c,d]
+ * 
+ * 
+ * 
  */
 public class Solution399 {
 
@@ -55,7 +68,7 @@ public class Solution399 {
 			return value;
 		}
 		start.visited = true;
-		for (Map.Entry<Elem, Double> entry : start.adjList.entrySet()) {
+		for (Entry<Elem, Double> entry : start.adjList.entrySet()) {
 			Elem node = entry.getKey();
 			if (!node.visited) {
 				double res = dfs(node, end, value * start.adjList.get(node));

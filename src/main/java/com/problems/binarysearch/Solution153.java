@@ -21,7 +21,9 @@ package com.problems.binarysearch;
  *         
  * [4,5,6,7,0,1,2]
  *      |
- *      6>4  point of changes somewhere on the left piece
+ *      6>4  point of changes somewhere on the right piece
+ *      
+ *  IDEA: min elem = point of change
  */
 public class Solution153 {
 
@@ -48,7 +50,7 @@ public class Solution153 {
 				return nums[mid + 1];
 			}
 
-			// if the mid element is lesser than its previous element then mid element is
+			// the same as previous if the mid element is lesser than its previous element then mid element is
 			// the smallest
 			if (nums[mid - 1] > nums[mid]) {
 				return nums[mid];

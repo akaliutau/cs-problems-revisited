@@ -30,12 +30,12 @@ public class Solution31 {
 
     public void nextPermutation(int[] nums) {
         int i = nums.length - 2;
-        while (i >= 0 && nums[i + 1] <= nums[i]) {// find an asc order from the tail - a peak
+        while (i >= 0 && nums[i] >= nums[i + 1]) {// find an asc order from the tail - a peak
             i--;
         }
         if (i >= 0) {
             int j = nums.length - 1;
-            while (j >= 0 && nums[j] <= nums[i]) {// find an elem greater or equal than found one 
+            while (j >= 0 && nums[i] >= nums[j]) {// find the 1st elem greater or equal than found one 
                 j--;
             }
             swap(nums, i, j);

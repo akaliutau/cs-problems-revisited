@@ -53,7 +53,7 @@ public class Solution535 {
 		int key = r.nextInt(Integer.MAX_VALUE);
 
 		public String encode(String longUrl) {
-			while (map.containsKey(key)) {
+			while (map.containsKey(key)) {// find unique key
 				key = r.nextInt(Integer.MAX_VALUE);
 			}
 			map.put(key, longUrl);
@@ -65,8 +65,6 @@ public class Solution535 {
 		}
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }

@@ -71,8 +71,5 @@ public class Solution694 {
 		return shapes.size();
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
 
 }

@@ -42,10 +42,7 @@ public class Solution1311 {
         Set<Integer> visited = new HashSet<>();
         visited.add(id);
         Map<String, Video> stat = new HashMap<>();
-        Comparator<Video> byFreq = (a, b) -> Integer.compare(a.freq, b.freq);
-        Comparator<Video> byTitle = (a, b) -> a.title.compareTo(b.title);
 
-        PriorityQueue<Video> pq = new PriorityQueue<>(byFreq.thenComparing(byTitle));
         while (!queue.isEmpty() && level > 0) {
             int layerSize = queue.size();
             for (int k = 0; k < layerSize; k++) {
@@ -67,6 +64,11 @@ public class Solution1311 {
                 stat.computeIfAbsent(s, title -> new Video(title, 0)).freq++;
             }
         }
+
+        Comparator<Video> byFreq = (a, b) -> Integer.compare(a.freq, b.freq);
+        Comparator<Video> byTitle = (a, b) -> a.title.compareTo(b.title);
+
+        PriorityQueue<Video> pq = new PriorityQueue<>(byFreq.thenComparing(byTitle));
 
         for (Video v : stat.values()) {
             pq.offer(v);

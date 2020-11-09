@@ -34,7 +34,7 @@ public class Solution124 {
 	}
 
 	public int maxPathSum(TreeNode root) {
-		traverse(root);
-		return maxSum;
+		int path = traverse(root);
+		return Math.max(maxSum, path);
 	}
 }

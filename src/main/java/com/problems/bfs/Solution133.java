@@ -17,15 +17,15 @@ public class Solution133 {
             return node;
         }
 
-        // Hash map to save the visited node and it's respective clone
+        // Hash map to save the cloned node and it's respective clone
         // as key and value respectively. This helps to avoid cycles.
-        HashMap<Node, Node> visited = new HashMap<>();
+        HashMap<Node, Node> cloned = new HashMap<>();
 
         // Put the first node in the queue
         LinkedList<Node> queue = new LinkedList<Node>();
         queue.add(node);
-        // Clone the node and put it in the visited dictionary.
-        visited.put(node, new Node(node.val, new ArrayList<>()));
+        // Clone the node and put it in the cloned dictionary.
+        cloned.put(node, new Node(node.val, new ArrayList<>()));
 
         // Start BFS traversal
         while (!queue.isEmpty()) {
@@ -33,19 +33,19 @@ public class Solution133 {
             Node n = queue.remove();
             // Iterate through all the neighbors of the node "n"
             for (Node neighbor : n.children) {
-                if (!visited.containsKey(neighbor)) {
-                    // Clone the neighbor and put in the visited, if not present already
-                    visited.put(neighbor, new Node(neighbor.val, new ArrayList<>()));
+                if (!cloned.containsKey(neighbor)) {
+                    // Clone the neighbor and put in the cloned, if not present already
+                    cloned.put(neighbor, new Node(neighbor.val, new ArrayList<>()));
                     // Add the newly encountered node to the queue.
                     queue.add(neighbor);
                 }
                 // Add the clone of the neighbor to the neighbors of the clone node "n".
-                visited.get(n).children.add(visited.get(neighbor));
+                cloned.get(n).children.add(cloned.get(neighbor));
             }
         }
 
-        // Return the clone of the node from visited.
-        return visited.get(node);
+        // Return the clone of the node from cloned.
+        return cloned.get(node);
     }
 
     public static void main(String[] arg) {

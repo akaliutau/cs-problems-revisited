@@ -63,7 +63,7 @@ public class Solution994 {
 
 		int sum = 0;
 
-		for (int[] row : grid) {
+		for (int[] row : grid) {// edge cases
 			for (int v : row) {
 				sum += v;
 				if (v == 1) {

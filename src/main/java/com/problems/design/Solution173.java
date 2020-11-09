@@ -1,6 +1,5 @@
 package com.problems.design;
 
-import java.util.List;
 import java.util.Stack;
 
 import com.problems.model.TreeNode;

@@ -59,10 +59,6 @@ public class Solution113 {
         return array;
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
+ 
 
 }

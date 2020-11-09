@@ -1,4 +1,4 @@
-package com.problems.binarysearch;
+package com.problems.twopointers;
 
 /**
  * Given a matrix mat where every row is sorted in strictly increasing order,

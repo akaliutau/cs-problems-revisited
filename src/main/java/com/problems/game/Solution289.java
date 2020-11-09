@@ -1,4 +1,4 @@
-package com.problems.array;
+package com.problems.game;
 
 /**
  * According to the Wikipedia's article: "The Game of Life, also known simply as

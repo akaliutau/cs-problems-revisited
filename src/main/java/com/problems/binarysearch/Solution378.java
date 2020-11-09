@@ -10,69 +10,70 @@ package com.problems.binarysearch;
  * [ 1, 5, 9], 
  * [10, 11, 13], 
  * [12, 13, 15] 
- * ], 
- * k = 8, return 13.
+ * ], k = 8, return 13.
+ * 
+ * IDEA:
  */
 public class Solution378 {
-    
-    int countOnRangeLE(int[][] matrix, int mid, int[] smallLargePair) {
 
-        int count = 0;
-        int n = matrix.length, row = n - 1, col = 0;
+	int getElementsLesserThan(int mid, int[][] matrix) {
+		int count = 0;
+		for (int i = 0; i < matrix.length; i++) {
+			count += getCount(matrix[i], mid);
+		}
+		return count;
+	}
 
-        while (row >= 0 && col < n) {
+	int getCount(int arr[], int x) {
+		int low = 0;
+		int high = arr.length - 1;
+		int ans = arr.length;
+		if (x > arr[high]) {
+			return ans;
+		}
+		while (low <= high) {
+			int mid = low + (high - low) / 2;
+			if (arr[mid] <= x) {
+				low = mid + 1;
+			} else {
+				ans = mid;
+				high = mid - 1;
+			}
+		}
 
-            if (matrix[row][col] > mid) {
+		return ans;
+	}
 
-                // as matrix[row][col] is bigger than the mid, let's keep track of the
-                // smallest number greater than the mid
-                smallLargePair[1] = Math.min(smallLargePair[1], matrix[row][col]);
-                row--;
+	public int kthSmallest(int[][] matrix, int k) {
 
-            } else {
+		int n = matrix.length;
 
-                // as matrix[row][col] is less than or equal to the mid, let's keep track of the
-                // biggest number less than or equal to the mid
-                smallLargePair[0] = Math.max(smallLargePair[0], matrix[row][col]);
-                count += row + 1;// ate least all elems on [0,row] are smaller
-                col++;
-            }
-        }
+		int min = Integer.MAX_VALUE;
+		int max = Integer.MIN_VALUE;
 
-        return count;
-    }
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				min = Math.min(min, matrix[i][j]);
+				max = Math.max(max, matrix[i][j]);
+			}
 
-    public int kthSmallest(int[][] matrix, int k) {
+		}
 
-        int n = matrix.length;
-        int start = matrix[0][0], end = matrix[n - 1][n - 1];
-        while (start < end) {
+		int low = min;
+		int high = max;
+		int ans = -1;
+		while (low <= high) {
+			int mid = low + (high - low) / 2;
+			int midCount = getElementsLesserThan(mid, matrix);
+			if (midCount < k) {
+				low = mid + 1;
+			} else {
+				ans = mid;
+				high = mid - 1;
+			}
 
-            int mid = start + (end - start) / 2;
-            // first number is the smallest elem on range
-            // second number is the largest elem on range
-            
-            int[] smallLargePair = { matrix[0][0], matrix[n - 1][n - 1] };
-
-            int count = countOnRangeLE(matrix, mid, smallLargePair);
-
-            if (count == k)
-                return smallLargePair[0];
-
-            if (count < k)
-                start = smallLargePair[1]; // search higher
-            else
-                end = smallLargePair[0]; // search lower
-        }
-        return start;
-    }
-
-    
-
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
+		}
+		return ans;
+	}
 
 }

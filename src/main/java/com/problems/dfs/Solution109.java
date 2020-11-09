@@ -15,14 +15,6 @@ import com.problems.model.TreeNode;
  * possible answer is [0,-3,9,-10,null,5], which represents the shown height
  * balanced BST.
  * 
- * ➔ function formBst(start, end) 
- *   mid = (start + end) / 2 
- *   formBst(start, mid - 1) 
- *   TreeNode(head.val) 
- *   head = head.next 
- *   formBst(mid + 1, end)
- * 
- * 
  */
 public class Solution109 {
 

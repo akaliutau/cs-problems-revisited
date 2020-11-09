@@ -46,12 +46,13 @@ public class Solution473 {
         int sides = 4;
 
         for (int num : nums) {
-
             total += num;
         }
-        if (total % sides != 0) {
+
+        if (total % sides != 0) {//edge case
             return false;
         }
+        
         return dfs(nums, sides, total / sides, 0, 0, new boolean[nums.length]);
 
     }

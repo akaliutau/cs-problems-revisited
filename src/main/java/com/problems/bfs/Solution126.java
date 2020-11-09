@@ -104,7 +104,7 @@ public class Solution126 {
 		while (!q.isEmpty()) {
 			int size = q.size();
 			for (int i = 0; i < size; i++) {
-				node = q.remove();
+				node = q.poll();
 				String word = node.word;
 				if (word.equals(endWord) && dist <= minDist) {// reached the end
 					minDist = dist;

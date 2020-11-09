@@ -21,7 +21,7 @@ import com.problems.model.TreeNode;
 public class Solution297 {
 
 	public class Codec {
-		public void serialize(TreeNode root, StringBuilder sb) {
+		private void serialize(TreeNode root, StringBuilder sb) {
 			if (root == null) {
 				sb.append("null,");
 			} else {
@@ -32,7 +32,7 @@ public class Solution297 {
 			}
 		}
 
-		public TreeNode deserialize(List<String> l) {
+		private TreeNode deserialize(List<String> l) {
 			if (l.get(0).equals("null")) {
 				l.remove(0);
 				return null;
@@ -49,7 +49,7 @@ public class Solution297 {
 		// Decodes your encoded data to tree.
 		public TreeNode deserialize(String data) {
 			String[] nodes = data.split(",");
-			List<String> list = new LinkedList<>(Arrays.asList(nodes));
+			List<String> list = new LinkedList<>(Arrays.asList(nodes));// node linkedlist because of romove op
 			return deserialize(list);
 		}
 

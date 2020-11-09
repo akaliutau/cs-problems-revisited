@@ -17,16 +17,16 @@ import java.util.Queue;
  */
 public class Solution854 {
 
-    List<String> neighbors(String s, String target) {
+    List<String> neighbors(String src, String target) {
         List<String> ans = new ArrayList<>();
         int i = 0;
-        while(i < s.length() && s.charAt(i) == target.charAt(i)) {// find first difference
+        while(i < src.length() && src.charAt(i) == target.charAt(i)) {// find first difference
             i++;
         }
 
-        char[] word = s.toCharArray();
-        for (int j = i + 1; j < s.length(); ++j)
-            if (s.charAt(j) == target.charAt(i)) {// try to switch with best possible sibling in pair
+        char[] word = src.toCharArray();
+        for (int j = i + 1; j < src.length(); ++j)
+            if (src.charAt(j) == target.charAt(i)) {// after switch 2 letters will be equal 
                 swap(word, i, j);
                 ans.add(new String(word));
                 swap(word, i, j);

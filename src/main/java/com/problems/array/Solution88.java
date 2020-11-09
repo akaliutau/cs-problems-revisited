@@ -1,7 +1,5 @@
 package com.problems.array;
 
-import java.util.List;
-
 /**
  * 
  * Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as

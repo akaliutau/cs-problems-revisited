@@ -41,9 +41,9 @@ public class Solution797 {
 
 		target = graph.length - 1;
 		this.graph = graph;
-		results = new ArrayList<List<Integer>>();
+		results = new ArrayList<>();
 		// adopt the LinkedList for fast access to the tail element.
-		LinkedList<Integer> path = new LinkedList<Integer>();
+		LinkedList<Integer> path = new LinkedList<>();
 		path.addLast(0);
 		// kick of the backtracking, starting from the source (node 0)
 		backtrack(0, path);

@@ -45,7 +45,7 @@ public class Solution1197 {
 
     public int minKnightMoves(int x, int y) {
         Set<Long> visited = new HashSet<>();
-        PriorityQueue<Node> pq = new PriorityQueue<>((o, p) -> Long.compare(o.h(), p.h()));
+        PriorityQueue<Node> pq = new PriorityQueue<>((o, p) -> Long.compare(o.h(), p.h()));// min goal function
         Node n = new Node(0, 0);
         n.f = f(0 , 0, x, y);
         pq.add(n);
@@ -62,8 +62,8 @@ public class Solution1197 {
                 Long key = hash(nx, ny);
                 if (!visited.contains(key)) {
                     Node next = new Node(nx, ny);
-                    next.g = cur.g + 3;
-                    next.f = f(nx, ny, x, y);
+                    next.g = cur.g + 3;// passed distance
+                    next.f = f(nx, ny, x, y);// to pass
 
                     visited.add(key);
                     pq.add(next);

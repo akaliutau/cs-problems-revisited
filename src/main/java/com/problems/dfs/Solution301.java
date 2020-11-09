@@ -35,49 +35,48 @@ public class Solution301 {
         }
         return left == 0;
     }
+    
+    void processWithoutBracket(String orig, int j, Set<String> memo, Set<String> res) {
+        String candidate = orig.substring(0, j) + orig.substring(j + 1);
+        if (!memo.contains(candidate)) {
+            memo.add(candidate);
+            // remove j and continue dfs
+            dfs(candidate, res, memo);
+        }
+    }
 
     void dfs(String s, Set<String> res, Set<String> memo) {
-            if (valid(s)) {
-                res.add(s);
-                return;
-            }
+        if (valid(s)) {
+             res.add(s);
+             return;
+        }
 
         int left = 0;
-        int last = -1;// first time: starting from 0, then from i
+        int lastRemoved = -1;// first time: starting from 0, then from i
         for (int i = 0; i < s.length(); i++) {
             left += left(s.charAt(i));
             if (left < 0) {// too much )
-                for (int j = last + 1; j <= i; j++) {// try to remove some )
+                for (int j = lastRemoved + 1; j <= i; j++) {// try to remove some )
                     if (s.charAt(j) == ')') {
-                        String candidate = s.substring(0, j) + s.substring(j + 1);
-                        if (!memo.contains(candidate)) {
-                            memo.add(candidate);
-                            // remove j and continue dfs
-                            dfs(candidate, res, memo);
-                        }
+                    	processWithoutBracket(s, j, memo, res);
                     }
                 }
-                last = i;
+                lastRemoved = i;
                 left = 0;
             }
         }
 
         int right = 0;
-        last = s.length();
+        lastRemoved = s.length();
         for (int i = s.length() - 1; i >= 0; i--) {
             right += right(s.charAt(i));
             if (right < 0) {
-                for (int j = last - 1; j >= i; j--) {
+                for (int j = lastRemoved - 1; j >= i; j--) {
                     if (s.charAt(j) == '(') {
-                        String candidate = s.substring(0, j) + s.substring(j + 1);
-                        if (!memo.contains(candidate)) {
-                            memo.add(candidate);
-                            // remove j and continue dfs
-                            dfs(candidate, res, memo);
-                        }
+                    	processWithoutBracket(s, j, memo, res);
                     }
                 }
-                last = i;
+                lastRemoved = i;
                 right = 0;
             }
         }

@@ -67,7 +67,7 @@ public class Solution211 {
 		}
 
 		/** Returns if the word is in the node. */
-		public boolean searchInNode(char[] word, int from, TrieNode node) {
+		private boolean searchInNode(char[] word, int from, TrieNode node) {
 			for (int i = from; i < word.length; ++i) {
 				if (!node.children.containsKey(word[i])) {
 					// if the current character is '.'
@@ -101,8 +101,6 @@ public class Solution211 {
 		}
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }

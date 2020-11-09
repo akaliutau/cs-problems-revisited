@@ -1,4 +1,4 @@
-package com.problems.array;
+package com.problems.twopointers;
 
 import java.util.Arrays;
 
@@ -19,21 +19,18 @@ import java.util.Arrays;
 public class Solution1099 {
 
 	public int twoSumLessThanK(int[] arr, int k) {
-		int S = -1;
+		int s = -1;
 		Arrays.sort(arr);
 		int lo = 0, hi = arr.length - 1;
 		while (lo < hi) {
 			if (arr[lo] + arr[hi] < k) {
-				S = Math.max(S, arr[lo] + arr[hi]);
+				s = Math.max(s, arr[lo] + arr[hi]);
 				++lo;
 			} else
 				--hi;
 		}
-		return S;
+		return s;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
-
+	
 }

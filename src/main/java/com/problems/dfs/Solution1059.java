@@ -24,26 +24,29 @@ public class Solution1059 {
 	void add(int src, int dest) {// forming linked list of nodes, f.e. [0,1], [1,2]
 		destMap[idx] = dest;      // destMap[0] = 1
 		oneway[idx] = idSrc[src];// oneway[0] = -1 - always = -1, if only 1 path exists
-		idSrc[src] = idx++;    // idSrc[0] = 0
+		idSrc[src] = idx;    // idSrc[0] = 0
+		idx++;
 	}
 
 	boolean[] seen;
 
-	boolean dfs(int root, int dest) {
-		if (root == dest) {
+	boolean dfs(int node, int dest) {
+		if (node == dest) {
 			return true;
 		}
-		if (idSrc[root] == -1 || seen[root]) {
+		if (idSrc[node] == -1 || seen[node]) {
 			return false;
 		}
-		seen[root] = true;
-		for (int i = idSrc[root]; i != -1; i = oneway[i]) {// go through all possibilities
-			int j = destMap[i];
+		seen[node] = true;
+		int id = idSrc[node];
+		while (id != -1) {// go through all possibilities
+			int j = destMap[id];
 			if (!dfs(j, dest)) {
 				return false;
 			}
+			id = oneway[id];
 		}
-		seen[root] = false;// backtracking
+		seen[node] = false;// backtracking
 		return true;
 	}
 

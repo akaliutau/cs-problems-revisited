@@ -13,7 +13,7 @@ package com.problems.backtracking;
  */
 public class Solution37 {
 
-	// box size
+	// sub box size
 	int n = 3;
 	// row size
 	int N = n * n;
@@ -31,6 +31,7 @@ public class Solution37 {
 		 * Check if one could place a number d in (row, col) cell
 		 */
 		int idx = (row / n) * n + col / n;
+		// the same number shouldn't appear in 1) row 2)column 3) box
 		return rows[row][d] + columns[col][d] + boxes[idx][d] == 0;
 	}
 

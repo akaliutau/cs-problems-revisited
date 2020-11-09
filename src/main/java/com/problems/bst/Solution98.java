@@ -1,7 +1,5 @@
 package com.problems.bst;
 
-import java.util.List;
-
 import com.problems.model.TreeNode;
 
 /**

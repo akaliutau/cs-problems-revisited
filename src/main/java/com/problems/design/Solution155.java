@@ -52,15 +52,11 @@ public class Solution155 {
 		private void updateMin() {
 			minElem = Integer.MAX_VALUE;
 			for (int i = 0; i < stack.size(); i++) {
-				minElem = minElem > stack.get(i) ? stack.get(i) : minElem;
+				minElem = Math.min(minElem, stack.get(i));
 			}
 		}
 	}
 
-	public static void main(String[] arg) {
 
-		System.out.println();
-
-	}
 
 }
