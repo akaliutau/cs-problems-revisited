@@ -10,6 +10,10 @@ package com.problems.slidingwindow;
  * Input: s = "abcabcbb" Output: 3 Explanation: The answer is "abc", with the
  * length of 3.
  * 
+ * IDEA:
+ * consider the block [i, j] without without repeating characters
+ * look at the array from point j
+ * 
  */
 public class Solution3 {
 
@@ -19,18 +23,16 @@ public class Solution3 {
 		int[] index = new int[128]; // current index of character
 		char[] letters = s.toCharArray();
 		// try to extend the range [i, j]
-		int i = 0;
+		int lowestPossible = 0;// earliest possible start = MAX {indecies of all letters in block}
+		
 		for (int j = 0; j < n; j++) {
-
-			i = Math.max(index[letters[j]], i);
-			ans = Math.max(ans, j - i + 1);
+		    lowestPossible = Math.max(index[letters[j]], lowestPossible);
+			ans = Math.max(ans, j - lowestPossible + 1);
 			index[letters[j]] = j + 1;
 		}
 		return ans;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+	
 
 }

@@ -47,8 +47,5 @@ public class Solution12 {
 		return sb.toString();
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
 
 }

@@ -95,10 +95,6 @@ public class Solution25 {
 		return newHead == null ? head : newHead;
 	}
 
-	public static void main(String[] arg) {
 
-		System.out.println();
-
-	}
 
 }

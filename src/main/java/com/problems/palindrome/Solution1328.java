@@ -10,6 +10,9 @@ package com.problems.palindrome;
  * 
  * Example 2: Input: palindrome
  * = "a" Output: ""
+ * 
+ * IDEA:
+ * find any non 'a' letter and change it to 'a'
  */
 public class Solution1328 {
 
@@ -24,7 +27,8 @@ public class Solution1328 {
                 return String.valueOf(ch);
             }
         }
-        // it seemes all letters are a! so change the last one to b
+        // it seemes all letters are a!
+        // so change the last one to b
         ch[length - 1] = 'b';
         return String.valueOf(ch);
     }

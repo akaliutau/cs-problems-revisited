@@ -1,6 +1,7 @@
 package com.problems.hashtable;
 
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 /**
@@ -56,7 +57,7 @@ public class Solution726 {
 			if (formula.charAt(i) == '(') {
 				i++;
 				// copy stat from inside ()
-				for (Map.Entry<String, Integer> entry : parse(formula).entrySet()) {
+				for (Entry<String, Integer> entry : parse(formula).entrySet()) {
 					count.put(entry.getKey(), count.getOrDefault(entry.getKey(), 0) + entry.getValue());
 				}
 			} else {
@@ -76,7 +77,7 @@ public class Solution726 {
 		// parse number if exists and multiply all in ()
 		int multiplicity = parseNumber(formula);
 		for (String key : count.keySet()) {
-			count.put(key, count.get(key) * multiplicity);
+			count.compute(key, (k,v) -> v * multiplicity);
 		}
 		return count;
 	}
@@ -94,8 +95,6 @@ public class Solution726 {
 		return new String(ans);
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }

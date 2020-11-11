@@ -21,15 +21,22 @@ import java.util.List;
  * Output: "Infinite solutions" 
  * Example 3: Input: "2x=x" Output: "x=0"
  * 
+ * IDEA:
+ * 
+ * reduce to l*x=r, => x = r/l
+ * 
  */
 public class Solution640 {
 
+    // x -> 1, +x -> +1, -x -> -1.
 	String coeff(String x) {
-		if (x.length() > 1 && x.charAt(x.length() - 2) >= '0' && x.charAt(x.length() - 2) <= '9')
+		if (x.length() > 1 && x.charAt(x.length() - 2) >= '0' && x.charAt(x.length() - 2) <= '9') {//20x -> 20, etc
 			return x.replace("x", "");
+		}
 		return x.replace("x", "1");
 	}
 
+	// splits eq into  list x+5-3+x --> [x, +5, -3, +x]
 	List<String> breakIt(String s) {
 		List<String> res = new ArrayList<>();
 		String r = "";
@@ -39,22 +46,23 @@ public class Solution640 {
 				if (r.length() > 0) {
 					res.add(r);
 				}
-				r = "" + sym[i];
+				r = "" + sym[i];// start from sign + OR -
 			} else
 				r += sym[i];
 		}
-		res.add(r);
+		res.add(r);// add the tail
 		return res;
 	}
 
 	public String solveEquation(String equation) {
 		String[] lr = equation.split("=");
-		int lhs = 0, rhs = 0;
+		int lhs = 0;//
+		int rhs = 0;
 		for (String x : breakIt(lr[0])) {
 			if (x.indexOf("x") >= 0) {
-				lhs += Integer.parseInt(coeff(x));
+				lhs += Integer.parseInt(coeff(x));// x, +10x, -x
 			} else
-				rhs -= Integer.parseInt(x);
+				rhs -= Integer.parseInt(x);// just number
 		}
 		for (String x : breakIt(lr[1])) {
 			if (x.indexOf("x") >= 0)
@@ -72,10 +80,6 @@ public class Solution640 {
 		return "x=" + rhs / lhs;
 	}
 
-	public static void main(String[] arg) {
 
-		System.out.println();
-
-	}
 
 }

@@ -73,11 +73,11 @@ public class Solution76 {
 
 		int l = 0, r = 0;
 
-		// formed is used to keep track of how many unique characters in t
+		// common is used to keep track of how many unique characters in t
 		// are present in the current window in its desired frequency.
 		// e.g. if t is "AABC" then the window must have two A's, one B and one C.
-		// Thus formed would be = 3 when all these conditions are met.
-		int formed = 0;
+		// Thus common would be = 3 when all these conditions are met.
+		int common = 0;
 
 		// count of all the unique characters in the current window.
 		int[] windowCounts = new int[256];
@@ -89,10 +89,10 @@ public class Solution76 {
 			windowCounts[c] ++;
 
 			if (have[c] > 0 && windowCounts[c] == have[c]) {
-				formed++;
+				common++;
 			}
 
-			while (l <= r && formed == required) {
+			while (l <= r && common == required) {
 				c = s.charAt(l);
 				// update stat
 				if (ans.len == 0 || ans.len > r - l + 1) {// found smaller or first time
@@ -103,7 +103,7 @@ public class Solution76 {
 
 				windowCounts[c] --;
 				if (have[c] > 0 && windowCounts[c] < have[c]) {
-					formed--;
+					common--;
 				}
 				l++;
 			}
@@ -113,8 +113,6 @@ public class Solution76 {
 		return ans.len == 0 ? "" : s.substring(ans.l, ans.r + 1);
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }

@@ -18,10 +18,11 @@ package com.problems.slidingwindow;
  *  |      |   |     |  |  |
  *    blk1       blk2   blk3
  *    
- *  1  3  3  -3  5  5   6  7     :: left  
- *  3  3 -1   5  5  3   7  7     :: right
+ *  1  3  3| -3  5  5|  6  7     :: left  
+ *  3  3 -1|  5  5  3|  7  7     :: right
  *  
- *    
+ *  IDEA: 
+ *  split on k-blocks  
  */
 public class Solution239 {
 
@@ -69,10 +70,6 @@ public class Solution239 {
         return output;
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
+  
 
 }

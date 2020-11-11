@@ -34,7 +34,7 @@ public class Solution451 {
 		if (s == null || s.isEmpty())
 			return s;
 
-		// Count up the occurances.
+		// Count up the occurrences.
 		Map<Character, Integer> counts = new HashMap<>();
 		for (char c : s.toCharArray()) {
 			counts.compute(c, (k,v) -> v == null ? 1 : v + 1);

@@ -21,7 +21,7 @@ public class Solution19 {
             first = first.next;
             second = second.next;
         }
-        second.next = second.next.next;
+        second.next = second.next.next;// remove the nth
         return dummy.next;
     }
     

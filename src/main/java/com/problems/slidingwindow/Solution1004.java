@@ -15,11 +15,11 @@ package com.problems.slidingwindow;
  * 
  * |
  * 1,1,1,0,0,0,1,1,1,1,0,0
- *           | k=-1
+ *           | k=-1, get run of 0s to change
  * 
  *         |
  * 1,1,1,0,0,0,1,1,1,1,0,0
- *           | k = 0
+ *           | k = 0, got rid of 1 zero, now can continue extend right boundary
  * 
  *         |
  * 1,1,1,0,0,0,1,1,1,1,0,0
@@ -53,10 +53,6 @@ public class Solution1004 {
         return right - left;
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
+  
 
 }

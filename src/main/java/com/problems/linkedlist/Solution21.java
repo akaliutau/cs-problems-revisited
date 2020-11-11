@@ -22,7 +22,7 @@ public class Solution21 {
                 prev.next = l2;
                 l2 = l2.next;
             }
-            prev = prev.next;
+            prev = prev.next;// always != null because loop's cond
         }
 
         // exactly one of l1 and l2 can be non-null at this point
@@ -32,9 +32,5 @@ public class Solution21 {
     }
 
 
-	
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
 
 }

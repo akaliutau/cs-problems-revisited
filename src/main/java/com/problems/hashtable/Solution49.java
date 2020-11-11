@@ -73,10 +73,6 @@ public class Solution49 {
 
 	}
 
-	public static void main(String[] arg) {
 
-		System.out.println();
-
-	}
 
 }

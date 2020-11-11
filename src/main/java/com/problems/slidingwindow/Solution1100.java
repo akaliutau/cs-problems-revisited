@@ -49,21 +49,24 @@ public class Solution1100 {
 				unique++;
 			} else if (counter[c - 'a'] == 1) {// becomes duplicate
 				unique--;
+			} else {// do nothing, because c already has been counted (it was 0 OR 1) 
+			    
 			}
 			counter[c - 'a']++;
 
 			// analyse the block [i, i+k]
 			// update statistics starting from the first letter which left this block
 			if (i >= k) {
-				char d = letters[i - k];
-				if (counter[d - 'a'] == 2) {// this letter is unique in block
+				char d = letters[i - k];// letter about to leave block
+				if (counter[d - 'a'] == 2) {// this letter will become unique in block
 					unique++;
-				} else if (counter[d - 'a'] == 1) {// this letter is absent in block
+				} else if (counter[d - 'a'] == 1) {// this letter will absent in block
 					unique--;
 				}
 				counter[d - 'a']--;// update stat
 			}
-			// increment counter only if all letters are unique
+			// increment counter only if all letters are unique in block [i,i+k]
+			// intersections are allowed
 			if (unique == k) {
 				countK++;
 			}
@@ -72,8 +75,6 @@ public class Solution1100 {
 		return countK;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }

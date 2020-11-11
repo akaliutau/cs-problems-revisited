@@ -24,7 +24,7 @@ package com.problems.greedy;
  * IDEA:
  * use 2 vars:
  * 1) max radius of reachability maxReachablePos - cal on each step
- * 2) radius of reachability achieved from last jump
+ * 2) maxPosInsideLastJump = radius of reachability achieved from last jump
  */
 public class Solution45 {
 

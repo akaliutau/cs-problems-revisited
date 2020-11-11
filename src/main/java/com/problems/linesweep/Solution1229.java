@@ -25,7 +25,8 @@ import java.util.List;
  * Example 1:
  * 
  * Input: slots1 = 
- * [[10,50],[60,120],[140,210]], slots2 = 
+ * [[10,50],[60,120],[140,210]], 
+ * slots2 = 
  * [[0,15],[60,70]],
  * duration = 8 Output: [60,68]
  * 

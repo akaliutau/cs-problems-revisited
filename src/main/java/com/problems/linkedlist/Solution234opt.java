@@ -10,6 +10,12 @@ import com.problems.model.ListNode;
  * 
  * Input: 1->2 Output: false
  * 
+ * IDEA:
+ * split into simple subproblems
+ * in particular,
+ * 1) reverse op can be applied on any range of LL
+ * 2) reverse op is reversable (Group op)
+ * 
  */
 public class Solution234opt {
 

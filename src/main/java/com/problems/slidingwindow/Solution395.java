@@ -17,12 +17,14 @@ import java.util.Arrays;
  * character has at least k frequency. 
  * 
  * The idea is to find all the valid
- * substrings with a different number of unique characters and track the maximum
+ * substrings with a different number of distinct characters and track the maximum
  * length
+ * 
+ * O(nU)
  */
 public class Solution395 {
 
-    // get the maximum number of unique letters in the string s
+    // get the maximum number of distinct letters in the string s
     int getMaxUniqueLetters(String s) {
         boolean map[] = new boolean[26];
         int maxUnique = 0;
@@ -40,34 +42,36 @@ public class Solution395 {
         int[] countMap = new int[26];
         int maxUnique = getMaxUniqueLetters(s);
         int result = 0;
-        for (int cur = 1; cur <= maxUnique; cur++) {
+        for (int cur = 1; cur <= maxUnique; cur++) {// have to check all variants as replacement for check all subarrays of all lengths
             // reset countMap
             Arrays.fill(countMap, 0);
-            int left = 0, right = 0, idx = 0, unique = 0, countAtLeastK = 0;
+            int left = 0, right = 0, ch = 0;
+            int distinct = 0;// total distinct letters in [left, right]
+            int countAtLeastK = 0;
             while (right < str.length) {
 
-                if (unique <= cur) {// expand the sliding window
-                    idx = str[right] - 'a';
-                    if (countMap[idx] == 0) {
-                        unique++;
+                if (distinct <= cur) {// expand the sliding window
+                    ch = str[right] - 'a';
+                    countMap[ch]++;
+                    if (countMap[ch] == 1) {
+                        distinct++;
                     }
-                    countMap[idx]++;
-                    if (countMap[idx] == k) {
+                    if (countMap[ch] == k) {
                         countAtLeastK++;
                     }
                     right++;
                 } else {// shrink the sliding window
-                    idx = str[left] - 'a';
-                    if (countMap[idx] == k) {
-                        countAtLeastK--;
+                    ch = str[left] - 'a';
+                    countMap[ch]--;
+                    if (countMap[ch] == 0) {
+                        distinct--;
                     }
-                    countMap[idx]--;
-                    if (countMap[idx] == 0) {
-                        unique--;
+                    if (countMap[ch] < k) {// fell under threshold
+                        countAtLeastK--;
                     }
                     left++;
                 }
-                if (unique == cur && unique == countAtLeastK)
+                if (distinct == cur && distinct == countAtLeastK)
                     result = Math.max(right - left, result);
             }
         }

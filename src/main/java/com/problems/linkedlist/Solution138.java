@@ -26,14 +26,15 @@ public class Solution138 {
 
 		public Node(int val) {
 			this.val = val;
-			this.next = null;
-			this.random = null;
+			next = null;
+			random = null;
 		}
 	}
 
 	// HashMap which holds old nodes as keys and new nodes as its values.
-	Map<Node, Node> visitedHash = new HashMap<Node, Node>();
+	Map<Node, Node> visitedHash = new HashMap<>();
 
+	// returns a clone of head
 	public Node copyRandomList(Node head) {
 
 		if (head == null) {
@@ -42,13 +43,13 @@ public class Solution138 {
 
 		// If we have already processed the current node, then we simply return the
 		// cloned version of it.
-		if (this.visitedHash.containsKey(head)) {
-			return this.visitedHash.get(head);
+		if (visitedHash.containsKey(head)) {
+			return visitedHash.get(head);
 		}
 
 		// Create a new node with the value same as old node. (i.e. copy the node)
 		Node node = new Node(head.val);
-		this.visitedHash.put(head, node);
+		visitedHash.put(head, node);
 
 		// Recursively copy the remaining linked list starting once from the next
 		// pointer and then from the random pointer.
@@ -58,10 +59,5 @@ public class Solution138 {
 		return node;
 	}
 
-	public static void main(String[] arg) {
-
-		System.out.println("D");
-
-	}
 
 }

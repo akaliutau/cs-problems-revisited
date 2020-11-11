@@ -21,6 +21,7 @@ import java.util.Set;
  * Input: A = "this apple is sweet", B = "this apple is sour" Output:
  * ["sweet","sour"]
  * 
+ * IDEA:
  * 
  */
 public class Solution884 {
@@ -52,7 +53,7 @@ public class Solution884 {
 			if (!setA.contains(word)) {
 				result.add(word);
 			} else {
-				setA.remove(word);
+			    common.add(word);
 			}
 		}
 

@@ -70,10 +70,6 @@ public class Solution445 {
         return head;
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
+  
 
 }

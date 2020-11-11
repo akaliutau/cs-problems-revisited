@@ -1,7 +1,6 @@
 package com.problems.math;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,6 +38,9 @@ import java.util.Map;
  * Example 1:
  * 
  * Input: s = "III" Output: 3
+ * 
+ * IDEA:
+ * cover special cases first, and add normal mapping if not the case
  * 
  */
 public class Solution10 {

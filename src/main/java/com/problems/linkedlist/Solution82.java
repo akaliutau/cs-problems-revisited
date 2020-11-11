@@ -13,29 +13,38 @@ import com.problems.model.ListNode;
  * 
  * Input: 1->2->3->3->4->4->5 Output: 1->2->5
  * 
+ * IDEA:
+ * 
+ * 1->2->3->3->4->4->5
+ *       |  |
+ *      2nd case 
  */
 public class Solution82 {
 
-	ListNode remove(ListNode node) {
-		if (node == null || node.next == null)
+    // return next non-equal or itself
+    ListNode getNextNotEqualsToMe(ListNode node) {
+        while (node.next != null && node.val == node.next.val) {
+            node = node.next;
+        }
+        return node;
+    }
+
+	ListNode withoutDup(ListNode node) {
+		if (node == null || node.next == null) {//edge case - withoutDups length = 0 | 1
 			return node;
+		}
 
-		if (node.val == node.next.val)
-			return remove(getNextNotEqualsToMe(node).next);
+		if (node.val == node.next.val) {
+			return withoutDup(getNextNotEqualsToMe(node).next);// remove next to get a list which includes all unique numbers
+		}
 
-		node.next = remove(node.next);
+		node.next = withoutDup(node.next);
 
-		return node;
-	}
-
-	ListNode getNextNotEqualsToMe(ListNode node) {
-		while (node.next != null && node.val == node.next.val)
-			node = node.next;
 		return node;
 	}
 
 	public ListNode deleteDuplicates(ListNode head) {
-		return remove(head);
+		return withoutDup(head);
 	}
 
 }

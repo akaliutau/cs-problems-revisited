@@ -44,10 +44,10 @@ import java.util.PriorityQueue;
  */
 public class Solution759 {
 
-    static class Job {
+    static class Schedule {
         int employee, interval;
 
-        Job(int employee, int i) {
+        Schedule(int employee, int i) {
             this.employee = employee;
             interval = i;
         }
@@ -69,27 +69,28 @@ public class Solution759 {
 
     public List<Interval> employeeFreeTime(List<List<Interval>> avails) {
         List<Interval> free = new ArrayList<>();
-        Comparator<Job> byStart = (a, b) -> avails.get(a.employee).get(a.interval).start - avails.get(b.employee).get(b.interval).start;
+        Comparator<Schedule> byStart = (a, b) -> avails.get(a.employee).get(a.interval).start - avails.get(b.employee).get(b.interval).start;
 
-        PriorityQueue<Job> pq = new PriorityQueue<Job>(byStart);
-        int emplid = 0, left = Integer.MAX_VALUE;
+        PriorityQueue<Schedule> pq = new PriorityQueue<Schedule>(byStart);
+        int emplid = 0;
+        int lastEnd = Integer.MAX_VALUE; // global last end across all schs
 
         for (List<Interval> employee : avails) {// one can add all intervals at once, but more optimal to use only 0 (smaller heap -> faster processing)
-            pq.add(new Job(emplid++, 0));
-            left = Math.min(left, employee.get(0).start);
+            pq.add(new Schedule(emplid++, 0));
+            lastEnd = Math.min(lastEnd, employee.get(0).start);// the earliest start must be > lastEnd
         }
 
         while (!pq.isEmpty()) {
-            Job job = pq.poll();
-            Interval iv = avails.get(job.employee).get(job.interval);
-            if (left < iv.start) {
-                free.add(new Interval(left, iv.start));
+            Schedule sch = pq.poll();
+            Interval iv = avails.get(sch.employee).get(sch.interval);
+            if (lastEnd < iv.start) {
+                free.add(new Interval(lastEnd, iv.start));
             }
-            left = Math.max(left, iv.end);// shift left
+            lastEnd = Math.max(lastEnd, iv.end);// shift lastEnd
             
-            job.interval ++;
-            if (job.interval < avails.get(job.employee).size()) {// get next avail if any for this empl
-                pq.add(job);
+            sch.interval ++;
+            if (sch.interval < avails.get(sch.employee).size()) {// get next avail if any for this empl
+                pq.add(sch);
             }
         }
 

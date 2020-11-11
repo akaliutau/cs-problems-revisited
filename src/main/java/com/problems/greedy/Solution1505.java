@@ -12,7 +12,7 @@ package com.problems.greedy;
  * 4321 -> 3421 -> 3412 -> 3142 -> 1342
  * 
  * IDEA: 
- * decrease layer by layer, blockally
+ * decrease layer by layer, bubble-up the smallest and the most distant digit
  * 4321 -> 1432
  * 1432 -> 1342
  * 

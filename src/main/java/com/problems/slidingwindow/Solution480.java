@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.TreeSet;
 
 /**
- * Median is the middle value in an ordered integer list. If the size of the
+ * Median is the middle value in an ORDERED integer list. If the size of the
  * list is even, there is no middle value. So the median is the mean of the two
  * middle value.
  * 
@@ -21,7 +21,7 @@ import java.util.TreeSet;
  * 
  * Window position           Median 
  * ---------------           ----- 
- * [1 3 -1] -3 5 3 6 7          1       
+ * [1 3 -1] -3 5 3 6 7          1   // ordered win : [-1 1 3]    
  * 1 [3 -1  -3] 5 3 6 7        -1 
  * 1 3 [-1 -3 5] 3 6 7         -1 
  * 1 3 -1 [-3 5 3] 6 7          3 

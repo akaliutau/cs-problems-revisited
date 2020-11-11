@@ -17,6 +17,9 @@ import com.problems.model.ListNode;
  * 
  * Given 1->2->3->4->5, reorder it to 1->5->2->4->3.
  * 
+ * IDEA:
+ * 
+ * split into simple subproblems
  * 
  */
 public class Solution143 {
@@ -32,17 +35,23 @@ public class Solution143 {
 			slow = slow.next;
 			fast = fast.next.next;
 		}
+		// when fast goes out of range, slow will be @middle of the list
 
 		// reverse the second part of the list [Problem 206]
 		// convert 1->2->3->4->5->6 into 1->2->3->4 and 6->5->4
 		// reverse the second half in-place
 		ListNode prev = null, curr = slow, tmp;
+		//        4  ->  5  ->  6
+		//prev   cur    tmp 
+		
 		while (curr != null) {
 			tmp = curr.next;
 			curr.next = prev;
 			prev = curr;
 			curr = tmp;
 		}
+		
+		// now prev points to the head of reversed linked list
 
 		// merge two sorted linked lists [Problem 21]
 		// merge 1->2->3->4 and 6->5->4 into 1->6->2->5->3->4
@@ -58,8 +67,6 @@ public class Solution143 {
 		}
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }
