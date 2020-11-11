@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * Given an array arr of positive integers, call a (contiguous, not necessarily
- * distinct) subarray of arr good if the number of diffCount integers in that
+ * distinct) subarray of arr good if the number of different integers in that
  * subarray is exactly K.
  * 
  * (For example, [1,2,3,1,2] has 3 diffCount integers: 1, 2, and 3.)
@@ -20,6 +20,9 @@ import java.util.Map;
  * exactly 2 diffCount integers: [1,2], [2,1], [1,2], [2,3], [1,2,1], [2,1,2],
  * [1,2,1,2]
  * 
+ * IDEA:
+ * consider 2 sliding windows with the same end point
+ * 
  * We'll maintain two sliding windows, corresponding to left1, left2. Each sliding window will be able to stat 
  * how many diffCount elements there are in the window, and add and remove elements in a queue-like fashion.
  * 
@@ -32,9 +35,12 @@ import java.util.Map;
  * IMPORTANT - For a given array of length N and 'always ending with last element', number of possible sub-arrays = N
  * i. Number of possible sub-arrays of first window = N (with <= K distinct integers)
  * ii. Number of possible sub-arrays of second window = M (with < K distinct integers)
+ * 
  * Total number of sub-arrays with 'exactly' K distinct integers = N - M,
+ * 
  * since N = endPtr - startPtr1
  * and M = endPtr - startPtr2
+ * 
  *  => N - M = startPtr2 - startPtr1
  * Continue doing this till endPtr iterates from start till end of the input array
  * 

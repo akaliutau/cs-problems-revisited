@@ -26,17 +26,24 @@ import java.util.List;
  * minimal. So return 6.
  * 
  * IDEA:
- * calc |row0 - orig| + |row0 - orig| + |row1 - orig| 
+ * calc |row0 - orig| + |row1 - orig| + |row2 - orig| 
  * 
  * rows = [0,0,2]
  * cols = [0,2,4]
+ * 
+ * 1,8,10
+ * 
+ * 7   6
+ * 2   3
+ * 0   1 
+ * =9  =10
  * 
  */
 public class Solution296 {
 	
 	int n, m;
 	
-	int minDistance1D(List<Integer> points, int origin) {// calc |row0 - orig| + |row0 - orig| + |row1 - orig| 
+	int minDistance1D(List<Integer> points, int origin) {// calc |row0 - orig| + |row1 - orig| + |row2 - orig| 
 	    int distance = 0;
 	    for (int point : points) {
 	        distance += Math.abs(point - origin);

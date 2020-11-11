@@ -15,6 +15,8 @@ import java.util.Stack;
  * Input: nums = [1,2,3,4] Output: false Explanation: There is no 132 pattern in
  * the sequence.
  * 
+ * IDEA:
+ * 
  * 
  */
 public class Solution456 {
@@ -49,8 +51,6 @@ public class Solution456 {
 		return false;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+	
 
 }

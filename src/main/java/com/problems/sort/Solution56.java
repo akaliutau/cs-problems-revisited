@@ -25,10 +25,11 @@ public class Solution56 {
 
 		LinkedList<int[]> merged = new LinkedList<>();
 		for (int[] interval : intervals) {
-			if (merged.isEmpty() || merged.getLast()[1] < interval[0]) {// close/drop last interval and start next
+		    int[] last = merged.isEmpty() ? null : merged.getLast();
+			if (merged.isEmpty() || last[1] < interval[0]) {// close/drop last interval and start next
 				merged.add(interval);
 			} else { //overlap - updated only right edge 
-				merged.getLast()[1] = Math.max(merged.getLast()[1], interval[1]);
+			    last[1] = Math.max(last[1], interval[1]);
 			}
 		}
 

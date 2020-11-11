@@ -10,6 +10,11 @@ import java.util.List;
  * 
  * Example 1: Input: intervals
  * = [[1,3],[6,9]], newInterval = [2,5] Output: [[1,5],[6,9]]
+ * 
+ * IDEA:
+ * 1) omit all arrays that ended before
+ * 2) if array falls in gap, add it and replace newInterval with current one (all the rest will be chained)
+ * 3) merge all intersection
  */
 public class Solution57 {
 

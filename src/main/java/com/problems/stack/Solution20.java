@@ -1,13 +1,12 @@
 package com.problems.stack;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
 /**
- * Given a string s containing just the characters '(', ')', '{', '}', '[' and
- * ']', determine if the input string is valid.
+ * Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', 
+ * determine if the input string is valid.
  * 
  * An input string is valid if:
  * 
@@ -41,9 +40,8 @@ public class Solution20 {
 			// If the current character is a closing bracket.
 			if (mappings.containsKey(c)) {
 
-				// Get the top element of the stack. If the stack is empty, set a dummy value of
-				// '#'
-				char topElement = stack.empty() ? '#' : stack.pop();
+				// Get the top element of the stack. If the stack is empty, set a dummy value of ' '
+				char topElement = stack.empty() ? ' ' : stack.pop();
 
 				// If the mapping for this bracket doesn't match the stack's top element, return
 				// false.
@@ -60,8 +58,6 @@ public class Solution20 {
 		return stack.isEmpty();
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+	
 
 }

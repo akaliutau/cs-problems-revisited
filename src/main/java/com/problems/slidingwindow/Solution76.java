@@ -88,7 +88,7 @@ public class Solution76 {
 			char c = s.charAt(r);
 			windowCounts[c] ++;
 
-			if (have[c] > 0 && windowCounts[c] == have[c]) {
+			if (have[c] > 0 && windowCounts[c] == have[c]) {// update this if have is a SET - limit to 0s & 1s
 				common++;
 			}
 
@@ -102,7 +102,7 @@ public class Solution76 {
 				}
 
 				windowCounts[c] --;
-				if (have[c] > 0 && windowCounts[c] < have[c]) {
+				if (have[c] > 0 && windowCounts[c] < have[c]) {// if removed char was in have set
 					common--;
 				}
 				l++;
