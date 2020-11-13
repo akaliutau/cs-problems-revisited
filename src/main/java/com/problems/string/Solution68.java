@@ -13,12 +13,23 @@ import java.util.List;
  * distributed as evenly as possible. If the number of spaces on a line do not
  * divide evenly between words, the empty slots on the left will be assigned
  * more spaces than the slots on the right. For the last line of text, it should
- * be left justified and no extra space is inserted between words.
+ * be left justified and no extra space is inserted between words. 
+ * 
+ * Input: words
+ * = ["This", "is", "an", "example", "of", "text", "justification."] maxWidth =
+ * 16 
+ * 
+ * Output: 
+ * [ 
+ * "This is an", 
+ * "example of text", 
+ * "justification. " 
+ * ]
  */
 public class Solution68 {
 
-    static String get(int len) {
-        char[] line = new char[len];
+    static String get(int wordLen) {
+        char[] line = new char[wordLen];
         Arrays.fill(line, ' ');
         return new String(line);
     }
@@ -26,10 +37,10 @@ public class Solution68 {
     public List<String> fullJustify(String[] words, int maxWidth) {
         List<String> res = new ArrayList<>();
         List<StringBuilder> line = new ArrayList<>();
-        int totLetters = 0;
+        int totLetters = 0;// total letters in cur line to build
         for (String word : words) {
-            int len = word.length(), size = line.size();
-            if (totLetters + size + len > maxWidth) {
+            int wordLen = word.length(), size = line.size();
+            if (totLetters + size + wordLen > maxWidth) {
                 int space = maxWidth - totLetters;
                 if (size == 1) {
                     res.add(line.get(0).toString() + get(space));
@@ -42,7 +53,7 @@ public class Solution68 {
                 totLetters = 0;
                 line.clear();
             }
-            totLetters += len;
+            totLetters += wordLen;
             line.add(new StringBuilder(word));
         }
         String last = String.join(" ", line);

@@ -4,12 +4,15 @@ import java.util.Arrays;
 
 /**
  * Given two strings s and t, determine if they are isomorphic. Two strings are
- * isomorphic if the characters in s can be replaced dest get t. All occurrences
+ * isomorphic if the characters in s can be replaced by t. All occurrences
  * of a character must be replaced with another character while preserving the
- * order of characters. No two characters may map dest the same character but a
- * character may map dest itself. 
+ * order of characters. No two characters may map to the same character but a
+ * character may map to itself. 
  * 
  * Example 1: Input: s = "egg", t = "add" Output: true
+ * 
+ * IDEA:
+ *  use 2 maps for source and dest
  */
 public class Solution205 {
 

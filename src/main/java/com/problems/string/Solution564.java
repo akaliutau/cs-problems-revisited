@@ -11,6 +11,9 @@ import java.util.List;
  * minimized between two integers. 
  * 
  * Example 1: Input: "123" Output: "121"
+ * 
+ * IDEA:
+ * 
  */
 public class Solution564 {
 
@@ -60,10 +63,6 @@ public class Solution564 {
         return String.valueOf(res);
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
+ 
 
 }

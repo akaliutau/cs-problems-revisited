@@ -2,6 +2,9 @@ package com.problems.string;
 
 /**
  * Convert a non-negative integer num to its English words representation.
+ * 
+ * IDEA:
+ *  process phrase recursively
  */
 public class Solution273 {
 

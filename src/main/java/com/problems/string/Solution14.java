@@ -23,7 +23,7 @@ public class Solution14 {
 			while (strs[i].indexOf(prefix) != 0) {//decrease prefix until match found
 				prefix = prefix.substring(0, prefix.length() - 1);
 				if (prefix.isEmpty())
-					return "";
+					return "";// early exit
 			}
 		}
 		return prefix;

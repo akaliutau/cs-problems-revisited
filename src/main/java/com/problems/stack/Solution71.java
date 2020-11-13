@@ -1,6 +1,5 @@
 package com.problems.stack;
 
-import java.util.List;
 import java.util.Stack;
 
 /**
@@ -22,6 +21,9 @@ import java.util.Stack;
  * 
  * Input: "/home/" Output: "/home" Explanation: Note that there is no trailing
  * slash after the last dir name.
+ * 
+ * IDEA:
+ * Straightforward: use dir names as COMMANDS
  * 
  */
 public class Solution71 {
@@ -65,8 +67,6 @@ public class Solution71 {
         return result.length() > 0 ? result.toString() : "/" ;
     }
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }

@@ -15,6 +15,17 @@ import java.util.Stack;
  *     [1,  1,  4,  2,  1,  1,  0,  0].
  * 
  * O(2n)
+ * 
+ * IDEA:
+ *   ------>
+ *       o
+ *      ooo
+ *      ooo
+ *      |
+ *   there is a need to hold only refs to the days with tempr > cur    
+ *      
+ *   1) save REF to temperature object, not temperature itself
+ *   2) dynamically filter out all cooler days
  */
 public class Solution739 {
 

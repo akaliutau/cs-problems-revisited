@@ -8,11 +8,17 @@ package com.problems.string;
  * 
  * Example 1: Input: 12 Output: 21
  * 
- * IDEA: 
- * def: inversion 
+ * IDEA:
+ * 1) find 2 numbers (not necessarily consequent) from the end, left > right
+ * 2) swap them
+ * 3) reverse the tail after left + 1 (because according the def of left, all seq [left,end] is DECREASING, => reverse to get the smallest)
+ *  
  * 
  * 12 -> 21
  * 21 -> 12 - wrong
+ * 
+ * 12354
+ *   | |
  * 
  * 
  * 1320

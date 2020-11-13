@@ -57,7 +57,7 @@ public class Solution207 {
 
             for (Integer nextCourse : graph.get(course).out) {
                 Node childNode = graph.get(nextCourse);
-                childNode.in -= 1;
+                childNode.in --;
                 removedEdges += 1;
                 if (childNode.in == 0) {
                     queue.add(nextCourse);

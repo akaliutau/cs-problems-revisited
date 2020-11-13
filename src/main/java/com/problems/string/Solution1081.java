@@ -3,6 +3,10 @@ package com.problems.string;
 /**
  * 
  * String
+ * IDEA:
+ * use freq map, iterate through array from back, removing duplicates on the way
+ * O(2n)
+ * 
  */
 public class Solution1081 {
 
@@ -22,7 +26,7 @@ public class Solution1081 {
 		for (char c : letters) {
 			freq[c - 'a']--;
 			int last = res.length() - 1;
-			if (!taken[c - 'a']) {
+			if (!taken[c - 'a']) {// if not taken yet on previous iteration removing duplicates on the way
 				while (res.charAt(last) > c && freq[res.charAt(last) - 'a'] > 0) {
 					taken[res.charAt(last) - 'a'] = false;
 					res.deleteCharAt(last);
@@ -30,7 +34,6 @@ public class Solution1081 {
 				}
 				res.append(c);
 				taken[c - 'a'] = true;
-				
 			}
 		}
 
@@ -38,8 +41,6 @@ public class Solution1081 {
 
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+	
 
 }

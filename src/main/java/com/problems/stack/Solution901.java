@@ -18,7 +18,7 @@ import java.util.Stack;
  *           lake 1
  *           |            |
  *           lake2
- * 
+ *    <-------------------- go back in time = use stack
  * 
  * Example 1:
  * 
@@ -38,34 +38,42 @@ import java.util.Stack;
  * Note that (for example) S.next(75) returned 4, because the last 4 prices
  * (including today's price of 75) were less than or equal to today's price.
  * 
+ * IDEA:
+ * 
+ * 
  */
 public class Solution901 {
 
 	class StockSpanner {
+	    
+	    class Price {
+	        int val;
+	        int weight = 1;
 
-		Stack<Integer> prices, days;
+	        public Price(int val, int weight) {
+	                this.val = val;
+	                this.weight = weight;
+	        }
+	 	}
+
+		Stack<Price> prices;
 
 		public StockSpanner() {
 			prices = new Stack<>();// latest prices which are > current
-			days = new Stack<>();  // days = how many days price persisted
 		}
 
 		public int next(int price) {
 			int day = 1;// current
 			// used to compress all lakes with smaller prices
-			while (!prices.isEmpty() && prices.peek() <= price) {// always frees stack from all prices < current
-				prices.pop();
-				day += days.pop();
+			while (!prices.isEmpty() && prices.peek().val <= price) {// always frees stack from all prices < current
+			    Price p = prices.pop();
+				day += p.weight;
 			}
 
-			prices.push(price);
-			days.push(day);
+			prices.push(new Price(price, day));
 			return day;
 		}
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
 
 }

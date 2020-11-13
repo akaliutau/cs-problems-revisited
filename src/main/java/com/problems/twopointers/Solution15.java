@@ -18,6 +18,9 @@ import java.util.List;
  * 
  * Input: nums = [-1,0,1,2,-1,-4] Output: [[-1,-1,2],[-1,0,1]]
  * 
+ * IDEA:
+ * reduce to 2sum case,
+ * 
  */
 public class Solution15 {
 
@@ -44,16 +47,12 @@ public class Solution15 {
 	public List<List<Integer>> threeSum(int[] nums) {
 		Arrays.sort(nums);
 		List<List<Integer>> res = new ArrayList<>();
-		for (int i = 0; i < nums.length && nums[i] <= 0; ++i) {
+		for (int i = 0; i < nums.length && nums[i] <= 0; ++i) {// < 0 because sum=0
 			if (i == 0 || nums[i - 1] != nums[i]) {
 				twoSums(nums, i, res);
 			}
 		}
 		return res;
-	}
-
-	public static void main(String[] arg) {
-		System.out.println(true);
 	}
 
 }

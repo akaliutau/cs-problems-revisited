@@ -7,12 +7,7 @@ import java.util.Stack;
  * 
  * 3 - 2*2
  * 
- * idea: split equation into groups divided by "+" sign
- * 
- * (3) + ( -2*2)
- * all * and / operations are calc in place
- * 
- *  stack accumulator   operation
+ *  stack num   numSign
  *  []      3            +
  *  [3]     0            -
  *  [3]     2            -
@@ -21,6 +16,9 @@ import java.util.Stack;
  *  [3, -4] 0 
  *         
  *  reduce [3, -4] -> -1
+ *  
+ *  IDEA:
+ *  sign is always coming before number  
  * 
  */
 public class Solution227 {
@@ -37,25 +35,25 @@ public class Solution227 {
         int n = s.length();
         if (n > 0) {
             Stack<Integer> stack = new Stack<>();
-            char operation = '+';// last op is always summing
-            int accumulator = 0;
+            char numSign = '+';// last op is always summing
+            int num = 0;
             for (int i = 0; i < n; i++) {
                 char c = s.charAt(i);
                 if (Character.isDigit(c)) {
-                    accumulator = accumulator * 10 + (c - '0');
+                    num = num * 10 + (c - '0');
                 }
                 if (isOperator(c) || i == n - 1) {
-                    if (operation == '+') {
-                        stack.push(accumulator);
-                    } else if (operation == '-') {
-                        stack.push(-accumulator);
-                    } else if (operation == '*') {
-                        stack.push(stack.pop() * accumulator);
-                    } else if (operation == '/') {
-                        stack.push(stack.pop() / accumulator);
+                    if (numSign == '+') {
+                        stack.push(num);
+                    } else if (numSign == '-') {
+                        stack.push(-num);
+                    } else if (numSign == '*') {
+                        stack.push(stack.pop() * num);
+                    } else if (numSign == '/') {
+                        stack.push(stack.pop() / num);
                     }
-                    accumulator = 0;
-                    operation = c;
+                    num = 0;
+                    numSign = c;
                 }
             }
             while (!stack.isEmpty()) {
@@ -63,13 +61,6 @@ public class Solution227 {
             }
         }
         return result;
-    }
-
-
-    public static void main(String[] arg) {
-
-        System.out.println();
-
     }
 
 }

@@ -53,7 +53,6 @@ public class Solution18 {
         }
         return res;
     }
-
     
     public List<List<Integer>> fourSum(int[] nums, int target) {
         len = nums.length;
