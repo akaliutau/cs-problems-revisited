@@ -41,8 +41,6 @@ public class Solution503 {
 		return res;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }

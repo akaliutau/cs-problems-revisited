@@ -16,7 +16,7 @@ import java.util.Stack;
  * the sequence.
  * 
  * IDEA:
- * 
+ * combination of prefix array and stack filtering
  * 
  */
 public class Solution456 {
@@ -36,11 +36,14 @@ public class Solution456 {
 		
 		for (int j = n - 1; j >= 0; j--) {
 			int min0j = min[j];
-			if (nums[j] > min0j) {
+			if (nums[j] > min0j) {// [some elem on 0..j][stack(k)][j]
 				// find elem on stackKthElem which is > min0j
 				while (!stackKthElem.isEmpty() && stackKthElem.peek() <= min0j) {// first, find number on stack which satisfy j > i
 					stackKthElem.pop();
 				}
+				// filter out all that smaller than min on left
+				// f.e. 247[1]5
+				
 				// stackKthElem is 1) empty OR 2) contains elem > min0j
 				if (!stackKthElem.isEmpty() && stackKthElem.peek() < nums[j]) {// min0j < stackKthElem < nums[j], guaranteed that k > j
 					return true;
