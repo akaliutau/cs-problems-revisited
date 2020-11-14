@@ -24,8 +24,6 @@ public class Solution11 {
 		return maxarea;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }

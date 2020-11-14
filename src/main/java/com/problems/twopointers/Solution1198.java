@@ -43,9 +43,10 @@ public class Solution1198 {
                     return -1;
                 }
                 // here: elem >= localMax
-                if (mat[i][col] != localMax) {// > case
+                int curElem = mat[i][col];
+                if (curElem > localMax) {// it must be > case, new localMax found
                     cnt = 1;
-                    localMax = mat[i][col];
+                    localMax = curElem;
                 } else if (++cnt == rows) {// == case
                     return localMax;
                 }

@@ -24,6 +24,11 @@ import java.util.Stack;
  * asteroids = [5, 10, -5] Output: [5, 10]
  * 
  * asteroids = [-5, 10, -5] Output: [-5, 10]
+ * 
+ * IDEA:
+ *  1) consider only one direction
+ *  2) for each negative asteroid:
+ *       check it's survival 
  */
 public class Solution735 {
 
@@ -56,8 +61,6 @@ public class Solution735 {
 		return ans;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }

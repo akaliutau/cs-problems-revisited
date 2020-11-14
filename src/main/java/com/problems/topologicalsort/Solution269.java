@@ -13,7 +13,7 @@ import java.util.Queue;
  * where words are sorted lexicographically by the rules of this new language.
  * Derive the order of letters in this language.
  * 
- * Idea: 
+ * IDEA: 
  * 1) extract partial relations from known words 
  * 2) topologically sort them 
  * 3) output ordered letters 
@@ -22,7 +22,7 @@ import java.util.Queue;
  * Output: "wertf"
  * 
  * 1) partial relations: 
- *    w->e, e->r,   t->f, r->t
+ *    w->e, e->r,(1st letter)   t->f (3rd letter), r->t (2nd letter, er-ett)
  * 2) ordered:
  *    w->e, e->r, r->t, t->f
  * 3)  wertf     
@@ -34,7 +34,7 @@ public class Solution269 {
 
         // Step 0: Create data structures and find all unique letters.
         Map<Character, List<Character>> adjList = new HashMap<>();
-        Map<Character, Integer> counts = new HashMap<>();
+        Map<Character, Integer> counts = new HashMap<>();// map of all chars we have
         for (String word : words) {
             for (char c : word.toCharArray()) {
                 counts.put(c, 0);
@@ -54,7 +54,7 @@ public class Solution269 {
             for (int j = 0; j < Math.min(word1.length, word2.length); j++) {
                 if (word1[j] != word2[j]) {
                     adjList.get(word1[j]).add(word2[j]);
-                    counts.put(word2[j], counts.get(word2[j]) + 1);
+                    counts.compute(word2[j], (k, v) -> v + 1);
                     break;
                 }
             }
@@ -72,23 +72,17 @@ public class Solution269 {
             Character c = queue.remove();
             sb.append(c);
             for (Character next : adjList.get(c)) {
-                counts.put(next, counts.get(next) - 1);
+                counts.compute(next, (k,v) -> v - 1);
                 if (counts.get(next).equals(0)) {
                     queue.add(next);
                 }
             }
         }
 
-        if (sb.length() < counts.size()) {
+        if (sb.length() < counts.size()) {// some chars are non-mapped
             return "";
         }
         return sb.toString();
-    }
-
-    public static void main(String[] arg) {
-
-        System.out.println();
-
     }
 
 }

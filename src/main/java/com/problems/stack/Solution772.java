@@ -23,26 +23,38 @@ import java.util.Stack;
  * 
  * Input: s = " 6-4 / 2 " Output: 4
  * 
+ * IDEA:
+ * interpret blocks inside () using standard calc
+ *   ( 1     8   )
+ *   i i+1   j-1 j
  * 
+ *  2-3/4
+ *  
+ *  stack
+ *  +2
+ *  -3
+ *  /4
+ *  
  */
 public class Solution772 {
 
-	public int calculate(String s) {
-		char sign = '+';
+	public static int calculate(String s) {
+		char signForNum = '+';// before parse of future number, use sign for this number
 		int num = 0;
 		Stack<Integer> stack = new Stack<>();
-		int i = 0;
+		int i = 0;// global index == cur symbol to interpret
 		while (i < s.length()) {
 			char c = s.charAt(i);
 			if (c == '(') {
 				int leftCnt = 1;
 				int j = i + 1;
-				for (; j < s.length() && leftCnt > 0; ++j) {
+				while (j < s.length() && leftCnt > 0) {
 					if (s.charAt(j) == '(') {
 						++leftCnt;
 					} else if (s.charAt(j) == ')') {
 						--leftCnt;
 					}
+					++j;
 				}
 				num = calculate(s.substring(i + 1, j - 1));
 				i = j - 1;
@@ -50,18 +62,18 @@ public class Solution772 {
 				if (Character.isDigit(c)) {
 					num = num * 10 + s.charAt(i) - '0';
 				}
-				if (i == s.length() - 1 || !Character.isDigit(c) && c != ' ') {
-					if (sign == '+') {
+				if (i == s.length() - 1 || !Character.isDigit(c) && c != ' ') {// exec only on non-empty, non-digit sym or @end
+					if (signForNum == '+') {
 						stack.push(num);
-					} else if (sign == '-') {
+					} else if (signForNum == '-') {
 						stack.push(-num);
-					} else if (sign == '*') {
+					} else if (signForNum == '*') {
 						stack.push(num * stack.pop());
-					} else if (sign == '/') {
+					} else if (signForNum == '/') {
 						stack.push(stack.pop() / num);
 					}
 					num = 0;
-					sign = c;
+					signForNum = c;
 				}
 				++i;
 			}
@@ -72,5 +84,11 @@ public class Solution772 {
 		}
 		return sum;
 	}
+	
+	public static void main(String[] arg) {
+	        System.out.println(calculate("2-3"));
+            System.out.println(calculate("-2-3"));
+	}
+
 
 }

@@ -35,10 +35,6 @@ public class Solution1 {
 		return new int[] {};
 	}
 
-	public static void main(String[] arg) {
 
-		System.out.println("D");
-
-	}
 
 }

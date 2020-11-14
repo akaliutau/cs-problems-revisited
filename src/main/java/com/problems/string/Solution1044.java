@@ -83,8 +83,6 @@ public class Solution1044 {
 		return s.substring(start, start + left - 1);
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+	
 
 }

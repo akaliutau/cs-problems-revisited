@@ -9,6 +9,9 @@ package com.problems.string;
  * 
  * Example 1: Input: s = "ab", t =
  * "acb" Output: true Explanation: We can insert 'c' into s to get t.
+ * 
+ * IDEA:
+ *  go to the 1st different symbol and compare the tails
  */
 public class Solution161 {
 

@@ -24,6 +24,9 @@ import java.util.Stack;
  * 
  * O(2n) for building map
  * O(n + m)
+ * IDEA:
+ *  take the current and go though the stack of elems seen so far to check whom this elem is the biggest for
+ * 
  */
 public class Solution496 {
 
