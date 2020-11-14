@@ -31,24 +31,25 @@ public class Solution1198 {
 
     public int smallestCommonElement(int[][] mat) {
         int rows = mat.length, m = mat[0].length;
-        int pos[] = new int[rows], localMax = Integer.MIN_VALUE, cnt = 0;
+        int pos[] = new int[rows];
+        int globalMax = Integer.MIN_VALUE, cnt = 0;
         while (true) {
             for (int i = 0; i < rows; ++i) {
                 
-                while (pos[i] < m && mat[i][pos[i]] < localMax) {// find elem >= localMax
+                while (pos[i] < m && mat[i][pos[i]] < globalMax) {// find elem >= globalMax
                     ++pos[i];
                 }
                 int col = pos[i];
                 if (col >= m) {// not found
                     return -1;
                 }
-                // here: elem >= localMax
+                // here: elem >= globalMax
                 int curElem = mat[i][col];
-                if (curElem > localMax) {// it must be > case, new localMax found
+                if (curElem > globalMax) {// it must be > case, new globalMax found
                     cnt = 1;
-                    localMax = curElem;
+                    globalMax = curElem;
                 } else if (++cnt == rows) {// == case
-                    return localMax;
+                    return globalMax;
                 }
             }
         }

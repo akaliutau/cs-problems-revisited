@@ -38,6 +38,9 @@ import com.problems.model.TreeNode;
  *  [7]
  * ]
  * 
+ * IDEA:
+ * Straightforward - preorder traversing + collecting in vertical map all the lists
+ * 
  */
 public class Solution314 {
 
@@ -72,7 +75,7 @@ public class Solution314 {
 
 			if (root != null) {
 				if (!columnTable.containsKey(column)) {
-					columnTable.put(column, new ArrayList<Integer>());
+					columnTable.put(column, new ArrayList<>());
 				}
 				columnTable.get(column).add(root.val);
 				minColumn = Math.min(minColumn, column);

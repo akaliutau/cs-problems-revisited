@@ -26,7 +26,12 @@ import com.problems.model.TreeNode;
  * 
  * Example
  * 
- * Input: 1 \ 2 / \ 3 4
+ * Input:  
+ *     1 
+ *      \ 
+ *       2 
+ *      / \ 
+ *     3   4
  * 
  * Ouput: [1, 3, 4, 2]
  * 

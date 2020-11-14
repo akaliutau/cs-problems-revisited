@@ -15,10 +15,19 @@ import java.util.stream.Collectors;
  * 
  * Input: arr = [1,2,3,4,5], k = 4, x = 3 Output: [1,2,3,4]
  * 
+ * IDEA:
+ * the point is to find such mid that is the center of [mid, mid + k]
+ * 
+ * [1,2,3,4,5, 6] [1,3]
+ *  |   |
+ *  |  diff = -1 
+ *  diff= 3
+ * 
  *  0 1 2 3 4 5 6 7 8
  * [1,2,3,4,5,6,7,8,9]
  *  |   |   |
- *  l  mid  r=n-4
+ *  |  mid  r=n-4
+ * left
  * 
  */
 public class Solution658 {
@@ -34,7 +43,10 @@ public class Solution658 {
 	    
 		while (left < right) {
 			int mid = (left + right) / 2;
-			if (x - arr[mid] > arr[mid + k] - x) {// find [mid, mid + k]
+			// investigate an array [mid, mid + k] : 
+			// check distance from x to left boundary (x - arr[mid])
+			// check distance from x to right boundary (arr[mid + k] - x)
+			if (x - arr[mid] > arr[mid + k] - x) {
 				left = mid + 1;
 			} else {
 				right = mid;

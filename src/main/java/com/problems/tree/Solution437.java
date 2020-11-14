@@ -9,7 +9,7 @@ import com.problems.model.TreeNode;
  * 
  * You are given a binary tree in which each node contains an integer value.
  * 
- * Find the number of paths that sum to a given value.
+ * Find the number of paths that tgt to a given value.
  * 
  * The path does not need to start or end at the root or a leaf, but it must go
  * downwards (traveling only from parent nodes to child nodes).
@@ -19,7 +19,7 @@ import com.problems.model.TreeNode;
  * 
  * Example:
  * 
- * root = [10,5,-3,3,2,null,11,3,-2,null,1], sum = 8
+ * root = [10,5,-3,3,2,null,11,3,-2,null,1], tgt = 8
  * 
  *          10 
  *         / \ 
@@ -30,56 +30,65 @@ import com.problems.model.TreeNode;
  *    3  -2   1
  * 
  * Return 3. 
- * The paths that sum to 8 are:
+ * The paths that tgt to 8 are:
  * 
  * 1. 5 -> 3 
  * 2. 5 -> 2 -> 1 
  * 3. -3 -> 11
  * 
- * Idea: prefix sum technique: one pass + linear time complexity
+ * IDEA: 
+ * prefix sum technique: one pass + linear time complexity
+ * BF:
+ * 10 + 5 + 3 + 3 = accSum
+ * 10 + 5 + 3 + -2 = accSum
+ * 10 + 5 + 2 + 1 = accSum
+ * 
+ * count also all valid partial sums that sums up to tgt:
+ * 10    +   (-3 + 11) = accSum
+ * partial     tgt       accSum  
+ * partial = accSum - tgt
+ * 
  */
 public class Solution437 {
 
 	static class Result {
 		int count = 0;
-		int sum;
+		int tgt;
 	}
 
-	public void preorder(TreeNode node, int currSum, Map<Integer, Integer> h, Result r) {
+	public void preorder(TreeNode node, int accSum, Map<Integer, Integer> h, Result r, int tgt) {
 		if (node == null)
 			return;
 
-		currSum += node.val;
+		accSum += node.val;
 
-		if (currSum == r.sum)
+		if (accSum == tgt) {// count the full path from the root node
 			r.count++;
+		}
 
-		// number of times the curr_sum − k has occurred already
-		r.count += h.getOrDefault(currSum - r.sum, 0);
+		// number of times the (accSum − tgt) has occurred already
+		r.count += h.getOrDefault(accSum - tgt, 0);
 
-		// add the current sum into hashmap
-		// to use it during the child nodes processing
-		h.put(currSum, h.getOrDefault(currSum, 0) + 1);
+		// add the current tgt into hashmap
+		// to use it during the child nodes processing at line 70 on next iteration
+		h.compute(accSum, (k,v) -> v == null ? 1 : v + 1);
 
-		preorder(node.left, currSum, h, r);
-		preorder(node.right, currSum, h, r);
+		preorder(node.left, accSum, h, r, tgt);
+		preorder(node.right, accSum, h, r, tgt);
 
-		// remove the current sum from the hashmap
+		// remove the current tgt from the hashmap
 		// in order not to use it during
-		// the parallel subtree processing
-		h.put(currSum, h.get(currSum) - 1);
+		// processing on other nodes in other branches
+		h.compute(accSum, (k,v) -> v - 1);
 	}
 
-	public int pathSum(TreeNode root, int sum) {
+	public int pathSum(TreeNode root, int tgt) {
 		Result r = new Result();
-		r.sum = sum;
-		Map<Integer, Integer> h = new HashMap<>();
-		preorder(root, 0, h, r);
+		Map<Integer, Integer> h = new HashMap<>();// must use map, because treenode values can be < 0
+		preorder(root, 0, h, r, tgt);
 		return r.count;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }

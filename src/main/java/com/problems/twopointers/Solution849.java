@@ -16,26 +16,32 @@ package com.problems.twopointers;
  * If Alex sits in any other open seat,
  * the closest person has distance 1. Thus, the maximum distance to the closest
  * person is 2.
+ * 
+ * IDEA:
+ * 1) use 2 indecies which point to the left and right persons
+ * 2) dynamically update these pointers, calculate min distance on each empty place
+ * 
  */
 public class Solution849 {
 
     public int maxDistToClosest(int[] seats) {
         int n = seats.length;
-        int prev = -1, next = 0;
+        int seenLeft = -1, seenRight = 0;
         int ans = 0;
 
         for (int i = 0; i < n; ++i) {
             if (seats[i] == 1) {
-                prev = i;
-            } else {
-                next = Math.max(next, i);
-                while (next < n && seats[next] == 0) {// find next 1 (after i)
-                    next++;
+                seenLeft = i;
+            } else {// triggered on empty seat
+                seenRight = Math.max(seenRight, i);
+                while (seenRight < n && seats[seenRight] == 0) {// find seenRight 1 (after i)
+                    seenRight++;
                 }
-                //   1    0   1
-                // [prev, i, next]
-                int left = prev == -1 ? n : i - prev;// prev == -1 - no init
-                int right = next == n ? n : next - i; // after i there is no 1
+                // now: if no persons, seenRight=n else seenRight=index(seat with 1)
+                //   1        0     1
+                // [seenLeft, i, seenRight]
+                int left = seenLeft == -1 ? n : i - seenLeft;// seenLeft == -1 - no persons
+                int right = seenRight == n ? n : seenRight - i; // after i there is no 1
                 ans = Math.max(ans, Math.min(left, right));
             }
         }

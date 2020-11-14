@@ -14,9 +14,9 @@ import com.problems.model.TreeNode;
  * Example 1:  Input: 
  *        1           <-- depth = 0, col = 0
  *       / \ 
- *      3   2         <-- depth = 0
+ *      3   2         <-- depth = 1
  *     / \   \ 
- *    5   3   9       <-- depth = 0
+ *    5   3   9       <-- depth = 2
  *    
  *    Output: 4 Explanation: The maximum
  * width existing in the third level with the length 4 (5,3,null,9).
@@ -25,9 +25,9 @@ import com.problems.model.TreeNode;
  * 
  *        1           <-- depth = 0, col = 0
  *       / \ 
- *      3   2         <-- depth = 0
+ *      3   2         <-- depth = 1
  *       \   \ 
- *        3   9       <-- depth = 0
+ *        3   9       <-- depth = 2
  *       / \ / \
  *      4   67  9
  */
@@ -40,7 +40,7 @@ public class Solution662 {
         if (node == null)
             return;
         // initialize the value, for the first seen colIndex per level
-        Integer firstColIndex = firstColIndexTable.computeIfAbsent(depth, d -> colIndex);// needed because of edge case: left branch in left part = null 
+        Integer firstColIndex = firstColIndexTable.computeIfAbsent(depth, k -> colIndex);// needed because of edge case: left branch in left part = null 
 
         maxWidth = Math.max(this.maxWidth, colIndex - firstColIndex + 1);// if firstColIndex=0, for the 2nd tree answer will be incorrect
 
@@ -50,7 +50,7 @@ public class Solution662 {
     }
 
     public int widthOfBinaryTree(TreeNode root) {
-        // table contains the first col_index for each level
+        // table contains the first colIndex for each level
         this.firstColIndexTable = new HashMap<Integer, Integer>();
 
         // start from depth = 0, and colIndex = 0

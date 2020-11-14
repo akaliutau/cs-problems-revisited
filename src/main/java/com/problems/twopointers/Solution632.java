@@ -16,41 +16,56 @@ import java.util.PriorityQueue;
  * List 2: [0, 9, 12, 20], 20 is in range [20,24]. 
  * List 3: [5, 18, 22, 30], 22 is in range [20,24]
  * 
+ * IDEA:
+ * for each k lists generate a ListElemTracker tracker
+ * then find interval = {Best{left_edge_i},globalMaxAcrossAllLists}
+ * in the beginning:
+ * globalMaxAcrossAllLists for i=0 => 5
+ * [4,5]
+ * [0,5] - covers everything
+ * [5,5]
+ * 
  */
 public class Solution632 {
     
-    static class LList {
+    static class ListElemTracker {
         int id;
         int left;
-        int idx;
+        int pos;
+        int size;
 
-        public LList(int id, int left, int idx) {
-            this.id = id;
-            this.left = left;
-            this.idx = idx;
+        public ListElemTracker(int id, int left, int pos, int size) {
+            this.id = id;// ref to the list
+            this.left = left;// num[0] in current contiguous list
+            this.pos = pos;  // index of elem in this list
+            this.size = size;
         }
 
     }
 
     public int[] smallestRange(List<List<Integer>> nums) {
-        PriorityQueue<LList> pq = new PriorityQueue<>((a, b) -> a.left - b.left);// natural sorting by 1st elem, the smallest on the top
+        PriorityQueue<ListElemTracker> pq = new PriorityQueue<>((a, b) -> a.left - b.left);// natural sorting by 1st elem, the smallest on the top
         int globalMax = Integer.MIN_VALUE;
         int globalLeft = 0;
         int globalRight = Integer.MAX_VALUE;
         for (int i = 0; i < nums.size(); ++i) {
-            pq.add(new LList(i, nums.get(i).get(0), 0));// fill with Lists with idx=0
-            globalMax = Math.max(globalMax, nums.get(i).get(0));// max value across all lists
+        	int firstElem = nums.get(i).get(0);
+            pq.add(new ListElemTracker(i, firstElem, 0, nums.get(i).size()));// fill with Lists with pos=0
+            globalMax = Math.max(globalMax, firstElem);// max value across all lists
         }
+        // globalMax now contains the max accross all elems
+        // the 
         while(true) {// we are going through each of n lists
-            LList p = pq.poll();
+            ListElemTracker p = pq.poll();
             if (globalMax - p.left < globalRight - globalLeft) {// if there is a smaller range,  [p.left, globalMax], reset
                 globalLeft = p.left;
                 globalRight = globalMax;
             }
-            int next = p.idx + 1;
-            if (next < nums.get(p.id).size()) {// not end of list, continue cycle
-                globalMax = Math.max(globalMax, nums.get(p.id).get(next));
-                pq.add(new LList(p.id, nums.get(p.id).get(next), next));// replace this list with the same id, different elem
+            int next = p.pos + 1;
+            if (next < p.size) {// not end of list, continue cycle
+            	int nextElem = nums.get(p.id).get(next);
+                pq.add(new ListElemTracker(p.id, nextElem, next, p.size));// replace this list with the same id, different elem
+                globalMax = Math.max(globalMax, nextElem);
             }else {
                 break;
             }

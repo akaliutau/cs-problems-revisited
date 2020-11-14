@@ -24,6 +24,12 @@ import java.util.Map;
  * sentences can only be similar if they have the same number of words. So a
  * sentence like words1 = ["great"] can never be similar to words2 =
  * ["doubleplus","good"].
+ * 
+ * IDEA:
+ * 1) think words as nodes and pairs as edges between words
+ * 2) build union sets
+ * 3) answer is true, if ALL WORDS from BOTH sentences are in the same set
+ * 
  */
 public class Solution737 {
 
@@ -70,7 +76,7 @@ public class Solution737 {
             }
             
             if (!index.containsKey(w1) || !index.containsKey(w2) || g.find(index.get(w1)) != g.find(index.get(w2))) {
-                return false;// words are not equal but never mentioned in pair set
+                return false;// words are not equal but they are in different association sets
             }
         }
         return true;

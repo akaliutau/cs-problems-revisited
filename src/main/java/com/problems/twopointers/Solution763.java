@@ -20,27 +20,31 @@ import java.util.List;
  * A partition like "ababcbacadefegde", "hijhklij" is incorrect, because it
  * splits S into less parts.
  * 
+ * IDEA:
+ * during traversing take care of upperBoundary for all letters seen so far
+ * if it coincides with i, then from [lastCut,curIdx] we have seen all letters
  * 
+ * abca  dd
  * 
  */
 public class Solution763 {
 	public List<Integer> partitionLabels(String s) {
-		int[] letterSeenAt = new int[26];
+		int[] lastSeenAt = new int[26];
 		int n = s.length();
 		for (int i = 0; i < n; i++) {
-			letterSeenAt[s.charAt(i) - 'a'] = i;
+			lastSeenAt[s.charAt(i) - 'a'] = i;
 		}
 
-		int end = 0;
+		int upperBoudnary = 0;// upperBoundary for all letters seen so far
 		int start = 0;
 		List<Integer> result = new LinkedList<>();
 		for (int i = 0; i < n; i++) {
-			if (letterSeenAt[s.charAt(i) - 'a'] > end) {
-				end = letterSeenAt[s.charAt(i) - 'a'];
+			if (lastSeenAt[s.charAt(i) - 'a'] > upperBoudnary) {
+				upperBoudnary = lastSeenAt[s.charAt(i) - 'a'];
 			}
 
-			if (i == end) {// triggers the cut
-				result.add(end - start + 1);
+			if (i == upperBoudnary) {// triggers the cut
+				result.add(upperBoudnary - start + 1);
 				start = i + 1;
 			}
 		}

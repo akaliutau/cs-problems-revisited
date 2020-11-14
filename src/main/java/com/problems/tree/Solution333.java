@@ -43,7 +43,7 @@ public class Solution333 {
 
 		// for each node: check range of left & right nodes + all subnodes must be BST
 		if (!left.bst || !right.bst || left.max >= r.val || right.min <= r.val) {
-			int countVal = Math.max(left.size, right.size);
+			int countVal = Math.max(left.size, right.size);// pick up the largest BST
 			return new Node(minVal, maxVal, countVal, false);
 		} else {
 			int countVal = right.size + left.size + 1;
@@ -57,10 +57,6 @@ public class Solution333 {
 		return countNode.size;
 	}
 
-	public static void main(String[] arg) {
 
-		System.out.println();
-
-	}
 
 }

@@ -13,6 +13,9 @@ import com.problems.model.TreeNode;
  * 1) they both empty
  * 2) both have the same value
  * 3) the same is true for each underlying level 
+ * 
+ * IDEA:
+ *  consider each node in s as node and check subtrees on equality
  */
 public class Solution572 {
 
@@ -38,8 +41,5 @@ public class Solution572 {
 		return traverse(s, t);
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
 
 }

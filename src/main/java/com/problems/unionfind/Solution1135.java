@@ -19,7 +19,7 @@ public class Solution1135 {
 
     static class Graph {
 
-        int[] set;
+        int[] set;// represents a city
 
         public Graph(int n) {
             set = new int[n + 1];
@@ -49,12 +49,13 @@ public class Solution1135 {
         Arrays.sort(connections, (a, b) -> a[2] - b[2]);
         Graph g = new Graph(n);
         for (int[] e : connections)
-            if (g.find(e[0]) != g.find(e[1])) {
+            if (g.find(e[0]) != g.find(e[1])) {// e[0] and e[1] are not in 1 set yet
                 ans += e[2];
                 cnt++;
                 g.union(e[0], e[1]);
-                if (cnt == n - 1)
+                if (cnt == n - 1) {// connected all cities
                     break;
+                }
             }
         return cnt == n - 1 ? ans : -1;
     }

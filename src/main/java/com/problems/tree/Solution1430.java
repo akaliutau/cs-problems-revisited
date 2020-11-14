@@ -4,6 +4,8 @@ import com.problems.model.TreeNode;
 
 /**
  *
+ * IDEA:
+ * transfer the index to the next node
  */
 public class Solution1430 {
 
@@ -12,8 +14,7 @@ public class Solution1430 {
             if (root == null || root.left != null || root.right != null) {
                 return false;
             }
-
-            return root.val == arr[index];
+           return root.val == arr[index];
         }
 
         if (root == null || root.val != arr[index]) {

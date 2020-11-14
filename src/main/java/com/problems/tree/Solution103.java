@@ -37,9 +37,9 @@ public class Solution103 {
 			results.add(newLevel);
 		} else {// use different order of adding on even/odd levels
 			if (level % 2 == 0) {
-				results.get(level).add(node.val);
+				results.get(level).add(node.val);// for even levels add from tail
 			}else {
-				results.get(level).add(0, node.val);
+				results.get(level).add(0, node.val);// for odd levels add from head
 			}
 		}
 
@@ -60,8 +60,6 @@ public class Solution103 {
 		return results;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }

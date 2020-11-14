@@ -21,28 +21,38 @@ import com.problems.model.TreeNode;
  *      9   20 
  *          / \ 
  *         15  7
+ *         
+ *     0  1 23 4
+ *         
+ *  IDEA:
+ *  1) use info about preorder to traverse tree
+ *  2) use inorder info to terminate tree building
+ *  3) use mapping nodeId/val => its linear center  
+ *  
+ *  
  */
 public class Solution105 {
 
 	static class Input {
 		int preIndex = 0;
 		int[] preorder;
-		Map<Integer, Integer> indexMap = new HashMap<>();// map value -> its index
+		Map<Integer, Integer> indexMap = new HashMap<>();// map value -> its center
 	}
 
 	public TreeNode build(int inLeft, int inRight, Input input) {
 		// if there is no elements to construct subtrees
+		// because interval [i,i+1] between close nodes in projection cannot be divided
 		if (inLeft == inRight)
 			return null;
 
 		int rootVal = input.preorder[input.preIndex];
 		TreeNode root = new TreeNode(rootVal);
 
-		int index = input.indexMap.get(rootVal);
+		int center = input.indexMap.get(rootVal);
 
 		input.preIndex++;
-		root.left = build(inLeft, index, input);
-		root.right = build(index + 1, inRight, input);
+		root.left = build(inLeft, center, input);// [0,1]
+		root.right = build(center + 1, inRight, input); //[2,5]
 		return root;
 	}
 
@@ -57,8 +67,6 @@ public class Solution105 {
 		return build(0, inorder.length, input);
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }

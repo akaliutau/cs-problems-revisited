@@ -52,10 +52,6 @@ public class Solution1120 {
 		return average;
 	}
 
-	public static void main(String[] arg) {
 
-		System.out.println();
-
-	}
 
 }

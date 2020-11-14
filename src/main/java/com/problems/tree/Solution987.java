@@ -37,10 +37,11 @@ import com.problems.model.TreeNode;
  *           15   7
  * 
  * Explanation:
- * Without loss of generality, we can assume the root node is at position (0,
- * 0): Then, the node with value 9 occurs at position (-1, -1); The nodes with
- * values 3 and 15 occur at positions (0, 0) and (0, -2); The node with value 20
- * occurs at position (1, -1); The node with value 7 occurs at position (2, -2).
+ * Without loss of generality, we can assume the root node is at position (0, 0): 
+ * Then, the node with value 9 occurs at position (-1, -1); 
+ * The nodes with values 3 and 15 occur at positions (0, 0) and (0, -2); 
+ * The node with value 20 occurs at position (1, -1); 
+ * The node with value 7 occurs at position (2, -2).
  * 
  */
 public class Solution987 {

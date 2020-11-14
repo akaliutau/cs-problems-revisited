@@ -29,7 +29,7 @@ public class Solution543 {
 			return 0;
 		int l = dps(node.left);//  inc in both
 		int r = dps(node.right);// directions 
-		ans = Math.max(ans, l + r + 1);// horizontal case (not incl. root node)
+		ans = Math.max(ans, l + r + 1);// horizontal case (possibly not incl. root node)
 		return Math.max(l, r) + 1;// choose longest path + cur node
 	}
 
@@ -37,10 +37,6 @@ public class Solution543 {
 		ans = 1;
 		dps(root);
 		return ans - 1;
-	}
-
-	public static void main(String[] arg) {
-		System.out.println(true);
 	}
 
 }

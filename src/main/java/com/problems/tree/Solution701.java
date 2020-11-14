@@ -34,10 +34,6 @@ public class Solution701 {
         return root;
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
+  
 
 }

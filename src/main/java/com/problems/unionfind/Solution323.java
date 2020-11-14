@@ -51,7 +51,7 @@ public class Solution323 {
 				parent[py] = px;
 			} else if (rank[py] > rank[px]) {
 				parent[px] = py;
-			} else {
+			} else {// to trigger rebalance
 				parent[py] = px;
 				rank[px] = rank[px] + 1;
 			}
@@ -69,8 +69,6 @@ public class Solution323 {
 		return n - g.components;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }

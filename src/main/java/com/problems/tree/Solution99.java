@@ -9,6 +9,7 @@ import com.problems.model.TreeNode;
  * 
  * Recover the tree without changing its structure.
  * 
+ * IDEA:
  * 
  */
 public class Solution99 {
@@ -43,8 +44,5 @@ public class Solution99 {
 		swap(x, y);
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
 
 }

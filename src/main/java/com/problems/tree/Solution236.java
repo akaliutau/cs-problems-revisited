@@ -7,12 +7,15 @@ import com.problems.model.TreeNode;
  * Tree
  * 
  * Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
+ * 
+ * IDEA:
+ * closest common ancestor is a fork point
  */
 public class Solution236 {
 
 	TreeNode ans;
 
-	private boolean check(TreeNode node, TreeNode p, TreeNode q) {
+	boolean check(TreeNode node, TreeNode p, TreeNode q) {
 
 		if (node == null) {
 			return false;
@@ -21,7 +24,7 @@ public class Solution236 {
 		boolean inLeftBranch = check(node.left, p, q);
 		boolean inRigtBranch = check(node.right, p, q);
 
-		boolean inCurNode = node == p || node == q;
+		boolean inCurNode = (node == p || node == q);
 
 		if ((inLeftBranch && inRigtBranch) || (inLeftBranch && inCurNode) || (inRigtBranch && inCurNode)) {
 			this.ans = node;
@@ -37,8 +40,6 @@ public class Solution236 {
 		return this.ans;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }

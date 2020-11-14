@@ -7,6 +7,9 @@ package com.problems.twopointers;
  * 
  * Example 1: Input: S
  * = "ab#c", T = "ad#c" Output: true Explanation: Both S and T become "ac".
+ * 
+ * IDEA:
+ * straightforward - simulate typing from the end, omitting symbols, using # as command
  */
 public class Solution844 {
 
@@ -30,7 +33,7 @@ public class Solution844 {
                 if (str[pos] == '#') {// omit #, count it
                     toSkip++;
                     pos--;
-                } else if (toSkip > 0) {// if pressed #, then skip
+                } else if (toSkip > 0) {// if pressed # 1 or more times, then skip as well
                     toSkip--;
                     pos--;
                 } else// found it!
@@ -44,7 +47,7 @@ public class Solution844 {
         BackspaceStr strS = new BackspaceStr(s);
         BackspaceStr strT = new BackspaceStr(t);
 
-        while (strS.pos >= 0 || strT.pos >= 0) { // While there may be chars in S or T
+        while (strS.pos >= 0 || strT.pos >= 0) { // While there are chars in S or T
 
             strS.next();
             strT.next();
@@ -60,10 +63,5 @@ public class Solution844 {
         return true;
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
-
+ 
 }

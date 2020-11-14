@@ -22,6 +22,10 @@ import java.util.Map;
  * Explanation: The first and third John's are the same person as they have the
  * common email "johnsmith@mail.com". The second John and Mary are different
  * people as none of their email addresses are used by other accounts.
+ * 
+ * IDEA:
+ * Union set structure will contain info about all sets
+ * 
  */
 public class Solution721 {
 
@@ -48,7 +52,7 @@ public class Solution721 {
 
 	public List<List<String>> accountsMerge(List<List<String>> accounts) {
 		Graph g = new Graph();
-		Map<String, String> emailToName = new HashMap<>();
+		Map<String, String> emailToName = new HashMap<>();// needed to restore name
 		Map<String, Integer> emailToID = new HashMap<>();// replace unique string with unique int id
 		int uuid = 0;
 		for (List<String> account : accounts) {
@@ -63,20 +67,18 @@ public class Solution721 {
 			}
 		}
 
-		Map<Integer, List<String>> ans = new HashMap<>();// map parent id => all emails in set
+		Map<Integer, List<String>> grouppedByParent = new HashMap<>();// map parent id => all emails in set
 		for (String email : emailToName.keySet()) {
 			int index = g.find(emailToID.get(email));
-			ans.computeIfAbsent(index, x -> new ArrayList<>()).add(email);
+			grouppedByParent.computeIfAbsent(index, x -> new ArrayList<>()).add(email);// group by parent of set
 		}
-		for (List<String> component : ans.values()) {
+		for (List<String> component : grouppedByParent.values()) {
 			Collections.sort(component);
 			component.add(0, emailToName.get(component.get(0)));// sort and attach name at pos=0
 		}
-		return new ArrayList<>(ans.values());
+		return new ArrayList<>(grouppedByParent.values());
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }

@@ -20,6 +20,9 @@ import com.problems.model.TreeNode;
  *  0   1  2 3  4
  *           |
  *         index  
+ *         
+ *  IDEA:
+ *  
  *    
  */
 public class Solution106 {
