@@ -40,8 +40,6 @@ public class Solution121 {
 		return profit;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }

@@ -62,10 +62,6 @@ public class Solution1130 {
 		return dp[0][n - 1];
 	}
 
-	public static void main(String[] arg) {
-
-		System.out.println();
-
-	}
+	
 
 }

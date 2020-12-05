@@ -68,16 +68,14 @@ public class Solution437 {
 
 		// number of times the (accSum − tgt) has occurred already
 		r.count += h.getOrDefault(accSum - tgt, 0);
-
-		// add the current tgt into hashmap
-		// to use it during the child nodes processing at line 70 on next iteration
+		
+		// add the current tgt into hashmap to use it during the child nodes processing at line 70 on next iteration
 		h.compute(accSum, (k,v) -> v == null ? 1 : v + 1);
 
 		preorder(node.left, accSum, h, r, tgt);
 		preorder(node.right, accSum, h, r, tgt);
 
-		// remove the current tgt from the hashmap
-		// in order not to use it during
+		// remove the current tgt from the hashmap in order not to use it during
 		// processing on other nodes in other branches
 		h.compute(accSum, (k,v) -> v - 1);
 	}

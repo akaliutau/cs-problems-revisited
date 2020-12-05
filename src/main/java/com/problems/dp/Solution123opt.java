@@ -21,10 +21,6 @@ public class Solution123opt {
         return t2Profit;
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
+  
 
 }

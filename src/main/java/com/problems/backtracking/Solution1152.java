@@ -50,6 +50,8 @@ import java.util.Set;
  * The 3-sequence ("cart", "maps", "home") was visited at least once by 1 user.
  * 
  * IDEA: generate smart statistics
+ * 1) generate all possible ordered permutations of visited sites, save freqs for each combination
+ * 2) pick up the combination with the max freq
  */
 public class Solution1152 {
 
@@ -82,10 +84,7 @@ public class Solution1152 {
 			}
 			List<String> copy = new ArrayList<>(currList);
 			visited.add(copy);
-			if (!freqMap.containsKey(copy)) {
-				freqMap.put(copy, 0);
-			}
-			freqMap.put(copy, freqMap.get(copy) + 1);
+			freqMap.compute(copy, (k,v) -> v == null ? 1 : v + 1);
 			return;
 		}
 		for (int i = currIdx; i < websites.size(); i++) {
@@ -107,10 +106,7 @@ public class Solution1152 {
 		// group by username
 		Map<String, List<String>> nameToWebsiteVisit = new HashMap<>();
 		for (Visit visit : dataList) {
-			if (!nameToWebsiteVisit.containsKey(visit.username)) {
-				nameToWebsiteVisit.put(visit.username, new ArrayList<>());
-			}
-			nameToWebsiteVisit.get(visit.username).add(visit.website);
+			nameToWebsiteVisit.computeIfAbsent(visit.username, k -> new ArrayList<>()).add(visit.website);
 		}
 
 		// backtracking, found all possible patterns
@@ -133,10 +129,5 @@ public class Solution1152 {
 		return result;
 	}
 
-	public static void main(String[] arg) {
-
-		System.out.println("D");
-
-	}
 
 }

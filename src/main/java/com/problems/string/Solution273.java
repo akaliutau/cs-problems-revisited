@@ -37,10 +37,6 @@ public class Solution273 {
         return result.trim();
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
+    
 
 }

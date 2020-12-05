@@ -47,8 +47,5 @@ public class Solution403 {
 		return map.get(stones[len - 1]).size() > 0;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
-
+	
 }

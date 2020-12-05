@@ -1,5 +1,7 @@
 package com.problems.hashtable;
 
+import com.problems.utils.Utils;
+
 /**
  * There are 8 prison cells in a row, and each cell is either occupied or
  * vacant.
@@ -37,17 +39,14 @@ package com.problems.hashtable;
  */
 public class Solution957 {
 
-	public int[] prisonAfterNDays(int[] cells, int day) {
+	public static int[] prisonAfterNDays(int[] cells, int day) {
 		int n = cells.length;
 		int[] res = new int[n];
-		int prison = 0;
-		for (int i = 0; i < 8; i++) {
-			if (cells[i] == 1) {
-				prison += 1;
-			}
+		int prison = cells[0];
+		for (int i = 1; i < 8; i++) {
 			prison = prison << 1;
+			prison += cells[i];
 		}
-		prison = prison >> 1;
 		prison = prison & 255;
 
 		int mask = 126;
@@ -94,6 +93,12 @@ public class Solution957 {
 		return res;
 	}
 
+	public static void main(String[] arg) {
+		
+		int[] cells = {0,1,0,1,1,0,0,1};
+		Utils.print(prisonAfterNDays(cells, 7));
+	}
 
+	
 
 }

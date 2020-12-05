@@ -40,38 +40,37 @@ public class Solution1335 {
 	public int minDifficulty(int[] jobDifficulty, int d) {
 		int n = jobDifficulty.length;
 
-		// dp[d][i] - difficulty of schedule for all jobs [0,i] during week consisting from d days (==baskets)
+		// dp[d][i] - difficulty of schedule for all jobs [0,i] during week consisting from d + 1 days (==baskets)
 		int[][] dp = new int[d][n];
 
 		dp[0][0] = jobDifficulty[0];
-		for (int job = 1; job < n; job++) {
+		for (int job = 1; job < n; job++) {// for 1 day
 			dp[0][job] = Math.max(dp[0][job - 1], jobDifficulty[job]);
 		}
 
-		for (int day = 1; day < d; day++) {
+		for (int day = 1; day < d; day++) {// no jobs
 			dp[day][0] = -1;
 		}
 
 		for (int day = 1; day < d; day++) {
 			for (int job = 1; job < n; job++) {
-				dp[day][job] = -1;
 				if (dp[day - 1][job - 1] != -1) {
 					dp[day][job] = dp[day - 1][job - 1] + jobDifficulty[job];// by definition of schedule(day) = schedule(without cur day) + job difficulty at cur day
 					int max = jobDifficulty[job];
-					for (int prev = job - 2; prev >= 0; prev--) {//go through all combinations (dp[day][j], max difficulty of job on (j..n))
-						max = Math.max(max, jobDifficulty[prev + 1]);
-						if (dp[day - 1][prev] != -1) {
-							dp[day][job] = Math.min(dp[day][job], dp[day - 1][prev] + max);
+					for (int j = job - 2; j >= 0; j--) {//go through all combinations (dp[day][j], max is the MAX(difficulty of job on (j..n))
+						max = Math.max(max, jobDifficulty[j + 1]);// max on the block [4,3,2,1]
+						if (dp[day - 1][j] != -1) {
+							dp[day][job] = Math.min(dp[day][job], dp[day - 1][j] + max);
 						}
 					}
+				}else{
+					dp[day][job] = -1;// all dp where jobs < days = -1
 				}
 			}
 		}
 		return dp[d - 1][n - 1];
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+	
 
 }

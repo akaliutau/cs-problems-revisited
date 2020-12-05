@@ -13,31 +13,22 @@ public class Solution53 {
 
         int runningSum = nums[0];// runningSum of all elems left to index = right
         int bestSum = nums[0];
-        int bestLeft = 0;
-        int bestRight = 0;
-
         for (int i = 1; i < nums.length; i++) {
             if (runningSum >= 0) {// does not make sense to add num < 0
                 runningSum += nums[i];
             } else {
                 runningSum = nums[i];
                 if (runningSum > bestSum) {// reset left boundary
-                    bestLeft = i;
+                    
                 }
             }
             if (runningSum > bestSum) {
                 bestSum = runningSum;
-                bestRight = i;
             }
         }
         return bestSum;
 
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
 
 }

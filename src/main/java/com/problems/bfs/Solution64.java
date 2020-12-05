@@ -1,4 +1,4 @@
-package com.problems.dp;
+package com.problems.bfs;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -20,6 +20,9 @@ import java.util.Queue;
  * Explanation: Because the path
  * 1->3->1->1->1 minimizes the sum
  * 
+ * IDEA:
+ * for each cell:
+ *  calc path sum ONCE, then only update it to optimal value
  * 
  */
 public class Solution64 {
@@ -64,8 +67,6 @@ public class Solution64 {
 		return sum[n - 1][m - 1];
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+	
 
 }

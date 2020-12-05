@@ -16,7 +16,7 @@ package com.problems.dp;
  * 
  * Output: 4
  * 
- * 
+ * IDEA:
  * Build solution from blocks 2x2
  */
 public class Solution221 {
@@ -51,8 +51,6 @@ public class Solution221 {
 
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+	
 
 }

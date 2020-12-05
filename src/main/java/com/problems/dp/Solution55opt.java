@@ -56,10 +56,5 @@ public class Solution55opt {
 
 	}
 
-	public static void main(String[] arg) {
-
-		System.out.println();
-
-	}
-
+	
 }

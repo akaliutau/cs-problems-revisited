@@ -47,10 +47,6 @@ public class Solution123 {
         return maxProfit;
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
+   
 
 }

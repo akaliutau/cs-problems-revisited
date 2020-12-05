@@ -28,6 +28,10 @@ import com.problems.model.TreeNode;
  * 
  * Explanation: The nodes that are a distance 2 from the target node (with value
  * 5) have values 7, 4, and 1.
+ * 
+ * IDEA:
+ * 1) calc all parents for each node
+ * 2) use layered BFS for each node: left, right, parent
  */
 public class Solution863 {
 
@@ -49,13 +53,13 @@ public class Solution863 {
 
 		Set<TreeNode> seen = new HashSet<>();
 		seen.add(target);
-		seen.add(null);
+		seen.add(null);// all null
 
 		int dist = 0;
 		while (!queue.isEmpty()) {
 			if (dist == k) {
 				List<Integer> ans = new ArrayList<>();
-				for (TreeNode n : queue) {
+				for (TreeNode n : queue) {// layer #k
 					if (n != null) {
 						ans.add(n.val);
 					}
@@ -66,7 +70,7 @@ public class Solution863 {
 			int layer = queue.size();
 			for (int i = 0; i < layer; i++) {
 				TreeNode node = queue.poll();
-				if (node != null) {
+				if (node != null) {// left, right, parent
 					if (!seen.contains(node.left)) {
 						seen.add(node.left);
 						queue.add(node.left);
@@ -88,10 +92,6 @@ public class Solution863 {
 		return new ArrayList<Integer>();
 	}
 
-	public static void main(String[] arg) {
 
-		System.out.println();
-
-	}
 
 }

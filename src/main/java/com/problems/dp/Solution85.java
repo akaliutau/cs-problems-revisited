@@ -14,10 +14,32 @@ import java.util.Arrays;
  * 
  * Output: 6 Explanation: The maximal rectangle is shown in the above picture
  * 
+ * IDEA:
  * Imagine an algorithm where for each point we computed a rectangle by doing the following:
  * 1) Finding the maximum height of the rectangle by iterating upwards until a 0 is reached
  * 2) Finding the maximum width of the rectangle by iterating outwards left and right
  *    until a height that doesn't accommodate the maximum height of the rectangle
+ *    
+ * for each row use 2 pointers:
+ * left[i] - the last left edge of rectangle on the [0,i]
+ * right[i] - the last right edge of rectangle on the [i,n-1]
+ * height[i] - the best top edge of the bar on the [0,row]   
+ * 
+ * left array for row 1
+ * ["0","0","2","0","0"], 
+ * ["0","4","2","4","4"], 
+ * h=1   0   1   0   0
+ * 
+ * left array for row 2
+ * ["0","0","2","2","2"], 
+ * ["0","4","2","4","4"],
+ * h=2   0   2   1   1
+ *  
+ * left array for row 3
+ * ["0","0","2","2","2"],
+ * ["4","4","2","4","4"]
+ * h=2   0   3   2   2
+ * 
  */
 public class Solution85 {
 
@@ -38,11 +60,13 @@ public class Solution85 {
         int maxArea = 0;
         
         for (int i = 0; i < m; i++) {// for each row do:
-            int curLeft = 0, curRight = n;
+            int lastLeft = 0;
+            int lastRight = n;
+            char[] row = matrix[i];
             
             // update height for each column
             for (int j = 0; j < n; j++) {
-                if (matrix[i][j] == '1') {
+                if (row[j] == '1') {
                     height[j]++;
                 }else { // reset height
                     height[j] = 0;
@@ -50,20 +74,20 @@ public class Solution85 {
             }
             // update left for each column
             for (int j = 0; j < n; j++) {
-                if (matrix[i][j] == '1') {
-                    left[j] = Math.max(left[j], curLeft);
+                if (row[j] == '1') {
+                    left[j] = Math.max(left[j], lastLeft);// if in the past was narrower rectangle, with bigger left use it
                 } else {// reset left 
                     left[j] = 0;
-                    curLeft = j + 1;
+                    lastLeft = j + 1;
                 }
             }
             // update right for each column
             for (int j = n - 1; j >= 0; j--) {
-                if (matrix[i][j] == '1')
-                    right[j] = Math.min(right[j], curRight);
+                if (row[j] == '1')
+                    right[j] = Math.min(right[j], lastRight);// if in the past was narrower rectangle, with smaller right use it
                 else {// reset right
                     right[j] = n - 1;
-                    curRight = j - 1;
+                    lastRight = j - 1;
                 }
             }
             // update area

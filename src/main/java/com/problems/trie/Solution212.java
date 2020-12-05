@@ -32,10 +32,6 @@ public class Solution212 {
 	static class TrieNode {
 		Map<Character, TrieNode> children = new HashMap<>();
 		String word = null;
-
-		public TrieNode() {
-
-		}
 	}
 
 	public List<String> findWords(char[][] board, String[] words) {
@@ -44,15 +40,8 @@ public class Solution212 {
 		TrieNode root = new TrieNode();
 		for (String word : words) {
 			TrieNode node = root;
-
 			for (Character letter : word.toCharArray()) {
-				if (node.children.containsKey(letter)) {
-					node = node.children.get(letter);
-				} else {
-					TrieNode newNode = new TrieNode();
-					node.children.put(letter, newNode);
-					node = newNode;
-				}
+				node = node.children.computeIfAbsent(letter, k -> new TrieNode());
 			}
 			node.word = word; // store words in Trie
 		}
@@ -71,7 +60,7 @@ public class Solution212 {
 		return result;
 	}
 
-	private void backtracking(int row, int col, char[][] board, TrieNode parent, ArrayList<String> result) {
+	void backtracking(int row, int col, char[][] board, TrieNode parent, ArrayList<String> result) {
 		Character letter = board[row][col];
 		TrieNode currNode = parent.children.get(letter);
 
@@ -82,7 +71,7 @@ public class Solution212 {
 
 		board[row][col] = '#';
 
-		int[] rowOffset = { -1, 0, 1, 0 };
+		int[] rowOffset = {-1, 0, 1,  0 };
 		int[] colOffset = { 0, 1, 0, -1 };
 		for (int i = 0; i < 4; ++i) {
 			int r = row + rowOffset[i];
@@ -96,17 +85,13 @@ public class Solution212 {
 			}
 		}
 
-		board[row][col] = letter;
+		board[row][col] = letter;// restore letter for backtracking
 
 		if (currNode.children.isEmpty()) {
 			parent.children.remove(letter);
 		}
 	}
 
-	public static void main(String[] arg) {
 
-		System.out.println();
-
-	}
 
 }

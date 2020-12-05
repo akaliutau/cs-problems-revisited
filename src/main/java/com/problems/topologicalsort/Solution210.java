@@ -31,9 +31,7 @@ public class Solution210 {
 		for (int i = 0; i < prerequisites.length; i++) {
 			int dest = prerequisites[i][0];
 			int src = prerequisites[i][1];
-			List<Integer> lst = adjList.getOrDefault(src, new ArrayList<>());
-			lst.add(dest);
-			adjList.put(src, lst);
+			adjList.computeIfAbsent(src, k -> new ArrayList<>()).add(dest);
 
 			// Record in-degree of each vertex
 			indegree[dest] += 1;

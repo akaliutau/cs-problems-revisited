@@ -48,10 +48,6 @@ public class Solution322 {
 		return dp[amount] > amount ? -1 : dp[amount];
 	}
 
-	public static void main(String[] arg) {
-
-		System.out.println();
-
-	}
+	
 
 }

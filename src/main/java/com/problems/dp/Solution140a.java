@@ -80,10 +80,6 @@ public class Solution140a {
         }
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println("D");
-
-    }
+ 
 
 }

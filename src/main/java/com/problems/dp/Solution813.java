@@ -30,7 +30,7 @@ public class Solution813 {
         for (int l = 0; l < k - 1; ++l) {// k iterations
             for (int i = 0; i < n; ++i) {
                 for (int j = i + 1; j < n; ++j) {// all possible 2-part partition
-                    dp[i] = Math.max(dp[i], (sum[j] - sum[i]) / (j - i) + dp[j]);
+                    dp[i] = Math.max(dp[i], dp[j] + (sum[j] - sum[i]) / (j - i));
                 }
             }
         }

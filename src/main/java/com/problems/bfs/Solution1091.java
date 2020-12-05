@@ -60,8 +60,6 @@ public class Solution1091 {
 		return -1;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }

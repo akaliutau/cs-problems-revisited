@@ -35,8 +35,6 @@ public class Solution1155 {
 		return dp[target];
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }

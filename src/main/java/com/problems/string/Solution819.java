@@ -57,10 +57,7 @@ public class Solution819 {
 			}
 			Word word = new Word(s);
 			if (!banSet.contains(word.w)) {
-				if (!wordMap.containsKey(word.w)) {
-					wordMap.put(word.w, word);
-				}
-				wordMap.get(word.w).freq++;
+				wordMap.computeIfAbsent(word.w, k -> word).freq++;
 			}
 		}
 		Comparator<Word> byFreq = (o, p) -> Integer.compare(o.freq, p.freq);

@@ -22,12 +22,11 @@ public class Solution673 {
 
         for (int j = 0; j < n; ++j) {
             for (int i = 0; i < j; ++i) {// iterate through all possible pairs (i,j)
-                
                 if (nums[i] < nums[j]) {// [i], .. , [j] - increasing seq
-                    if (dp[i] >= dp[j]) {
+                    if (dp[i] >= dp[j]) {// find some short seq which is increasing
                         dp[j] = dp[i] + 1;// added [j] elem
                         counts[j] = counts[i];// no increase in counts, because seq is not the longest
-                    } else if (dp[i] == dp[j] - 1) {
+                    } else if (dp[i] + 1 == dp[j]) {
                         counts[j] += counts[i];
                     }
                 }

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Given a list of words (without duplicates), please write a program that
+ * Given a list of words (without duplicates), write a program that
  * returns all concatenated words in the given list of words. A concatenated
  * word is defined as a string that is comprised entirely of at least two
  * shorter words in the given array.
@@ -22,6 +22,10 @@ import java.util.Set;
  * can be concatenated by "rat", "cat", "dog" and "cat".
  * 
  * Input: ["cat","cats","catsdogcats","dog" Output: ["catsdogcats","dogcatsdog"]
+ * 
+ * IDEA:
+ * 
+ * 
  */
 public class Solution472 {
 
@@ -32,17 +36,17 @@ public class Solution472 {
 		}
 
 		/* Add to the result if last part of the string is found */
-		if (from != 0 && hset.contains(s)) {
+		if (from != 0 && hset.contains(s)) {// str = catsdogcats - > cats + dogcats - NOT TRUE
 			result.add(str);
 			return true;
 		}
 
 		StringBuilder sb = new StringBuilder();
-		sb.append(s.charAt(0));
+		sb.append(s.charAt(0));// dogcats
 		for (int i = 1; i < s.length(); i++) {
 			/* Check if we can complete the string using smaller words recursively */
 			if (hset.contains(sb.toString())) {
-				if (findWord(str, from + i, hset, result)) {
+				if (findWord(str, from + i, hset, result)) {// try catsdogcats as cats + dog + [cats]
 					return true;
 				}
 			}
@@ -53,7 +57,7 @@ public class Solution472 {
 	}
 
 	public List<String> findAllConcatenatedWordsInADict(String[] words) {
-		HashSet<String> hset = new HashSet<>();
+		Set<String> hset = new HashSet<>();
 		List<String> res = new ArrayList<>();
 
 		for (String s : words) {
@@ -67,10 +71,6 @@ public class Solution472 {
 		return res;
 	}
 
-	public static void main(String[] arg) {
 
-		System.out.println("D");
-
-	}
 
 }

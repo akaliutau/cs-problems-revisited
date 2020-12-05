@@ -21,7 +21,7 @@ package com.problems.dfs;
  * ] 
  * 
  * Output: 1
- * 
+ * O(n + m)
  */
 public class Solution200 {
 	void dfs(char[][] grid, int r, int c) {

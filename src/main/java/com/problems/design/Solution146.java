@@ -115,8 +115,6 @@ public class Solution146 {
 		}
 	}
 
-	public static void main(String[] arg) {
-
-	}
+	
 
 }

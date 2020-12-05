@@ -65,10 +65,6 @@ public class Solution23 {
         return mergeSublist(lists, 0, n - 1);
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println("D");
-
-    }
+ 
 
 }

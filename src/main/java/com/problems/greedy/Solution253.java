@@ -13,6 +13,9 @@ import java.util.Queue;
  * Example 1:
  * 
  * Input: [[0, 30],[5, 10],[15, 20]] Output: 2
+ * 
+ * IDEA:
+ * dynamically update endings using PQ to track the earliest ending
  */
 public class Solution253 {
 
@@ -40,7 +43,7 @@ public class Solution253 {
 
 			// If the ending of {all added intervals} already in the past relatively
 			// interval [i], use that time slot
-			if (intervals[i][0] >= endings.peek()) {// start_of_current_interval >= end of all previous ones
+			if (intervals[i][0] >= endings.peek()) {// end of all previous ones if and only if it ended earlier
 				endings.poll();
 			}
 			// If a new slot is to be assigned, then also we add to the heap,

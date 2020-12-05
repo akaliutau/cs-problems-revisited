@@ -40,8 +40,8 @@ public class Solution1192 {
 			if (!visited[neighbor]) {
 				dfs(graph, visited, time, curNode, neighbor, curTime + 1, results);
 			}
-			time[curNode] = Math.min(time[curNode], time[neighbor]);// relaxation equation
-			// comapare time AFTER relaxation
+			time[curNode] = Math.min(time[curNode], time[neighbor]);// relaxation equation - each node in the loop will be relaxed
+			// Compare time AFTER relaxation
 			if (time[neighbor] > curTime) {
 				results.add(Arrays.asList(curNode, neighbor));
 			}

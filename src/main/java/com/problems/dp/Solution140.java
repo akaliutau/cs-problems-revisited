@@ -64,7 +64,7 @@ public class Solution140 {
 
             int len = s.length();
             // contains a list of all possible cuts for [0,l)
-            List<List<String>> dp = new ArrayList<>(len + 1);
+            List<List<String>> dp = new ArrayList<>(len + 1);// dp[i] the answer for the question if cut at i
             
             for (int i = 0; i < len + 1; ++i) {
                 List<String> emptyList = new ArrayList<>();
@@ -91,10 +91,6 @@ public class Solution140 {
         }
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println("D");
-
-    }
+  
 
 }

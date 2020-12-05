@@ -22,6 +22,13 @@ import java.util.Map;
  * get and put functions for that item since it was inserted. This number is set
  * to zero when the item is removed.
  * 
+ * IDEA:
+ * use 2 structures to track nodes:
+ * 1) map for fast access
+ * 2) nodes grouped by frequency
+ * 
+ * Note, that the tricky part is node migration (from group to group)
+ * 
  */
 public class Solution460 {
 
@@ -62,11 +69,11 @@ public class Solution460 {
 		int maxSize;
 		int size;
 
-		Map<Integer, LinkedList<Node>> counter;// for statistics
+		Map<Integer, LinkedList<Node>> counter;// groups nodes by frequency
 		Map<Integer, Node> nodeMap;// for fast access
 
-		Node head;
-		Node tail;
+		Node head;// points to the first node in cache
+		Node tail;// points to the last node in cache
 
 		int minCount;
 
@@ -86,36 +93,34 @@ public class Solution460 {
 				return -1;
 			}
 
-			Node node = nodeMap.get(key);
+			Node requestedNode = nodeMap.get(key);// requested node
 
-			LinkedList<Node> nodes = counter.get(node.count);
-			nodes.remove(node);
+			LinkedList<Node> nodes = counter.get(requestedNode.count);
+			nodes.remove(requestedNode);
 
 			if (nodes.size() > 0) {
 				Node node1 = nodes.peekFirst();
-				node.chain(node1);
-				if (node == tail) {
+				requestedNode.chain(node1);
+				if (requestedNode == tail) {
 					tail = node1;
 				}
 			}
 
-			node.count += 1;
-			if (!counter.containsKey(node.count)) {
-				counter.put(node.count, new LinkedList<>());
-			}
+			requestedNode.count += 1;
 
-			LinkedList<Node> updatesNodes = counter.get(node.count);
+			LinkedList<Node> updatesNodes = counter.computeIfAbsent(requestedNode.count, k -> new LinkedList<>());
+			
 			if (updatesNodes.size() > 0) {
 				Node node1 = updatesNodes.peekLast();
-				node1.chain(node);
+				node1.chain(requestedNode);
 				if (node1 == tail) {
-					tail = node;
+					tail = requestedNode;
 				}
 			}
 
-			updatesNodes.offer(node);
+			updatesNodes.offer(requestedNode);
 
-			return node.value;
+			return requestedNode.value;
 		}
 
 		public void put(int key, int value) {
@@ -145,11 +150,7 @@ public class Solution460 {
 
 			nodeMap.put(key, node);
 
-			if (!counter.containsKey(node.count)) {
-				counter.put(node.count, new LinkedList<>());
-			}
-
-			counter.get(node.count).offer(node);
+			counter.computeIfAbsent(node.count, k -> new LinkedList<>()).offer(node);
 		}
 
 		void remove(Node node) {

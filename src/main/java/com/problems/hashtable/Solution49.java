@@ -62,10 +62,7 @@ public class Solution49 {
 		Map<FootPrint, List<String>> groupped = new HashMap<>();
 		for (String s : strs) {
 			FootPrint fp = new FootPrint(s);
-			if (!groupped.containsKey(fp)) {
-				groupped.put(fp, new ArrayList<>());
-			}
-			groupped.get(fp).add(s);
+			groupped.computeIfAbsent(fp, k -> new ArrayList<>()).add(s);
 		}
 
 		results.addAll(groupped.values());

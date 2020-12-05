@@ -52,10 +52,5 @@ public class Solution973 {
 		return res;
 	}
 
-	public static void main(String[] arg) {
-
-		System.out.println("D");
-
-	}
 
 }

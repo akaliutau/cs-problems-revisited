@@ -6,6 +6,9 @@ package com.problems.dp;
  * in time. The robot is trying to reach the bottom-right corner of the grid
  * (marked 'Finish' in the diagram below). Now consider if some obstacles are
  * added to the grids. How many unique paths would there be?
+ * 
+ * IDEA:
+ * 
  */
 public class Solution63 {
 
@@ -19,18 +22,18 @@ public class Solution63 {
 
         int[][] dp = new int[n][m];
         boolean obstacle = false;
-        for (int i = 0; i < m; i++) {
+        for (int i = 0; i < m; i++) {// first row
             obstacle = obstacle || obstacleGrid[0][i] == 1;
-            dp[0][i] = obstacle ? 0 : 1;
+            dp[0][i] = obstacle ? 0 : 1;// if obstacle path blocked forever
         }
         obstacle = false;
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {// first column
             obstacle = obstacle || obstacleGrid[i][0] == 1;
             dp[i][0] = obstacle ? 0 : 1;
         }
         for (int row = 1; row < n; row++) {
             for (int col = 1; col < m; col++) {
-                int left = obstacleGrid[row][col - 1] == 1 ? 0 : dp[row][col - 1];
+                int left = obstacleGrid[row][col - 1] == 1 ? 0 : dp[row][col - 1];// take # of paths from prev cell
                 int up = obstacleGrid[row - 1][col] == 1 ? 0 : dp[row - 1][col];
                 if (obstacleGrid[row][col] == 0) {
                     dp[row][col] = left + up;

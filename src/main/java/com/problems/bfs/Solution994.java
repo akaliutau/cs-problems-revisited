@@ -75,10 +75,6 @@ public class Solution994 {
 		return sum == 0 ? 0 : days; // Empty grid if sum == 0
 	}
 
-	public static void main(String[] arg) {
 
-		System.out.println("D");
-
-	}
 
 }

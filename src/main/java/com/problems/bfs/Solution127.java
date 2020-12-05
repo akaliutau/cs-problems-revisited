@@ -39,7 +39,7 @@ import java.util.Set;
  * ["hit","hot","dot","dog","cog"], 
  * ["hit","hot","lot","log","cog"] ]
  */
-public class Solution126 {
+public class Solution127 {
 	class Node {
 		String word;
 		Node parent;
@@ -106,7 +106,7 @@ public class Solution126 {
 			for (int i = 0; i < size; i++) {
 				node = q.poll();
 				String word = node.word;
-				if (word.equals(endWord) && dist <= minDist) {// reached the end
+				if (word.equals(endWord) && dist <= minDist) {// reached the end, filter out too long paths
 					minDist = dist;
 					List<String> path = new ArrayList<>();
 					// backtracing to restore the path
@@ -137,10 +137,6 @@ public class Solution126 {
 		return ans;
 	}
 
-	public static void main(String[] arg) {
 
-		System.out.println();
-
-	}
 
 }
