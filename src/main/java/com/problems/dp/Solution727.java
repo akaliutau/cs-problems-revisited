@@ -45,11 +45,12 @@ public class Solution727 {
 				windows.add(new int[] { i, i });
 		}
 		
-		for (int j = 1; j < m; ++j) {// for all consequent letters in t with index tIndex
-			int tIndex = t.charAt(j) - 'a';
+		for (int j = 1; j < m; ++j) {// for all consequent letters in t with index letter
+			int letter = t.charAt(j) - 'a';
 			for (int[] window : windows) {
-				if (window[1] < n - 1 && dp[window[1] + 1][tIndex] >= 0) {//1) not the last (must be subseq) 2) have such letter in s
-					window[1] = dp[window[1] + 1][tIndex];
+			   //1) not the last (must be subseq)   2) have such letter in s
+				if (window[1] < n - 1 && dp[window[1] + 1][letter] >= 0) {
+					window[1] = dp[window[1] + 1][letter];
 				} else {
 					window[0] = window[1] = -1;// reset
 					break;
