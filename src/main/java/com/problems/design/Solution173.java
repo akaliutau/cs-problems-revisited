@@ -27,6 +27,9 @@ import com.problems.model.TreeNode;
  * iterator.next(); // return 20 
  * iterator.hasNext(); // return false
  * 
+ * IDEA:
+ * 1) collect on the stack the list of all leftmost nodes
+ * 2) 
  * 
  */
 public class Solution173 {
@@ -79,8 +82,5 @@ public class Solution173 {
 	    }
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
 
 }
