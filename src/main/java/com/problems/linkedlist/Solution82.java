@@ -21,30 +21,35 @@ import com.problems.model.ListNode;
  */
 public class Solution82 {
 
-    // return next non-equal or itself
-    ListNode getNextNotEqualsToMe(ListNode node) {
-        while (node.next != null && node.val == node.next.val) {
-            node = node.next;
-        }
-        return node;
-    }
-
-	ListNode withoutDup(ListNode node) {
-		if (node == null || node.next == null) {//edge case - withoutDups length = 0 | 1
-			return node;
-		}
-
-		if (node.val == node.next.val) {
-			return withoutDup(getNextNotEqualsToMe(node).next);// remove next to get a list which includes all unique numbers
-		}
-
-		node.next = withoutDup(node.next);
-
-		return node;
-	}
-
 	public ListNode deleteDuplicates(ListNode head) {
-		return withoutDup(head);
-	}
+        ListNode sPointer = new ListNode(-1);
+        ListNode first = sPointer;
+        int lastCount = 1;
+        ListNode cur = head;
+        ListNode prev = null;
+        while (cur != null){
+            if (prev != null){
+                if (cur.val != prev.val){
+                    if (lastCount < 2){
+                        sPointer.next = prev;
+                        sPointer = sPointer.next;
+                    }
+                    prev = cur;
+                    lastCount = 1;
+                }else{
+                    lastCount ++;
+                }
+            }else{
+                prev = cur;
+            }
+            cur = cur.next;
+        }
+        if (lastCount == 1 && prev != null){// add the last
+            sPointer.next = prev;
+        }else{// the tail consists from duplicates
+            sPointer.next = null;
+        }
+        return first.next;
+    }
 
 }
