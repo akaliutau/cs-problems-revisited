@@ -14,27 +14,41 @@ import java.util.List;
  * 
  * Input: n = 3 Output: ["((()))","(()())","(())()","()(())","()()()"]
  * 
+ * IDEA:
+ * 
+ * 1) left branch - add ( until count < 3
+ * 
+ * 2) right branch - does not start until left branch exit
+ * 
+ * 
+ * 			   ""
+ *            /   \
+ *           (     )
+ *          / 
+ *         (
+ *        / \
+ *       (   )
  */
 public class Solution22 {
 
-	void backtrack(List<String> ans, String cur, int open, int close, int max) {
+	void backtrack(List<String> accumulator, String cur, int open, int close, int max) {
 		if (cur.length() == max * 2) {
-			ans.add(cur);
+			accumulator.add(cur);
 			return;
 		}
-
 		if (open < max) {
-			backtrack(ans, cur + "(", open + 1, close, max);
+			backtrack(accumulator, cur + "(", open + 1, close, max);
 		}
+		
 		if (close < open) {
-			backtrack(ans, cur + ")", open, close + 1, max);
+			backtrack(accumulator, cur + ")", open, close + 1, max);
 		}
 	}
 
 	public List<String> generateParenthesis(int n) {
-		List<String> ans = new ArrayList<>();
-		backtrack(ans, "", 0, 0, n);
-		return ans;
+		List<String> accumulator = new ArrayList<>();
+		backtrack(accumulator, "", 0, 0, n);
+		return accumulator;
 	}
 
 }

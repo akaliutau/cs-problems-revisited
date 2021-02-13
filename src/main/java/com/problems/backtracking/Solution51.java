@@ -56,10 +56,6 @@ public class Solution51 {
         return results;
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
+ 
 
 }
