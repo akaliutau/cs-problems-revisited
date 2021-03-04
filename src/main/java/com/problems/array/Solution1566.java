@@ -20,22 +20,25 @@ package com.problems.array;
  * 
  * b1   b2   b3  
  * 
- * Go though block b_i, comparing it simultaneously with b_i+1
+ * Go though block [b_i], comparing it simultaneously with block [b_i+1]
  * if total length of filled cells ==   (k - 1) * m, pattern found
  * 
  */
 public class Solution1566 {
 
     public boolean containsPattern(int[] arr, int m, int k) {
-        int len = 0;
+        int commonLength = 0;
         for (int i = 0; i + m < arr.length; i++) {
-            len = arr[i] == arr[i + m] ? len + 1 : 0;
-            if (len == (k - 1) * m) {
+        	if (arr[i] == arr[i + m]) {// some element in the next block
+        		commonLength ++;
+        	}else {
+        		commonLength = 0;// pattern broken because blocks needed to be consequentive
+        	}
+            if (commonLength == (k - 1) * m) {// total number of common elements
                 return true;
             }
         }
         return false;
-
     }
 
 }
