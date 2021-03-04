@@ -21,7 +21,7 @@ import java.util.Queue;
  * If such a path does not exist, return -1.
  * 
  * IDEA:
- * 
+ * 1) use a classical BFS - which is ALWAYS return the shortest path due to its nature
  * 
  */
 public class Solution1091 {
@@ -54,7 +54,7 @@ public class Solution1091 {
 						if (nx == n - 1 && ny == n - 1) {// bottom-right corner
 							return distance;
 						}
-						grid[nx][ny] = 1;
+						grid[nx][ny] = 1;// mark as visited instead of using auxiliary structure
 						queue.add(new int[] { nx, ny });
 					}
 				}
