@@ -43,10 +43,5 @@ public class Solution33 {
         return -1;
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
-
+ 
 }

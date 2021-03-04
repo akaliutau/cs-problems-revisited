@@ -28,15 +28,27 @@ package com.problems.binarysearch;
  * capacity 14 and splitting the packages into parts like (2, 3, 4, 5), (1, 6,
  * 7), (8), (9), (10) is not allowed
  * 
+ * IDEA:
+ * 1) calc the boundaries for capacity of the ship
+ * 2) use binary search to find the golden point
  * 
+ * NOTE: the binary search is possible due to the linear nature of tonnage function
+ * 
+ *             [0,3]
+ *          /        \
+ *       [0,1]          [1,3]
+ *      /    \
+ *    [0,0]   [0,1]  <--- needed to add 1 to avoid infinite loop - see the code 
  */
 public class Solution1011 {
 
+	// simulate the shipping scenario
+	// this is a costly function, so must be invoked as rare as possible
 	boolean isPossible(int[] weights, int D, int k) {
 		int d = 1;
 		int sum = 0;
 		for (int weight : weights) {
-			if (sum + weight > k) {
+			if (sum + weight > k) {// if overweight, close the previous sum and inc the day counter
 				sum = 0;
 				d++;
 			}
@@ -46,24 +58,23 @@ public class Solution1011 {
 	}
 
 	public int shipWithinDays(int[] weights, int d) {
-		int right = 0, left = 0;
+		// boundaries for capacity of the ship
+		int maxTonnage = 0, minTonnage = 0;
 		for (int weight : weights) {// calculate boundaries
-			right += weight;
-			left = Math.max(left, weight);
+			maxTonnage += weight;
+			minTonnage = Math.max(minTonnage, weight);
 		}
-		while (left < right) {
-			int mid = left + (right - left) / 2;
+		// search for the ideal balanced solution using linear function
+		while (minTonnage < maxTonnage) {
+			int mid = minTonnage + (maxTonnage - minTonnage) / 2;
 			if (!isPossible(weights, d, mid)) {
-				left = mid + 1;
+				minTonnage = mid + 1;// need to add 1 to avoid infinite loop
 			} else {
-				right = mid;
+				maxTonnage = mid;
 			}
 		}
-		return left;
+		return minTonnage;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
 
 }

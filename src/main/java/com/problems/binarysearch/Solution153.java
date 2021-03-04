@@ -15,15 +15,19 @@ package com.problems.binarysearch;
  * 
  * Input: [3,4,5,1,2] Output: 1
  * 
+ *  IDEA: min elem = point of change
+ *  
+ *  
+ * CASE 1
  * [4,5,6,7,0,1,2]
  *        |
  *        7>0 - then this is the point of change
- *         
+ * 
+ * CASE 2        
  * [4,5,6,7,0,1,2]
  *      |
  *      6>4  point of changes somewhere on the right piece
  *      
- *  IDEA: min elem = point of change
  */
 public class Solution153 {
 
@@ -43,6 +47,7 @@ public class Solution153 {
 		while (right >= left) {
 			int mid = left + (right - left) / 2;
 
+			// CASE 1
 			// if the mid element is greater than its next element then mid+1 element is the
 			// smallest
 			// This point would be the point of change. From higher to lower value.
@@ -56,12 +61,13 @@ public class Solution153 {
 				return nums[mid];
 			}
 
+			// CASE 2
 			// the least value is somewhere to the right
 			if (nums[mid] > nums[0]) {
 				left = mid + 1;
 			} else {
 				// the smallest value is somewhere to the left
-				right = mid - 1;
+				right = mid - 1;// safe, because mid is not the 0 here
 			}
 		}
 		return -1;

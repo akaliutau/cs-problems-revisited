@@ -41,10 +41,6 @@ public class Solution74opt {
     }
     
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
+ 
 
 }
