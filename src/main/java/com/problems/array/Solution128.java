@@ -24,16 +24,17 @@ public class Solution128 {
         int longestStreak = 0;
 
         for (int num : numsSet) {
+        	// check that num is a beginning of some streak
             if (!numsSet.contains(num - 1)) {// num is not in the middle of seq
                 int currentNum = num;
-                int currentStreak = 1;
+                int curSubseq = 1;// num is an elem
 
                 while (numsSet.contains(currentNum + 1)) {
                     currentNum += 1;
-                    currentStreak += 1;
+                    curSubseq += 1;
                 }
-
-                longestStreak = Math.max(longestStreak, currentStreak);
+                // update longest length
+                longestStreak = Math.max(longestStreak, curSubseq);
             }
         }
 
