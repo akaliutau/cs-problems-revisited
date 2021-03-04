@@ -13,6 +13,8 @@ import java.util.Queue;
  * Example 1:
  * Input: low = 0, high = 21 Output: [0,1,2,3,4,5,6,7,8,9,10,12,21] 
  * 
+ * IDEA:
+ * 
  * BFS: start
  * node = 0 From 0, we can move to 1 2 3 4 5 6 7 8 9 
  * from 1 -> 12 and 10 
@@ -41,13 +43,13 @@ public class Solution1215 {
            }
            // calc next
            long lastDigit = p % 10;
-           if (lastDigit > 0) {
-               long cand = p * 10 + (lastDigit - 1);
+           if (lastDigit > 0) {// all but 0
+               long cand = p * 10 + (lastDigit - 1);// calc lower number
                if (cand <= high)
                    queue.add(cand);
            }
-           if (lastDigit < 9) {
-               long cand = p * 10 + (lastDigit + 1);
+           if (lastDigit < 9) {// all but 9
+               long cand = p * 10 + (lastDigit + 1);// calc higher number
                if (cand <= high)
                    queue.add(cand);
            }

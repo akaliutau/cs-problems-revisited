@@ -17,10 +17,23 @@ import java.util.PriorityQueue;
  * 
  * Example 1:
  * 
- * Input: [ [5,4,5], [1,2,6], [7,4,6]]
+ * Input: 
+ * [ 
+ * [5,4,5], 
+ * [1,2,6], 
+ * [7,4,6]
+ * ]
  * 
  * Output: 4 (5 -> 4 -> 5 -> 6 -> 6)
  * 
+ * IDEA:
+ * 1) the score of the whole path is determined by the min value in the chain 
+ *    => the winning strategy will be to avoid min as long until it's possible
+ *    
+ *    Use  PriorityQueue to pick up next the cell with the max score FIRST, among all neighbors
+ *    
+ *    As a result all cells in queue will be prioritized with the max score on the top => optimal 
+ *    [not necessary the shortest] path 
  * 
  */
 public class Solution1102 {
@@ -54,7 +67,8 @@ public class Solution1102 {
 					continue;
 				else {
 					visited[nr][nc] = true;
-					pq.add(new int[] { nr, nc, Math.min(pair[2], grid[nr][nc]) });// transfer min value through the grid
+					// transfer min value through the grid - because the score of path determined by smallest value
+					pq.add(new int[] { nr, nc, Math.min(pair[2], grid[nr][nc]) });
 				}
 			}
 		}

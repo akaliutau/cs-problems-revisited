@@ -14,6 +14,11 @@ import java.util.Set;
  * to move the knight to the square [x, y]. It is guaranteed the answer exists.
  * 
  * Example 1: Input: x = 2, y = 1 Output: 1 Explanation: [0, 0] → [2, 1]
+ * 
+ * IDEA:
+ * combination of greedy approach and A* technique
+ * 
+ * 
  */
 public class Solution1197 {
 
@@ -42,6 +47,10 @@ public class Solution1197 {
     long hash(int a, int b) {
         return (long) 20000 * a + b + 10000;
     }
+    
+    // defines all possible jumps from the cell (0,0)
+    static int[][] dirs = new int[][] { { -2, 1 }, { -1, 2 }, { 1, 2 }, { 2, 1 }, { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, };
+
 
     public int minKnightMoves(int x, int y) {
         Set<Long> visited = new HashSet<>();
@@ -50,11 +59,10 @@ public class Solution1197 {
         n.f = f(0 , 0, x, y);
         pq.add(n);
         visited.add(hash(0, 0));
-        int[][] dirs = new int[][] { { -2, 1 }, { -1, 2 }, { 1, 2 }, { 2, 1 }, { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, };
         while (pq.size() > 0) {
             Node cur = pq.poll();
             if (cur.x == x && cur.y == y) {
-                return (int) (cur.g / 3);
+                return (int) (cur.g / 3);// a little hack, just in order not to add extra vars -  each step took 3 substeps
             }
             for (int[] dir : dirs) {
                 int nx = dir[0] + cur.x;

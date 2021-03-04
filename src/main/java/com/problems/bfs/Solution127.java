@@ -38,6 +38,10 @@ import java.util.Set;
  * Output: [ 
  * ["hit","hot","dot","dog","cog"], 
  * ["hit","hot","lot","log","cog"] ]
+ * 
+ * IDEA:
+ * 
+ * 
  */
 public class Solution127 {
 	class Node {
@@ -52,15 +56,16 @@ public class Solution127 {
 
 	int minDist = Integer.MAX_VALUE; // looking for only shortest paths
 
-	List<String> paths(String word, Map<Integer, List<String>> tiesMap, Set<String> visited) {
+	// used to calculate all possible words which can be built from word by replacing only 1 symbol
+	List<String> pathsFrom(String word, Map<Integer, List<String>> linkedWords, Set<String> visited) {
 		Set<String> ans = new HashSet<>();
 		char[] orig = word.toCharArray();
 		for (int i = 0; i < word.length(); i++) {
 			char[] key = orig.clone();
 			key[i] = '?';
 			int hashCode = Arrays.hashCode(key);
-			if (tiesMap.containsKey(hashCode)) {
-				for (String w : tiesMap.get(hashCode)) {
+			if (linkedWords.containsKey(hashCode)) {
+				for (String w : linkedWords.get(hashCode)) {
 					if (!visited.contains(w)) {
 						ans.add(w);
 					}
@@ -82,31 +87,28 @@ public class Solution127 {
 		// "d?g" => dog
 		// "do?" => dog
 
-		Map<Integer, List<String>> tiesMap = new HashMap<>();
-		for (String word : wordList) {
+		Map<Integer, List<String>> linkedWords = new HashMap<>();
+		for (String word : wordList) {// iterate through all words we have
 			char[] orig = word.toCharArray();
 			for (int i = 0; i < word.length(); i++) {
 				char[] key = orig.clone();
 				key[i] = '?';
 				int hashCode = Arrays.hashCode(key);
-				if (!tiesMap.containsKey(hashCode)) {
-					tiesMap.put(hashCode, new ArrayList<>());
-				}
-				tiesMap.get(hashCode).add(word);
+				linkedWords.computeIfAbsent(hashCode, k -> new ArrayList<>()).add(word);
 			}
 		}
 
-		Node node = new Node(beginWord, null);
+		Node node = new Node(beginWord, null);// start with start word without parent
 		Queue<Node> q = new LinkedList<>();
 		q.add(node);
-		Set<String> visited = new HashSet<>();
+		Set<String> visited = new HashSet<>();// to avoid loops
 		int dist = 1;
 		while (!q.isEmpty()) {
 			int size = q.size();
 			for (int i = 0; i < size; i++) {
 				node = q.poll();
 				String word = node.word;
-				if (word.equals(endWord) && dist <= minDist) {// reached the end, filter out too long paths
+				if (word.equals(endWord) && dist <= minDist) {// reached the end, ignore sequences which are too long
 					minDist = dist;
 					List<String> path = new ArrayList<>();
 					// backtracing to restore the path
@@ -116,19 +118,21 @@ public class Solution127 {
 					}
 					// filter out only the shortest paths
 					if (ans.isEmpty() || ans.get(0).size() == path.size()) {
-						ans.add(path);
+						ans.add(path);// works also for the duplicates
 					} else {
-						if (ans.get(0).size() > path.size()) {// the very first path is too long
+						if (ans.get(0).size() > path.size()) {// the very first path we found earlier is too long, then drop all and reset
 							ans = new ArrayList<>();
 							ans.add(path);
+						}else {
+							// ignore because the found path is longer
 						}
 					}
 				}
 				// mark processed word as visited
 				visited.add(word);
-				// get variations
-				List<String> next = paths(word, tiesMap, visited);
-				for (String w : next) {
+				// get variations and link them to the current node
+				List<String> linked = pathsFrom(word, linkedWords, visited);
+				for (String w : linked) {
 					q.add(new Node(w, node));
 				}
 			}
