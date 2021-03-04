@@ -28,9 +28,9 @@ public class Solution229 {
         Integer candidate2 = null;
 
         for (int n : nums) {
-            if (candidate1 != null && candidate1 == n) {
+            if (candidate1 != null && candidate1 == n) {// first time meet
                 count1++;
-            } else if (candidate2 != null && candidate2 == n) {
+            } else if (candidate2 != null && candidate2 == n) {// first time meet
                 count2++;
             } else if (count1 == 0) {//is neither candidate matches and current one expired replace it with new 
                 candidate1 = n;

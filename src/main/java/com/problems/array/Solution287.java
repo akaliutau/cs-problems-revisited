@@ -31,6 +31,8 @@ public class Solution287 {
 
         // this part in needed  because the intersection point is not the cycle entrance in the general case 
         // [1,3,4,2,2]
+        // 
+        
         // [2,5,9,6,4,3,8,9,7,1]
         int ptr1 = nums[0];
         int ptr2 = firstPtr;// intersection

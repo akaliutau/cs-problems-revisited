@@ -1,7 +1,6 @@
 package com.problems.array;
 
 import java.util.Arrays;
-import java.util.Stack;
 
 /**
  * Given an unsorted array, find the maximum difference between the successive
@@ -19,8 +18,7 @@ public class Solution164 {
         if (n < 2) {// edge case
             return 0;
         }
-        Stack<Integer> stack = new Stack<>();
-        stack.add(nums[0]);
+
         int i = 1;
         Arrays.sort(nums);
         int diff = nums[1] - nums[0];

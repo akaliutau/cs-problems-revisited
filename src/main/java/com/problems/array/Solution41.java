@@ -8,6 +8,9 @@ package com.problems.array;
  * 
  * Input: nums = [1,2,0] Output: 3
  * 
+ * IDEA:
+ * 
+ * 
  */
 public class Solution41 {
 
@@ -26,13 +29,13 @@ public class Solution41 {
 			return 1;
 		}
 
-		// nums = [1]
+		// nums length is 1, f.e  [1] - note it is ALWAYS 1 (due to the previous step)
 		if (n == 1) {
 			return 2;
 		}
 
 		// Replace negative numbers, zeros, and numbers larger than n by 1s.
-		// After this nums will contain only positive numbers.
+		// After this nums will contain only positive numbers >= 1.
 		for (int i = 0; i < n; i++) {
 			if (nums[i] <= 0 || nums[i] > n) {
 				nums[i] = 1;
@@ -41,15 +44,16 @@ public class Solution41 {
 		
 		boolean[] present = new boolean[n + 1];
 		
-		// now nums is a map, which maps to itself.
+		// now we have only positive numbers >= 1
+		// also now nums is a map, which maps to itself.
 		for (int i = 0; i < n; i++) {
-			int idx = Math.abs(nums[i]);
+			int idx = nums[i];
 			present[idx] = true;
 		}
 
 		// Now the index of the first positive number
 		// is equal to first missing positive.
-		for (int i = 1; i < n + 1; i++) {
+		for (int i = 1; i < n + 1; i++) {// iterate through all possible numbers
 			if (!present[i])
 				return i;
 		}

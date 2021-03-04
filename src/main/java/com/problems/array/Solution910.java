@@ -12,6 +12,10 @@ import java.util.Arrays;
  * consider when A[i] goes down while A[j] goes up. This is because the interval
  * (A[i] + K, A[j] - K) is inside the interval (A[i] - K, A[j] + K) (here, (a, b) for a > b denotes (b, a) instead.) 
  * 
+ * In other words, for A[i] < A[j] (sorted array) the interval
+ * (A[i] + K, A[j] - K) is more narrow than this one : (A[i] - K, A[j] + K)
+ * 
+ * 
  * So the best strategy on every element of array will be:
  * 1) add k to the left elem
  * 2) sub k from the right elem
@@ -36,11 +40,11 @@ public class Solution910 {
         for (int i = 0; i < n - 1; ++i) {
             // check the hypothesis:
             // assuming that i is the central elem, check the max and min boundaries of set and calc range
-            int a = arr[i];
-            int b = arr[i + 1];
-            int high = Math.max(arr[n - 1] - k, a + k);
-            int low = Math.min(arr[0] + k, b - k);
-            ans = Math.min(ans, high - low);
+            int left = arr[i];
+            int right = arr[i + 1];
+            int high = Math.max(arr[n - 1] - k, left + k);//best of biggest - k vs all combinations for possible breakup of left boundary
+            int low = Math.min(arr[0] + k, right - k);//best of smallest + k vs all combinations for possible breakdown of right boundary
+            ans = Math.min(ans, Math.abs(high - low));
         }
         return ans;
 

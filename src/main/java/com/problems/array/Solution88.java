@@ -15,6 +15,8 @@ package com.problems.array;
  * 
  * Output: [1,2,2,3,5,6]
  * 
+ * IDEA: merge starting from the end for both result and 2 merge pointers
+ * 
  */
 public class Solution88 {
 

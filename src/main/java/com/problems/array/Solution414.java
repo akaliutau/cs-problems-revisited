@@ -7,13 +7,18 @@ package com.problems.array;
  * 
  * Example 1: Input: [3, 2, 1] Output: 1 Explanation: The third
  * maximum is 1.
+ * 
+ * IDEA:
+ * introduce a limit for max function
+ * 
  */
 public class Solution414 {
     
-    static long find(int[] nums, long max) {
+	// returns the biggest number with limit set to ceil
+    static long find(int[] nums, long ceil) {
         long maxVal = Long.MIN_VALUE;
         for (int num : nums) {
-            if (maxVal < num && num < max) {
+            if (maxVal < num && num < ceil) {
                 maxVal = num;
             }
         }

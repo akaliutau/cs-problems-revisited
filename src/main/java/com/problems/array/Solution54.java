@@ -30,6 +30,7 @@ public class Solution54 {
             for (int c = c1; c <= c2; c++) {
                 ans.add(matrix[r1][c]);
             }
+            // right side
             for (int r = r1 + 1; r <= r2; r++) {
                 ans.add(matrix[r][c2]);
             }
@@ -38,6 +39,7 @@ public class Solution54 {
                 for (int c = c2 - 1; c > c1; c--) {
                     ans.add(matrix[r2][c]);
                 }
+                // left side
                 for (int r = r2; r > r1; r--) {
                     ans.add(matrix[r][c1]);
                 }
