@@ -16,11 +16,11 @@ public class Solution37 {
 	// sub box size
 	int n = 3;
 	// row size
-	int N = n * n;
+	int dim = n * n;
 
-	int[][] rows = new int[N][N + 1];
-	int[][] columns = new int[N][N + 1];
-	int[][] boxes = new int[N][N + 1];
+	int[][] rows = new int[dim][dim + 1];
+	int[][] columns = new int[dim][dim + 1];
+	int[][] boxes = new int[dim][dim + 1];
 
 	char[][] board;
 
@@ -65,18 +65,16 @@ public class Solution37 {
 		 */
 		// if we're in the last cell
 		// that means we have the solution
-		if ((col == N - 1) && (row == N - 1)) {
+		if ((col == dim - 1) && (row == dim - 1)) {
 			sudokuSolved = true;
 		}
 		// if not yet
 		else {
-			// if we're in the end of the row
-			// go to the next row
-			if (col == N - 1)
+			if (col == dim - 1) {
 				backtrack(row + 1, 0);
-			// go to the next column
-			else
+			}else {
 				backtrack(row, col + 1);
+			}
 		}
 	}
 
@@ -97,16 +95,17 @@ public class Solution37 {
 						removeNumber(d, row, col);
 				}
 			}
-		} else
+		} else {
 			placeNextNumbers(row, col);
+		}
 	}
 
 	public void solveSudoku(char[][] board) {
 		this.board = board;
 
 		// init rows, columns and boxes
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < N; j++) {
+		for (int i = 0; i < dim; i++) {
+			for (int j = 0; j < dim; j++) {
 				char num = board[i][j];
 				if (num != '.') {
 					int d = Character.getNumericValue(num);

@@ -19,6 +19,9 @@ import java.util.List;
  * 
  * Input: s = "25525511135" Output: ["255.255.11.135","255.255.111.35"]
  * 
+ * IDEA:
+ * 1) try to cut a block from 1 to 3 symbols in length, check its validness, and if all is okay, go to step #2
+ * 2) repeat until have non-empty input
  * 
  */
 public class Solution93 {
@@ -28,6 +31,10 @@ public class Solution93 {
 	LinkedList<String> segments = new LinkedList<>();
 	List<String> result = new ArrayList<String>();
 
+	// criteria for validness:
+	// 1) length of segment from 1 to 3 inclusive
+	// 2) cannot have leading zeros - if it starts from 0, then the length must be 1
+	// 3) parsed int must be in [0,255]
 	boolean valid(String segment) {
 		int m = segment.length();
 		if (m > 3)
@@ -71,8 +78,5 @@ public class Solution93 {
 		return result;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
 
 }

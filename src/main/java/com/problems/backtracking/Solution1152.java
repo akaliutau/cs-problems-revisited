@@ -67,6 +67,7 @@ public class Solution1152 {
 		}
 	}
 
+	// return true, if tuple key is Lexicographically Smaller than result
 	boolean isLexicographicallySmaller(List<String> key, List<String> result) {
 		for (int i = 0; i < key.size(); i++) {
 			if (!key.get(i).equals(result.get(i))) {
@@ -78,7 +79,8 @@ public class Solution1152 {
 
 	void helper(int currIdx, List<String> websites, List<String> currList, Map<List<String>, Integer> freqMap,
 			Set<List<String>> visited) {
-		if (currList.size() == 3) {
+		
+		if (currList.size() == 3) {// ready to add to statistics
 			if (visited.contains(currList)) {
 				return;
 			}
@@ -87,8 +89,9 @@ public class Solution1152 {
 			freqMap.compute(copy, (k,v) -> v == null ? 1 : v + 1);
 			return;
 		}
+		// else continue chaining and backtracking
 		for (int i = currIdx; i < websites.size(); i++) {
-			currList.add(websites.get(i));
+			currList.add(websites.get(i));// add candidate
 			helper(i + 1, websites, currList, freqMap, visited);
 			currList.remove(currList.size() - 1);
 		}
@@ -96,13 +99,14 @@ public class Solution1152 {
 
 	public List<String> mostVisitedPattern(String[] username, int[] timestamp, String[] website) {
 		int n = username.length;
+		// generate tuples from the original data
 		List<Visit> dataList = new ArrayList<>();
 		for (int i = 0; i < n; i++) {
 			dataList.add(new Visit(username[i], timestamp[i], website[i]));
 		}
 		Comparator<Visit> byTimestamp = (o, p) -> Integer.compare(o.timestamp, p.timestamp);
-
-		Collections.sort(dataList, byTimestamp);
+		Collections.sort(dataList, byTimestamp);// needed due to "sorted in ascending order by the time of their visits" condition
+		
 		// group by username
 		Map<String, List<String>> nameToWebsiteVisit = new HashMap<>();
 		for (Visit visit : dataList) {
@@ -114,6 +118,7 @@ public class Solution1152 {
 		for (List<String> list : nameToWebsiteVisit.values()) {// for each user
 			helper(0, list, new ArrayList<>(), freqMap, new HashSet<>());
 		}
+		
 		// find the lower freq pattern and return it
 		int maxFreq = 0;
 		List<String> result = new ArrayList<>();

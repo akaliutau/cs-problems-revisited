@@ -28,11 +28,17 @@ import java.util.Set;
  * "I am happy today but was sorrow yesterday", 
  * "I am joy today but was sad yesterday", 
  * "I am joy today but was sorrow yesterday"]
+ * 
+ * IDEA:
+ * 
+ * 
  */
 public class Solution1258 {
 
     Map<String, List<String>> graph;
 
+    // graph traversing starting from the node src
+    // return all interconnected synonyms
     void getSynFor(List<String> syn, Set<String> visited, String src) {
         if (visited.contains(src)) {
             return;
@@ -43,9 +49,32 @@ public class Solution1258 {
             getSynFor(syn, visited, word);
         }
     }
+    
+    void dfs(List<String> res, String[] placeHolder, String[] arr, int idx) {
+        if (idx == arr.length) {
+            res.add(String.join(" ", placeHolder));
+            return;
+        }
+        String cur = arr[idx];
+        if (graph.containsKey(cur)) {
+            List<String> syn = new ArrayList<>();
+            Set<String> visited = new HashSet<>();
+            getSynFor(syn, visited, cur);// returns syn for happy + happy itself (note the last condition)
+            Collections.sort(syn);
+            for (String neigh : syn) {
+                placeHolder[idx] = neigh;
+                dfs(res, placeHolder, arr, idx + 1);
+            }
+        } else {// all cases for non-synomical words  
+            placeHolder[idx] = cur;
+            dfs(res, placeHolder, arr, idx + 1);
+        }
+    }
+
 
     public List<String> generateSentences(List<List<String>> getSynFor, String text) {
         // contains map "happy" => all synonyms for "happy"
+    	// build bi-directional graph
         this.graph = new HashMap<>();
         for (List<String> syn : getSynFor) {
             String a = syn.get(0);
@@ -60,25 +89,5 @@ public class Solution1258 {
         return res;
     }
 
-    void dfs(List<String> res, String[] placeHolder, String[] arr, int idx) {
-        if (idx == arr.length) {
-            res.add(String.join(" ", placeHolder));
-            return;
-        }
-        String cur = arr[idx];
-        if (graph.containsKey(cur)) {
-            List<String> syn = new ArrayList<>();
-            Set<String> visited = new HashSet<>();
-            getSynFor(syn, visited, cur);// returns syn for happy + happy itself
-            Collections.sort(syn);
-            for (String neigh : syn) {
-                placeHolder[idx] = neigh;
-                dfs(res, placeHolder, arr, idx + 1);
-            }
-        } else {
-            placeHolder[idx] = cur;
-            dfs(res, placeHolder, arr, idx + 1);
-        }
-    }
 
 }

@@ -9,9 +9,15 @@ import java.util.Arrays;
  * Return the maximum amount of gold you can collect under the conditions:
  * 
  * Every time you are located in a cell you will collect all the gold in that
- * cell. From your position you can walk one step to the left, right, up or
- * down. You can't visit the same cell more than once. Never visit a cell with 0
- * gold. You can start and stop collecting gold from any position in the grid
+ * cell. 
+ * 
+ * From your position you can walk one step to the left, right, up or down. 
+ * 
+ * You can't visit the same cell more than once. 
+ * 
+ * Never visit a cell with 0 gold. 
+ * 
+ * You can start and stop collecting gold from any position in the grid
  * that has some gold.
  * 
  * 
@@ -27,11 +33,14 @@ import java.util.Arrays;
  * Explanation: 
  * Path to get the maximum gold, 9 -> 8 -> 7.
  * 
+ * IDEA:
+ * investigate all routes
  * 
  */
 public class Solution1219 {
 	
 	int backtrack(int[][] grid, int row, int col, int sum) {
+		// exit conditions
         if (row < 0 || col < 0 || row == grid.length || col == grid[row].length)
             return sum;
         if (grid[row][col] == 0)
@@ -39,16 +48,16 @@ public class Solution1219 {
 
         // save  prev value because it's dfs
         int gold = grid[row][col];
-        // mark as visited
+        // mark as visited to avoid loops
         grid[row][col] = 0;
 
-        // 4 directions
+        // collected gold after using all 4 directions
         int up = backtrack(grid, row + 1, col, sum + gold);
         int down = backtrack(grid, row - 1, col, sum + gold);
         int left = backtrack(grid, row, col - 1, sum + gold);
         int right = backtrack(grid, row, col + 1, sum + gold);
 
-        // backtrack - restore prev value
+        // backtrack - restore prev value to pick up using another route
         grid[row][col] = gold;
 
         // return the largest one of 4 directions
@@ -67,10 +76,4 @@ public class Solution1219 {
         return max;
     }
 
-    
-
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
-
-}
+ }

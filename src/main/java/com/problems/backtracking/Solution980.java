@@ -2,9 +2,13 @@ package com.problems.backtracking;
 
 /**
  * On a 2-dimensional grid, there are 4 types of squares: 
- * 1 represents the starting square. There is exactly one starting square. 
- * 2 represents the ending square. There is exactly one ending square. 
- * 0 represents toDo squares we can walk over. 
+ * 
+ *  1 represents the starting square. There is exactly one starting square. 
+ * 
+ *  2 represents the ending square. There is exactly one ending square. 
+ *
+ *  0 represents toDo squares we can walk over. 
+ * 
  * -1 represents obstacles that we cannot walk over. 
  * 
  * Return
@@ -17,12 +21,21 @@ package com.problems.backtracking;
  * [1,0,0,0],
  * [0,0,0,0],
  * [0,0,2,-1]
- * ] Output: 2 Explanation: We have the
+ * ] 
+ * 
+ * Output: 2 
+ * 
+ * Explanation: We have the
  * following two paths: 
  * 1.
  * (0,0),(0,1),(0,2),(0,3),(1,3),(1,2),(1,1),(1,0),(2,0),(2,1),(2,2) 
  * 2.
  * (0,0),(1,0),(2,0),(2,1),(1,1),(0,1),(0,2),(0,3),(1,3),(1,2),(2,2)
+ * 
+ * IDEA:
+ *  start at any point of board and investigate in all directions 
+ *  taking into account all conditions
+ * 
  */
 public class Solution980 {
 
@@ -35,6 +48,7 @@ public class Solution980 {
     int[] yOff = { 1, -1, 0, 0 };
 
     void backtrack(int row, int col, int toDo) {
+    	// conditions fro exit
         // base case for the termination of backtracking
         if (grid[row][col] == 2 && toDo == 1) {
             // reach the destination

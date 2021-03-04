@@ -28,26 +28,35 @@ import java.util.List;
  *         (
  *        / \
  *       (   )
+ *        \  | \
+ *         ) (  )
+ *          \
+ *           )
+ *            \
+ *             )
+ *       
  */
 public class Solution22 {
 
-	void backtrack(List<String> accumulator, String cur, int open, int close, int max) {
+	void traverse(List<String> accumulator, String cur, int open, int close, int max) {
 		if (cur.length() == max * 2) {
 			accumulator.add(cur);
 			return;
 		}
+		// this block will be invoked until ((( formed - left branch of brackets tree 
 		if (open < max) {
-			backtrack(accumulator, cur + "(", open + 1, close, max);
+			traverse(accumulator, cur + "(", open + 1, close, max);
 		}
 		
+		// this block will be invoked when right part is formed - right branch of brackets tree 
 		if (close < open) {
-			backtrack(accumulator, cur + ")", open, close + 1, max);
+			traverse(accumulator, cur + ")", open, close + 1, max);
 		}
 	}
 
 	public List<String> generateParenthesis(int n) {
 		List<String> accumulator = new ArrayList<>();
-		backtrack(accumulator, "", 0, 0, n);
+		traverse(accumulator, "", 0, 0, n);
 		return accumulator;
 	}
 
