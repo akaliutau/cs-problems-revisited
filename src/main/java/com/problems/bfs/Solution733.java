@@ -36,6 +36,10 @@ import java.util.Queue;
  * the same color as the starting pixel are colored with the new color. Note the
  * bottom corner is not colored 2, because it is not 4-directionally connected
  * to the starting pixel.
+ * 
+ * IDEA:
+ * a classic BFS
+ * 
  */
 public class Solution733 {
 
@@ -76,10 +80,5 @@ public class Solution733 {
 		return image;
 	}
 
-	public static void main(String[] arg) {
-
-		System.out.println();
-
-	}
 
 }

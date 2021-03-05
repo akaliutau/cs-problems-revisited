@@ -21,11 +21,17 @@ import java.util.Set;
  * [0,0,0], 
  * [0,1,1], 
  * [0,0,0]
- * ], k = 1 Output: 6
+ * ], 
+ * k = 1 Output: 6
  * 
  * Explanation: The shortest path without eliminating any obstacle is 10. The
  * shortest path with one obstacle elimination at position (3,2) is 6. Such path
  * is (0,0) -> (0,1) -> (0,2) -> (1,2) -> (2,2) -> (3,2) -> (4,2).
+ * 
+ * IDEA:
+ * 1) use a classical BFS - which is ALWAYS return the shortest path due to its nature
+ * 2) track a current number of overcome obstacles - and traverse this value along with coords on next cell to process
+ * 
  */
 public class Solution1293 {
 
@@ -39,7 +45,7 @@ public class Solution1293 {
             return 0;
         }
 
-        // if k is large enough, then can ignore obstacles
+        // if k is large enough, then can ignore any number of obstacles i.e. to jump directly to the dest point
         if (k >= rows + cols - 3) {
             return rows + cols - 2;
         }
@@ -82,6 +88,7 @@ public class Solution1293 {
             }
             res++;
         }
+        // if didn't exit earlier, 
         return -1;
     }
 

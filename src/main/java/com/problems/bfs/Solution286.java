@@ -5,7 +5,13 @@ import java.util.Queue;
 
 /**
  * You are given a m x n 2D grid initialized with these three possible values.
- * -1 - A wall or an obstacle. 0 - A gate. INF - Infinity means an empty room.
+ * 
+ * -1 - A wall or an obstacle. 
+ * 
+ *  0 - A gate. 
+ *  
+ * INF - Infinity means an empty room.
+ * 
  * We use the value 2^31 - 1 = 2147483647 to represent INF as you may assume that
  * the distance to a gate is less than 2147483647. Fill each empty room with the
  * distance to its nearest gate. If it is impossible to reach a gate, it should
@@ -25,6 +31,11 @@ import java.util.Queue;
  * 2  2 1 -1 
  * 1 -1 2 -1 
  * 0 -1 3  4
+ * 
+ * IDEA:
+ * 
+ * Use BFS with multiple sources and "first come - first fill" strategy
+ * (will work because problem requires to find the shortest path and bfs provides the shortest )
  * 
  */
 public class Solution286 {

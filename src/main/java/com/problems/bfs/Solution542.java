@@ -26,7 +26,7 @@ import java.util.Queue;
  * ]
  * 
  * IDEA:
- * 
+ * BFS from multiple sources with competitive update of dest map
  * 
  */
 public class Solution542 {
@@ -62,7 +62,7 @@ public class Solution542 {
 				int nr = x + dir[i][0];
 				int nc = y + dir[i][1];
 				if (nr >= 0 && nc >= 0 && nr < rows && nc < cols) {
-					if (dist[nr][nc] > dist[x][y] + 1) {// update cell if and only if it was contacted by lengthy path the from cur cell
+					if (dist[nr][nc] > dist[x][y] + 1) {// update cell if and only if it was contacted by shorter path from cur cell to [some other cell]
 						dist[nr][nc] = dist[x][y] + 1;// there is a shorter dist
 						q.add(new int[] { nr, nc });
 					}

@@ -11,9 +11,11 @@ import java.util.Queue;
  * shortest amount of distance. You can only move up, down, left and right. You
  * are given a 2D grid of values 0, 1 or 2, where:
  * 
- * Each 0 marks an empty land which you can pass by freely. Each 1 marks a
- * building which you cannot pass through. Each 2 marks an obstacle which you
- * cannot pass through. 
+ * Each 0 marks an empty land which you can pass by freely. 
+ * 
+ * Each 1 marks a building which you cannot pass through. 
+ * 
+ * Each 2 marks an obstacle which you cannot pass through. 
  * 
  * Example:
  * 
@@ -31,13 +33,19 @@ import java.util.Queue;
  * (0,2), the point (1,2) is an ideal empty land to build a house, as the total
  * travel distance of 3+3+1=7 is minimal. So return 7.
  * 
+ * IDEA:
+ * 1) perform BFS from each building and save the maps with [accumulated] distances to accDistToBuildings
+ * 2) go through all empty cells and analyze only those of them which are reachable from all buildings (use map reachableBuildingsCount)
+ * 
+ * 
  */
 public class Solution317 {
 
 	int[][] dirs = new int[][] { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
 	int rows, cols;
 
-	void distToEmptyCell(int[][] grid, int[][] accDistToBuild, int[][] reachableBuildings, int row, int col) {
+	// this method will be invoked only on (row,col) coordinates of building 
+	void distToEmptyCell(int[][] grid, int[][] accDistToBuildings, int[][] reachableBuildingsCount, int row, int col) {
 		Queue<int[]> q = new LinkedList<>();
 		boolean[][] visited = new boolean[rows][cols];
 		q.add(new int[] { row, col });
@@ -50,8 +58,8 @@ public class Solution317 {
 				int[] vertex = q.poll();
 				int r = vertex[0];
 				int c = vertex[1];
-				accDistToBuild[r][c] += step;
-				reachableBuildings[r][c] ++;
+				accDistToBuildings[r][c] += step;
+				reachableBuildingsCount[r][c] ++;
 				for (int[] dir : dirs) {
 					int nr = r + dir[0];
 					int nc = c + dir[1];
@@ -71,14 +79,14 @@ public class Solution317 {
 			return 0;
 		}
 		this.cols = grid[0].length;
-		int[][] accDistToBuild = new int[rows][cols];// dist from this cell[i,j] to nearest building
-		int[][] reachableBuildings = new int[rows][cols];// # of buildings one can reach from this cell
+		int[][] accDistToBuildings = new int[rows][cols];// dist from this cell[i,j] to nearest building
+		int[][] reachableBuildingsCount = new int[rows][cols];// the number of buildings one can reach from this cell
 		int buildingCount = 0;
 
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
 				if (grid[i][j] == 1) {
-					distToEmptyCell(grid, accDistToBuild, reachableBuildings, i, j);
+					distToEmptyCell(grid, accDistToBuildings, reachableBuildingsCount, i, j);
 					buildingCount++;
 				}
 			}
@@ -87,16 +95,12 @@ public class Solution317 {
 		int min = Integer.MAX_VALUE;
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
-				if (grid[i][j] == 0 && buildingCount == reachableBuildings[i][j]) {// count only when possible to reach all buildings
-					min = Math.min(min, accDistToBuild[i][j]);
+				if (grid[i][j] == 0 && buildingCount == reachableBuildingsCount[i][j]) {// count only when possible to reach all buildings
+					min = Math.min(min, accDistToBuildings[i][j]);
 				}
 			}
 		}
 		return min == Integer.MAX_VALUE ? -1 : min;
-	}
-
-	public static void main(String[] arg) {
-		System.out.println(true);
 	}
 
 }

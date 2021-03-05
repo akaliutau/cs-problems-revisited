@@ -11,15 +11,20 @@ import java.util.Map;
  * Example 1: Input: n = 8 Output: 3 Explanation: 8 -> 4 -> 2 -> 1
  * 
  * IDEA:
- * Use BFS on all possibilities for curr Number
- * Use memoization for cache for already calculated numbers
+ * combination of BFS with recursion
+ * 
+ * 1) Use BFS on all possibilities for current Number
+ * 2) Use memoization for cache for already calculated numbers
  * 
  * time: O(3n) ~ O(n), because ((curr+1)+1) became divisible by 2
+ * 
+ * 
  * 
  */
 public class Solution397 {
 
     static int traverse(long curr, Map<Long, Integer> memo) {
+    	// condition for exit
         if (curr == 1) {
             return 0;
         }

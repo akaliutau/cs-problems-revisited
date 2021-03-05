@@ -15,6 +15,9 @@ import java.util.Queue;
  * Return the minimum number of minutes that must elapse until no cell has a
  * fresh orange. If this is impossible, return -1 instead.
  * 
+ * IDEA:
+ * simulate a rottenness propagation
+ * 
  */
 public class Solution994 {
 

@@ -14,23 +14,31 @@ import java.util.Queue;
  * a and b are K-similar. 
  * Example 1: Input: a = "ab", b = "ba" Output: 1 
  * Example 2: Input: a = "abc", b = "bca" Output: 2
+ * 
+ * IDEA:
+ * 1) generate a space of all words-neighbors 
+ * 2) perform a BFS on this space starting from word = a with target at b
+ * 
  */
 public class Solution854 {
 
+	// generate all words from src which can be made closer to the target by the way of switching of 2 random letters
+	// note: we are generating not all variants
     List<String> neighbors(String src, String target) {
         List<String> ans = new ArrayList<>();
         int i = 0;
         while(i < src.length() && src.charAt(i) == target.charAt(i)) {// find first difference
             i++;
         }
-
+        // at this point i=index of different letter
         char[] word = src.toCharArray();
-        for (int j = i + 1; j < src.length(); ++j)
+        for (int j = i + 1; j < src.length(); ++j) {
             if (src.charAt(j) == target.charAt(i)) {// after switch 2 letters will be equal 
                 swap(word, i, j);
                 ans.add(new String(word));
                 swap(word, i, j);
             }
+        }
 
         return ans;
     }
