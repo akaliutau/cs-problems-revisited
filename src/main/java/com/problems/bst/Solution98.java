@@ -21,6 +21,13 @@ import com.problems.model.TreeNode;
  * 
  * Input: [2,1,3] Output: true
  * 
+ * IDEA:
+ * for each node 3 conditions must be verified:
+ * 1) central node in [minValue, maxValue]
+ * 2) left node in [minValue, maxValue=central node]
+ * 3) right node in [minValue==central node, maxValue]
+ * 
+ * In the beginning the range is [-inf, +inf], but then narrows
  * 
  */
 public class Solution98 {

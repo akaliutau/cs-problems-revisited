@@ -17,6 +17,10 @@ import com.problems.model.TreeNode;
  *  0 1 2  3   
  *    
  * Output: 1
+ * 
+ * IDEA:
+ * 
+ *  inorder traversing returns already ordered array
  */
 public class Solution230 {
 

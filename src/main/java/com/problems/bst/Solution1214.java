@@ -15,7 +15,9 @@ import com.problems.model.TreeNode;
  * 
  * Explanation: 2 and 3 sum up to 5.
  * 
- * IDEA: the same as 2sum problem with sorted array
+ * IDEA: the same as 2sum problem with sorted array with some corrections:
+ * 1) create a set of complementary numbers - such that if (target - some_val_tree_1) = some_val_tree_2, => some_val_tree_1 + some_val_tree_2 = target
+ * 
  */
 public class Solution1214 {
 

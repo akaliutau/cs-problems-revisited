@@ -24,8 +24,9 @@ import com.problems.model.TreeNode;
  *                   3        8     - 8
  *                   
  *           36  35  33 26
- *             
- *  Traverse inorder backward                 
+ * 
+ *  IDEA:
+ *  Traverse inorder-backward                 
  */
 public class Solution1038 {
 
@@ -44,10 +45,6 @@ public class Solution1038 {
 		return node;
 	}
 
-	public static void main(String[] arg) {
 
-		System.out.println();
-
-	}
 
 }
