@@ -8,13 +8,18 @@ import java.util.Random;
 
 /**
  * 
- * Design
+ * Design O(1) random generator
+ * 
+ * IDEA:
+ * 1) use map (number) => (its position in list) for fast access
+ * 2) when removing element, exchange it first with the last in the list
+ * 
  */
 public class Solution380 {
 
 	static class RandomizedSet {
-		Map<Integer, Integer> dict;// map number => pos in list
-		List<Integer> list;// plain array
+		Map<Integer, Integer> dict;// map (number) => (its position in list)
+		List<Integer> list;// plain array containing the random numbers
 		Random rand = new Random();
 
 		/** Initialize your data structure here. */
@@ -50,6 +55,7 @@ public class Solution380 {
 			int idx = dict.get(val);
 			list.set(idx, lastElement);// O(1)
 			dict.put(lastElement, idx);// O(1)
+			
 			// delete the last element
 			list.remove(list.size() - 1);
 			dict.remove(val);

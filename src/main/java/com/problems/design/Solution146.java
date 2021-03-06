@@ -18,6 +18,16 @@ import java.util.Map;
  * key exists. Otherwise, add the key-value pair to the cache. If the number of
  * keys exceeds the capacity from this operation, evict the least recently used
  * key.
+ * 
+ * IDEA:
+ * use q queue with time ordering - the oldest nodes will be at the tail
+ * 
+ * 1) use a double-linked list to hold data
+ * 2) on get: bubble up the requested node to the head
+ * 3) on put:
+ *   a) if exists - update the value and bubble up
+ *   b) add new to the head and remove the oldest if needed
+ * 
  */
 public class Solution146 {
 
@@ -28,6 +38,14 @@ public class Solution146 {
 			int value;
 			Node prev;
 			Node next;
+
+			public Node() {
+			}
+
+			public Node(int key, int value) {
+				this.key = key;
+				this.value = value;
+			}
 		}
 
 		// adds node from the head (as in queue)
@@ -92,9 +110,7 @@ public class Solution146 {
 			Node node = cache.get(key);
 
 			if (node == null) {
-				Node newNode = new Node();
-				newNode.key = key;
-				newNode.value = value;
+				Node newNode = new Node(key, value);
 
 				cache.put(key, newNode);
 				addNode(newNode);

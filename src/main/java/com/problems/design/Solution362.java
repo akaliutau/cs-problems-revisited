@@ -1,7 +1,7 @@
 package com.problems.design;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Design a hit counter which counts the number of hits received in the past 5
@@ -32,6 +32,10 @@ import java.util.concurrent.ConcurrentHashMap;
  * 
  * // get hits at timestamp 301, should return 3. counter.getHits(301);
  * 
+ * IDEA:
+ * 1) use synchronized method to collect statistics
+ * 2) count only those distance to the current moment is less than 300; remove all the oldest ones
+ * 
  */
 public class Solution362 {
 
@@ -41,7 +45,7 @@ public class Solution362 {
 
 		/** Initialize your data structure here. */
 		public HitCounter() {
-			lookUp = new ConcurrentHashMap<>();
+			lookUp = new HashMap<>();
 		}
 
 		/**
@@ -49,8 +53,7 @@ public class Solution362 {
 		 * 
 		 * @param timestamp - The current timestamp (in seconds granularity).
 		 */
-		public void hit(int timestamp) {
-
+		public synchronized void hit(int timestamp) {
 			lookUp.put(timestamp, lookUp.getOrDefault(timestamp, 0) + 1);// EDGE case:  hits arrive roughly at the same time, then value in lookUp map > 1
 		}
 
@@ -62,11 +65,11 @@ public class Solution362 {
 		public int getHits(int timestamp) {
 
 			int ctr = 0;
-
+			// calculated the oldest value for timestamp
 			int lowerBoundary = Math.max(0, timestamp - 300);
 			// all the hits that is less than equal to 300. return count.
 			for (int key : lookUp.keySet()) {
-				if (key > lowerBoundary) {
+				if (key > lowerBoundary) {// count only those distance to the current moment is less than 300
 					ctr += lookUp.get(key);
 				} else {
 					lookUp.remove(key); // clearing off the old hit records.

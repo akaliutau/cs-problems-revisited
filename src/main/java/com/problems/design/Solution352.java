@@ -14,6 +14,8 @@ import java.util.TreeMap;
  * 2 [1, 3], [7, 7]              // case 1
  * 6 [1, 3], [6, 7]              // case 2
  * 
+ * IDEA:
+ * 
  */
 public class Solution352 {
 

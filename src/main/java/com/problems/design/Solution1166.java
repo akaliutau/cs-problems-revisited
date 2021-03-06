@@ -18,17 +18,20 @@ import java.util.Map;
  * int get(string path) Returns the
  * value associated with path or returns -1 if the path doesn't exist.
  * 
+ * IDEA:
+ *  use a trie (a tree with miltiple nodes)
+ * 
  */
 public class Solution1166 {
 
     static class FileSystem {
 
         static class FSNode {
-            Map<String, FSNode> subNodes;
+            Map<String, FSNode> nodes;
             int val;
 
             FSNode() {
-                subNodes = new HashMap<>();
+                nodes = new HashMap<>();
                 val = -1;
             }
         }
@@ -39,38 +42,39 @@ public class Solution1166 {
             root = new FSNode();
         }
 
+        // note this method is not used to create folders in bulk
         public boolean createPath(String path, int value) {
-            FSNode cur = root;
+            FSNode node = root;
             String[] paths = path.split("/");
-            for (int i = 1; i < paths.length; ++i) {
+            for (int i = 1; i < paths.length; ++i) {// omit the segment before the first '/'
                 String p = paths[i];
-                if (!cur.subNodes.containsKey(p)) {
-                    if (i != paths.length - 1) {
+                if (!node.nodes.containsKey(p)) {
+                    if (i != paths.length - 1) {// parent path doesn't exist
                         return false;
                     } else {
-                        cur.subNodes.put(p, new FSNode());
+                        node.nodes.put(p, new FSNode());
                     }
                 }
-                cur = cur.subNodes.get(p);
+                node = node.nodes.get(p);
             }
-            if (cur.val != -1) {
+            if (node.val != -1) {// newly created node must have a val=-1
                 return false;
             }
-            cur.val = value;
+            node.val = value;
             return true;
         }
 
         public int get(String path) {
-            FSNode cur = root;
+            FSNode node = root;
             String[] paths = path.split("/");
             for (int i = 1; i < paths.length; ++i) {
                 String p = paths[i];
-                if (!cur.subNodes.containsKey(p)) {
+                if (!node.nodes.containsKey(p)) {
                     return -1;
                 }
-                cur = cur.subNodes.get(p);
+                node = node.nodes.get(p);
             }
-            return cur.val;
+            return node.val;
         }
 
     }

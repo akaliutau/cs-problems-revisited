@@ -18,6 +18,8 @@ import java.util.Random;
  * 
  * // Returns the random shuffling of array [1,2,3]. solution.shuffle();
  * 
+ * IDEA:
+ * gen a random number in a range
  * 
  */
 public class Solution384 {
@@ -28,11 +30,12 @@ public class Solution384 {
 
 		Random rand = new Random();
 
-		private int randRange(int min, int max) {
+		// returns the random number in [min, max)
+		private int randInRange(int min, int max) {
 			return rand.nextInt(max - min) + min;
 		}
 
-		private void swapAt(int i, int j) {
+		private void swap(int i, int j) {
 			int temp = array[i];
 			array[i] = array[j];
 			array[j] = temp;
@@ -51,7 +54,7 @@ public class Solution384 {
 
 		public int[] shuffle() {
 			for (int i = 0; i < array.length; i++) {
-				swapAt(i, randRange(i, array.length));
+				swap(i, randInRange(i, array.length));
 			}
 			return array;
 		}

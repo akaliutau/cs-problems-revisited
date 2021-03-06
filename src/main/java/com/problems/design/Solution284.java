@@ -3,7 +3,11 @@ package com.problems.design;
 import java.util.Iterator;
 
 /**
+ * Implement iterator
  * 
+ * IDEA:
+ * 1) use 2 vars: hasNextCached & nextCached - to return value and state of iterator
+ * 2) change state only on next() invoking
  */
 public class Solution284 {
 

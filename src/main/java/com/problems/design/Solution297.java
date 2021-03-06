@@ -17,6 +17,10 @@ import com.problems.model.TreeNode;
  * You just need to ensure that a binary tree can be serialized to a string and
  * this string can be deserialized to the original tree structure.
  * 
+ * IDEA:
+ * 1) serialize: save nodes as they are traversed, incl. the empty ones (null)
+ * 2) deserialize: use the same traversing order and feed deserializer with data from file
+ * 
  */
 public class Solution297 {
 
@@ -33,6 +37,7 @@ public class Solution297 {
 		}
 
 		private TreeNode deserialize(List<String> l) {
+			// if feed is empty, i.e. null token, then do nothing
 			if (l.get(0).equals("null")) {
 				l.remove(0);
 				return null;
@@ -49,7 +54,7 @@ public class Solution297 {
 		// Decodes your encoded data to tree.
 		public TreeNode deserialize(String data) {
 			String[] nodes = data.split(",");
-			List<String> list = new LinkedList<>(Arrays.asList(nodes));// node linkedlist because of romove op
+			List<String> list = new LinkedList<>(Arrays.asList(nodes));// node linkedlist because of often use of remove op
 			return deserialize(list);
 		}
 
@@ -61,10 +66,5 @@ public class Solution297 {
 		}
 	}
 
-	public static void main(String[] arg) {
-
-		System.out.println();
-
-	}
 
 }

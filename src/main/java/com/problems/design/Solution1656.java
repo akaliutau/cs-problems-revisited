@@ -37,7 +37,8 @@ import java.util.List;
  * The resulting order is the same as the order above.
  * 
  * IDEA:
- *  update ptr if and only if it coincides with (id-1)
+ * 1)
+ * 2) update ptr if and only if it coincides with (id-1)
  * 
  */
 public class Solution1656 {
@@ -54,6 +55,7 @@ public class Solution1656 {
 	    public List<String> insert(int id, String value) {
 	    	chunks[id - 1] = value;
 	    	List<String> res = new ArrayList<>();
+	    	// this code is used to generate a chunk if the pointer to the last saved str coincides with the current save position
 	    	if (id - 1 == ptr) {
 	    		while (ptr < chunks.length && chunks[ptr] != null) {
 	    			res.add(chunks[ptr++]);

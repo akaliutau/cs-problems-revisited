@@ -13,21 +13,25 @@ package com.problems.design;
  * row, int col, int player) Indicates that player with id player plays at the
  * cell (row, col) of the board. The move is guaranteed to be a valid move.
  * 
+ * IDEA:
+ * each player either increase by 1 the cell or descrease it
+ * if some row| column | diag  reach sum with norm == ||n|| someone won
+ * 
  */
 public class Solution348 {
 
 	class TicTacToe {
-		int[] r;
-		int[] c;
-		int diag;
-		int antidiag;
+		int[] rSum;
+		int[] cSum;
+		int diagSum;
+		int antidiagSum;
 		int n;
 
 		public TicTacToe(int n) {
-			r = new int[n];
-			c = new int[n];
-			diag = 0;
-			antidiag = 0;
+			rSum = new int[n];
+			cSum = new int[n];
+			diagSum = 0;
+			antidiagSum = 0;
 			this.n = n;
 		}
 
@@ -44,17 +48,17 @@ public class Solution348 {
 		 */
 		public int move(int row, int col, int player) {
 			int num = player == 1 ? 1 : -1;
-			r[row] += num;
-			c[col] += num;
+			rSum[row] += num;
+			cSum[col] += num;
 			if (row == col) {
-				diag += num;
+				diagSum += num;
 			}
 			if (row + col == n - 1) {
-				antidiag += num;
+				antidiagSum += num;
 			}
-			if (r[row] == n || c[col] == n || diag == n || antidiag == n) {
+			if (rSum[row] == n || cSum[col] == n || diagSum == n || antidiagSum == n) {
 				return 1;
-			} else if (r[row] == -n || c[col] == -n || diag == -n || antidiag == -n) {
+			} else if (rSum[row] == -n || cSum[col] == -n || diagSum == -n || antidiagSum == -n) {
 				return 2;
 			} else {
 				return 0;

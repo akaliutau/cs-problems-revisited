@@ -2,6 +2,7 @@ package com.problems.design;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +30,7 @@ public class Solution449 {
             return nodes.stream().map(i -> i.toString()).collect(Collectors.joining(" "));
         }
 
-        public TreeNode helper(Integer lower, Integer upper, ArrayDeque<Integer> nums) {
+        public TreeNode helper(Integer lower, Integer upper, Deque<Integer> nums) {
             if (nums.isEmpty())
                 return null;
             int val = nums.getLast();
@@ -49,7 +50,7 @@ public class Solution449 {
             if (data.isEmpty()) {
                 return null;
             }
-            ArrayDeque<Integer> nums = new ArrayDeque<Integer>();
+            Deque<Integer> nums = new ArrayDeque<Integer>();
             for (String s : data.split("\\s+")) {
                 nums.add(Integer.valueOf(s));
             }

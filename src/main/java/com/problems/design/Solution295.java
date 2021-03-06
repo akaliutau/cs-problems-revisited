@@ -6,6 +6,10 @@ import java.util.Queue;
 /**
  * [41, 35, 62, 5, 97, 108] 
  * 
+ * IDEA:
+ * 1) to calculate median only centroid or central element is needed
+ * 
+ * 
  * Adding  41 MaxHeap lower: [41]         MinHeap higher: []            Median is 41 
  * 
  * Adding  35 MaxHeap lower: [35]         MinHeap higher: [41]          Median is 38
@@ -18,6 +22,7 @@ import java.util.Queue;
  * lower - accumulates smaller elems
  * higher - accumulates bigger elems
  * 
+ * 
  *         lower                       higher
  * (..., lower.peek()), median, (higher.peek(), ...)
  * 
@@ -29,8 +34,8 @@ public class Solution295 {
         Queue<Integer> higher, lower;
 
         public MedianFinder() {
-            higher = new PriorityQueue<>();
-            lower = new PriorityQueue<>((o, p) -> Integer.compare(p, o));
+            higher = new PriorityQueue<>();// head contains the smallest elem in the set
+            lower = new PriorityQueue<>((o, p) -> Integer.compare(p, o));// head contains the biggest elem in the set
         }
 
         public void addNum(int num) {

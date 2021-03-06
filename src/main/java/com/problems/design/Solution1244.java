@@ -15,6 +15,10 @@ import java.util.Map;
  * other words erase it from the leaderboard). It is guaranteed that the player
  * was added to the leaderboard before calling this function. Initially, the
  * leaderboard is empty.
+ * 
+ * IDEA:
+ * use a sorting by score and fetching the top k
+ * 
  */
 public class Solution1244 {
 

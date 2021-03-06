@@ -47,10 +47,5 @@ public class Solution1010 {
         return counter;
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
 
 }

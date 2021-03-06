@@ -13,9 +13,12 @@ import com.problems.model.TreeNode;
  * 
  * 
  * Example:
- * 
- * 
- * 
+ *           9
+ *         /  \
+ *        7    15
+ *       / \     \
+ *      3   8     20
+ *      
  * BSTIterator iterator = new BSTIterator(root); 
  * iterator.next(); // return 3
  * iterator.next(); // return 7 
@@ -29,7 +32,9 @@ import com.problems.model.TreeNode;
  * 
  * IDEA:
  * 1) collect on the stack the list of all leftmost nodes
- * 2) 
+ * 2) alg for each node:
+ *    a) return the cur elem on the stack (which is always the leftmost)
+ *    b) check the right branch - if exists, invoke leftmostInorder()
  * 
  */
 public class Solution173 {
@@ -56,6 +61,7 @@ public class Solution173 {
 	            this.stack.push(root);
 	            root = root.left;
 	        }
+	        // we have the leaf on the top of stack now
 	    }
 
 	    /**
@@ -65,7 +71,8 @@ public class Solution173 {
 	        // Node at the top of the stack is the next smallest element
 	        TreeNode topmostNode = this.stack.pop();
 
-	        // Need to maintain the invariant. If the node has a right child, call the 
+	        // Need to maintain the invariant. 
+	        // If the node has a right child, call the 
 	        // helper function for the right child
 	        if (topmostNode.right != null) {
 	            this.leftmostInorder(topmostNode.right);

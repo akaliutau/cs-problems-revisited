@@ -13,7 +13,11 @@ import java.util.List;
  * top() -- Get the top element. 
  * getMin() -- Retrieve the minimum element in the stack.
  *
- *
+ * IDEA:
+ * 1) update min on push() and return this value on getMin()
+ * 2) if the value to return == min, then start  updateMin procedure
+ * 
+ * O(n) - worst case scenario
  */
 public class Solution155 {
 

@@ -33,6 +33,9 @@ import java.util.Map;
  * wordDictionary.search(".ad"); // return True 
  * wordDictionary.search("b.."); // return True
  * 
+ * IDEA:
+ *  a classical trie, use all nodes check for '.' letter
+ * 
  */
 public class Solution211 {
 
@@ -67,15 +70,15 @@ public class Solution211 {
 		}
 
 		/** Returns if the word is in the node. */
-		private boolean searchInNode(char[] word, int from, TrieNode node) {
-			for (int i = from; i < word.length; ++i) {
-				if (!node.children.containsKey(word[i])) {
+		private boolean searchInNode(char[] wordLetters, int from, TrieNode node) {
+			for (int i = from; i < wordLetters.length; ++i) {
+				if (!node.children.containsKey(wordLetters[i])) {
 					// if the current character is '.'
 					// check all possible nodes at this level
-					if (word[i] == '.') {
+					if (wordLetters[i] == '.') {
 						for (char x : node.children.keySet()) {
 							TrieNode child = node.children.get(x);
-							if (searchInNode(word, i + 1, child)) {
+							if (searchInNode(wordLetters, i + 1, child)) {
 								return true;
 							}
 						}
@@ -86,7 +89,7 @@ public class Solution211 {
 				} else {
 					// if the character is found
 					// go down to the next level in trie
-					node = node.children.get(word[i]);
+					node = node.children.get(wordLetters[i]);
 				}
 			}
 			return node.word;

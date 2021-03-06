@@ -29,14 +29,17 @@ import java.util.Queue;
  * firstUnique.showFirstUnique(); // return 3 firstUnique.add(3); // the queue
  * is now [2,3,5,5,2,3] firstUnique.showFirstUnique(); // return -1
  * 
+ * IDEA:
+ * 1) use queue as a buffer, which is processed on showFirstUnique invoke
+ * 2) use a map structure to hold info about uniqueness
  * 
  */
 public class Solution1429 {
 
 	class FirstUnique {
 
-		Queue<Integer> queue = new ArrayDeque<>();
-		Map<Integer, Boolean> unique = new HashMap<>();
+		Queue<Integer> queue = new ArrayDeque<>();// used as a buffer, which is processed on showFirstUnique invoke
+		Map<Integer, Boolean> unique = new HashMap<>(); // grows indefinitely
 
 		public FirstUnique(int[] nums) {
 			for (int num : nums) {
@@ -54,12 +57,14 @@ public class Solution1429 {
 		}
 
 		public int showFirstUnique() {
-			// go through all queue and remove all non-unique from queue (map still hold the
-			// info about uniqueness value)
+			// go through all queue and remove all non-unique from queue
+			// map still hold the info about uniqueness value though
+			
 			while (!queue.isEmpty() && !unique.get(queue.peek())) {
 				queue.remove();
 			}
 
+			// as a result queue will contain only unique values now
 			if (!queue.isEmpty()) {
 				return queue.peek();
 			}

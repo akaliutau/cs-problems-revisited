@@ -38,15 +38,14 @@ public class Solution1032 {
 
     class StreamChecker {
         TrieNode trie = new TrieNode();
-        Deque<Character> stream = new ArrayDeque<>();
+        Deque<Character> stream = new ArrayDeque<>();// used as a memory buffer to hold the last n = max(all words) letters
 
         public StreamChecker(String[] words) {
             for (String word : words) {
                 TrieNode node = trie;
                 String reversedWord = new StringBuilder(word).reverse().toString();
                 for (char ch : reversedWord.toCharArray()) {
-                    node.children.computeIfAbsent(ch, key -> new TrieNode());
-                    node = node.children.get(ch);
+                    node = node.children.computeIfAbsent(ch, key -> new TrieNode());
                 }
                 node.word = true;
             }

@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 
 /**
  * 
@@ -65,6 +64,9 @@ import java.util.Queue;
  * 
  * snake.move("U"); -> Returns -1 (Game over because snake collides with border)
  * 
+ * IDEA:
+ * use a deque to track all cells which constitute the body of snake
+ * 
  */
 public class Solution353 {
 
@@ -84,7 +86,7 @@ public class Solution353 {
 		int score;
 
 		List<int[]> foodPos;
-		Queue<int[]> queue = new LinkedList<>();
+		int[] currentPos = null;
 		Deque<String> deque = new LinkedList<>();
 
 		public SnakeGame(int width, int height, int[][] food) {
@@ -94,7 +96,7 @@ public class Solution353 {
 			this.foodPos = new ArrayList<>(Arrays.asList(food));
 			this.deque = new LinkedList<>();
 
-			queue.add(new int[] { 0, 0 });
+			currentPos = new int[] { 0, 0 };
 		}
 
 		/**
@@ -107,14 +109,13 @@ public class Solution353 {
 
 		public int move(String direction) {
 
-			int[] currentPos = queue.remove();
 			int[] currentFood = foodPos.size() > 0 ? foodPos.get(0) : new int[] { -1, -1 };
 
 			int[] next = dirMap.get(direction);
 
 			int x = currentPos[0] + next[0];
 			int y = currentPos[1] + next[1];
-			queue.add(new int[] { x, y });
+			currentPos = new int[] { x, y };
 
 			if (x == height || y == width || x < 0 || y < 0 || deque.contains((x + ":" + y))) {
 				return -1;
@@ -122,19 +123,20 @@ public class Solution353 {
 
 			deque.add(x + ":" + y);
 
+			// the result of execution of this block:
+			// 1) score up, length increased
+			// 2) score the same, length the same
 			if (currentFood[0] == x && currentFood[1] == y) {
 				foodPos.remove(0);
 				score++;
-			} else if (deque.size() > score)
-				deque.removeFirst();
+			} else {// no inc in length, remove head
+				deque.poll();
+			}
 
 			return score;
 		}
 
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
 
 }
