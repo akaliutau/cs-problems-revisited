@@ -44,7 +44,7 @@ public class Solution863 {
 	}
 
 	public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
-		// first calc parents for all nodes
+		// first calculates parents for all nodes
 		Map<TreeNode, TreeNode> parents = new HashMap<>();
 		dfs(root, null, parents);
 

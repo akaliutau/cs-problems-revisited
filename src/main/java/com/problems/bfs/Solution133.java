@@ -9,6 +9,10 @@ import com.problems.model.Node;
 /**
  * Given a reference of a node in a connected undirected graph. Return a deep
  * copy (clone) of the graph.
+ * 
+ * IDEA:
+ * traverse through all nodes, and create new nodes with appropriate topology during traversing
+ * 
  */
 public class Solution133 {
 
@@ -48,10 +52,6 @@ public class Solution133 {
         return cloned.get(node);
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
+ 
 
 }

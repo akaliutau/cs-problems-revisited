@@ -16,6 +16,14 @@ import java.util.PriorityQueue;
  * [2,3,3,2,3,1] 
  * ] 
  * Return 4.
+ * 
+ * IDEA:
+ * 1) in 2D water leaks using the lowest level => start from
+ *  a) boundaries
+ *  b) lowest walls
+ *  
+ *  start BFS from multiple sources (boundary cells)
+ * 
  */
 public class Solution407 {
 
@@ -55,9 +63,9 @@ public class Solution407 {
         int volume = 0;
 
         while (!minheap.isEmpty()) {// from outside into inner cells
-            Pos p = minheap.remove();// always take the smallest level
+            Pos p = minheap.poll();// always take the smallest level
 
-            int curHeight = p.val;
+            int smallestWallHeight = p.val;// in the beginning this is the boundary
             int i = p.i;
             int j = p.j;
 
@@ -69,11 +77,11 @@ public class Solution407 {
                     continue;
                 }
                 int neighbourHeight = height[ni][nj]; 
-                if (neighbourHeight < curHeight) {
-                    volume += (curHeight - neighbourHeight);// because its global min
-                    minheap.add(new Pos(curHeight, ni, nj));
+                if (neighbourHeight < smallestWallHeight) {
+                    volume += (smallestWallHeight - neighbourHeight);// because the cell is lower than wall, one can save some water
+                    minheap.add(new Pos(smallestWallHeight, ni, nj));// re-use the wall for the next cells, because can't add more water column
                 } else {
-                    minheap.add(new Pos(neighbourHeight, ni, nj));
+                    minheap.add(new Pos(neighbourHeight, ni, nj));// effectively installs a new wall cell
                 }
                 height[ni][nj] = -1;
                 

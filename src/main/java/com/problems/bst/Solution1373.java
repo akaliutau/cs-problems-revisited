@@ -6,9 +6,11 @@ import com.problems.model.TreeNode;
  * Given a binary tree root, the task is to return the maximum sum of all keys
  * of any sub-tree which is also a Binary Search Tree (BST). 
  * 
- * IDEA: 1) traverse
- * the BST using [lower, upper] boundary check on each node 2) collect the sum
- * in parallel
+ * IDEA: 
+ * 
+ * 1) traverse the BST using [lower, upper] boundary check on each node 
+ * 
+ * 2) collect the sum when traversing
  */
 public class Solution1373 {
 
@@ -36,9 +38,11 @@ public class Solution1373 {
     }
 
     Result traverse(TreeNode node, int[] max) {
+    	// edge case
         if (node == null)
             return new Result(maxVal, minVal, 0, true);
 
+        // retrieve necessary info about underlying nodes
         Result left = traverse(node.left, max);
         Result right = traverse(node.right, max);
 

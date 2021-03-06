@@ -21,10 +21,15 @@ import java.util.Set;
  * Example: Input: routes = [[1, 2, 7], [3, 6, 7]] S = 1 T = 6 Output: 2
  * Explanation: The best strategy is take the first bus to the bus stop 7, then
  * take the second bus to the bus stop 6.
+ *
+ * IDEA:
  * 
  * We perform a breadth first search on bus numbers. When we start at S,
  * originally we might be able to board many buses, and if we end at T we may
  * have many targets for our goal state.
+ * 
+ * 
+ * 
  */
 public class Solution815 {
 
@@ -40,6 +45,9 @@ public class Solution815 {
 
 	/**
 	 * Detects intersection of 2 sorted routes
+	 * f.e. 
+	 * [1, 2, 7], 
+	 * [3, 6, 7]
 	 */
 	boolean intersect(int[] route1, int[] route2) {
 		int i = 0, j = 0;
@@ -71,7 +79,7 @@ public class Solution815 {
 		Set<Integer> targets = new HashSet<>();
 		Queue<Point> queue = new ArrayDeque<>();
 
-		// Build the graph. Two buses are connected if
+		// Build the bi-directional graph. Two buses are connected if
 		// they share at least one bus stop.
 		for (int i = 0; i < n; ++i) {
 			for (int j = i + 1; j < n; ++j) {
@@ -112,10 +120,6 @@ public class Solution815 {
 		return -1;
 	}
 
-	public static void main(String[] arg) {
 
-		System.out.println();
-
-	}
 
 }

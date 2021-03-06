@@ -22,8 +22,9 @@ import java.util.Queue;
  * 
  * IDEA:
  * for each cell:
- *  calc path sum ONCE, then only update it to optimal value
- * 
+ *  1) calc path sum as cur_cell_val + grid_cell_val
+ *  2) update next cell it to optimal value
+ *  3) add to queue if and only if this cell was not processed previously
  */
 public class Solution64 {
 
@@ -48,7 +49,7 @@ public class Solution64 {
 
 			if (c + 1 < m) {
 				int sum1 = sum[r][c] + grid[r][c + 1];
-				sum[r][c + 1] = sum[r][c + 1] == 0 ? sum1 : Math.min(sum[r][c + 1], sum1);
+				sum[r][c + 1] = sum[r][c + 1] == 0 ? sum1 : Math.min(sum[r][c + 1], sum1);// the second condition is in the case of 2nd path availability
 				if (!processed[r][c + 1]) {
 					q.add(new int[] { r, c + 1 });
 					processed[r][c + 1] = true;

@@ -40,7 +40,9 @@ import java.util.Set;
  * ["hit","hot","lot","log","cog"] ]
  * 
  * IDEA:
- * 
+ * use graph to build a valid path, but decrease the number of possible variants using:
+ * 1) filter on possible routes
+ * 2) bfs to find the shortest path
  * 
  */
 public class Solution127 {

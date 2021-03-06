@@ -34,6 +34,10 @@ package com.problems.bfs;
  * ['B', '1', '1', '1', 'B'], 
  * ['B', 'B', 'B', 'B', 'B']
  * ]
+ * 
+ * IDEA:
+ * BFS from the point of click
+ * 
  */
 public class Solution529 {
     
@@ -72,7 +76,7 @@ public class Solution529 {
         if (board[r][c] == 'E') {
             int mines = checkNeighbours(board, r, c, n, m);
             if (mines > 0) {
-                board[r][c] = String.valueOf(mines).charAt(0);
+                board[r][c] = String.valueOf(mines).charAt(0);// hack, because total sum always <= 8
             } else {
                 board[r][c] = 'B';
                 for (int i = 0; i < 8; i++) {
@@ -89,8 +93,6 @@ public class Solution529 {
         }
         return board;
     }
-    
-    
 
 
 }

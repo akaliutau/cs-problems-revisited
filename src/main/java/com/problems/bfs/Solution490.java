@@ -15,6 +15,8 @@ import java.util.Queue;
  * 
  * You may assume that the borders of the maze are all walls (see examples)
  * 
+ * IDEA:
+ * almost pure BFS, with additional code to calc stable position
  * 
  */
 public class Solution490 {
@@ -50,8 +52,6 @@ public class Solution490 {
 		return false;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+
 
 }

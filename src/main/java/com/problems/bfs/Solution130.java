@@ -22,6 +22,10 @@ import java.util.List;
  * X X X X 
  * X O X X
  * 
+ * IDEA:
+ * 1) find all escaped cells using list of boundary cells and bfs from them (mark them temporarily as E)
+ * 2) after run - convert all O -> X, and all E -> O
+ * 
  * 
  */
 public class Solution130 {
