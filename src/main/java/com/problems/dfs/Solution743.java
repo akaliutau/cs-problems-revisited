@@ -19,6 +19,9 @@ import java.util.Map;
  * 
  * Input: times = [[2,1,1],[2,3,1],[3,4,1]], n = 4, k = 2 Output: 2
  * 
+ * IDEA:
+ *  use dijkstra algorithm
+ * 
  */
 public class Solution743 {
 
@@ -27,7 +30,7 @@ public class Solution743 {
 	public int networkDelayTime(int[][] times, int n, int k) {
 		Map<Integer, List<int[]>> graph = new HashMap<>();
 		for (int[] edge : times) {
-			graph.computeIfAbsent(edge[0], key -> new ArrayList<>()).add(new int[] { edge[1], edge[2] });
+			graph.computeIfAbsent(edge[0], key -> new ArrayList<>()).add(new int[] { edge[1], edge[2] });// note: only 2 elems in this array in comparison with times array
 		}
 		// Dijkstra alg
 		dist = new HashMap<>();
@@ -42,7 +45,7 @@ public class Solution743 {
 		while (true) {
 			int cur = -1;
 			int fastest = Integer.MAX_VALUE;// we start from the biggest possible value
-			for (int i = 1; i <= n; ++i) {
+			for (int i = 1; i <= n; ++i) {// find the fastest non=proceesed yet node
 				if (!seen[i] && dist.get(i) < fastest) {
 					fastest = dist.get(i);
 					cur = i;
@@ -52,11 +55,13 @@ public class Solution743 {
 			if (cur < 0) {
 				break;
 			}
-			seen[cur] = true;
+			seen[cur] = true;// process this node
+			
 			if (graph.containsKey(cur)) {
-				for (int[] child : graph.get(cur)) {
-					int ch = child[0];
-					dist.put(ch, Math.min(dist.get(ch), dist.get(cur) + child[1]));
+				for (int[] child : graph.get(cur)) {// investigate all children
+					int dest = child[0];
+					int weight = child[1];
+					dist.put(dest, Math.min(dist.get(dest), dist.get(cur) + weight));// make a choice - either leave as is OR use path
 				}
 			}
 		}

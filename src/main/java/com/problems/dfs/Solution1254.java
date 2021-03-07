@@ -19,6 +19,10 @@ package com.problems.dfs;
  * 
  * Explanation: Islands in gray are closed because they are completely
  * surrounded by water (group of 1s).
+ * 
+ * IDEA:
+ * 1) detect and remove boundary land using dfs
+ * 2) detect and count lands using dfs
  */
 public class Solution1254 {
 	

@@ -17,7 +17,14 @@ package com.problems.dfs;
  * 
  * Explanation: The longest increasing path is [1, 2, 6, 9].
  * 
- * IDEA: build path from pieces
+ * IDEA: 
+ * build path from pieces
+ * 1) for each cell (i,j): build the longest path starting at (i,j) and save it in memo
+ * 2) regardless of found order for each piece, the final resulting longest path will be found
+ *  proof: 
+ *  if start at cell 1, will be found pieces 1 -> 8, or the actual result 1 -> 2 -> 6 -> 9
+ *  if start at cell 6, will be found pieces 6 -> 8, 6 -> 9
+ * 
  */
 public class Solution329 {
 
@@ -32,6 +39,7 @@ public class Solution329 {
         for (int[] d : dirs) {
             int x = i + d[0];
             int y = j + d[1];
+            // move forward only for the bigger numbers
             if (0 <= x && x < m && 0 <= y && y < n && matrix[x][y] > matrix[i][j]) {// choose the path according to conditions
                 cache[i][j] = Math.max(cache[i][j], dfs(matrix, x, y, cache));
             }

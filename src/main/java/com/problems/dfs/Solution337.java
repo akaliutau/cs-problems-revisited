@@ -27,6 +27,11 @@ import com.problems.model.TreeNode;
  * Finally, call the helper(root) in the main function, and return its maximum
  * value.
  * 
+ * IDEA:
+ * construct a repeatable situation where there is a need to make a choice
+ * 1) cost to rob this node and not robe neighbors
+ * 2) cost not to rob this node, and investigate the cost of robbing neighbors in different combinations
+ * 
  */
 public class Solution337 {
 

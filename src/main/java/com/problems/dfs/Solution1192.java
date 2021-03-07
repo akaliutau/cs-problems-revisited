@@ -26,6 +26,9 @@ import java.util.Map;
  *       1  1  1  1
  *       C->D
  *       1  4
+ *       
+ *       A, B, C - form a cycle
+ *       D - a separate node
  */
 public class Solution1192 {
 
@@ -34,15 +37,17 @@ public class Solution1192 {
 		time[curNode] = curTime;
 		visited[curNode] = true;
 		for (int neighbor : graph.get(curNode)) {
-			if (neighbor == prevNode) {
+			if (neighbor == prevNode) {// omit previous (parent) node
 				continue;
 			}
 			if (!visited[neighbor]) {
 				dfs(graph, visited, time, curNode, neighbor, curTime + 1, results);
 			}
-			time[curNode] = Math.min(time[curNode], time[neighbor]);// relaxation equation - each node in the loop will be relaxed
+			// relaxation equation - each node in the loop will be relaxed
+			// as a result all nodes in loop will have the same value
+			time[curNode] = Math.min(time[curNode], time[neighbor]);
 			// Compare time AFTER relaxation
-			if (time[neighbor] > curTime) {
+			if (time[neighbor] > time[curNode]) {
 				results.add(Arrays.asList(curNode, neighbor));
 			}
 		}
@@ -51,11 +56,12 @@ public class Solution1192 {
 	public List<List<Integer>> criticalConnections(int n, List<List<Integer>> connections) {
 		Map<Integer, List<Integer>> graph = new HashMap<>();
 		List<List<Integer>> res = new LinkedList<>();
+		// create a bi-directional graph
 		for (List<Integer> connection : connections) {
 			int cur = connection.get(0);
 			int ref = connection.get(1);
-			graph.putIfAbsent(cur, new ArrayList<>()).add(ref);
-			graph.putIfAbsent(ref, new ArrayList<>()).add(cur);
+			graph.computeIfAbsent(cur, k -> new ArrayList<>()).add(ref);
+			graph.computeIfAbsent(ref, k -> new ArrayList<>()).add(cur);
 		}
 		int[] time = new int[n];
 		for (int i = 0; i < n; ++i) {

@@ -20,7 +20,11 @@ package com.problems.dfs;
  * ]
  * output: 6
  * 
+ * IDEA:
+ *  use dfs to traverse all cells
+ * 
  */
+
 public class Solution695 {
 
     int[][] grid;

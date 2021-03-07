@@ -22,6 +22,10 @@ import java.util.Stack;
  * Example 1: Input: [["MUC", "LHR"],
  * ["JFK", "MUC"], ["SFO", "SJC"], ["LHR", "SFO"]] Output: ["JFK", "MUC", "LHR",
  * "SFO", "SJC"]
+ * 
+ * IDEA:
+ *  try all possible routes using dfs and conditions provided
+ *  
  */
 public class Solution332 {
 
@@ -86,10 +90,5 @@ public class Solution332 {
 
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
-
+ 
 }

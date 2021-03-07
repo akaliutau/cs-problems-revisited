@@ -50,10 +50,6 @@ public class Solution797 {
 		return results;
 	}
 
-	public static void main(String[] arg) {
 
-		System.out.println();
-
-	}
 
 }

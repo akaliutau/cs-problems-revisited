@@ -1,4 +1,4 @@
-package com.problems.dfs;
+package com.problems.parentheses;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -12,6 +12,14 @@ import java.util.Set;
  * 
  * Example 1: Input: "()())()"
  * Output: ["()()()", "(())()"]
+ * 
+ * IDEA:
+ * 1) count left and right balance:
+ *   f.e. for the left balance:
+ *   a) inc counter if char == '(' and dec if char == ')' - as a result all situations like ()) will be covered
+ *      regardless of any further symbols, the only way to fix the problem is to remove ANY of )-brackets
+ *       
+ * 
  */
 public class Solution301 {
 
@@ -38,7 +46,7 @@ public class Solution301 {
     
     void processWithoutBracket(String orig, int j, Set<String> memo, Set<String> res) {
         String candidate = orig.substring(0, j) + orig.substring(j + 1);
-        if (!memo.contains(candidate)) {
+        if (!memo.contains(candidate)) {// omit already processed
             memo.add(candidate);
             // remove j and continue dfs
             dfs(candidate, res, memo);
@@ -56,7 +64,7 @@ public class Solution301 {
         for (int i = 0; i < s.length(); i++) {
             left += left(s.charAt(i));
             if (left < 0) {// too much )
-                for (int j = lastRemoved + 1; j <= i; j++) {// try to remove some )
+                for (int j = lastRemoved + 1; j <= i; j++) {// try to remove some )-brackets
                     if (s.charAt(j) == ')') {
                     	processWithoutBracket(s, j, memo, res);
                     }
@@ -71,7 +79,7 @@ public class Solution301 {
         for (int i = s.length() - 1; i >= 0; i--) {
             right += right(s.charAt(i));
             if (right < 0) {
-                for (int j = lastRemoved - 1; j >= i; j--) {
+                for (int j = lastRemoved - 1; j >= i; j--) {// try to remove some (-brackets
                     if (s.charAt(j) == '(') {
                     	processWithoutBracket(s, j, memo, res);
                     }

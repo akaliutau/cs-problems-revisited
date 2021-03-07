@@ -19,6 +19,10 @@ package com.problems.dfs;
  * Explanation:The 0th and 1st students
  * are direct friends, so they are in a friend circle. The 2nd student himself
  * is in a friend circle. So return 2.
+ * 
+ * IDEA:
+ * use transitive feature of dfs to detect and fill out the friend circle - the same as in islands problem
+ * 
  */
 public class Solution547 {
 

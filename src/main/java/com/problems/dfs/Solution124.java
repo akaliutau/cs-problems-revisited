@@ -11,6 +11,11 @@ import com.problems.model.TreeNode;
  * 
  * Input: root = [1,2,3] Output: 6
  * 
+ * IDEA:
+ *  2 cases are possible
+ * 1) path from root till leaf
+ * 2) path from some leaf to another leaf
+ * 
  */
 public class Solution124 {
 

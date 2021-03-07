@@ -19,6 +19,10 @@ import com.problems.model.TreeNode;
  * Explanation: The root-to-leaf path 1->2 represents the number 12.
  * The root-to-leaf path 1->3 represents the number 13. Therefore, sum = 12 + 13
  * = 25.
+ * 
+ * IDEA:
+ * 1) update a global rootToLeaf number if and only if the node is a leaf
+ * 
  */
 public class Solution129 {
 

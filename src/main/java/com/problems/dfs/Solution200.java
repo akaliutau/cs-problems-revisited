@@ -21,7 +21,10 @@ package com.problems.dfs;
  * ] 
  * 
  * Output: 1
- * O(n + m)
+ * O(n*m)
+ * 
+ * IDEA:
+ * use dfs to fill out islands and count in the process
  */
 public class Solution200 {
 	void dfs(char[][] grid, int r, int c) {

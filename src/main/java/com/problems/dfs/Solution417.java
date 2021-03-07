@@ -34,8 +34,9 @@ import java.util.List;
  * [[0, 4], [1, 3], [1, 4], [2, 2], [3, 0], [3, 1], [4, 0]] (positions with
  * parentheses in above matrix)
  * 
- * IDEA: find the points which are peaks and meeting points in the same time 
- * 
+ * IDEA: 
+ * find the points which are peaks and meeting points in the same time 
+ * use marker +1 for one area and marker +2 for another one; the meeting point will have 1+2 == 3
  */
 public class Solution417 {
 	

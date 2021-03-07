@@ -24,7 +24,7 @@ import java.util.Map;
  * $10. Person #2 gave person #0 $5. Two transactions are needed. One way to
  * settle the debt is person #1 pays person #0 and #2 $5 each.
  * 
- * who       trans   balance    
+ * who  idx  trans   balance    
  * ------------------------
  * Alice 0  -10 +5   -5
  * Bill  1  +10      +10 
@@ -32,6 +32,7 @@ import java.util.Map;
  * 
  *  
  * IDEA:
+ * use dfs to transfer debt
  *  
  */
 public class Solution465 {
@@ -48,7 +49,7 @@ public class Solution465 {
         
         int ans = Integer.MAX_VALUE;
         for (int i = index + 1; i < list.size(); i++) {// index -> [index + 1 , n]
-            if (list.get(i) * balance > 0) {// do not transfer if balance on one side, f.e. both in negatice zone or both lenders
+            if (list.get(i) * balance > 0) {// do not transfer if balance on one side, f.e. both in negative zone or both lenders
                 continue;
             }
             int temp = list.get(i);

@@ -15,7 +15,29 @@ import com.problems.model.TreeNode;
  * possible answer is [0,-3,9,-10,null,5], which represents the shown height
  * balanced BST.
  * 
- */
+ * IDEA:
+ * [1, 4, 7, 9]
+ * 
+ * 1) Recursively divide list and put left part to the left subbranch, and right part to the right subbranch
+ * 
+ *   [left, mid-1] [mid] [mid+1, right]
+ * 
+ *        [1, 4,   7,       9]
+ *         |  |             |
+ *         0  central       3
+ *         mid == central elem
+ *                7
+ *            /     \
+ *       [1]         [7, 9]
+ *       /               \ 
+ *      1                 [2, 1][2][3,3]
+ *                          \
+ *                           2
+ *                            \
+ *                             3
+ *                             
+ */                         
+                     
 public class Solution109 {
 
 	private ListNode head;
