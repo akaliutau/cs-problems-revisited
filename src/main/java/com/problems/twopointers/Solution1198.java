@@ -21,6 +21,8 @@ package com.problems.twopointers;
  * 
  * Initialize row positions, current max and counter with zeros. 
  * 
+ * IDEA:
+ * use multi-row tracking
  * For each row: Increment the row position until the
  * value is equal or greater than the current max. If we reach the end of the
  * row, return -1. If the value equals the current max, increase the counter.
@@ -32,23 +34,23 @@ public class Solution1198 {
     public int smallestCommonElement(int[][] mat) {
         int rows = mat.length, m = mat[0].length;
         int pos[] = new int[rows];
-        int globalMax = Integer.MIN_VALUE, cnt = 0;
+        int globalMax = Integer.MIN_VALUE, maxCounter = 0;
         while (true) {
             for (int i = 0; i < rows; ++i) {
                 
                 while (pos[i] < m && mat[i][pos[i]] < globalMax) {// find elem >= globalMax
                     ++pos[i];
                 }
-                int col = pos[i];
-                if (col >= m) {// not found
+                if (pos[i] >= m) {// not found
                     return -1;
                 }
-                // here: elem >= globalMax
+                int col = pos[i];
+                // here: curElem >= globalMax
                 int curElem = mat[i][col];
-                if (curElem > globalMax) {// it must be > case, new globalMax found
-                    cnt = 1;
+                if (curElem > globalMax) {// it must be > case, new globalMax found,
+                	maxCounter = 1;
                     globalMax = curElem;
-                } else if (++cnt == rows) {// == case
+                } else if (++maxCounter == rows) {// == case
                     return globalMax;
                 }
             }

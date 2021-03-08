@@ -7,10 +7,10 @@ import java.util.List;
 /**
  * Given an array nums of n integers and an integer target, are there elements
  * a, b, c, and d in nums such that a + b + c + d = target? 
- * Find all unique
- * quadruplets in the array which gives the sum of target. 
+ * Find all unique quadruples in the array which gives the sum of target. 
+ * 
  * Notice that the
- * solution set must not contain duplicate quadruplets. 
+ * solution set must not contain duplicate quadruples. 
  * 
  * Example 1: Input: nums =
  * [1,0,-1,0,-2,2], target = 0 Output: [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
@@ -47,7 +47,7 @@ public class Solution18 {
         }
         for (int i = start; i < len; ++i) {
             if (i == start || nums[i - 1] != nums[i]) {// this block is triggered only on the first elem or on change
-                for (List<Integer> set : kSum(nums, target - nums[i], i + 1, k - 1)) {
+                for (List<Integer> set : kSum(nums, target - nums[i], i + 1, k - 1)) {// recursive call to decrease problem n-1 => n-2
                     List<Integer> found = new ArrayList<>(Arrays.asList(nums[i]));
                     found.addAll(set);
                     res.add(found);

@@ -30,7 +30,7 @@ public class Solution42 {
         }
   
         for (int i = 0; i < n; i++) { 
-            maxVol += Math.min(left[i], right[i]) - arr[i];
+            maxVol += Math.min(left[i], right[i]) - arr[i];// for stable bar of water boundary must the the min of 2
         }
   
         return maxVol; 

@@ -11,6 +11,19 @@ package com.problems.dp;
  * Example 1:
  * Input: s = "aa", p = "a" Output: false Explanation: "a" does not match the
  * entire string "aa"
+ * 
+ * IDEA:
+ * 1) start search from the tail
+ * 2) subproblem
+ *    remove the last symbol @pattern for pattern and compare against block 
+ *    
+ *  
+ *     ""  a 
+ *  "" 1   0 
+ *  a  0   X
+ *  a  0   1
+ *  
+ * 
  */
 public class Solution10 {
 
@@ -24,11 +37,12 @@ public class Solution10 {
         char[] text = txt.toCharArray();
         char[] pattern = prn.toCharArray();
 
+        // note: all references are from tail
         for (int i = n; i >= 0; i--) {
             for (int j = m - 1; j >= 0; j--) {
                 boolean firstMatch = (i < n && (pattern[j] == text[i] || pattern[j] == '.'));
                 if (j + 1 < m && pattern[j + 1] == '*') {
-                    dp[i][j] = dp[i][j + 2] || firstMatch && dp[i + 1][j];
+                    dp[i][j] = (dp[i][j + 2] || firstMatch) && dp[i + 1][j];
                 } else {
                     dp[i][j] = firstMatch && dp[i + 1][j + 1];
                 }

@@ -44,8 +44,9 @@ public class Solution743 {
 
 		while (true) {
 			int cur = -1;
+			// here a non-optimal approach is used, use a queue instead
 			int fastest = Integer.MAX_VALUE;// we start from the biggest possible value
-			for (int i = 1; i <= n; ++i) {// find the fastest non=proceesed yet node
+			for (int i = 1; i <= n; ++i) {// find the fastest non-processed yet node
 				if (!seen[i] && dist.get(i) < fastest) {
 					fastest = dist.get(i);
 					cur = i;

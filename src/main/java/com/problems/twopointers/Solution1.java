@@ -19,6 +19,10 @@ import java.util.Map;
  * Input: nums = [2,7,11,15], target = 9 Output: [0,1] Output: Because nums[0] +
  * nums[1] == 9, we return [0, 1].
  * 
+ * IDEA:
+ * complementary + nums[i] = target
+ * save all processed numbers. if complementary in a map, then => exists nums[j] = target - nums[i]
+ * 
  */
 public class Solution1 {
 

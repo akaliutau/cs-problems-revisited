@@ -1,4 +1,4 @@
-package com.problems.twopointers;
+package com.problems.binarysearch;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  * Input: arr = [1,2,3,4,5], k = 4, x = 3 Output: [1,2,3,4]
  * 
  * IDEA:
- * the point is to find such mid that is the center of [mid, mid + k]
+ * the point is to find such mid that is the center of [mid, mid + k] - this will be the answer most close to the ideal one
  * 
  * [1,2,3,4,5, 6] [1,3]
  *  |   |
@@ -41,15 +41,16 @@ public class Solution658 {
 			return Arrays.stream(arr).boxed().collect(Collectors.toList());
 		}
 	    
+		// try to find the ideal interval using binary search dividing
 		while (left < right) {
-			int mid = (left + right) / 2;
-			// investigate an array [mid, mid + k] : 
-			// check distance from x to left boundary (x - arr[mid])
-			// check distance from x to right boundary (arr[mid + k] - x)
-			if (x - arr[mid] > arr[mid + k] - x) {
-				left = mid + 1;
+			int lAnswer = (left + right) / 2;
+			// investigate an array [lAnswer, lAnswer + k] : 
+			// check distance from x to left boundary (x - arr[lAnswer])
+			// check distance from x to right boundary (arr[lAnswer + k] - x)
+			if (x - arr[lAnswer] > arr[lAnswer + k] - x) {
+				left = lAnswer + 1;
 			} else {
-				right = mid;
+				right = lAnswer;
 			}
 		}
 

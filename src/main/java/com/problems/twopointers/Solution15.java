@@ -25,16 +25,17 @@ import java.util.List;
 public class Solution15 {
 
 	void twoSums(int[] nums, int i, List<List<Integer>> results) {
-		int lo = i + 1;// 2nd number
+		int constant = nums[i];
+		int lo = i + 1;// 2nd number - right next after constant
 		int hi = nums.length - 1;// 3rd number
 		while (lo < hi) {
-			int sum = nums[i] + nums[lo] + nums[hi];
+			int sum = constant + nums[lo] + nums[hi];
 			if (sum < 0) {// too small, increase the lowest one
 				++lo;
 			} else if (sum > 0) {// too big, decrease the highest one
 				--hi;
 			} else {
-				results.add(Arrays.asList(nums[i], nums[lo], nums[hi]));
+				results.add(Arrays.asList(constant, nums[lo], nums[hi]));
 				lo++;
 				hi--;
 				while (lo < hi && nums[lo] == nums[lo - 1]) {// omit equal numbers
@@ -47,7 +48,7 @@ public class Solution15 {
 	public List<List<Integer>> threeSum(int[] nums) {
 		Arrays.sort(nums);
 		List<List<Integer>> res = new ArrayList<>();
-		for (int i = 0; i < nums.length && nums[i] <= 0; ++i) {// < 0 because sum=0
+		for (int i = 0; i < nums.length && nums[i] <= 0; ++i) {// the 3rd number must be < 0 because sum=0
 			if (i == 0 || nums[i - 1] != nums[i]) {
 				twoSums(nums, i, res);
 			}

@@ -22,7 +22,7 @@ import java.util.List;
  * 
  * IDEA:
  * during traversing take care of upperBoundary for all letters seen so far
- * if it coincides with i, then from [lastCut,curIdx] we have seen all letters
+ * if it coincides with i, then => from [lastCut,curIdx] we have seen all letters
  * 
  * abca  dd
  * 
@@ -35,16 +35,16 @@ public class Solution763 {
 			lastSeenAt[s.charAt(i) - 'a'] = i;
 		}
 
-		int upperBoudnary = 0;// upperBoundary for all letters seen so far
+		int upperBoundary = 0;// upperBoundary is the lower upper boundary for all letters seen so far
 		int start = 0;
 		List<Integer> result = new LinkedList<>();
 		for (int i = 0; i < n; i++) {
-			if (lastSeenAt[s.charAt(i) - 'a'] > upperBoudnary) {
-				upperBoudnary = lastSeenAt[s.charAt(i) - 'a'];
+			if (lastSeenAt[s.charAt(i) - 'a'] > upperBoundary) {
+				upperBoundary = lastSeenAt[s.charAt(i) - 'a'];
 			}
 
-			if (i == upperBoudnary) {// triggers the cut
-				result.add(upperBoudnary - start + 1);
+			if (i == upperBoundary) {// triggers the cut
+				result.add(upperBoundary - start + 1);
 				start = i + 1;
 			}
 		}
