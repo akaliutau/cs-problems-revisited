@@ -24,7 +24,7 @@ import com.problems.model.TreeNode;
  *  ]
  *  
  *  IDEA:
- *  create new levels during tree traversal, push values into them
+ *  create new levels' List during tree traversal, push values into them
  */
 public class Solution102 {
 

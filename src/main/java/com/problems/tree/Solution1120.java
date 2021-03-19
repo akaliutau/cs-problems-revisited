@@ -10,7 +10,9 @@ import com.problems.model.TreeNode;
  * average value of a tree is the sum of its values, divided by the number of
  * nodes.)
  * 
- * 
+ * IDEA:
+ * just collect state during traversing
+ * for each node calculate the avg using stats about childs + current node
  * 
  */
 public class Solution1120 {

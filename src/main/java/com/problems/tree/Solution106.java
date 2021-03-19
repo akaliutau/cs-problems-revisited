@@ -21,8 +21,10 @@ import com.problems.model.TreeNode;
  *           |
  *         index  
  *         
- *  IDEA:
- *  
+ *  IDEA (the same as in 105):
+ *  1) use info about postorder to traverse tree
+ *  2) use inorder info to terminate tree building
+ *  3) use mapping nodeId/val => its linear center  
  *    
  */
 public class Solution106 {
@@ -43,14 +45,16 @@ public class Solution106 {
 
         // root splits inorder list
         // into left and right subtrees
-        int index = indexMap.get(val);
+        int center = indexMap.get(val);
 
-        // recursion
+        // recursion - go to the  next element in PreOrder list
         postIdx--;
+        
         // first build right, as postorder list ends on right nodes 
-        root.right = helper(index + 1, right);
+        root.right = helper(center + 1, right);
+        
         // build left 
-        root.left = helper(left, index - 1);
+        root.left = helper(left, center - 1);
         return root;
     }
 

@@ -14,7 +14,7 @@ import com.problems.model.TreeNode;
  * trees.
  * 
  * IDEA:
- * combine check of BST with sum collecting
+ * combine check of BST with speculative sum collecting + record max recording
  * 
  */
 public class Solution1373 {

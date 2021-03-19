@@ -22,13 +22,18 @@ import com.problems.model.TreeNode;
  *          / \ 
  *         15  7
  *         
- *     0  1 23 4
+ *   [9,3,15,20,7]
+ *     0 1 2 3 4
  *         
  *  IDEA:
  *  1) use info about preorder to traverse tree
  *  2) use inorder info to terminate tree building
  *  3) use mapping nodeId/val => its linear center  
  *  
+ *  Algorithm:
+ *  1) traverse and build tree in preorder manner 
+ *  2) us mapping of value to the its index in the in-order array - 
+ *     if an array built  from indecies [left, right] has a 0 length, that exit building immediately 
  *  
  */
 public class Solution105 {
@@ -50,7 +55,8 @@ public class Solution105 {
 
 		int center = input.indexMap.get(rootVal);
 
-		input.preIndex++;
+		input.preIndex++;// go to the  next element in PreOrder list
+		
 		root.left = build(inLeft, center, input);// [0,1]
 		root.right = build(center + 1, inRight, input); //[2,5]
 		return root;

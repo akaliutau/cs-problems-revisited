@@ -14,6 +14,8 @@ import com.problems.model.TreeNode;
  *   2   3      2   3 
  *   
  *   [1,2,3], [1,2,3] Output: true
+ *   
+ *   IDEA: traverse both in the same order (does not matter, in which one)
  */
 public class Solution100 {
 
