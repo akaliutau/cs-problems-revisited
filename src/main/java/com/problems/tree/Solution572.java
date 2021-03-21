@@ -32,13 +32,13 @@ public class Solution572 {
 		return l.val == r.val && equals(l.left, r.left) && equals(l.right, r.right);
 	}
 
-	boolean traverse(TreeNode s, TreeNode t) {
-		return s != null && (equals(s, t) || traverse(s.left, t) || traverse(s.right, t));
+	boolean dfs(TreeNode s, TreeNode t) {
+		return s != null && (equals(s, t) || dfs(s.left, t) || dfs(s.right, t));
 	}
 
 	// t is a smaller tree
 	public boolean isSubtree(TreeNode s, TreeNode t) {
-		return traverse(s, t);
+		return dfs(s, t);
 	}
 
 

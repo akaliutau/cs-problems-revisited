@@ -38,10 +38,13 @@ public class Solution865 {
 		}
 		Result l = dfs(node.left);
 		Result r = dfs(node.right);
-		if (l.dist > r.dist)
+		if (l.dist > r.dist) {
 			return new Result(l.node, l.dist + 1);
-		if (l.dist < r.dist)
+		}
+		if (l.dist < r.dist) {
 			return new Result(r.node, r.dist + 1);
+		}
+		// l.dist == r.dist
 		return new Result(node, l.dist + 1);
 	}
 

@@ -22,75 +22,79 @@ import java.util.Set;
  * 
  * IDEA:
  * 
- * The idea is that we trim out the leaf nodes layer by layer, until we reach the core of the graph, which are the centroids nodes.
+ * The idea is that we trim out the leaf nodes layer by layer, until we reach
+ * the core of the graph, which are the CENTROIDS nodes.
  * 
- * Once we trim out the first layer of the leaf nodes (nodes that have only one connection), some of the non-leaf nodes would become leaf nodes.
+ * Once we trim out the first layer of the leaf nodes (nodes that have only one
+ * connection), some of the non-leaf nodes would become leaf nodes.
  *
- * The trimming process continues until there are only two nodes left in the graph, which are the centroids that we are looking for.
+ * The trimming process continues until there are only two nodes left in the
+ * graph, which are the CENTROIDS that we are looking for.
  * 
  * 
  */
 public class Solution310 {
-    
-    static class Node {
-        final int id;
-        final Set<Node> ref = new HashSet<>();
-        
-        public Node(int id) {
-            this.id = id;
-        }
-        
-        public boolean isLeaf() {
-            return ref.size() == 1;
-        }
-    }
 
-     public List<Integer> findMinHeightTrees(int n, int[][] edges) {
-        // base cases
-        if (n <= 2) {
-            List<Integer> centroids = new ArrayList<>();
-            for (int i = 0; i < n; i++) {
-                centroids.add(i);
-            }
-            return centroids;
-        }
-        
-        // build the tree with bi-directional ties
-        Node[] nodes= new Node[n];
-        Set<Integer> set = new HashSet<>();
-        for (int i = 0; i < n; i++) {
-            nodes[i] = new Node(i);
-            set.add(i);
-        }
-        for (int i = 0; i < edges.length; i++) {
-            int[] edge = edges[i];
-            nodes[edge[0]].ref.add(nodes[edge[1]]);
-            nodes[edge[1]].ref.add(nodes[edge[0]]);
-        }
+	static class Node {
+		final int id;
+		final Set<Node> ref = new HashSet<>();// contains from 1 till 3 refs to node max
 
-        // Initialize the first layer of leaves
-        Queue<Node> q = new LinkedList<>();
-        for (int i = 0; i < n; i++) {
-            if (nodes[i].isLeaf()) {
-                q.add(nodes[i]);
-            }
-        }
+		public Node(int id) {
+			this.id = id;
+		}
 
-        // Trim the leaves until reaching the centroids
-         while (!q.isEmpty() && set.size() > 2) {
-            int layer = q.size();
-            // remove the current leaves along with the edges
-            for (int i = 0; i < layer; i++) {
-                Node leaf = q.poll();
-                Node parent = leaf.ref.iterator().next();// leaf has only one ref - to its parent
-                parent.ref.remove(leaf);// remove leaf ref
-                set.remove(leaf.id);
-                if (parent.isLeaf()) {
-                    q.add(parent);
-                }
-            }
-        }
-       // The remaining nodes are the centroids of the graph
-        return new ArrayList<>(set);
-    }
+		public boolean isLeaf() {
+			return ref.size() == 1;// a ref to the parent
+		}
+	}
+
+	public List<Integer> findMinHeightTrees(int n, int[][] edges) {
+		// base cases
+		// if we have a tree with 1 or 2 nodes, it's already a minimal one
+		if (n <= 2) {
+			List<Integer> centroids = new ArrayList<>();
+			for (int i = 0; i < n; i++) {
+				centroids.add(i);
+			}
+			return centroids;
+		}
+
+		// build the tree with bi-directional ties
+		Node[] nodes = new Node[n];
+		Set<Integer> curNodesSet = new HashSet<>();
+		for (int i = 0; i < n; i++) {
+			nodes[i] = new Node(i);
+			curNodesSet.add(i);
+		}
+		for (int i = 0; i < edges.length; i++) {
+			int[] edge = edges[i];
+			nodes[edge[0]].ref.add(nodes[edge[1]]);
+			nodes[edge[1]].ref.add(nodes[edge[0]]);
+		}
+
+		// Initialize the first layer of leaves
+		Queue<Node> q = new LinkedList<>();
+		for (int i = 0; i < n; i++) {
+			if (nodes[i].isLeaf()) {
+				q.add(nodes[i]);
+			}
+		}
+
+		// Trim the leaves until reaching the centroids
+		while (!q.isEmpty() && curNodesSet.size() > 2) {
+			int layer = q.size();// the size of layer
+			// remove the current leaves along with the edges
+			for (int i = 0; i < layer; i++) {// process the whole layer
+				Node leaf = q.poll();
+				Node parent = leaf.ref.iterator().next();// leaf has only one ref - to its parent
+				parent.ref.remove(leaf);// remove leaf ref
+				curNodesSet.remove(leaf.id);
+				if (parent.isLeaf()) {// if parent after update becomes the leaf - add it!
+					q.add(parent);
+				}
+			}
+		}
+		// The remaining nodes are the centroids of the graph
+		return new ArrayList<>(curNodesSet);
+	}
 }

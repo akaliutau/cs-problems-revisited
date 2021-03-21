@@ -12,6 +12,9 @@ package com.problems.string;
  * Example 1:
  * 
  * Input: strs = ["flower","flow","flight"] Output: "fl"
+ * 
+ * IDEA:
+ *  take the 1st word as a prefix, then decrease the length each time the divergence is found
  */
 public class Solution14 {
 

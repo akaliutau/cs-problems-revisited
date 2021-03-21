@@ -20,11 +20,17 @@ import java.util.Set;
  * IDEA
  * 
  * 
- * For the graph to be a valid tree, it must have exactly n - 1 edges. Any less,
- * and it can't possibly be fully connected. Any more, and it has to contain
- * cycles. Additionally, if the graph is fully connected and contains exactly n - 1 edges, 
+ * For the graph to be a valid tree, it must have exactly n - 1 edges. 
+ * 
+ * Any less, and it can't possibly be fully connected. 
+ * 
+ * Any more, and it has to contain cycles. 
+ * 
+ * Additionally, if the graph is fully connected and contains exactly n - 1 edges, 
  * it can't possibly contain a cycle, and therefore must be a tree!
  * 
+ * 1) check that n - 1 == edges.size
+ * 2) start tree traversal using BFS from any node (use bi-directional traversing) - must visit all n nodes.
  */
 public class Solution261 {
 

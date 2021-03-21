@@ -36,7 +36,17 @@ import com.problems.model.TreeNode;
  * 2. 5 -> 2 -> 1 
  * 3. -3 -> 11
  * 
+ * Symmetric case:
+ *          10 
+ *         / \ 
+ *        5   5 
+ *       / \   \ 
+ *      1   2   2 
+ *     / 
+ *    3  
+ *    
  * IDEA: 
+ * 
  * prefix sum technique: one pass + linear time complexity
  * BF:
  * 10 + 5 + 3 + 3 = accSum
@@ -48,6 +58,9 @@ import com.problems.model.TreeNode;
  * partial     tgt       accSum  
  * partial = accSum - tgt
  * 
+ * 1) use parameter accSum to dynamically calculate the partial sum
+ * 2) use map accSum => counter
+ * 2*) Note the symmetric use-case: line 93: remove the current tgt from the hashmap in order not to use it
  */
 public class Solution437 {
 

@@ -32,14 +32,17 @@ import com.problems.model.TreeNode;
  * Output:
  * 
  * [ 
- *  [9], 
+ *  [9],    <-- each array represents the vertical slope
  *  [3,15], 
  *  [20], 
  *  [7]
  * ]
  * 
  * IDEA:
- * Straightforward - preorder traversing + collecting in vertical map all the lists
+ * Straightforward - 
+ * 1) preorder traversing + be aware of index of current column
+ * 
+ * 2) collect in  map: col_index => list all the nodes from specific column
  * 
  */
 public class Solution314 {

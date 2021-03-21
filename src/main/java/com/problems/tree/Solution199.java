@@ -2,6 +2,7 @@ package com.problems.tree;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 import com.problems.model.TreeNode;
@@ -21,6 +22,9 @@ import com.problems.model.TreeNode;
  *        \   \ 
  *         5   4    <--- bfs level 2
  * 
+ * IDEA:
+ *  1) use BFS traversing type for tree (i.e. by layers)
+ *  2) in this type of traversal the last element in layer obviously will be the rightmost 
  * 
  */
 public class Solution199 {
@@ -28,14 +32,14 @@ public class Solution199 {
 	 public List<Integer> rightSideView(TreeNode root) {
 	        if (root == null) return new ArrayList<>();
 	        
-	        ArrayDeque<TreeNode> queue = new ArrayDeque<>();
+	        Deque<TreeNode> queue = new ArrayDeque<>();
 	        queue.add(root);
 	        List<Integer> rightside = new ArrayList<>();
 	        
 	        while (!queue.isEmpty()) {
 	            int levelLength = queue.size();
 
-	            for(int i = 0; i < levelLength; ++i) {
+	            for(int i = 0; i < levelLength; ++i) {// process all what we have at the current moment
 	                TreeNode node = queue.poll();
 	                // if it's the rightmost element
 	                if (i == levelLength - 1) {

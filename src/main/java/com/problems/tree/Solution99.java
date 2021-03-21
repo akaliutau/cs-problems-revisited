@@ -10,7 +10,10 @@ import com.problems.model.TreeNode;
  * Recover the tree without changing its structure.
  * 
  * IDEA:
- * 
+ * 0) use inorder traversing (simulated via Stack)
+ * 1) start from the leftmost elem
+ * 2) compare it with central
+ * 3) in case of disorder - save to x | to y
  */
 public class Solution99 {
 
@@ -25,12 +28,15 @@ public class Solution99 {
 		TreeNode x = null, y = null, pred = null;
 
 		while (!stack.isEmpty() || root != null) {
-			while (root != null) {
-				stack.add(root);
+			while (root != null) {// find the leftmost elem
+				stack.add(root);  // add all elems that lead to this elem, i.e form a path
 				root = root.left;
 			}
 			root = stack.removeLast();
-			if (pred != null && root.val < pred.val) {
+			// this block should executed twice:
+			// 1) find disorder - left_elem > right.elem
+			// 2) find the next biggest elem to the found one
+			if (pred != null && root.val < pred.val) {// omitted on the smallest elem in BST
 				y = root;
 				if (x == null)
 					x = pred;

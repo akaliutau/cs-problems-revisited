@@ -17,6 +17,7 @@ import java.util.HashSet;
  * 
  * Input: "abcd" Output: ""
  * 
+ * IDEA:
  * 
  * 
  */
@@ -43,9 +44,10 @@ public class Solution1044 {
 		seen.add(h);
 		// const value to be used often : a**l % modulus
 		long al = 1;
-		for (int i = 1; i <= l; ++i)
+		for (int i = 1; i <= l; ++i) {
 			al = (al * a) % modulus;
-
+		}
+		
 		for (int start = 1; start < n - l + 1; ++start) {
 			// compute rolling hash in O(1) time
 			h = (h * a - nums[start - 1] * al % modulus + modulus) % modulus;

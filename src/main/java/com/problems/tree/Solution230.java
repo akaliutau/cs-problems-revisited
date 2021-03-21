@@ -18,6 +18,11 @@ import com.problems.model.TreeNode;
  *    2 
  *    
  *    Output: 1
+ *    
+ * IDEA:
+ * 1) use mapping of BST to the array - the array will be already sorted in asc order
+ * 2) the kth Smallest element will be [k-1]
+ *    
  */
 public class Solution230 {
 

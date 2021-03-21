@@ -39,6 +39,7 @@ import com.problems.model.TreeNode;
  *   2       6
  *  / \     /
  * 3   1   5
+ * 
  */
 public class Solution623 {
 

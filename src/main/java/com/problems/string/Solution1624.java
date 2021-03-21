@@ -22,16 +22,16 @@ import java.util.Arrays;
 public class Solution1624 {
 
 	public int maxLengthBetweenEqualCharacters(String s) {
-		int[] indecies = new int[26];
-		Arrays.fill(indecies, -1);
+		int[] index = new int[26];
+		Arrays.fill(index, -1);
 		int maxLen = -1;
 		int pos = 0;
 		for (char c : s.toCharArray()) {
-			if (indecies[c - 'a'] >= 0) {// already seen in the past
-				int len = pos - indecies[c - 'a'] - 1;
+			if (index[c - 'a'] >= 0) {// already seen in the past
+				int len = pos - index[c - 'a'] - 1;
 				maxLen = Math.max(maxLen, len);
 			}else{
-			    indecies[c - 'a'] = pos;
+			    index[c - 'a'] = pos;
             }
 			pos++;
 		}

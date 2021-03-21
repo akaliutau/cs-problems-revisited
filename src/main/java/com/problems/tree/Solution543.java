@@ -18,6 +18,10 @@ import com.problems.model.TreeNode;
  * Return 3, which is the length
  * of the path [4,2,1,3] or [5,2,1,3].
  * 
+ * IDEA:
+ * use 2 answers:
+ * 1) global var ans - for horizontal case which could or couldn't include root
+ * 2) incremental path from cur node to the leaf - the return output for dfs
  * 
  */
 public class Solution543 {
@@ -25,12 +29,14 @@ public class Solution543 {
 	int ans;
 
 	int dps(TreeNode node) {
-		if (node == null)
+		if (node == null) {
 			return 0;
-		int l = dps(node.left);//  inc in both
-		int r = dps(node.right);// directions 
-		ans = Math.max(ans, l + r + 1);// horizontal case (possibly not incl. root node)
-		return Math.max(l, r) + 1;// choose longest path + cur node
+		}
+		int l = dps(node.left);        //  Increment in both
+		int r = dps(node.right);       //  directions 
+		
+		ans = Math.max(ans, l + r + 1);// horizontal case (possibly not including root node)
+		return Math.max(l, r) + 1;     // choose longest path + cur node
 	}
 
 	public int diameterOfBinaryTree(TreeNode root) {
