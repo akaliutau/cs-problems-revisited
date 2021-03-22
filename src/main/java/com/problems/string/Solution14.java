@@ -15,6 +15,7 @@ package com.problems.string;
  * 
  * IDEA:
  *  take the 1st word as a prefix, then decrease the length each time the divergence is found
+ *  NOTE: the order is not important, as well as the relative length of the 1st word 
  */
 public class Solution14 {
 

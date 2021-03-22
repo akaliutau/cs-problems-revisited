@@ -22,6 +22,10 @@ package com.problems.string;
  * If version1 < version2, return -1. If version1 > version2, return 1.
  * Otherwise, return 0.
  * 
+ * IDEA:
+ * 1) compare digit by digit, sequentially
+ * 
+ * 
  */
 public class Solution165 {
 

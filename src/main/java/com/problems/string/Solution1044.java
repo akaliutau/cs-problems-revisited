@@ -18,7 +18,8 @@ import java.util.HashSet;
  * Input: "abcd" Output: ""
  * 
  * IDEA:
- * 
+ * Combination of Binary Search with Rabin-Karp match function
+ * (search function)
  * 
  */
 public class Solution1044 {
@@ -29,14 +30,16 @@ public class Solution1044 {
 
 	/*
 	 * Rabin-Karp with polynomial rolling hash. Search a substring of given length
-	 * that occurs at least 2 times. Return start position if the substring exits
+	 * that occurs at least 2 times. Return start position if the substring exists
 	 * and -1 otherwise.
+	 * 
+	 * The string is represented as a sequence [32, 12, 5, 43, 11]
 	 */
-	int search(int l, int a, int n, int[] nums) {
+	int search(int l, int base, int n, int[] nums) {
 		// compute the hash of string S[:l]
 		long h = 0;
 		for (int i = 0; i < l; ++i) {
-			h = (h * a + nums[i]) % modulus;
+			h = (h * base + nums[i]) % modulus;
 		}
 
 		// already seen hashes of strings of length l
@@ -45,12 +48,12 @@ public class Solution1044 {
 		// const value to be used often : a**l % modulus
 		long al = 1;
 		for (int i = 1; i <= l; ++i) {
-			al = (al * a) % modulus;
+			al = (al * base) % modulus;
 		}
 		
 		for (int start = 1; start < n - l + 1; ++start) {
 			// compute rolling hash in O(1) time
-			h = (h * a - nums[start - 1] * al % modulus + modulus) % modulus;
+			h = (h * base - nums[start - 1] * al % modulus + modulus) % modulus;
 			h = (h + nums[start + l - 1]) % modulus;
 			if (seen.contains(h))
 				return start;

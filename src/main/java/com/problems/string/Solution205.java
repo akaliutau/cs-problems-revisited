@@ -13,6 +13,8 @@ import java.util.Arrays;
  * 
  * IDEA:
  *  use 2 maps for source and dest
+ *  1) use mapping: src => dest to dynamically build map
+ *  2) use mapped map for destination letters to cover scenario a => c, b => c
  */
 public class Solution205 {
 
@@ -42,6 +44,7 @@ public class Solution205 {
                 }
             }
         }
+        // mapping has been built, no errors so far
         return true;
     }
 
