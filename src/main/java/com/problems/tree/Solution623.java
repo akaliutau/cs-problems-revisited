@@ -40,6 +40,13 @@ import com.problems.model.TreeNode;
  *  / \     /
  * 3   1   5
  * 
+ * IDEA:
+ * 1) traverse tree using preorder
+ * 2) be sure to have on each level:
+ *    A. ref to parent node
+ *    B. level on which the logic should be executed
+ *    C. current level dynamically counted starting from 1 (root level = 1)
+ * 
  */
 public class Solution623 {
 
@@ -68,7 +75,7 @@ public class Solution623 {
 	}
 
 	public TreeNode addOneRow(TreeNode root, int v, int d) {
-		if (d == 1) {
+		if (d == 1) {// special case
 			TreeNode toInsert = new TreeNode(v);
 			toInsert.left = root;
 			return toInsert;

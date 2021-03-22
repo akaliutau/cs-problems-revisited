@@ -20,7 +20,7 @@ import com.problems.model.TreeNode;
  * from top to bottom (decreasing Y coordinates).
  * 
  * If two nodes have the same position, then the value of the node that is
- * reported first is the value that is smaller. (SPECIAL COND)
+ * reported first is the value that is smaller. (SPECIAL CONDITION)
  * 
  * Return an list of non-empty reports in order of X coordinate. Every report
  * will have a list of values of nodes.
@@ -43,6 +43,13 @@ import com.problems.model.TreeNode;
  * The node with value 20 occurs at position (1, -1); 
  * The node with value 7 occurs at position (2, -2).
  * 
+ * IDEA:
+ * quite straightforward:
+ * 1) DFS through tree, be aware of current level and column
+ * 2) collect in map column => list of Pair(rows,value)
+ * 3) update stat for min, max columns
+ * 
+ * on the 2nd stage exract and sort all data from map
  */
 public class Solution987 {
 
@@ -56,19 +63,18 @@ public class Solution987 {
 		}
 	}
 
-	Map<Integer, ArrayList<Pair>> columnTable = new HashMap<>();// map column => list of (rows+value) in this column
+	Map<Integer, List<Pair>> columnTable = new HashMap<>();// map column => list of (rows+value) in this column
 
 	int minColumn = 0, maxColumn = 0;
 
 	void dfs(TreeNode node, Integer row, Integer column) {
-		if (node == null)
+		if (node == null) {
 			return;
-
-		if (!columnTable.containsKey(column)) {
-			columnTable.put(column, new ArrayList<>());
 		}
-
-		columnTable.get(column).add(new Pair(row, node.val));
+		
+		columnTable
+		.computeIfAbsent(column, k -> new ArrayList<>())
+		.add(new Pair(row, node.val));
 		
 		minColumn = Math.min(minColumn, column);
 		maxColumn = Math.max(maxColumn, column);
@@ -92,7 +98,7 @@ public class Solution987 {
 		// step 2). retrieve the value from the columnTable
 		for (int i = minColumn; i < maxColumn + 1; ++i) {
 			// order by both "row" and "value"
-			Collections.sort(columnTable.get(i), byRow.thenComparing(byValue));// up -> down, SPECIAL COND
+			Collections.sort(columnTable.get(i), byRow.thenComparing(byValue));// up -> down, Note SPECIAL CONDITION
 
 			List<Integer> sortedColumn = new ArrayList<>();
 			for (Pair p : columnTable.get(i)) {

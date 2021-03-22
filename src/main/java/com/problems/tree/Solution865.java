@@ -16,8 +16,15 @@ import com.problems.model.TreeNode;
  * descendants of that node.
  * 
  * IDEA:
- * for each node choose the deepest branch and return it as an answer
+ * 1) for each node traverse both left and right branches, then
+ * 2) choose the deepest branch and return it as an answer
  * 
+ * Expected result: 1-way path without forks or 1-way path with fork on one end:
+ *           3                      3 
+ *          / \                    / \
+ *         4   5                  5   3
+ *        /                      / \
+ *       4                      2   4
  */
 public class Solution865 {
 
@@ -33,18 +40,20 @@ public class Solution865 {
 
 	// Return the result of the subtree at this node.
 	Result dfs(TreeNode node) {
+		
 		if (node == null) {
-			return new Result(null, 0);
+			return new Result(null, 0);// result for empty node == null with depth = 0
 		}
+		
 		Result l = dfs(node.left);
 		Result r = dfs(node.right);
 		if (l.dist > r.dist) {
-			return new Result(l.node, l.dist + 1);
+			return new Result(l.node, l.dist + 1); // COPY the l.node with [updated] depth (+1)
 		}
 		if (l.dist < r.dist) {
-			return new Result(r.node, r.dist + 1);
+			return new Result(r.node, r.dist + 1);// COPY the r.node with  [updated] depth (+1)
 		}
-		// l.dist == r.dist
+		// l.dist == r.dist - use current node as the answer - tree, not one-way path !
 		return new Result(node, l.dist + 1);
 	}
 
