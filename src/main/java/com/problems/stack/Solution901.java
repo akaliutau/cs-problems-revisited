@@ -15,9 +15,9 @@ import java.util.Stack;
  * [100, 80, 60, 70, 60, 75, 85], then the stock spans would be 
  * [1,   1,   1,  2,  1,  4,  6].
  *           |    |
- *           lake 1
+ *           lake1
  *           |            |
- *           lake2
+ *               lake2
  *    <-------------------- go back in time = use stack
  * 
  * Example 1:

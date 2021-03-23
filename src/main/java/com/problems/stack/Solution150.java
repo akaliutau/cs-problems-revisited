@@ -11,6 +11,10 @@ import java.util.Stack;
  * 
  * Example 1: Input: ["2", "1", "+", "3", "*"] Output: 9 Explanation: ((2 + 1) *
  * 3) = 9
+ * 
+ * IDEA:
+ * strait-forward: pop 2 values from stack, reduce and push back
+ * 
  */
 public class Solution150 {
 

@@ -18,6 +18,10 @@ import java.util.Stack;
  * 
  * Input: s = "()" Output: true
  * 
+ * IDEA:
+ * 1) add only opening brackets to the stack
+ * 2) if bracket is from closing set, try to match with the top of stack
+ * 3) in the end check stack for emptiness
  */
 public class Solution20 {
 

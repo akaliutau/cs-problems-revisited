@@ -19,11 +19,14 @@ import java.util.Stack;
  * combination of prefix array and stack filtering
  * [1,4,5,2]
  * 
+ * 1) first build a minimal stack
  * look on the stack in 2 directions
  * for each i
  * one direction
  *  -->
  * min number seen so far TO THE LEFT of i - check out min[i]
+ * 
+ * 
  * 
  * <--
  * use filtered stack which contains:
