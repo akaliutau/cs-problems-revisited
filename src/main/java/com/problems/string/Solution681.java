@@ -20,7 +20,7 @@ public class Solution681 {
 		}
 
 		while (true) {
-			cur = (cur + 1) % (24 * 60); // check all 3600 possibilities
+			cur = (cur + 1) % (24 * 60); // check all 3600 possibilities, starting from the current time
 			int[] digits = new int[] { (cur / 60) / 10, (cur / 60) % 10, (cur % 60) / 10, (cur % 60) % 10 };
 			boolean valid = true;
 			for (int d : digits) {

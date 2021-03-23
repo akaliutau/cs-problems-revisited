@@ -28,6 +28,9 @@ import java.util.Set;
  * adjacent to words, such as "ball,"), and that "hit" isn't the answer even
  * though it occurs more because it is banned.
  * 
+ * IDEA:
+ * use statistics/collector pattern - 
+ * collect all information about frequencies, then pick up the one from top 
  * 
  */
 public class Solution819 {

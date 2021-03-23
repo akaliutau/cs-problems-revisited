@@ -55,11 +55,11 @@ public class Solution1638 {
                     if (s.charAt(sStartingAt) != t.charAt(tStartingAt)) {
                         diff++;
                     }
-                    if (diff == 1) {// find some 2 substrings from s and t ending at (non-important index)
+                    if (diff == 1) {// find some 2 substrings from s and t 
                         ans++;
                     }
                     if (diff == 2) {// exit procedure if there are more than 2 differences
-                        break;
+                        break;      // NOTE:  s and t will be ending at (non-important index) 
                     }
                     sStartingAt ++;
                     tStartingAt ++;

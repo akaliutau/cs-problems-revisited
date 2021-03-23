@@ -22,13 +22,13 @@ import java.util.Arrays;
  * 
  * IDEA:
  * generate all possible variants
- * for speed up use letter distribution calculations
+ * for speed up comparison of final parts use letter distribution calculations
  * 
  *  original         referenced
  * -----------      ------------
  * a_1 a_2 a_3      b_1 b_2 b_3
  * 
- * on each iteration check 2 variants:
+ * on each iteration check 2 mapping variants:
  * a_1|a_2 a_3      b_1 -> a_1 OR b_2 b_3 -> a_2 a_3
  * 
  * a_1 a_2 | a_3    b_1 b_2 -> a_1 a_2 OR b_3 -> a_3

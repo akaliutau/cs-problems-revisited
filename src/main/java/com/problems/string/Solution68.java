@@ -25,6 +25,10 @@ import java.util.List;
  * "example of text", 
  * "justification. " 
  * ]
+ * 
+ * IDEA:
+ * try to add as many words as possible, until max size has reached, then start a new line 
+ * 
  */
 public class Solution68 {
 

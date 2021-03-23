@@ -21,7 +21,7 @@ package com.problems.string;
  * you are done modifying the input array, return the new length of the array
  * 
  * IDEA:
- * 1) use writing ponter: writePos, reading pointer readPos -  to track the copy op
+ * 1) use writing ponter: writePos, reading pointer readPos -  to track the copy operation
  * 
  */
 public class Solution443 {
