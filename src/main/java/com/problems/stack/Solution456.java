@@ -18,6 +18,18 @@ import java.util.Stack;
  * IDEA:
  * combination of prefix array and stack filtering
  * [1,4,5,2]
+ *  |   | \
+ * min  |  at stack
+ *     cur
+ * 
+ * the idea is to find a leftmost element (any) using a min prefix array 
+ * and an inverted pair (j, k) - use stack to hold all past values (== elem k) and current elem to find j
+ * 
+ * 1) min prefix array guarantee that there exists an elem which is smaller than the prefix elem at position i  
+ * 2) stack guarantees the index of element on it is always bigger than the current one (past elements)
+ * 3) for each element from tail check the condition elem > elem@stack
+ * 
+ * 
  * 
  * 1) first build a minimal stack
  * look on the stack in 2 directions
@@ -29,17 +41,10 @@ import java.util.Stack;
  * 
  * 
  * <--
- * use filtered stack which contains:
- * 1) values bigger than min[i]
+ * 2) use filtered stack which contains:
+ *  values bigger than min[i]
  * 
- * finally we have:
  * 
- * nums  1   4  5  2
- * min   1   1  1  1
- * stack           2
- *       1    < 5> 2     
- *  
- *  
  * 
  */
 public class Solution456 {
@@ -49,7 +54,7 @@ public class Solution456 {
 		if (n < 3)
 			return false;
 		
-		Stack<Integer> stackKthElem = new Stack<>();
+		Stack<Integer> stackForKthElem = new Stack<>();
 		int[] min = new int[n];// min[i] == minimal elem on [0,i] inclusive
 		min[0] = nums[0];
 		
@@ -58,20 +63,21 @@ public class Solution456 {
 		}
 		
 		for (int j = n - 1; j >= 0; j--) {
-			int min0j = min[j];
-			if (nums[j] > min0j) {// [some elem on 0..j][stack(k)][j]
-				// find elem on stackKthElem which is > min0j
-				while (!stackKthElem.isEmpty() && stackKthElem.peek() <= min0j) {// first, find number on stack which satisfy j > i
-					stackKthElem.pop();
+			int leftElem = min[j];
+			int curElem = nums[j];
+			if (curElem > leftElem) {// [some elem on 0..j][stack(k)][j]
+				// find elem on stack which is > min0j
+				while (!stackForKthElem.isEmpty() && stackForKthElem.peek() <= leftElem) {// first, find number on stack which satisfy stack > left_elem
+					stackForKthElem.pop();
 				}
 				// filter out all that smaller than min on left
 				// f.e. 247[1]5
 				
 				// stackKthElem is 1) empty OR 2) contains elem > min0j
-				if (!stackKthElem.isEmpty() && nums[j] > stackKthElem.peek()) {// min0j < stackKthElem < nums[j], guaranteed that k > j
+				if (!stackForKthElem.isEmpty() && curElem > stackForKthElem.peek()) {// min0j < stackKthElem < nums[j], guaranteed that k > j
 					return true;
 				}
-				stackKthElem.push(nums[j]);
+				stackForKthElem.push(curElem);
 			}
 		}
 		return false;

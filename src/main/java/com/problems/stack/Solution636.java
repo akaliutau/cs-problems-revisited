@@ -36,7 +36,22 @@ import java.util.Stack;
  * executes for 1 unit of time. So function 0 spends 2 + 1 = 3 units of total
  * time executing, and function 1 spends 4 units of total time executing
  * 
+ * IDEA:
  * 
+ * Processes have the following form:
+ * 
+ * 0:start:3
+ * 0:end:4
+ * 1:start:0
+ * 1:end:4
+ * 
+ * 
+ *  0   1   2   3   4
+ *              -----
+ *  -----------------
+ *              
+ *  1) use stack to put on hold already running processes and to process new ones
+ *  2)            
  */
 public class Solution636 {
 	
@@ -54,7 +69,7 @@ public class Solution636 {
 		}
 
 		
-		public int getValue() {
+		public int getTimestamp() {
 			return Integer.parseInt(s[2]);
 		}
 		
@@ -68,21 +83,21 @@ public class Solution636 {
 		int[] res = new int[n];
 		Function f1 = new Function(logs.get(0));
 		stack.push(f1.getId());
-		int i = 1, prev = f1.getValue();
-		while (i < logs.size()) {
-			Function f = new Function(logs.get(i));
+		
+		int prev = f1.getTimestamp();
+		for (String log : logs) {
+			Function f = new Function(log);
 			if (f.getType().equals(Type.START)) {
 				if (!stack.isEmpty()) {
-					res[stack.peek()] += f.getValue() - prev;// updated running time of previous function
+					res[stack.peek()] += f.getTimestamp() - prev;// updated running time of previous function
 				}
 				stack.push(f.getId());// take cpu
-				prev = f.getValue();// start new exclusive period
+				prev = f.getTimestamp();// start new exclusive period
 			} else {
-				res[stack.peek()] += f.getValue() - prev + 1;// updated running time of current function, NOTE: end inclusive
+				res[stack.peek()] += f.getTimestamp() - prev + 1;// updated running time of current function, NOTE: end inclusive so add +1
 				stack.pop();// pass control to the prev function if any
-				prev = f.getValue() + 1;// set to end + 1
+				prev = f.getTimestamp() + 1;// set to end + 1
 			}
-			i++;
 		}
 		return res;
 	}

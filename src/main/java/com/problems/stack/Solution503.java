@@ -18,7 +18,26 @@ import java.util.Stack;
  * next greater number; The second 1's next greater number needs to search
  * circularly, which is also 2.
  * 
+ * IDEA:
+ * use stack to hold only those elements which are > current
  * 
+ * array              stack     result
+ * -------------------------------------------
+ * [1, 2,  1]        []        [0,0,-1]
+ *         |
+ *         
+ * [1, 2,  1]        [2]       [0,-1,-1] <-- '1' has been removed, '2' was added during normal cycle
+ *     |
+ *         
+ * [1, 2,  1]        [2,1]     [2,-1,-1] <-- first hit, '1' was added during normal cycle
+ *  |
+ *  
+ * In order to get the correct answer, the 2nd round is needed
+ *  
+ * [1, 2,  1]        [2,1]     [2,-1, 2] <-- second hit, first '1' has been removed, then last '1' was added during normal cycle
+ *         |
+ *  and so on
+ *         
  * T(2n + n)
  * 
  */
@@ -31,12 +50,14 @@ public class Solution503 {
 		// go through array twice starting from tail
 		for (int i = 2 * n - 1; i > -1; --i) {
 			int curIdx = i % n;
-			while (!stack.empty() && nums[stack.peek()] <= nums[curIdx]) {// remove all (smaller then cur) elements from
-																			// stack
+			
+			//loop: a filter to remove all (smaller then cur) elements from stack
+			while (!stack.empty() && nums[stack.peek()] <= nums[curIdx]) {
 				stack.pop();
 			}
+			
 			res[curIdx] = stack.empty() ? -1 : nums[stack.peek()];
-			stack.push(curIdx);// left on the stack only the biggest
+			stack.push(curIdx);// add current elem on the stack
 		}
 		return res;
 	}

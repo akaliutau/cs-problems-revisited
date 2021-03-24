@@ -78,6 +78,7 @@ public class Solution772 {
 				++i;
 			}
 		}
+		// at this point stack will contain only a sequence of +-numbers
 		int sum = 0;
 		while (!stack.isEmpty()) {
 			sum += stack.pop();
@@ -85,10 +86,5 @@ public class Solution772 {
 		return sum;
 	}
 	
-	public static void main(String[] arg) {
-	        System.out.println(calculate("2-3"));
-            System.out.println(calculate("-2-3"));
-	}
-
 
 }

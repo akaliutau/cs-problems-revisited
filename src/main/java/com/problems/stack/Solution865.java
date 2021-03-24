@@ -19,15 +19,16 @@ package com.problems.stack;
 public class Solution865 {
 
     public int scoreOfParentheses(String s) {
-        int ans = 0, bal = 0;
+        int ans = 0;
+        int balance = 0;
         char[] let = s.toCharArray();
         for (int i = 0; i < s.length(); ++i) {;
             if (let[i] == '(') {
-                bal++;
+            	balance++;
             } else {
-                bal--;
+            	balance--;
                 if (let[i-1] == '(')
-                    ans += 1 << bal;
+                    ans += 1 << balance;
             }
         }
 

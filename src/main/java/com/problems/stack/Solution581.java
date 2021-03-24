@@ -19,6 +19,16 @@ import java.util.Stack;
  * [inc][dec][inc]
  *     |     |
  *    left   right
+ *    
+ * 1) finding left boundary: for each segments like
+ *          4
+ *        /   \       
+ *       /      3
+ *      /        \
+ *    1            2
+ *          |   |
+ *       hist > cur   <---   update left with index(hist)  
+ *    
  */
 public class Solution581 {
 
@@ -27,7 +37,8 @@ public class Solution581 {
         int n = nums.length;
         int right = 0;
         int left = n;
-        for (int i = 0; i < n; i++) {// find the leftest possible boundary of dec seq, and before this seq - increase
+        for (int i = 0; i < n; i++) {
+        	// find the leftmost possible boundary of dec seq, and before this seq - increase
         	//                         any elem in history
             while (!history.isEmpty() && nums[history.peek()] > nums[i]) {// exit if found increment:  6 -> 7 -> 10
                 left = Math.min(left, history.pop());
@@ -35,7 +46,8 @@ public class Solution581 {
             history.push(i);
         }
         history.clear();
-        for (int i = n - 1; i >= 0; i--) {// find the rightest possible boundary of inc seq
+        
+        for (int i = n - 1; i >= 0; i--) {// find the rightmost possible boundary of inc seq
             while (!history.isEmpty() && nums[history.peek()] < nums[i]) {// exit if found decrement: 10 -> 8 -> 6
                 right = Math.max(right, history.pop());
             }

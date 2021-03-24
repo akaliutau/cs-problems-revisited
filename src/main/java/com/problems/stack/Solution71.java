@@ -23,7 +23,7 @@ import java.util.Stack;
  * slash after the last dir name.
  * 
  * IDEA:
- * Straightforward: use dir names as COMMANDS
+ * Straightforward: use '.' or '..' sequence names as COMMANDS
  * 
  */
 public class Solution71 {

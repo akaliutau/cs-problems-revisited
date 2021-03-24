@@ -29,13 +29,15 @@ import java.util.Stack;
  *  1) consider only one direction
  *  2) for each negative asteroid:
  *       check it's survival 
+ *       
+ *  the final state of Stack will show all survived asteroids 
  */
 public class Solution735 {
 
 	public int[] asteroidCollision(int[] asteroids) {
 		Stack<Integer> stack = new Stack<>();// accumulates only survived so far asteroids
 		for (int asteroid : asteroids) {
-			boolean collision = false;
+			boolean bothdestroyed = false;
 			// check each negative asteroid for collision
 			if (asteroid < 0) {
 				while (!stack.isEmpty() && stack.peek() > 0) {// check only positive
@@ -44,12 +46,12 @@ public class Solution735 {
 						continue;// asteroid wins and survives
 					} else if (stack.peek() == Math.abs(asteroid)) {
 						stack.pop();
+						bothdestroyed = true;
+						break;
 					}
-					collision = true;
-					break;
 				}
 			}
-			if (!collision) {
+			if (!bothdestroyed) {
 				stack.push(asteroid);
 			}
 		}
