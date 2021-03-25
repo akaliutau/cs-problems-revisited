@@ -47,7 +47,10 @@ package com.problems.palindrome;
  */
 public class Solution1616 {
 
-	boolean checkTail(char[] a, char[] b, int l, int r) {
+	/**
+	 * 	returns true is sequences a & b are equal from points a_l and b_r
+	 */
+	boolean equals(char[] a, char[] b, int l, int r) {
 		while (l >= 0 && r < a.length) {
 			if (a[l] != b[r]) {
 				return false;
@@ -78,8 +81,8 @@ public class Solution1616 {
 		if (poli) {
 			return true;
 		}
-		// standard case: interval [l,r] must be a polindrome
-		return checkTail(a, b, l, r) || checkTail(b, a, l, r);
+		// standard case: interval [l,r] must be a palindrome
+		return equals(a, b, l, r) || equals(b, a, l, r);
 	}
 
 	public boolean checkPalindromeFormation(String a, String b) {

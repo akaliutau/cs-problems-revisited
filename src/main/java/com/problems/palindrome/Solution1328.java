@@ -12,7 +12,11 @@ package com.problems.palindrome;
  * = "a" Output: ""
  * 
  * IDEA:
- * find any non 'a' letter and change it to 'a'
+ * find any non 'a' letter starting from index 0 and change it to 'a'
+ * 
+ * after change: 
+ * 1) string is not a palindrome anymore, because changes to diff letter 
+ * 2) lexicographically smaller, because letter bigger than 'a' has been changed to a
  */
 public class Solution1328 {
 

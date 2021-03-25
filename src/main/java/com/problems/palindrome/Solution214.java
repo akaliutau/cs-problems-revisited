@@ -12,53 +12,65 @@ package com.problems.palindrome;
  * 
  * s=abac
  * 
- * str = abac#caba
+ * the longest string is caba|abac
+ * which can be represented as 2 interlaced parts:
  * 
- * Using KMP, find repeated symbols for the biggest substr starting from "" to "abac"
+ * caba      <-- reversed
+ *     abac  <-- original
+ *     
+ * final overlacing
+ *     
+ * caba      <-- reversed
+ *  abac     <-- original
+ *     
+ * the answer should be c+abac
  * 
- * It's "aba", then point index to the tail's first symbol
+ * Basically we have to find the longest interlaced substrings in str1 and str2
+ * Use Robin-Karp approach to calculate rolling hash
  * 
- *       0 1 2 3 4 5 6 7 8
- *       a b a c # c a b a
- *       | |                 case 2, advance j 
- *       |   |               case 1, advance i,j
- *         |   |             case 3, reset i to the last equals
- *       |        
+ * original: rolling-hash sum for growing string [:i]  
+ * reversed: rolling-hash sum for growing string [n-i:n] - total length n - (n -i) = i
+ * 
+ * 
+ * rolling sum for original: 
+ *   17^2 * a + 17 * b + a = 17^n * next_letter + prev_sum
+ *   
+ * rolling sum for reversed: 
+ *   17^2 * a + 17 * b + a = 17 * prev_sum + next_letter
+ * 
  * 
  */
 public class Solution214 {
-
-    int getLSPindex(char[] s) {
-        int m = s.length;
-        int twin[] = new int[m];
-        twin[0] = 0;
-        int i = 0;
-        int j = 1;
-        while (j < m) {
-            if (s[i] == s[j]) {// first character match
-                i++;
-                twin[j] = i;
-                j++;
-            } else if (i == 0) {
-                twin[j] = 0;
-                j++;
-            } else {// if chars differ, reset i to the last equal
-                i = twin[i - 1];
-            }
-        }
-        return twin[m - 1];
-    }
+	
+	static final int MOD = 1000000007;
 
     public String shortestPalindrome(String s) {
         int n = s.length();
-        if (n < 2) {
-            return s;
-        }
-        String str = s + "#" + new StringBuilder(s).reverse().toString();
-        char[] arr = str.toCharArray();
-        int index = getLSPindex(arr);
-        String val = new StringBuilder(s.substring(index)).reverse().toString() + s;
-        return val;
-    }
+      if (n < 2) {
+          return s;
+      }
+      String rev =  new StringBuilder(s).reverse().toString();
+      
+      if (rev.equals(s)){
+          return s;
+      }
+      int index = 0;
+      char[] orig = s.toCharArray();
+      long rh_orig = 0, rh_rev = 0, base = 1;
+      
+      // try to find bigger and bigger substrings
+      for (int i = 0; i < n; i++) {
+          int c = orig[i] - 'a';
+      	  rh_orig = (rh_orig * 26 + c) % MOD;
+      	  rh_rev = (rh_rev  +  base * c) % MOD;
+          base = (base * 26) % MOD;
+          if(rh_rev == rh_orig) {
+          	index = i + 1;
+       	}
+      }
+
+		String val = new StringBuilder(s.substring(index)).reverse().append(s).toString();
+      return val;
+  }
 
 }
