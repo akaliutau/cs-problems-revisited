@@ -69,8 +69,7 @@ public class Solution214 {
        	}
       }
 
-		String val = new StringBuilder(s.substring(index)).reverse().append(s).toString();
-      return val;
+	 return new StringBuilder(s.substring(index)).reverse().append(s).toString();
   }
 
 }

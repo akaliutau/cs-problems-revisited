@@ -20,6 +20,14 @@ package com.problems.parentheses;
  * 
  * Explanation: "lee(t(co)de)" , "lee(t(c)ode)" would also be accepted.
  * 
+ * IDEA:
+ * 1) eliminate all deficits of ( brackets counting the balance from left to right - 
+ *    each time the balance dips lower than 0, omit symbol
+ * 2) eliminate all deficits of ) brackets counting the balance from right to left - 
+ *    each time the balance dips lower than 0, omit symbol
+ * 
+ * O(2n)
+ * 
  */
 public class Solution1249 {
 

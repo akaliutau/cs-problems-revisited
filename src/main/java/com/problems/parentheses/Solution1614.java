@@ -5,9 +5,9 @@ package com.problems.parentheses;
  * A string is a valid parentheses string (denoted VPS) if it meets one of the
  * following:
  * 
- * It is an empty string "", or a single character not equal to "(" or ")", 
- * It can be written as AB (A concatenated with B), where A and B are VPS's, or 
- * It can be written as (A), where A is a VPS. 
+ * 1) It is an empty string "", or a single character not equal to "(" or ")", 
+ * 2) It can be written as AB (A concatenated with B), where A and B are VPS's, or 
+ * 3) It can be written as (A), where A is a VPS. 
  * 
  * We can similarly define the nesting depth depth(S) of any VPS S as follows:
  * 
@@ -30,6 +30,9 @@ package com.problems.parentheses;
  * 
  * Input: s = "(1)+((2))+(((3)))" Output: 3
  * 
+ * IDEA:
+ *  use stack (if needed to track exact nested value / position) or depth counter 
+ *  with dynamic sticking variable 'maxDepth'
  * 
  */
 public class Solution1614 {
