@@ -18,7 +18,9 @@ import java.util.PriorityQueue;
  * 
  * Example 1: Input: people =
  * [[7,0],[4,4],[7,1],[5,0],[6,1],[5,2]] Output:
- * [[5,0],[7,0],[5,2],[6,1],[4,4],[7,1]] Explanation: Person 0 has height 5 with
+ * [[5,0],[7,0],[5,2],[6,1],[4,4],[7,1]] 
+ * 
+ * Explanation: Person 0 has height 5 with
  * no other people taller or the same height in front. Person 1 has height 7
  * with no other people taller or the same height in front. Person 2 has height
  * 5 with two persons taller or the same height in front, which is person 0 and
@@ -39,35 +41,34 @@ public class Solution406 {
 
     public int[][] reconstructQueue(int[][] people) {
         Comparator<int[]> byHeight = (o, p) -> o[0] - p[0];
-        Comparator<int[]> byLen = (o, p) -> o[1] - p[1];
-        PriorityQueue<int[]> pq = new PriorityQueue<>(byHeight.thenComparing(byLen));
-        for (int[] person : people) {
-            pq.add(person);
-        }
+        Comparator<int[]> byQueueLen = (o, p) -> o[1] - p[1];
+        
         List<int[]> ans = new ArrayList<>();
         
-        Arrays.sort(people, byLen.thenComparing(byHeight));
+        Arrays.sort(people, byQueueLen.thenComparing(byHeight));
 
-        int size = 0;
 
         for (int[] person : people){
             int count = 0;
-            int i = 0;
-            while (i < size){
-                if (ans.get(i)[0] >= person[0]) {// count the number of taller persons ahead
+            int pos = 0;
+            // go through all queue built so far and find optimal position
+            while (pos < ans.size()){
+            	int[] inQueue = ans.get(pos);
+            	// compare heights first
+            	// count the number of people who have a height greater than or equal to ahead
+                if (inQueue[0] >= person[0]) {// count the number of taller persons ahead
                     count++;
                 }
-                if (count > person[1]) {// find the pos where the min number is reached
+                if (count > person[1]) {// found the pos where the min number is reached
                     break;
                 }
-                i++;
+                pos++;
             }
             if (ans.isEmpty()){
                 ans.add(person);
             }else{
-                ans.add(i, person);
+                ans.add(pos, person);
             }
-            size++;
         }
 
         return ans.toArray(new int[ans.size()][]);

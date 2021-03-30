@@ -10,6 +10,10 @@ package com.problems.sort;
  * Explanation: After
  * squaring, the array becomes [16,1,0,9,100]. After sorting, it becomes
  * [0,1,9,16,100].
+ * 
+ * IDEA:
+ * merge 2 arrays for numbers < 0 and numbers > 0
+ * dynamically form arrays - i.e. do not generate intermediate one
  */
 public class Solution977 {
     

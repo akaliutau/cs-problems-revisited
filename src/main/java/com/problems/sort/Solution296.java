@@ -13,12 +13,15 @@ import java.util.List;
  * 
  * Input:
  * 
- *    1 - 0 - 0 - 0 - 1 
- *    |   |   |   |   | 
- *    0 - 0 - 0 - 0 - 0 
- *    |   |   |   |   | 
- *    0 - 0 - 1 - 0 - 0
- * 
+ *          GRID                   HORIZONTAL DISTANCE
+ *    1 - 0 - 0 - 0 - 1         *---|----------------*
+ *    |   |   |   |   |             |
+ *    0 - 0 - 0 - 0 - 0             | 
+ *    |   |   |   |   |             |
+ *    0 - 0 - 1 - 0 - 0             |-------* 
+ *                               any point 
+ *                               
+ *                                  |<----->|   <---- overlapping range - to make it as small as possible, choose MEDIAN POINT as an optimum
  * Output: 6
  * 
  * Explanation: Given three people living at (0,0), (0,4), and (2,2): The point
@@ -26,7 +29,10 @@ import java.util.List;
  * minimal. So return 6.
  * 
  * IDEA:
- * calc |row0 - orig| + |row1 - orig| + |row2 - orig| 
+ * 
+ * SEE THE DIAGRAMM
+ * 
+ * calculate the divergence between MEDIAN POINT (orig) and rows |row0 - orig| + |row1 - orig| + |row2 - orig| 
  * 
  * rows = [0,0,2]
  * cols = [0,2,4]
@@ -80,7 +86,7 @@ public class Solution296 {
 		m = grid[0].length;
 	    List<Integer> rows = collectRows(grid);
 	    List<Integer> cols = collectCols(grid);
-	    int rowOpt = rows.get(rows.size() / 2);// because in sorted list of x-coords the middle point is an equilibrium
+	    int rowOpt = rows.get(rows.size() / 2);// because in sorted list of x-coords the median point is an equilibrium
 	    int colOpt = cols.get(cols.size() / 2);
 	    return minDistance1D(rows, rowOpt) + minDistance1D(cols, colOpt);
 	}
