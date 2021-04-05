@@ -12,6 +12,8 @@ package com.problems.slidingwindow;
  * Input: S = "ABAACBAB" T = "ABC" 
  * Output: "ACB"
  * 
+ * IDEA:
+ * 
  * Flow:
  * 
  * 1) init state

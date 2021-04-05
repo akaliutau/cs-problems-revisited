@@ -22,7 +22,7 @@ package com.problems.slidingwindow;
  *  3  3 -1|  5  5  3|  7  7     :: right
  *  
  *  IDEA: 
- *  split on k-blocks  
+ *  split on k-blocks and use partial sums to speed up 
  */
 public class Solution239 {
 

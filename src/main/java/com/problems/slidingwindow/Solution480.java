@@ -56,9 +56,11 @@ public class Solution480 {
         Comparator<Integer> comparator = byValue.thenComparing(byIndex);
         
         // minTree that store indices of smaller numbers
+        // NOTE: comparator has references to nums array and performs appropriate key sorting!
         TreeSet<Integer> minTree = new TreeSet<>(comparator.reversed());
         
         // maxTree that store indices of bigger numbers
+        // NOTE: comparator has references to nums array!
         TreeSet<Integer> maxTree = new TreeSet<>(comparator);
         
         // maxTree will always store equally for 1 element more than minTree

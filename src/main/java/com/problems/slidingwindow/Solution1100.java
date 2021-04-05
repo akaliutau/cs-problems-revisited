@@ -17,6 +17,10 @@ package com.problems.slidingwindow;
  * 
  * counter havefunonleetcode
  * 
+ * IDEA:
+ * 1) for each letter in the string setup a counter and
+ * 2) update unique counter each time when counter[let] hits 0, 1 or 2 (magic numbers)
+ * 
  * aaabac
  *    |||
  *    123
@@ -28,6 +32,7 @@ package com.problems.slidingwindow;
  * 2) a:2 b:1 unique=1
  * 
  * 3) a:2 b:1 c:1 unique=1+2=3
+ * 
  * 
  */
 public class Solution1100 {

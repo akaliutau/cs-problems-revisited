@@ -11,7 +11,11 @@ package com.problems.slidingwindow;
  * Output: 6
  * Explanation: [1,1,1,0,0,1,1,1,1,1,1]
  * 
- * Idea: use [left,right] as contiguous block and dynamically count 0s
+ * IDEA: 
+ * use [left,right] as contiguous block and dynamically count 0s
+ * Rules:
+ * 1) if there is no lack of 0s, increase the right boundary, leave the left one untouched
+ * 
  * 
  * |
  * 1,1,1,0,0,0,1,1,1,1,0,0
@@ -34,8 +38,8 @@ package com.problems.slidingwindow;
 public class Solution1004 {
 
     public int longestOnes(int[] arr, int k) {
-        int left = 0, right;
-        for (right = 0; right < arr.length; right++) {
+        int left = 0;
+        for (int right = 0; right < arr.length; right++) {
             // If we included a zero in the window we reduce the value of K.
             // Since K is the maximum zeros allowed in a window.
             if (arr[right] == 0)
@@ -50,7 +54,7 @@ public class Solution1004 {
                 left++;
             }
         }
-        return right - left;
+        return arr.length - left;
     }
 
   

@@ -11,13 +11,15 @@ import java.util.Arrays;
  * is "aaa", as 'a' is repeated 3 times. 
  * 
  * 
- * IDEA: The sliding window slides over
- * the string s and validates each character. Based on certain conditions, the
- * sliding window either expands or shrinks. A substring is valid if each
- * character has at least k frequency. 
+ * IDEA: 
  * 
- * The idea is to find all the valid
- * substrings with a different number of distinct characters and track the maximum
+ * 1) The sliding window slides over the string s and validates each character. 
+ * 
+ * Based on certain conditions, the sliding window either expands or shrinks, namely: 
+ * 
+ *       === A substring is valid if each character has at least k frequency === 
+ * 
+ * find all valid substrings with a different number of distinct characters and track the maximum
  * length
  * 
  * O(nU)
@@ -42,6 +44,8 @@ public class Solution395 {
         int[] countMap = new int[26];
         int maxUnique = getMaxUniqueLetters(s);
         int result = 0;
+        
+        
         for (int cur = 1; cur <= maxUnique; cur++) {// have to check all variants as replacement for check all subarrays of all lengths
             // reset countMap
             Arrays.fill(countMap, 0);

@@ -11,7 +11,7 @@ package com.problems.slidingwindow;
  * length of 3.
  * 
  * IDEA:
- * consider the block [i, j] without without repeating characters
+ * consider the block [i, j] without without repeating characters - 
  * look at the array from point j
  * 
  */
@@ -21,9 +21,11 @@ public class Solution3 {
 		int n = s.length();
 		int ans = 0;
 		int[] index = new int[128]; // current index of character
+		
 		char[] letters = s.toCharArray();
+		
 		// try to extend the range [i, j]
-		int lowestPossible = 0;// earliest possible start = MAX {indecies of all letters in block}
+		int lowestPossible = 0;// earliest possible start = MAX {indices of all letters in block}
 		
 		for (int j = 0; j < n; j++) {
 		    lowestPossible = Math.max(index[letters[j]], lowestPossible);

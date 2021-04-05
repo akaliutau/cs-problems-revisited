@@ -21,7 +21,7 @@ import java.util.Map;
  * [1,2,1,2]
  * 
  * IDEA:
- * consider 2 sliding windows with the same end point
+ * consider 2 sliding windows with end at the same point
  * 
  * We'll maintain two sliding windows, corresponding to left1, left2. Each sliding window will be able to stat 
  * how many diffCount elements there are in the window, and add and remove elements in a queue-like fashion.
@@ -48,18 +48,21 @@ import java.util.Map;
  *  |			 left1
  * [1,2,1,2,3]
  *  |            left2
+ *  
  * 
- *  |
+ *  |            left1
  * [1,2,1,2,3]
- *    | 
+ *    |          left2
+ *    
  * 
- *    |
+ *    |          left1
  * [1,2,1,2,3]
- *  | 
+ *  |            left2
+ *  
  * 
- *  |
+ *  |            left1
  * [1,2,1,2,3]
- *  | 
+ *  |            left2
  * 
  * 
  */
