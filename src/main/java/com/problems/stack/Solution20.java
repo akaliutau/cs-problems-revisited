@@ -25,31 +25,29 @@ import java.util.Stack;
  */
 public class Solution20 {
 
-	static Map<Character, Character> mappings = new HashMap<>();
+	static Map<Character, Character> mapping = new HashMap<>();
 	static {
-		mappings.put(')', '(');
-		mappings.put('}', '{');
-		mappings.put(']', '[');
+		mapping.put(')', '(');
+		mapping.put('}', '{');
+		mapping.put(']', '[');
 
 	}
 
 	public boolean isValid(String s) {
 
-		// Initialize a stack to be used in the algorithm.
 		Stack<Character> stack = new Stack<>();
 
 		for (int i = 0; i < s.length(); i++) {
 			char c = s.charAt(i);
 
 			// If the current character is a closing bracket.
-			if (mappings.containsKey(c)) {
+			if (mapping.containsKey(c)) {
 
 				// Get the top element of the stack. If the stack is empty, set a dummy value of ' '
 				char topElement = stack.empty() ? ' ' : stack.pop();
 
-				// If the mapping for this bracket doesn't match the stack's top element, return
-				// false.
-				if (topElement != mappings.get(c)) {
+				// mapping for this bracket must match the latest element on the stack
+				if (topElement != mapping.get(c)) {
 					return false;
 				}
 			} else {
@@ -58,7 +56,7 @@ public class Solution20 {
 			}
 		}
 
-		// If the stack still contains elements, then it is an invalid expression.
+		// after processing all elements the stack must be empty
 		return stack.isEmpty();
 	}
 
