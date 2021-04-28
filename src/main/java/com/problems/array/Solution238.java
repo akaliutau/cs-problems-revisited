@@ -13,7 +13,7 @@ package com.problems.array;
  * Input: [1,2,3,4] Output: [24,12,8,6]
  * 
  * 
- * Idea: prefix product technique
+ * IDEA: prefix product technique
  * 
  * Instead of dividing the product of all the numbers in the array by the number
  * at a given index to get the corresponding product, we can make use of the

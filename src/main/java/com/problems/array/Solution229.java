@@ -1,7 +1,11 @@
 package com.problems.array;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Given an integer array of size n, find all elements that appear more than 
@@ -15,54 +19,51 @@ import java.util.List;
  *        1 0 
  *          |
  *          2 => 3
+ *  IDEA:
+ *  use queue with fixed size (2 to be exact)
+ *  
  */
 public class Solution229 {
 
     public List<Integer> majorityElement(int[] nums) {
 
         // 1st pass
-        int count1 = 0;
-        int count2 = 0;
+        Map<Integer,Integer> queue = new HashMap<>();// simulate the key of size 2
 
-        Integer candidate1 = null;
-        Integer candidate2 = null;
-
-        for (int n : nums) {
-            if (candidate1 != null && candidate1 == n) {// first time meet
-                count1++;
-            } else if (candidate2 != null && candidate2 == n) {// first time meet
-                count2++;
-            } else if (count1 == 0) {//is neither candidate matches and current one expired replace it with new 
-                candidate1 = n;
-                count1++;
-            } else if (count2 == 0) {
-                candidate2 = n;
-                count2++;
-            } else {// n is neither candidate1 OR candidate2, update counters
-                count1--;
-                count2--;
-            }
+        for (int num : nums) {
+        	if (queue.containsKey(num)) {
+        		queue.compute(num, (k,v) -> v + 1);
+        	}else if (queue.size() < 2){
+        		queue.put(num, 1);
+        	}else {
+        		Set<Integer> toRemove = new HashSet<>();
+        		for (Integer key : queue.keySet()) {
+        			if (queue.get(key) == 0) {
+        				toRemove.add(key);
+        			}
+        			queue.compute(key, (k,v) -> v - 1);
+        		}
+        		for (Integer key : toRemove) {
+        			queue.remove(key);
+        		}
+        	}
         }
+        // 2nd pass
+        Map<Integer,Integer> stat = new HashMap<>();
+        
 
         // 2nd pass
         List<Integer> result = new ArrayList<>();
-
-        count1 = 0;
-        count2 = 0;
-
-        for (int n : nums) {
-            if (candidate1 != null && n == candidate1)
-                count1++;
-            if (candidate2 != null && n == candidate2)
-                count2++;
+        for (int num : nums) {
+        	stat.compute(num, (k, v) -> v == null ? 1 : v + 1);
         }
 
         int n = nums.length;
-        if (count1 > n / 3)
-            result.add(candidate1);
-        if (count2 > n / 3)
-            result.add(candidate2);
-
+		for (Integer key : stat.keySet()) {
+			if (stat.get(key)  > n /3) {
+				result.add(key);
+			}
+		}
         return result;
     }
 

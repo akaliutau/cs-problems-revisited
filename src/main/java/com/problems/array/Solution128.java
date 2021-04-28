@@ -10,7 +10,8 @@ import java.util.Set;
  * Example: Input: [100, 4, 200, 1, 3, 2] Output: 4 Explanation: The longest
  * consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4
  * 
- * IDEA: find the beginning of seq
+ * IDEA: find the beginning of some sequence
+ * as a result the total time complexity will be O(n) - if contains operation is O(1)
  */
 public class Solution128 {
 
@@ -25,7 +26,7 @@ public class Solution128 {
 
         for (int num : numsSet) {
         	// check that num is a beginning of some streak
-            if (!numsSet.contains(num - 1)) {// num is not in the middle of seq
+            if (!numsSet.contains(num - 1)) {// this block is executed if and only if num is the FIRST element (i.e. [num-1] is absent)
                 int currentNum = num;
                 int curSubseq = 1;// num is an elem
 

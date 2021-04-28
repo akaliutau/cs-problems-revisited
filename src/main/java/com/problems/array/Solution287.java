@@ -29,9 +29,13 @@ public class Solution287 {
             secondPtr = nums[nums[secondPtr]];
         }
 
-        // this part in needed  because the intersection point is not the cycle entrance in the general case 
+        // This part in needed  because the intersection point is not the cycle entrance in the general case 
+        // For example
         // [1,3,4,2,2]
-        // 
+        //  0 1 2 3 4 <-- path + oscillator with length < n
+        //  to determine the 
+        //  1 -> 3 -> 2 -> 4 -> 2
+        //  1 -> 4 -> 4 -> 4
         
         // [2,5,9,6,4,3,8,9,7,1]
         int ptr1 = nums[0];

@@ -29,7 +29,7 @@ import java.util.Map;
  * 
  * IDEA:
  * Divide the whole set on 2 subsets elements from which add up to k
- * 
+ * to achieve that aim, compose the data structure holding info about statistics, iterate through all values and try to find the complementary 
  * 
  */
 public class Solution1679 {
@@ -42,7 +42,7 @@ public class Solution1679 {
 		int ans = 0;
 		for (int num : nums) {
 			int compl = k - num;
-			if (compl == num && stat.get(num) > 1) {
+			if (compl == num && stat.get(num) > 1) {// edge case when num + num == k, need at least 2 elems of num
 				ans ++;
 				stat.compute(num, (u,v) -> v - 2);
 			}else if (stat.containsKey(compl) && stat.get(compl) > 0 && stat.get(num) > 0 && compl != num) {

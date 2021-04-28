@@ -23,6 +23,10 @@ package com.problems.array;
  * Go though block [b_i], comparing it simultaneously with block [b_i+1]
  * if total length of filled cells ==   (k - 1) * m, pattern found
  * 
+ * Like so:
+ * b1 -> b2
+ * b2 -> b3
+ * 
  */
 public class Solution1566 {
 
@@ -32,7 +36,7 @@ public class Solution1566 {
         	if (arr[i] == arr[i + m]) {// some element in the next block
         		commonLength ++;
         	}else {
-        		commonLength = 0;// pattern broken because blocks needed to be consequentive
+        		commonLength = 0;// pattern broken because blocks needed to be consequentive, so reset the total length
         	}
             if (commonLength == (k - 1) * m) {// total number of common elements
                 return true;
