@@ -14,6 +14,9 @@ package com.problems.dp;
  * including the (i+1)th elem
  * 
  * O(n^2)
+ * 
+ * IDEA:
+ * 
  */
 public class Solution300 {
 
@@ -24,20 +27,20 @@ public class Solution300 {
         }
         int[] dp = new int[n];//dp[i] =  longest seq on [0,i]
         dp[0] = 1;
-        int maxLen = 1;
+        int globalMaxLen = 1;
         
         for (int i = 1; i < n; i++) {
             int maxval = 0;
-            int cur = nums[i];
+            int lastElemSeq = nums[i];
             for (int j = 0; j < i; j++) {// looking for the best seq on [0,i]
-                if (cur > nums[j]) {// each time the order find update the length
-                    maxval = Math.max(maxval, dp[j]);// choose the best available seq
+                if (lastElemSeq > nums[j]) {// each time the order find update the length
+                    maxval = Math.max(maxval, dp[j]);// choose the best available seq - 1) to leave as is 2) choose some subsequence ending at [j]
                 }
             }
-            dp[i] = maxval + 1;// attach: [best avail seq @ some point j]  + [cur]
-            maxLen = Math.max(maxLen, dp[i]);
+            dp[i] = maxval + 1;// attach: [best available subsequence ending @ j]  + [cur]
+            globalMaxLen = Math.max(globalMaxLen, dp[i]);
         }
-        return maxLen;
+        return globalMaxLen;
     }
 
 }
