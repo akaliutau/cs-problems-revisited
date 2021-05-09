@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>algorithms</name>
-	<description>Optimal solutions of different problems in CS</description>
+	<description>Optimal solutions of different com.problems in CS</description>
 
 	<properties>
 	    <project.build.javaVersion>1.8</project.build.javaVersion>
