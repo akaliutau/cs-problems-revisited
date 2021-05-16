@@ -10,6 +10,13 @@ package problem.array;
  * [1,3,5,4]
  * [1,4,5,3] -> [1,4,3,5] reverse
  * 
+ * 
+ * 5     o
+ * 4     oo
+ * 3    ooo
+ * 2    ooo
+ * 1   oooo
+ * 
  * IDEA:
  * 0) represent visually a number as a histogram 
  * 1) find a peak 

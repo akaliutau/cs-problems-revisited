@@ -2,10 +2,8 @@ package problem.array;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Given an integer array of size n, find all elements that appear more than 
@@ -20,34 +18,14 @@ import java.util.Set;
  *          |
  *          2 => 3
  *  IDEA:
- *  use queue with fixed size (2 to be exact)
+ *  1) optimal - O(1) in space: use queue with fixed size (2 to be exact) because one can have only 2 elems with freq > 1/3 (total > 2/3)
+ *  2) suboptimal - O(n) in space: use statistics structure 
  *  
  */
 public class Solution229 {
 
     public List<Integer> majorityElement(int[] nums) {
 
-        // 1st pass
-        Map<Integer,Integer> queue = new HashMap<>();// simulate the key of size 2
-
-        for (int num : nums) {
-        	if (queue.containsKey(num)) {
-        		queue.compute(num, (k,v) -> v + 1);
-        	}else if (queue.size() < 2){
-        		queue.put(num, 1);
-        	}else {
-        		Set<Integer> toRemove = new HashSet<>();
-        		for (Integer key : queue.keySet()) {
-        			if (queue.get(key) == 0) {
-        				toRemove.add(key);
-        			}
-        			queue.compute(key, (k,v) -> v - 1);
-        		}
-        		for (Integer key : toRemove) {
-        			queue.remove(key);
-        		}
-        	}
-        }
         // 2nd pass
         Map<Integer,Integer> stat = new HashMap<>();
         

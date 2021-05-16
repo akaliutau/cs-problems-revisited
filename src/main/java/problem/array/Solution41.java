@@ -45,7 +45,7 @@ public class Solution41 {
 		boolean[] present = new boolean[n + 1];
 		
 		// now we have only positive numbers >= 1
-		// also now nums is a map, which maps to itself.
+		// also now nums is a map, which maps to itself (pigeonhole approach)
 		for (int i = 0; i < n; i++) {
 			int idx = nums[i];
 			present[idx] = true;

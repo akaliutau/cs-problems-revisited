@@ -12,6 +12,11 @@ import java.util.Set;
  * 
  * IDEA: find the beginning of some sequence
  * as a result the total time complexity will be O(n) - if contains operation is O(1)
+ * 
+ * f.e. [100, 4, 200, 1, 3, 2] has 2 partial sequences: [100, 200] & [1,2,3,4]
+ * 1) find a head
+ * 2) iterate till tail
+ * 3) update global max for length
  */
 public class Solution128 {
 

@@ -18,7 +18,7 @@ package problem.array;
  * 1 local inversion.
  *
  * IDEA:
- * 1) any local inversion is a global inversion as well => in IdealPermutation all inversions are LOCAL
+ * 1) any local inversion is a global inversion as well => in IdealPermutation ALL inversions are LOCAL
  * 2) if inversion is global only, one can return false immediately 
  */
 public class Solution775 {

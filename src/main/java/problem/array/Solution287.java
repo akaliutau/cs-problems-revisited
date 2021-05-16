@@ -14,38 +14,25 @@ package problem.array;
  * 
  * Example 2: Input: nums = [3,1,3,4,2] Output: 3
  * 
- * IDEA: nums is a group
- * lets nums is an array of ref, double means a cycle
+ * IDEA: 
+ * 
+ * sum = n * (n + 1) /2
+ * 
+ * sum + k = actualSum, =>
+ * k = actualSum - n
+ * 
  */
 public class Solution287 {
 
     public int findDuplicate(int[] nums) {
-        int firstPtr = nums[0];
-        int secondPtr = nums[0];
-        firstPtr = nums[firstPtr];
-        secondPtr = nums[nums[secondPtr]];
-        while (firstPtr != secondPtr) {
-            firstPtr = nums[firstPtr];
-            secondPtr = nums[nums[secondPtr]];
-        }
 
-        // This part in needed  because the intersection point is not the cycle entrance in the general case 
-        // For example
-        // [1,3,4,2,2]
-        //  0 1 2 3 4 <-- path + oscillator with length < n
-        //  to determine the 
-        //  1 -> 3 -> 2 -> 4 -> 2
-        //  1 -> 4 -> 4 -> 4
-        
-        // [2,5,9,6,4,3,8,9,7,1]
-        int ptr1 = nums[0];
-        int ptr2 = firstPtr;// intersection
-        while (ptr1 != ptr2) {
-            ptr1 = nums[ptr1];
-            ptr2 = nums[ptr2];
-        }
+    	int n = nums.length + 1;
+    	long sum = 0;
+    	for (int num : nums) {
+    		sum += num;
+    	}
 
-        return ptr1;
+        return (int) (sum - n * (n + 1) / 2);
 
     }
 

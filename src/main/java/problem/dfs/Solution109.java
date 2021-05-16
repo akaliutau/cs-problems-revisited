@@ -58,10 +58,9 @@ public class Solution109 {
 			return null;
 		}
 
-		int mid = (l + r) / 2;
+		int mid = l + (r - l) / 2;// middle point
 
-		// First step of simulated inorder traversal. Recursively form
-		// the left half
+		// First step of simulated INORDER traversal. Recursively form the left half
 		TreeNode left = formBst(l, mid - 1);
 
 		// Once left half is traversed, process the current node

@@ -52,10 +52,5 @@ public class Solution54 {
         return ans;
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
-
+ 
 }

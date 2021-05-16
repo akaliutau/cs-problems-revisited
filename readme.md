@@ -9,7 +9,7 @@ Total 400+ com.problems solved
 Overview
 ===========
 
-The package <b> com.problems </b> contains solutions of some medium-level complexity com.problems. The main accent is made on optimization and simplicity of solution. All com.problems are grouped by category (total 33 categories):
+The package <b> problems </b> contains solutions of some medium-level complexity com.problems. The main accent is made on optimization and simplicity of solution. All problems are grouped by category (total 33 categories):
 
 array <br/>
 backtracking <br/>
