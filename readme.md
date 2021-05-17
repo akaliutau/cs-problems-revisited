@@ -2,14 +2,14 @@
 About 
 ============
 
-These are solutions for various cs com.problems, mostly of mid-level complexity
-Total 400+ com.problems solved
+These are solutions for various cs problems, mostly of mid-level complexity
+Total 400+ problems solved
 
 
 Overview
 ===========
 
-The package <b> problems </b> contains solutions of some medium-level complexity com.problems. The main accent is made on optimization and simplicity of solution. All problems are grouped by category (total 33 categories):
+The package <b> problem </b> contains solutions of some medium-level complexity com.problems. The main accent is made on optimization and simplicity of solution. All problems are grouped by category (total 33 categories):
 
 array <br/>
 backtracking <br/>

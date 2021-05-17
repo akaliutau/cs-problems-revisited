@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.problems</groupId>
+	<groupId>problems</groupId>
 	<artifactId>basic</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>algorithms</name>
-	<description>Optimal solutions of different com.problems in CS</description>
+	<description>Optimal solutions of different problems in CS: Data structures, algorithms</description>
 
 	<properties>
 	    <project.build.javaVersion>1.8</project.build.javaVersion>
