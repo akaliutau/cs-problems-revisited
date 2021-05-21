@@ -1,7 +1,6 @@
 package problem.linkedlist;
 
 import problem.model.ListNode;
-import problem.model.ListNode;
 
 /**
  * You are given two linked lists: list1 and list2 of sizes n and m

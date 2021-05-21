@@ -1,7 +1,6 @@
 package problem.linkedlist;
 
 import problem.model.ListNode;
-import problem.model.ListNode;
 
 /**
  * Reverse a linked list from position m to n. Do it in one-pass.
