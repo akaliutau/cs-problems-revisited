@@ -14,6 +14,9 @@ import java.util.Queue;
  * Explanation: All possible ways to
  * reach at index 3 with value 0 are: index 5 -> index 4 -> index 1 -> index 3
  * index 5 -> index 6 -> index 4 -> index 1 -> index 3
+ * 
+ * IDEA:
+ * Build a graph of all possible paths using BFS, with seen array as a memo
  */
 public class Solution1306 {
 
