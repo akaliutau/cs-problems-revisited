@@ -18,7 +18,18 @@ import java.util.Map;
  * Explanation: 'e' appears twice while 'r' and 't' both appear once. So 'e'
  * must appear before both 'r' and 't'. Therefore "eetr" is also a valid answer
  * 
+ * IDEA:
+ * 1. collect map char => frequency
+ * 2. build a bucket structure:
+ *  | freq | string |
+ *  -----------------
+ *    3      null
+ *    2      ee 
+ *    1      r, then t <== append dynamically 
+ *    0      null 
+ *  -----------------
  * 
+ * go top -> down stitching all strings together
  * 
  */
 public class Solution451 {

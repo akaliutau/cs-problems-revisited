@@ -1,7 +1,9 @@
 package problem.hashtable;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * We are given two sentences A and B. (A sentence is a string of space
@@ -22,44 +24,28 @@ import java.util.Set;
  * ["sweet","sour"]
  * 
  * IDEA:
+ * 1. count the occurrence of every word in string
+ * 2. words with count=1 are the answer
+ * 
  * 
  */
 public class Solution884 {
 
 	public String[] uncommonFromSentences(String a, String b) {
-		Set<String> common = new HashSet<>();
+        Map<String, Integer> count = new HashMap<>();
+        for (String word: a.split(" ")) {
+        	count.compute(word, (k, v) -> v == null ? 1 : v + 1);
+        }
+        for (String word: b.split(" ")) {
+        	count.compute(word, (k, v) -> v == null ? 1 : v + 1);
+        }
 
-		
-		Set<String> setA = new HashSet<>();
-		for (String word : a.split(" ")) {
-			if (word.length() > 0) {
-				if (setA.contains(word)) {
-					common.add(word);
-				}
-				setA.add(word);
-			}
-		}
-		Set<String> setB = new HashSet<>();
-		for (String word : b.split(" ")) {
-			if (word.length() > 0) {
-				if (setB.contains(word)) {
-					common.add(word);
-				}
-				setB.add(word);
-			}
-		}
-		Set<String> result = new HashSet<>();
-		for (String word : setB) {
-			if (!setA.contains(word)) {
-				result.add(word);
-			} else {
-			    common.add(word);
-			}
-		}
-
-		result.addAll(setA);
-		result.removeAll(common);
-		return result.toArray(new String[result.size()]);
-
-	}
+        List<String> ans = new ArrayList<>();
+        for (String word: count.keySet()) {
+            if (count.get(word) == 1) {
+                ans.add(word);
+            }
+        }
+        return ans.toArray(new String[ans.size()]);
+    }
 }

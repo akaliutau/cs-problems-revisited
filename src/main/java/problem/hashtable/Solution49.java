@@ -14,12 +14,13 @@ import java.util.Map;
  * different word or phrase, typically using all the original letters exactly
  * once.
  * 
- * 
- * 
  * Example 1:
  * 
  * Input: strs = ["eat","tea","tan","ate","nat","bat"] Output:
  * [["bat"],["nat","tan"],["ate","eat","tea"]]
+ * 
+ * IDEA:
+ * use hashes of statistics tables for appropriate words 
  * 
  */
 public class Solution49 {
@@ -37,15 +38,7 @@ public class Solution49 {
 		@Override
 		public boolean equals(Object o) {
 			FootPrint fp = (FootPrint) o;
-			if (chars.length == fp.chars.length) {
-				for (int i = 0; i < chars.length; i++) {
-					if (chars[i] != fp.chars[i]) {
-						return false;
-					}
-				}
-				return true;
-			}
-			return false;
+			return Arrays.equals(fp.chars, chars);
 		}
 
 		@Override

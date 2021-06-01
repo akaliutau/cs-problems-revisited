@@ -12,6 +12,12 @@ import java.util.List;
  * 
  * Example 1: Input:
  * ["bella","label","roller"] Output: ["e","l","l"]
+ * 
+ * IDEA:
+ * 1. for each word build a vector representing statistics
+ * 2. for each letter: check the lower boundary (counter)
+ * 3. if letter is present in all words, then add it as a common one  
+ * 
  */
 public class Solution1002 {
 
@@ -19,12 +25,15 @@ public class Solution1002 {
         List<String> res = new ArrayList<>();
         int words = a.length;
         int[][] common = new int[words][26];
+        
         for (int w = 0; w < words; w++) {
             String word = a[w];
+            // build a vector representing statistics
             for (int i = 0; i < word.length(); i++) {
                 common[w][word.charAt(i) - 'a']++;
             }
         }
+        
         for (int i = 0; i < 26; i++) {// count stat for each letter
             int counter = Integer.MAX_VALUE;
             for (int w = 0; w < words; w++) {

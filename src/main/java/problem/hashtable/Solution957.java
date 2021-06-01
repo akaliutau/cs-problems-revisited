@@ -1,7 +1,6 @@
 package problem.hashtable;
 
 import problem.utils.Utils;
-import problem.utils.Utils;
 
 /**
  * There are 8 prison cells in a row, and each cell is either occupied or
@@ -26,6 +25,7 @@ import problem.utils.Utils;
  * Example 1:
  * 
  * Input: cells = [0,1,0,1,1,0,0,1], N = 7 Output: [0,0,1,1,0,0,0,0]
+ * 
  * Explanation: The following table summarizes the state of the prison on each
  * day: 
  * Day 0: [0, 1, 0, 1, 1, 0, 0, 1] 
@@ -43,6 +43,8 @@ public class Solution957 {
 	public static int[] prisonAfterNDays(int[] cells, int day) {
 		int n = cells.length;
 		int[] res = new int[n];
+		
+		// convert array to 8-bit integer
 		int prison = cells[0];
 		for (int i = 1; i < 8; i++) {
 			prison = prison << 1;
@@ -85,6 +87,8 @@ public class Solution957 {
 				prison = history[offset];
 			}
 		}
+		
+		// convert back
 		for (int i = 7; i > -1; i--) {
 			if ((prison & 1) == 1) {
 				res[i] = 1;
@@ -94,12 +98,6 @@ public class Solution957 {
 		return res;
 	}
 
-	public static void main(String[] arg) {
-		
-		int[] cells = {0,1,0,1,1,0,0,1};
-		Utils.print(prisonAfterNDays(cells, 7));
-	}
 
-	
 
 }

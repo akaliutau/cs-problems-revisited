@@ -27,9 +27,6 @@ import java.util.TreeMap;
  * followed by its count (if that count is more than 1), and so on.
  * 
  * 
- * 
- * 
- * 
  * Example 1:
  * 
  * Input: formula = "H2O" Output: "H2O" Explanation: The count of elements are
