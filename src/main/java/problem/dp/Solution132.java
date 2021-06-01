@@ -5,6 +5,23 @@ package problem.dp;
  * palindrome. Return the minimum cuts needed for a palindrome partitioning of
  * letters. Example 1: Input: letters = "aab" Output: 1 Explanation: The palindrome
  * partitioning ["aa","b"] could be produced using 1 cut.
+ * 
+ * IDEA:
+ * 
+ *   a a b a
+ * a 1 
+ * a   1 
+ * b     1
+ * a       1
+ * 
+ *   a a b a
+ * a 1 1      <-- fill values just above diagonal if appropriate chars are equal
+ * a   1 
+ * b     1
+ * a       1
+ * 
+ * 
+ * 
  */
 public class Solution132 {
 
