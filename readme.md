@@ -9,7 +9,7 @@ Total 400+ problems solved
 Overview
 ===========
 
-The package <b> problem </b> contains solutions of some medium-level complexity com.problems. The main accent is made on optimization and simplicity of solution. All problems are grouped by category (total 33 categories):
+The package <b> problem </b> contains solutions of some medium-level complexity com.problems. The main accent is made on optimization and simplicity of solution. All problems are grouped by category (total 36 categories):
 
 array <br/>
 backtracking <br/>
@@ -17,6 +17,7 @@ bfs <br/>
 binarysearch <br/>
 bitmanipulation <br/>
 bst <br/>
+buckets <br/>
 combinatorics <br/>
 design <br/>
 dfs <br/>
@@ -35,10 +36,13 @@ matrix <br/>
 misc <br/>
 palindrome <br/>
 parentheses <br/>
+pattern <br/>
+priority queue <br/>
 segmenttree <br/>
 slidingwindow <br/>
 sort <br/>
 stack <br/>
+statistics <br/>
 string <br/>
 topologicalsort <br/>
 tree <br/>
