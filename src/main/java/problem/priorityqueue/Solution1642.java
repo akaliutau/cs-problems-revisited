@@ -16,6 +16,7 @@ import java.util.PriorityQueue;
  * IDEA:
  * Reserve a list of blocks to be covered by ladders and then dynamically optimize it
  * 
+ * 
  */
 public class Solution1642 {
 
