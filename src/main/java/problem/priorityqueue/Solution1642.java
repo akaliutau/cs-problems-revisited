@@ -14,40 +14,37 @@ import java.util.PriorityQueue;
  * given ladders and bricks optimally.
  * 
  * IDEA:
- * 1. use bricks whenever possible, and ladders when bricks are not enough
- * 2. Implementation:
- *  
+ * Reserve a list of blocks to be covered by ladders and then dynamically optimize it
+ * 
+ * 
  */
 public class Solution1642 {
 
-    public int furthestBuilding(int[] heights, int bricks, int nLadders) {
+    public int furthestBuilding(int[] heights, int bricks, int ladders) {
         int n = heights.length;
-        int bricksUsed = 0; // bricks used so far
-        
-        // used to hold jumps to be covered by ladders
-        PriorityQueue<Integer> laddersJumps = new PriorityQueue<>();
+        PriorityQueue<Integer> withLadders = new PriorityQueue<>();
 
         for (int i = 0; i + 1 < n; i++) {
             int diff = heights[i + 1] - heights[i];
             if (diff > 0) {
-            	// first nLadders buildings can be covered by ladders, so just collect them
-                if (laddersJumps.size() < nLadders) {
-                	laddersJumps.add(diff);// all big jumps to be covered by ladders will be on the bottom of queue and processed in the end
+                if (withLadders.size() < ladders) {
+                	withLadders.add(diff);// all ladders will be on the bottom of queue
                 } else {
-                    if (nLadders == 0) {// if there are no ladders at all, always use bricks instead
-                    	bricksUsed += diff;
-                    } else if (diff > laddersJumps.peek()) {// diff is the max so far, so use ladder for it
-                    	bricksUsed += laddersJumps.peek(); // use bricks NOTE: all the rest jumps are covered with ladders
-                    	laddersJumps.poll();// replace with bricks
-                    	laddersJumps.add(diff);// replace with bricks
-                    } else {
-                    	bricksUsed += diff;// use bricks NOTE: all the rest jumps are covered with ladders
+                    if (withLadders.size() == 0) {
+                    	bricks -= diff;// use bricks
+                    } else if (diff > withLadders.peek()) {// diff is the max so far, so use ladder for it
+                    	bricks -= withLadders.peek(); // use bricks from queue as the most optimal step, because the tip contains the smallest amount 
+                    	withLadders.poll();
+                    	withLadders.add(diff);// replace with bigger amount as all in withLadders covered with ladders anyway
+                    } else {// found even more optimal solution
+                    	bricks -= diff;
                     }
                 }
             }
-            if (bricksUsed > bricks)
+            if (bricks < 0)
                 return i;
         }
+        // NOTE: the size of coveredBricks will be <=ladders here
         return n - 1;
 
     }
