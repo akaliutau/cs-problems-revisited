@@ -13,6 +13,12 @@ package problem.greedy;
  * Explanation: Swap s1[0] and s2[1], s1 = "yx", s2
  * = "yx".
  * 
+ * IDEA:
+ * 1. Calculate separately the number of mismatches:
+ *   number of x in the 1st str
+ *   number of y in the 1st str
+ * 2. have to distribute x and y equally
+ * 
  *           M       M     M 
  *  s1 - X X Y Y X Y X Y X X 
  *       | | | | | | | | | | 
@@ -20,28 +26,29 @@ package problem.greedy;
  *  
  *  
  *   S1 - S2 : (Mis-Matched)
- * 1. X - Y  :     3
- * 2. Y - X  :     3
+ * 1. X - Y  :     3  <-- number of x which can be traded for y
+ * 2. Y - X  :     3  <-- number of y which can be traded for x
  * 
- * If total mismatched i.e, X-Y(MisMatched) + Y-X(MisMatched) == odd (Then return -1 no ans is possible)
+ * 
+ * 
  */
 public class Solution1247 {
 
-    public int minimumSwap(String s1, String s2) {
-        int xToy = 0, yTox = 0;
+	public int minimumSwap(String s1, String s2) {
+        int nx = 0, ny = 0;
         for (int i = 0; i < s1.length(); i++) {
             if (s1.charAt(i) == s2.charAt(i))
                 continue;
             if(s1.charAt(i) == 'x') {
-                xToy++;
+                nx++;// number of x in the 1st str
             }else {
-                yTox++;
+                ny++;// number of y in the 1st str
             }
         }
-        if ((xToy + yTox) % 2 == 1) {
+        if ((nx + ny) % 2 == 1) {//
             return -1;
         }
-        return xToy / 2 + yTox / 2 + (xToy % 2 == 1 ? 2 : 0);// add +1 to each if odd
+        return (nx  + ny) / 2 + (nx % 2 == 1 ? 1 : 0);// add +1 to each if odd
     }
 
 }

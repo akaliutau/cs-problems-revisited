@@ -18,6 +18,9 @@ package problem.greedy;
  * on day 3 (price = 5), profit = 5-1 = 4. Then buy on day 4 (price = 3) and
  * sell on day 5 (price = 6), profit = 6-3 = 3.
  * 
+ * IDEA:
+ * add up difference each time it is positive
+ * 
  */
 public class Solution122 {
 	
@@ -30,8 +33,6 @@ public class Solution122 {
         return maxprofit;
     }
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
+	
 
 }

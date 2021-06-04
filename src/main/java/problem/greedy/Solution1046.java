@@ -18,12 +18,16 @@ import java.util.PriorityQueue;
  * combine 2 and 1 to get 1 so the array converts to [1,1,1] then, we combine 1
  * and 1 to get 0 so the array converts to [1] then that's the value of last
  * stone.
+ * 
+ * IDEA:
+ * use queue with ordering by weight (PQ)
+ * 
  */
 public class Solution1046 {
 
     public int lastStoneWeight(int[] stones) {
 
-        // Insert all the stones into a Max-Heap.
+        // Insert all the stones into a Max-Heap: NOTE by default the heap contains min element on its top
         PriorityQueue<Integer> heap = new PriorityQueue<>(Comparator.reverseOrder());
         for (int stone : stones) {
             heap.add(stone);
@@ -41,13 +45,8 @@ public class Solution1046 {
         }
 
         // Check whether or not there is a stone left to return.
-        return heap.isEmpty() ? 0 : heap.remove();
+        return heap.isEmpty() ? 0 : heap.remove();// last stone
     }
 
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
-
+ 
 }

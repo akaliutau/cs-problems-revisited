@@ -29,7 +29,24 @@ import java.util.stream.Collectors;
  * have sticks = [9]. There is only one stick left, so you are done. The total
  * cost is 5 + 9 = 14.
  * 
+ * IDEA:
+ * connect all smaller sticks first, then switch to the bigger ones (layer by layer) - avoid stitching sticks with big difference
+ * let's assume we have sticks [1, 2, 3, 4]
+ * sticks are summed by overlapping:
  * 
+ * = === -> ====  \
+ *                      --> =========   
+ * = === -> ====  /
+ *          2x in sum
+ *          
+ * = =       ->  ==      \
+ *                        --> =========
+ * === ===   ->  ======  / 
+ * 
+ *    =========
+ *   ==  ======   <-- Note, that 1 + 1 + 6 < (1+6) + (1+6), so use this observation to minimize total sum
+ *  = =  === ===
+ *  S = 2 x s1 + 2 x s2 
  */
 public class Solution1167 {
 
@@ -46,8 +63,5 @@ public class Solution1167 {
 
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
 
 }

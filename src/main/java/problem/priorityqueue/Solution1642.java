@@ -15,7 +15,7 @@ import java.util.PriorityQueue;
  * 
  * IDEA:
  * Reserve a list of blocks to be covered by ladders and then dynamically optimize it
- * 
+ * Use a heap to update list using the most optimal (==smallest gap) node
  * 
  */
 public class Solution1642 {
@@ -28,7 +28,7 @@ public class Solution1642 {
             int diff = heights[i + 1] - heights[i];
             if (diff > 0) {
                 if (withLadders.size() < ladders) {
-                	withLadders.add(diff);// all ladders will be on the bottom of queue
+                	withLadders.add(diff);// all added ladders will be on the bottom of queue
                 } else {
                     if (withLadders.size() == 0) {
                     	bricks -= diff;// use bricks
