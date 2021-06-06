@@ -1,4 +1,4 @@
-package problem.priorityqueue;
+package problem.priorityqueue.dynamicoptimization;
 
 import java.util.PriorityQueue;
 
@@ -10,12 +10,12 @@ import java.util.PriorityQueue;
  * is greater than or equal to the next building's height, you do not need a
  * ladder or bricks. If the current building's height is less than the next
  * building's height, you can either use one ladder or (h[i+1] - h[i]) bricks.
- * Return the furthest building index (0-indexed) you can reach if you use the
+ * Return the farthest building index (0-indexed) you can reach if you use the
  * given ladders and bricks optimally.
  * 
  * IDEA:
- * Reserve a list of blocks to be covered by ladders and then dynamically optimize it
- * Use a heap to update list using the most optimal (==smallest gap) node
+ * Reserve in (Priority)Queue a list of blocks to be covered by ladders and then dynamically optimize it
+ * Use a heap to update list using the most optimal (==smallest gap) to covered by bricks
  * 
  */
 public class Solution1642 {
@@ -30,11 +30,10 @@ public class Solution1642 {
                 if (withLadders.size() < ladders) {
                 	withLadders.add(diff);// all added ladders will be on the bottom of queue
                 } else {
-                    if (withLadders.size() == 0) {
-                    	bricks -= diff;// use bricks
+                    if (ladders == 0) {
+                    	bricks -= diff;// use bricks only
                     } else if (diff > withLadders.peek()) {// diff is the max so far, so use ladder for it
-                    	bricks -= withLadders.peek(); // use bricks from queue as the most optimal step, because the tip contains the smallest amount 
-                    	withLadders.poll();
+                    	bricks -= withLadders.poll(); // use bricks from queue as the most optimal step, because the tip contains the smallest amount 
                     	withLadders.add(diff);// replace with bigger amount as all in withLadders covered with ladders anyway
                     } else {// found even more optimal solution
                     	bricks -= diff;
