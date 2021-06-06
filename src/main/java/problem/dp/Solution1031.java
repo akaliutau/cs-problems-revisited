@@ -29,6 +29,9 @@ package problem.dp;
  * 
  * Explanation: One choice of
  * subarrays is [3,8,1] with length 3, and [8,9] with length 2.
+ * 
+ * IDEA:
+ * 
  */
 public class Solution1031 {
     
