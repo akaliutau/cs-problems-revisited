@@ -14,7 +14,6 @@ package problem.statistics;
  * Explanation: The strings that can be formed are "cat" and "hat" so the answer
  * is 3 + 3 = 6.
  * 
- * @author akaliutau
  *
  */
 public class Solution1160 {

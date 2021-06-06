@@ -25,6 +25,9 @@ package problem.dp;
  * The total cost was 20, and this
  * is the minimum possible.
  * 
+ * IDEA:
+ * 
+ * 
  * 
  */
 public class Solution1000 {
@@ -46,20 +49,20 @@ public class Solution1000 {
 		int[][] dp = new int[n][n];// dp[i][j] - cost of merge of piles on [i,j]
 		
 		for (int l = k; l <= n; l++) {
-			// analyse all intervals of length l 
+			// Analyze all intervals of length l 
 			// [3,2,4,1]
 			// l = 2: [3,2], [2,4], [4,1]
 
 			for (int i = 0; i <= n - l; i++) {// analysis of all [i,j] of length =l
-				int j = i + l - 1;
-				dp[i][j] = Integer.MAX_VALUE;
+				int end = i + l - 1;
+				dp[i][end] = Integer.MAX_VALUE;
 				// mid cuts i-j into blocks of min possible length (i.e. k)
-				for (int mid = i; mid < j; mid += k - 1) {
-					int cost = dp[i][mid] + dp[mid + 1][j];
-					dp[i][j] = Math.min(dp[i][j], cost);
+				for (int mid = i; mid < end; mid += k - 1) {
+					int cost = dp[i][mid] + dp[mid + 1][end];
+					dp[i][end] = Math.min(dp[i][end], cost);
 				}
-				if ((j - i) % (k - 1) == 0) {// also add the total cost - last 1 elem, because length = 1 omitted in cycle
-					dp[i][j] += sum[j + 1] - sum[i];
+				if ((end - i) % (k - 1) == 0) {// also add the total cost - last 1 elem, because length = 1 omitted in cycle
+					dp[i][end] += sum[end + 1] - sum[i];
 				}
 			}
 		}

@@ -65,50 +65,59 @@ import java.util.Arrays;
  * Use LIS-like approach: analyze from the tail
  * 
  * IDEA:
- * Note 1. chunks must be as narrow as possible
- * Note 2. equal nums are not allowed
- * Note 3. 
+ * 1. use DFS to build the chained buskets
+ * 2. use drop rules to cut-off wrong scenarios
  * 
- * The narrowest chunks can be made from SORTED array
- * 
+ * 1 1 2 2 3 3 6 8
+ * |   |
+ * start from[1,1] to [1,2] then [1,3], [1,6], [1,8]
+ * after forming one of these 4 groups continue the process - 
+ * try to form the next group, starting at [1,1] - 2nd one, and so on
  * 
  */
 public class Solution1681 {
 	
-	void dfs(int[] nums, int groupSize, int start, int end, int curSize, int sum, int used){
-        if (curSize == groupSize){ // Current group is full, try to build next group
-            sum += nums[end] - nums[start]; 
-            if (sum >= min) return;
-            for (int i = start + 1; i < nums.length; i++){ //Find new start index for next group
+	
+	void dfs(int[] nums, int busketSize, int left, int right, int curSize, int sum, int used){
+        if (curSize == busketSize){ // Current group is full, try to build next group
+            sum += nums[right] - nums[left]; 
+            if (sum >= min) return;// drop wrong scenarios - this optimization is possible because the sequence is strictly growing
+            
+            for (int i = left + 1; i < nums.length; i++){ //Find new left index for next group
                 int bit = 1 << i;
                 if ((used & bit) == bit) continue;
-                dfs(nums, groupSize, i, i, 1, sum, used | bit);
+                dfs(nums, busketSize, i, i, 1, sum, used | bit);
                 return; //Important! Always pick the smallest available number, no need to continue the loop.
             }
             min = sum; //all numbers are used already, set min.
+            
         }else{ // Current group is not full
-            for (int newEnd = end + 1; newEnd < nums.length; newEnd++){ //Try to add more bigger number to the group
-                int bit = 1 << newEnd;
-                if ((used & bit) == bit || nums[newEnd] == nums[end]) continue;
-                dfs(nums, groupSize, start, newEnd, curSize + 1, sum, used | bit);
+        	// start from basket [0,0], then try to extend right boundary
+            for (int newRight = right + 1; newRight < nums.length; newRight++){ //Try to add bigger number to the group
+                int bit = 1 << newRight;
+                if ((used & bit) == bit || nums[newRight] == nums[right]) continue;// drop already used numbers OR equal ones
+                dfs(nums, busketSize, left, newRight, curSize + 1, sum, used | bit);
             }
         }
     }
 	
-	 private int min = Integer.MAX_VALUE;
-	    public int minimumIncompatibility(int[] nums, int k){
-			int n = nums.length;
-			if (n == 0) {
-				return 0;
-			}
-			if (n % k != 0) {
-				return -1;
-			}
-
-	        Arrays.sort(nums);
-	        dfs(nums, n / k, 0, 0, 1, 0, 1);
-	        return min == Integer.MAX_VALUE ? -1 : min;
-	    }
+	private int min = Integer.MAX_VALUE;
+	
+	public int minimumIncompatibility(int[] nums, int k){
+		int n = nums.length;
+		if (n == 0) {
+			return 0;
+		}
+		if (n % k != 0) {
+			return -1;
+		}
+		
+        Arrays.sort(nums);
+        int busketSize = n / k; 
+        dfs(nums, busketSize, 0, 0, 1, 0, 1);
+        
+        return min == Integer.MAX_VALUE ? -1 : min;
+	}
 
 	    
 

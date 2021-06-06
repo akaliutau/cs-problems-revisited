@@ -21,8 +21,9 @@ package problem.dfs;
  * build path from pieces
  * 1) for each cell (i,j): build the longest path starting at (i,j) and save it in memo
  * 2) regardless of found order for each piece, the final resulting longest path will be found
+ * 
  *  proof: 
- *  if start at cell 1, will be found pieces 1 -> 8, or the actual result 1 -> 2 -> 6 -> 9
+ *  if start at cell 1 (bottom right), will be found pieces 1 -> 8, or the actual result 1 -> 2 -> 6 -> 9
  *  if start at cell 6, will be found pieces 6 -> 8, 6 -> 9
  * 
  */
