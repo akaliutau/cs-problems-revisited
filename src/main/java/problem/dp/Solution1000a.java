@@ -38,45 +38,59 @@ package problem.dp;
  * each possibility can be encoded by reference in the following format:
  * dp[i][j] = minimum cost to merge for array [i,j], where i, j in [0, n-1]
  * 
+ * 2. build the tree of possibilities calculating total cost along the way
+ * 3. (optional) optimize traversing by terminating branches when we have a better solution
+ * 
  */
-public class Solution1000 {
+public class Solution1000a {
+	
+	int cost = Integer.MAX_VALUE;
+	
+	private int sum(int[] stones, int i, int sz) {
+		int s = 0;
+		for (int j = i; j < i + sz; j++) {
+			s += stones[j];
+		}
+		return s;
+	}
+
+	
+	void generate(int[] stones, int sz, int build) {
+		int n = stones.length;
+		if (n < sz) {
+			return;
+		}
+		if (n == sz) {
+			cost = Math.min(cost, build + sum(stones, 0, sz));
+			return;
+		}
+		for (int i = 0; i < n - 1 - sz; i++) {
+			int[] next = new int[1 + n - sz];
+			int l = 0;
+			for (int j = 0; j < i; j++) {
+				next[l++] = stones[j];
+			}
+			int middleCost = sum(stones, i, sz); 
+			next[l++] = middleCost;
+			for (int j = i + sz; j < n; j++) {
+				next[l++] = stones[j];
+			}
+			generate(next, sz, middleCost + build);
+		}
+	}
+
 
 	public int mergeStones(int[] stones, int k) {
 		// 1. check for feasibility
 		int n = stones.length;
+		int[][] memo = new int[n][n];
 
 		if ((n - 1) % (k - 1) != 0) {
 			return -1;
 		}
-		// accelerating structure: calculate partial sums
-		int[] sum = new int[n + 1];
-		for (int i = 0; i < n; i++) {
-			sum[i + 1] = sum[i] + stones[i];// sum[i] = sum of stones [0,i]
-		}
+		generate(stones, k, 0);
+		return cost == Integer.MAX_VALUE ? -1 : cost;
 		
-		// 2. populate dp
-		int[][] dp = new int[n][n];// dp[i][j] - cost of merge of piles on [i,j]
-		
-		for (int l = k; l <= n; l++) {
-			// Analyze all intervals of length l 
-			// [3,2,4,1]
-			// l = 2: [3,2], [2,4], [4,1]
-
-			for (int i = 0; i <= n - l; i++) {// analysis of all [i,j] of length =l
-				int end = i + l - 1;
-				dp[i][end] = Integer.MAX_VALUE;
-				// mid cuts i-j into blocks of min possible length (i.e. k)
-				for (int mid = i; mid < end; mid += k - 1) {
-					int cost = dp[i][mid] + dp[mid + 1][end];
-					dp[i][end] = Math.min(dp[i][end], cost);
-				}
-				if ((end - i) % (k - 1) == 0) {// also add the total cost - last 1 elem, because length = 1 omitted in cycle
-					dp[i][end] += sum[end + 1] - sum[i];
-				}
-			}
-		}
-		// 3. return result
-		return dp[0][n - 1];
 	}
 
 }

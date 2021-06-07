@@ -19,6 +19,9 @@ import java.util.List;
  * not a smaller window because the elements of T in the window must occur in
  * order
  * 
+ * IDEA:
+ * 
+ * 
  * 
  */
 public class Solution727 {
