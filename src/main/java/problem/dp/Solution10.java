@@ -14,7 +14,17 @@ package problem.dp;
  * 
  * IDEA:
  * 1) start search from the tail
- * 2) subproblem
+ *		consider pattern = 'wo.d' and text= word
+ *		if last symbol is '.' or explicit: remove last symbol, reduce problem to
+ *		  pattern = 'wo.' and text= wor
+ * 		else have to choose:
+ *        1) accept match *=letter and advance in text without advancing in pattern
+ *        2) problem to  pattern = 'wo.' and text= wor		
+ * 
+ * 2) 
+ * 3) use dp table as a cache
+ * 
+ * 4) subproblem
  *    remove the last symbol @pattern for pattern and compare against block 
  *    
  *  
@@ -26,8 +36,9 @@ package problem.dp;
  * 
  */
 public class Solution10 {
+	
 
-    public boolean isMatch(String txt, String prn) {
+	public boolean isMatch(String txt, String prn) {
         int n = txt.length();
         int m = prn.length();
         boolean[][] dp = new boolean[n + 1][m + 1];// dp[i][j] - there is a match of pattern[0,j] on the string txt[0,i]
