@@ -19,7 +19,7 @@ import java.util.Arrays;
  * customer wants. You can sell the balls in any order.
  * 
  * Return the maximum total value that you can attain after selling orders
- * colored balls. As the answer may be too large, return it modulo 109 + 7.
+ * colored balls. As the answer may be too large, return it modulo 10^9 + 7.
  * Input: inventory = [2,5], orders = 4 Output: 14 
  * 
  * Explanation: Sell the 1st
@@ -28,28 +28,40 @@ import java.util.Arrays;
  * 
  * IDEA:
  * 
+ * inventory:
+ * 
+ * curPrice price
+ * |
+ * |       ooo       <-- consume all balls curPrice by curPrice, starting from the peak, down to base of pyramid
+ * |     ooooo
+ * |    oooooo
+ *      |  | |
+ *      0  i  n-1
+ * 
  */
 public class Solution1648 {
 
 	public int maxProfit(int[] inventory, int orders) {
+		int n = inventory.length;
         Arrays.sort(inventory);
-        int i = inventory.length - 1;
-        int ordersLeft = orders, curr = inventory[i];
+        int i = n - 1;
+        int ordersLeft = orders;
+        int curPrice = inventory[i];
         long sum = 0;
         while (ordersLeft > 0) {
-            while (i > 0 && inventory[i - 1] == curr) {
+            while (i > 0 && inventory[i - 1] == curPrice) {// find the beginning of curPrice
                 --i;
             }
-            int prev = (i == 0 ? 0 : inventory[i - 1]);
-            int need = ordersLeft / (inventory.length - i);
-            if (need == 0) {
-                sum += (long) curr * ordersLeft;
-                ordersLeft = 0;
+            int prevPrice = i == 0 ? 0 : inventory[i - 1];
+            int slicesNeeded = ordersLeft / (n - i);
+            if (slicesNeeded == 0) {// one slice covers everything
+                sum += (long) curPrice * ordersLeft;
+                break;
             } else {
-                int min = Math.min(need, curr - prev);
-                sum += (curr - min + 1L + curr) * min / 2 * (inventory.length - i);
-                ordersLeft -= min * (inventory.length - i);
-                curr -= min;
+                int min = Math.min(slicesNeeded, curPrice - prevPrice);
+                sum += (curPrice - min + 1L + curPrice) * min / 2 * (n - i);
+                ordersLeft -= min * (n - i);
+                curPrice -= min;
             }
         }
 
