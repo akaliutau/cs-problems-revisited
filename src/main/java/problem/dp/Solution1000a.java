@@ -1,5 +1,11 @@
 package problem.dp;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * 
  * There are n piles of stones arranged in a row. The i-th pile has stones[i]
@@ -32,7 +38,8 @@ package problem.dp;
  *              /    \      /    \       /      \
  *          [9,1]  [5,5] [9,1]  [3,7]  [5,5]    [3,7]
  *          
- *          
+ * 
+ * The benefit to use memo is obvious: total state space is n^n, and total elems in memo is just n^2
  *          
  * 
  * each possibility can be encoded by reference in the following format:
@@ -44,8 +51,6 @@ package problem.dp;
  */
 public class Solution1000a {
 	
-	int cost = Integer.MAX_VALUE;
-	
 	private int sum(int[] stones, int i, int sz) {
 		int s = 0;
 		for (int j = i; j < i + sz; j++) {
@@ -53,18 +58,28 @@ public class Solution1000a {
 		}
 		return s;
 	}
-
 	
-	void generate(int[] stones, int sz, int build) {
+	Map<Integer,Integer> memo = new HashMap<>();
+    int gcost = Integer.MAX_VALUE;
+	
+	int merge(int[] stones, int sz, int build) {
 		int n = stones.length;
 		if (n < sz) {
-			return;
+			return 0;
 		}
+        //System.out.println(Arrays.toString(stones));
+		int key = Arrays.hashCode(stones);
+        if (memo.containsKey(key)){
+            return memo.get(key);
+        }
 		if (n == sz) {
-			cost = Math.min(cost, build + sum(stones, 0, sz));
-			return;
+			int val = sum(stones, 0, sz);
+			memo.put(key, val);
+			return val;
 		}
-		for (int i = 0; i < n - 1 - sz; i++) {
+		int cost = Integer.MAX_VALUE;
+		int weight = 0;
+		for (int i = 0; i <= n - sz; i++) {
 			int[] next = new int[1 + n - sz];
 			int l = 0;
 			for (int j = 0; j < i; j++) {
@@ -75,22 +90,21 @@ public class Solution1000a {
 			for (int j = i + sz; j < n; j++) {
 				next[l++] = stones[j];
 			}
-			generate(next, sz, middleCost + build);
+			cost = Math.min(cost, middleCost + merge(next, sz, 0));
 		}
+		memo.put(key, cost);
+		return cost;
 	}
 
 
 	public int mergeStones(int[] stones, int k) {
 		// 1. check for feasibility
 		int n = stones.length;
-		int[][] memo = new int[n][n];
 
 		if ((n - 1) % (k - 1) != 0) {
 			return -1;
 		}
-		generate(stones, k, 0);
-		return cost == Integer.MAX_VALUE ? -1 : cost;
-		
+        return merge(stones, k, 0);
 	}
 
 }
