@@ -30,7 +30,7 @@ import java.util.Set;
  * is the minimum possible.
  * 
  * IDEA:
- * The approach is straightforward:
+ * The general approach is straightforward:
  * 1. On each iteration: generate all possible arrays. For provided example k=2 it should be:
  *                          [3,2,4,1]
  * 				         /     |        \
@@ -48,63 +48,48 @@ import java.util.Set;
  * 2. build the tree of possibilities calculating total cost along the way
  * 3. (optional) optimize traversing by terminating branches when we have a better solution
  * 
+ * Implementation:
+ * 
+ * 
  */
 public class Solution1000a {
 	
-	private int sum(int[] stones, int i, int sz) {
-		int s = 0;
-		for (int j = i; j < i + sz; j++) {
-			s += stones[j];
-		}
-		return s;
-	}
-	
-	Map<Integer,Integer> memo = new HashMap<>();
-    int gcost = Integer.MAX_VALUE;
-	
-	int merge(int[] stones, int sz, int build) {
-		int n = stones.length;
-		if (n < sz) {
+	int merge(int[] stones, int[] sum, int[][] memo, int k, int left, int right) {
+		if (right - left + 1 < k)
 			return 0;
-		}
-        //System.out.println(Arrays.toString(stones));
-		int key = Arrays.hashCode(stones);
-        if (memo.containsKey(key)){
-            return memo.get(key);
-        }
-		if (n == sz) {
-			int val = sum(stones, 0, sz);
-			memo.put(key, val);
-			return val;
-		}
-		int cost = Integer.MAX_VALUE;
-		int weight = 0;
-		for (int i = 0; i <= n - sz; i++) {
-			int[] next = new int[1 + n - sz];
-			int l = 0;
-			for (int j = 0; j < i; j++) {
-				next[l++] = stones[j];
-			}
-			int middleCost = sum(stones, i, sz); 
-			next[l++] = middleCost;
-			for (int j = i + sz; j < n; j++) {
-				next[l++] = stones[j];
-			}
-			cost = Math.min(cost, middleCost + merge(next, sz, 0));
-		}
-		memo.put(key, cost);
-		return cost;
-	}
 
+		if (memo[left][right] != 0)
+			return memo[left][right];
+
+		if (right - left + 1 == k) {
+			memo[left][right] = left == 0 ? sum[right] : sum[right] - sum[left - 1];
+			return memo[left][right];
+		}
+		int ans = Integer.MAX_VALUE;
+		for (int i = left; i < right; i += k - 1) {
+			ans = Math.min(ans, merge(stones, sum, memo, k, left, i) +
+					            merge(stones, sum, memo, k, i + 1, right));
+		}
+		if (k == 2 || (right - left + 1) % (k - 1) == 1) {
+			ans += left == 0 ? sum[right] : sum[right] - sum[left - 1];
+		}
+		memo[left][right] += ans;
+		return memo[left][right];
+	}
 
 	public int mergeStones(int[] stones, int k) {
-		// 1. check for feasibility
-		int n = stones.length;
-
-		if ((n - 1) % (k - 1) != 0) {
+		if (k != 2 && stones.length % (k - 1) != 1)
 			return -1;
+		int size = stones.length;
+		int[] sum = new int[size];
+		int[][] memo = new int[size][size];
+		sum[0] = stones[0];
+		
+		for (int i = 1; i < size; i++) {
+			sum[i] += sum[i - 1] + stones[i];
 		}
-        return merge(stones, k, 0);
+		
+		return merge(stones, sum, memo, k, 0, size - 1);
 	}
-
+    
 }

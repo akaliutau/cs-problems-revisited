@@ -37,8 +37,8 @@ public class Solution380 {
 				return false;
 			}
 
-			dict.put(val, list.size());// O(1) for integers - buckets for integer is intNumb % d
-			list.add(list.size(), val);// O(1)
+			dict.put(val, list.size());// O(1) for integers - due to buckets for integer is intNumb % d
+			list.add(list.size(), val);// O(1) - append to list
 			return true;
 		}
 
@@ -57,8 +57,8 @@ public class Solution380 {
 			dict.put(lastElement, idx);// O(1)
 			
 			// delete the last element
-			list.remove(list.size() - 1);
-			dict.remove(val);
+			list.remove(list.size() - 1);// O(1)
+			dict.remove(val);// O(1)
 			return true;
 		}
 
