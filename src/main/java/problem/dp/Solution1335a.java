@@ -97,6 +97,7 @@ public class Solution1335a {
 			int difficulty = s(d-1, job, jobDifficulty, dp);// in the 1st iteration == j-1
 			// max of the tail
 			max = Math.max(max, jobDifficulty[job+1]);// in the 1st iteration == j
+			
 			if (difficulty != -1) {// will be updated if at least 1 solution is found
 				maxDifficulty = Math.min(maxDifficulty, difficulty + max);
 			}
