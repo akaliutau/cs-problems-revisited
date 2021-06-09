@@ -31,15 +31,29 @@ import java.util.Arrays;
  * inventory:
  * 
  * curPrice price
- * |
+ * |            
+ * |       ooo 
  * |       ooo       <-- consume all balls curPrice by curPrice, starting from the peak, down to base of pyramid
  * |     ooooo
  * |    oooooo
  *      |  | |
  *      0  i  n-1
- * 
+ *      
+ *    
+ *  p          ooooo
+ *  p-1        ooooo
+ *  ...        ooooo
+ *  p-k        ooooo
+ *             |   |
+ *             i   n = r
+ *             
+ *  p * r + (p - 1) * r + ... = r * (sum(p) - sum(p-k-1))              
  */
 public class Solution1648 {
+	
+	long sum(long p) {
+		return p * (p + 1) / 2; 
+	}
 
 	public int maxProfit(int[] inventory, int orders) {
 		int n = inventory.length;
@@ -58,8 +72,8 @@ public class Solution1648 {
                 sum += (long) curPrice * ordersLeft;
                 break;
             } else {
-                int min = Math.min(slicesNeeded, curPrice - prevPrice);
-                sum += (curPrice - min + 1L + curPrice) * min / 2 * (n - i);
+                int min = Math.min(slicesNeeded, curPrice - prevPrice);      // take all block or its part only
+                sum += (sum(curPrice) - sum(curPrice - min)) * (n - i); // calculate the profit by formula - see higher
                 ordersLeft -= min * (n - i);
                 curPrice -= min;
             }

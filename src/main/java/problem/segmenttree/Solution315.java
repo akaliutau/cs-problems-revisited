@@ -55,7 +55,7 @@ import java.util.List;
  * 2. Query tree to find the # of 1s in the range
  * 
  */
-public class Solution315b {
+public class Solution315 {
 	
 	static class Node {
 		int[] range;
@@ -132,23 +132,7 @@ public class Solution315b {
 			}
 		}
         
-        void print(){
-            print(this.root);
-        }
-        
-        void print(Node node){
-            
-            if (node != null){
-                if (node.isLeaf()){
-                    System.out.println(node);
-                }
-                print(node.left);
-                print(node.right);
-            }
-        }
-		
-		
-	}
+ 	}
  
 
 	public List<Integer> countSmaller(int[] nums) {
@@ -162,7 +146,6 @@ public class Solution315b {
         for (int i = nums.length - 1; i >= 0; i--) {// from the last elem to the 1st one
         	result.add(tree.query(nums[i]));
         	tree.add(nums[i]);
-            //tree.print();
         }
         Collections.reverse(result);
         return result;

@@ -1,5 +1,7 @@
 package problem.dp;
 
+import java.util.Arrays;
+
 /**
  * DP
  * 
@@ -26,17 +28,24 @@ package problem.dp;
  * finish the last job, total difficulty = 1. The difficulty of the schedule = 6
  * + 1 = 7
  * 
+ * 
  * IDEA:
+ * 
+ * Reducing equation
  * 
  * [6,5,4,3,2,1]
  *      |
  *      
  * [6,5,4] [3,2,1]
- *  
- * [6,5] [4,3,2,1]
- *          max = the most difficult job seen so far
- *          
  * 
+ * 
+ * [6,5] [4,3,2,1]
+ *   |       max = the most difficult job seen so far
+ *   |       
+ *   |       
+ *  reduced solution
+ *         
+ *          
  * Time complexity of BF: O(n^d)
  * Time complexity of DP: O(n*d) - theoretical min
  * 
@@ -49,45 +58,63 @@ package problem.dp;
  *        dp(n,d) = min(dp(n-1-i,d-1) + jobDiff(i,1))
  *                   i
  *  
+ * Simulation
+ * 		[1,1,1]
+ *            \
+ *            min([1,1][1], [1],[1,1])
+ *            /                      \
+ *       min([1][1])                 min([1])                               
+ *  
  */
-public class Solution1335 {
+public class Solution1335a {
+	
+	int s(int d, int j, int[] jobDifficulty, int[][] dp) {
+		if (d > j) {
+			return -1;
+		}
+		if (d == 0 && j == 0) {
+			return jobDifficulty[0];
+		}
+		if (j == 0) {
+			return -1;
+		}
+		if (d == 0) {
+			int max = jobDifficulty[0];
+			for (int job = 1; job <=j; job ++) {
+				max = Math.max(max, jobDifficulty[job]);
+			}
+			return max;
+		}
+		if (dp[d][j] != -1) {
+			return dp[d][j];
+		}
+		int maxDifficulty = Integer.MAX_VALUE;
+		int max = -1;
+		
+		// finding the optimal solution via BF
+		// take the tail of array: jobDifficulty
+		for (int job = j-1; job >= 0; job--) {
+			int difficulty = s(d-1, job, jobDifficulty, dp);// in the 1st iteration == j-1
+			// max of the tail
+			max = Math.max(max, jobDifficulty[job+1]);// in the 1st iteration == j
+			if (difficulty != -1) {// will be updated if at least 1 solution is found
+				maxDifficulty = Math.min(maxDifficulty, difficulty + max);
+			}
+		}
+		dp[d][j] = maxDifficulty == Integer.MAX_VALUE ? -1 : maxDifficulty;
+		return dp[d][j];
+	}
 
 	public int minDifficulty(int[] jobDifficulty, int d) {
 		int n = jobDifficulty.length;
 
 		// dp[d][i] - difficulty of schedule for all jobs [0,i] during week consisting from d + 1 days (==baskets)
 		int[][] dp = new int[d][n];
-
-		// edge cases
-		dp[0][0] = jobDifficulty[0];
-		for (int job = 1; job < n; job++) {// for 1 day
-			dp[0][job] = Math.max(dp[0][job - 1], jobDifficulty[job]);
-		}
-
-		for (int day = 1; day < d; day++) {// no jobs
-			dp[day][0] = -1;
-		}
-
-		// main alg
-		for (int day = 1; day < d; day++) {
-			for (int job = 1; job < n; job++) {
-				if (dp[day - 1][job - 1] != -1) {
-					int max = jobDifficulty[job];// the same as
-					dp[day][job] = dp[day - 1][job - 1] + max;// by definition of schedule(day) = schedule(without cur day) + job difficulty at cur day
-					for (int prev = job - 2; prev >= 0; prev--) {//go through all combinations (dp[day][j], max is the MAX(difficulty of job on (j..n))
-						max = Math.max(max, jobDifficulty[prev + 1]);// max on the block [4,3,2,1]
-						if (dp[day - 1][prev] != -1) {
-							dp[day][job] = Math.min(dp[day][job], dp[day - 1][prev] + max);
-						}
-					}
-				}else{
-					dp[day][job] = -1;// all dp where jobs < days = -1
-				}
-			}
-		}
-		return dp[d - 1][n - 1];
+		for (int i = 0; i < d; i++)
+			Arrays.fill(dp[i], -1);
+		
+		return s(d-1, n-1, jobDifficulty, dp);
 	}
-
 	
 
 }

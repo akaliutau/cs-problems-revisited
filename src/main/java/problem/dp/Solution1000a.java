@@ -42,7 +42,7 @@ package problem.dp;
  * 2. build the tree of possibilities calculating total cost along the way
  * 3. (optional) optimize traversing by terminating branches when we have a better solution
  * 
- * Implementation uses 3 IDEAS:
+ * Implementation uses THREE IDEAS:
  * 1. optimal way of summation is the greedy one, when we adding up smaller numbers first, then using blocks to build the bigger ones
  * 2. (as a consequence) use only non-intersection blocks, i.e. all blocks must be aligned with k-size
  * 
@@ -96,7 +96,7 @@ public class Solution1000a {
 			memo[left][right] = sum(stones, left, right);
 			return memo[left][right];
 		}
-		// build optimal variants from block [left, right] and choose the best one
+		// choose optimal variant from block [left, right] and choose the best one
 		int ans = Integer.MAX_VALUE;
 		for (int i = left; i < right; i += k - 1) {
 			ans = Math.min(ans, cost(stones, memo, k, left, i) +
@@ -105,7 +105,7 @@ public class Solution1000a {
 		if (k == 2 || len % (k - 1) == 1) { // here len can be only > k
 			ans += sum(stones, left, right);// sum of end piles is always the same 
 		}
-		memo[left][right] += ans;// ?
+		memo[left][right] = ans;
 		return memo[left][right];
 	}
 
