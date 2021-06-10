@@ -1,4 +1,4 @@
-package problem.buckets;
+package problem.baskets;
 
 import java.util.Arrays;
 
@@ -21,13 +21,15 @@ import java.util.Arrays;
  * IDEA:
  * 
  * 1. maximum gap must be greater or equal to  [(max - min ) / (n - 1)], because the smallest value can be achieved on equal buckets; and inequality leads to disbalance
- * 2. map all numbers to the buckets; collect only max and min values in minBucket and maxBucket arrays
+ * 2. map all numbers to the buckets; collect only max and min values in minBasket and maxBasket arrays
  * 3. iterate through all buckets and calc difference () as gap 
  * 
  * Why it's working:
  * basically we are ignoring differences INSIDE buckets, calculating instead gap between max and min like so:
  * 
  *  [min, ... max]  [min, ..., max] => gap = min[i] - max[i-1]
+ *  
+ *  even though the baskets themselves are equal, 
  */
 public class Solution164 {
 	public int maximumGap(int[] nums) {
@@ -42,24 +44,24 @@ public class Solution164 {
 		}
 		
 		int bucketSize = (int) Math.ceil((double) (max - min) / (n - 1));
-		int[] minBucket = new int[n];
-		int[] maxBucket = new int[n];
-		Arrays.fill(minBucket, Integer.MAX_VALUE);
-		Arrays.fill(maxBucket, Integer.MIN_VALUE);
+		int[] minBasket = new int[n];
+		int[] maxBasket = new int[n];
+		Arrays.fill(minBasket, Integer.MAX_VALUE);
+		Arrays.fill(maxBasket, Integer.MIN_VALUE);
 		
 		for (int num : nums) {
 			int idx = (num - min) / bucketSize;
-			minBucket[idx] = Math.min(num, minBucket[idx]);
-			maxBucket[idx] = Math.max(num, maxBucket[idx]);
+			minBasket[idx] = Math.min(num, minBasket[idx]);
+			maxBasket[idx] = Math.max(num, maxBasket[idx]);
 		}
 		
-		int maxGap = bucketSize; // Maximum gap is always greater or equal to bucketSize
-		int lastMax = maxBucket[0];
+		int maxGap = bucketSize; // Maximum gap is always greater or equal to bucketSize, so start from bucketSize as min
+		int lastMax = maxBasket[0];
 		for (int i = 1; i < n; i++) {
-			if (minBucket[i] == Integer.MAX_VALUE)
+			if (minBasket[i] == Integer.MAX_VALUE)
 				continue; 
-			maxGap = Math.max(maxGap, minBucket[i] - lastMax);
-            lastMax = maxBucket[i];
+			maxGap = Math.max(maxGap, minBasket[i] - lastMax);
+            lastMax = maxBasket[i];
 		}
 		 return maxGap;
 	}

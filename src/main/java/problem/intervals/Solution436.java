@@ -23,6 +23,9 @@ import java.util.Map;
  * 
  * IDEA:
  * 
+ * 1. sort intervals by start edge
+ * 2. 
+ * 
  */
 public class Solution436 {
 
@@ -33,12 +36,15 @@ public class Solution436 {
         for (int i = 0; i < n; i++) {
             index.put(intervals[i], i);
         }        
-        Arrays.parallelSort(intervals, (o, p) -> o[0] - p[0]);
+        Arrays.parallelSort(intervals, (o, p) -> o[0] - p[0]);// modify original list of intervals
+        
         int[] ans = new int[n];
         for (int i = 0; i < n; i++) {
             int idx = -1;
-            for (int j = i + 1; j < n; j++) {
-                if (intervals[j][0] >= intervals[i][1]) {
+            for (int j = i + 1; j < n; j++) {// iterate through all the rest intervals
+            	int start = intervals[j][0];
+            	int endPrev = intervals[i][1];
+                if (start >= endPrev) {// stop here
                     idx = index.get(intervals[j]);
                     break;
                 }
