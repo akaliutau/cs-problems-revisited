@@ -15,7 +15,10 @@ import problem.model.TreeNode;
  *   
  *   [1,2,3], [1,2,3] Output: true
  *   
- *   IDEA: traverse both in the same order (does not matter, in which one)
+ *   IDEA: 
+ *   traverse both in the same order (f.e. preorder)
+ *   the point is: to traverse in sync in order to preserve the level and path
+ *   
  */
 public class Solution100 {
 
