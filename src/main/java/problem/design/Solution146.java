@@ -47,6 +47,23 @@ public class Solution146 {
 				this.value = value;
 			}
 		}
+		
+		private Map<Integer, Node> cache = new HashMap<>();
+		private int size;
+		private int capacity;
+		private Node head, tail;
+
+		public LRUCache(int capacity) {
+			size = 0;
+			this.capacity = capacity;
+
+			head = new Node();
+			tail = new Node();
+
+			head.next = tail;
+			tail.prev = head;
+		}
+
 
 		// adds node from the head (as in queue)
 		private void addNode(Node node) {
@@ -79,21 +96,6 @@ public class Solution146 {
 			return res;
 		}
 
-		private Map<Integer, Node> cache = new HashMap<>();
-		private int size;
-		private int capacity;
-		private Node head, tail;
-
-		public LRUCache(int capacity) {
-			size = 0;
-			this.capacity = capacity;
-
-			head = new Node();
-			tail = new Node();
-
-			head.next = tail;
-			tail.prev = head;
-		}
 
 		public int get(int key) {
 			Node node = cache.get(key);

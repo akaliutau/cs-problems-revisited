@@ -41,7 +41,7 @@ public class Solution460 {
 			int count;
 
 			Node prev;
-			Node next;
+			Node next;// == null if no next node
 
 			Node(int key, int value) {
 				this.key = key;
@@ -69,8 +69,8 @@ public class Solution460 {
 		int maxSize;
 		int size;
 
-		Map<Integer, LinkedList<Node>> counter;// groups nodes by frequency
-		Map<Integer, Node> nodeMap;// for fast access
+		Map<Integer, LinkedList<Node>> counter; // groups nodes by frequency
+		Map<Integer, Node> nodeMap;             // mapping key => node for fast access
 
 		Node head;// points to the first node in cache
 		Node tail;// points to the last node in cache
