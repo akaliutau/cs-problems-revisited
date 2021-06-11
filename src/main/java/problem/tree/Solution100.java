@@ -37,6 +37,7 @@ public class Solution100 {
             }
             return true;
         }
+        // some node null, other is not
         return false;
 
     }

@@ -6,7 +6,6 @@ import java.util.Deque;
 import java.util.List;
 
 import problem.model.TreeNode;
-import problem.model.TreeNode;
 
 /**
  * Given a binary tree, imagine yourself standing on the right side of it,
@@ -42,7 +41,7 @@ public class Solution199 {
 
 	            for(int i = 0; i < levelLength; ++i) {// process all what we have at the current moment
 	                TreeNode node = queue.poll();
-	                // if it's the rightmost element
+	                // choose only the rightmost element
 	                if (i == levelLength - 1) {
 	                    rightside.add(node.val);    
 	                }

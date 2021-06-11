@@ -16,7 +16,8 @@ import problem.model.TreeNode;
  * Follow up: Solve the problem if repeated values on the tree are allowed.
  * 
  * IDEA:
- * strait-forward: just traverse tree using pre-order and compare for simple equality
+ * 1. strait-forward: just traverse tree using pre-order and compare for simple equality
+ * 2. exit condition - when the target is met
  * 
  */
 public class Solution1379 {
@@ -28,11 +29,11 @@ public class Solution1379 {
 		if (original == target) {
 			return cloned;
 		}
-		TreeNode result = traverse(original.left, cloned.left, target);
+		TreeNode result = traverse(original.left, cloned.left, target); // check left-branch traversing first
 		if (result != null) {
 			return result;
 		}
-		return traverse(original.right, cloned.right, target);
+		return traverse(original.right, cloned.right, target); // if not found check right-branch traversing first
 	}
 
 	public final TreeNode getTargetCopy(final TreeNode original, final TreeNode cloned, final TreeNode target) {

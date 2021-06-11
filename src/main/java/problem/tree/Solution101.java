@@ -23,7 +23,8 @@ import problem.model.TreeNode;
  *   \    \ 
  *    3    3
  * 
- * IDEA: traverse the second tree in the opposite branches on EACH level
+ * IDEA: 
+ * traverse the second tree in the opposite branches on EACH level
  * 
  * 
  */

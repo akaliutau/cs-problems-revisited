@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import problem.model.TreeNode;
-import problem.model.TreeNode;
 
 /**
  * Given a binary tree, return the level order traversal of its nodes' values.

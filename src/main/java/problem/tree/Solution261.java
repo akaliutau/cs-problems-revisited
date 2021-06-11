@@ -54,7 +54,7 @@ public class Solution261 {
 		queue.offer(0);
 		seen.add(0);
 
-		while (!queue.isEmpty()) {
+		while (!queue.isEmpty()) {// the only reason to have this loop is to check the graph connectivity
 			int node = queue.poll();
 			for (int neighbour : adjacencyList.get(node)) {
 				if (seen.contains(neighbour)) {

@@ -4,6 +4,7 @@ import problem.model.TreeNode;
 
 /**
  * Check that the array represents preorder sequence of tree
+ * 
  * IDEA:
  * transfer the index to the next node
  */
@@ -17,9 +18,11 @@ public class Solution1430 {
            return root.val == arr[index];
         }
 
-        if (root == null || root.val != arr[index]) {
+        if (root != null && root.val != arr[index]) {
             return false;
         }
+        if (root == null)
+            return false;
 
         if (dfs(root.left, arr, index + 1)) {
             return true;

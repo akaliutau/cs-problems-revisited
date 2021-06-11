@@ -3,7 +3,6 @@ package problem.tree;
 import java.util.Stack;
 
 import problem.model.TreeNode;
-import problem.model.TreeNode;
 
 /**
  * Given a binary tree, return the sum of values of nodes with even-valued
@@ -15,13 +14,13 @@ import problem.model.TreeNode;
  * traverse the tree using a simulation:
  * wrap each "traversed" node into Pair and preserve even-odd information within it
  * 
- * 0                  4            <--  has no parent so even=false
+ * 0                  4            <--  has no parent so isParentEven=false
  *                  /   \
- * 1              3       8        <--  has an even parent "4"
+ * 1              3       8        <--  has an even parent "4" @ level=0, => isParentEven = true
  *               /  \
- * 2           1     6             <--  has an odd parent "3"
+ * 2           1     6             <--  has an odd parent "3"  @ level=1, => isParentEven = false
  *                    \
- * 3                   2           <--  has an even parent "6"
+ * 3                   2           <--  has an even parent "6" @ level=2, => isParentEven = true
  * 
  * 4
  * 
@@ -50,7 +49,7 @@ public class Solution1315 {
             if (p.node.left != null) {
                 stack.push(new Pair(p.node.left, isEven));
 
-                if (p.isParentEven) {// if parent of p.node has an even val, add
+                if (p.isParentEven) {// if parent of p.node has an even val, add val to sum
                     sum += p.node.left.val;
                 }
             }

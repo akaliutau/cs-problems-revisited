@@ -15,8 +15,8 @@ import problem.model.TreeNode;
  * IDEA:
  * 1. find the path to each number
  * 2. remove the common part in paths:
- * [0, 1, 1, 1]
- * [0, 0, 1, 1]
+ * [-1, 1, 1, 1]
+ * [-1, 0, 1, 1]
  *     |
  *     idx = 1
  */
@@ -26,7 +26,7 @@ public class Solution1740 {
 		if (node == null) {
 			return false;
 		}
-		if (node.val == num) {
+		if (node.val == num) {// we are adding values if and only if we have found a match
 			path.add(side);
 			return true;
 		}
@@ -44,13 +44,15 @@ public class Solution1740 {
 	}
 	
 	public int findDistance(TreeNode root, int p, int q) {
-		if (p == q) {
+		if (p == q) {// edge case
 			return 0;
 		}
+		
 		List<Integer> pathP = new ArrayList<>();
 		boolean foundP = find(root, p, pathP, -1);
 		List<Integer> pathQ = new ArrayList<>();
 		boolean foundQ = find(root, q, pathQ, -1);
+		
 		if (!foundP || ! foundQ) {
 			return 0;
 		}
@@ -60,7 +62,7 @@ public class Solution1740 {
 			ip --;
             iq --;
 		}
-        if (ip == pathP.size()-2 || iq == pathQ.size()-2){
+        if (ip == pathP.size()-2 || iq == pathQ.size()-2){// the very first difference is just after root node = -1, => p & q are in different branches
             return ip + iq + 2;
         }
 		return Math.abs(ip - iq);

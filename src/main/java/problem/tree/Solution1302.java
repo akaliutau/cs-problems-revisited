@@ -7,9 +7,9 @@ import problem.model.TreeNode;
  * 
  * IDEA:
  * Traverse all nodes (does not matter in which order)
- * For each node must to have in local vars:
- *  1) current level of recursion
- *  2) result structure
+ * For each node must to have in local var to answer the question int[] result :
+ *  1) current level of recursion                             <-- [0] = level 
+ *  2) result data structure to hold the answer               <-- [1] = sum of values
  *  
  *  Process 2 cases for leaves:
  *  1) we have a better (== deeper) level - reset the result

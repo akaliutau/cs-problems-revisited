@@ -28,7 +28,8 @@ import problem.model.TreeNode;
  * [15,7] 
  * ]
  * 
- * IDEA: be aware of the even or odd the current level is and push into list from tail or head
+ * IDEA: be aware of the even or odd the current level is 
+ *       and push into list either from tail or head (push_back or add first)
  */
 public class Solution103 {
 

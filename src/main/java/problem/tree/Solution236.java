@@ -30,7 +30,7 @@ public class Solution236 {
 
 		boolean inCurNode = (curNode == p || curNode == q);
 
-		if ((inLeftBranch && inRigtBranch) || (inLeftBranch && inCurNode) || (inRigtBranch && inCurNode)) {
+		if ((inLeftBranch && inRigtBranch) || (inLeftBranch && inCurNode) || (inRigtBranch && inCurNode)) {// this block is executed only un fork node
 			this.ans = curNode;
 		}
 
@@ -38,7 +38,6 @@ public class Solution236 {
 	}
 
 	public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-		// Traverse the tree
 		ans = null;
 		check(root, p, q);
 		return this.ans;

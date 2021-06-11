@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import problem.model.TreeNode;
-import problem.model.TreeNode;
 
 /**
  * 
@@ -17,8 +16,8 @@ import problem.model.TreeNode;
  * preorder = [3,9,20,15,7] inorder = [9,3,15,20,7] Return the following binary
  * tree:
  * 
- *        3 
- *       / \
+ *        3         <-- use mapping: val => index to find the position in inorder array
+ *       / \                        to define the range of elements to put in this branch
  *      9   20 
  *          / \ 
  *         15  7
@@ -28,12 +27,12 @@ import problem.model.TreeNode;
  *         
  *  IDEA:
  *  1) use info about preorder to traverse tree
- *  2) use inorder info to terminate tree building
+ *  2) use inorder info to TERMINATE (== EXIT) tree building, used to define the range of elements to be put on the next level
  *  3) use mapping nodeId/val => its linear center  
  *  
  *  Algorithm:
  *  1) traverse and build tree in preorder manner 
- *  2) us mapping of value to the its index in the in-order array - 
+ *  2) use mapping of value to the its index in the in-order array - 
  *     if an array built  from indecies [left, right] has a 0 length, that exit building immediately 
  *  
  */
@@ -42,7 +41,7 @@ public class Solution105 {
 	static class Input {
 		int preIndex = 0;
 		int[] preorder;
-		Map<Integer, Integer> indexMap = new HashMap<>();// map value -> its center
+		Map<Integer, Integer> inorderIndex = new HashMap<>();// map value -> its center
 	}
 
 	public TreeNode build(int inLeft, int inRight, Input input) {
@@ -54,7 +53,7 @@ public class Solution105 {
 		int rootVal = input.preorder[input.preIndex];
 		TreeNode root = new TreeNode(rootVal);
 
-		int center = input.indexMap.get(rootVal);
+		int center = input.inorderIndex.get(rootVal);
 
 		input.preIndex++;// go to the  next element in PreOrder list
 		
@@ -69,7 +68,7 @@ public class Solution105 {
 
 		int idx = 0;
 		for (Integer val : inorder) {
-			input.indexMap.put(val, idx++);
+			input.inorderIndex.put(val, idx++);
 		}
 		return build(0, inorder.length, input);
 	}

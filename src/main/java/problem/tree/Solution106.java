@@ -23,7 +23,7 @@ import problem.model.TreeNode;
  *         
  *  IDEA (the same as in 105):
  *  1) use info about postorder to traverse tree
- *  2) use inorder info to terminate tree building
+ *  2) use inorder info to terminate tree building - used to define the range of elements to be put on the next level
  *  3) use mapping nodeId/val => its linear center  
  *    
  */
