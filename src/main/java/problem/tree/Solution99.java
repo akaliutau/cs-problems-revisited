@@ -1,7 +1,6 @@
 package problem.tree;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.Stack;
 
 import problem.model.TreeNode;
 
@@ -11,10 +10,24 @@ import problem.model.TreeNode;
  * Recover the tree without changing its structure.
  * 
  * IDEA:
- * 0) use inorder traversing (simulated via Stack)
- * 1) start from the leftmost elem
+ * 0) use inorder traversing (simulated via Stack); any disorder element is a swapped one 
+ * 
+ * 1) start from the leftmost elem ()
  * 2) compare it with central
  * 3) in case of disorder - save to x | to y
+ * 
+ *       7               7
+ *      /               /
+ *     6               6       <-- root
+ *    / \             /
+ *   4   5           4         <-- leftMost
+ *   
+ *     leftMost
+ *    /   root
+ *   /  / 
+ *   | / /
+ *   | | | /
+ *   4 6 5 7
  */
 public class Solution99 {
 
@@ -25,26 +38,28 @@ public class Solution99 {
 	}
 
 	public void recoverTree(TreeNode root) {
-		Deque<TreeNode> stack = new ArrayDeque<>();
-		TreeNode x = null, y = null, pred = null;
+		Stack<TreeNode> stack = new Stack<>();
+		TreeNode x = null, y = null;
+		TreeNode leftMost = null;// the most left element found so far
 
 		while (!stack.isEmpty() || root != null) {
 			while (root != null) {// find the leftmost elem
 				stack.add(root);  // add all elems that lead to this elem, i.e form a path
 				root = root.left;
 			}
-			root = stack.removeLast();
+			// at this point root == null and the top of the stack contains the root which has no more left elements
+			root = stack.pop();
 			// this block should executed twice:
 			// 1) find disorder - left_elem > right.elem
 			// 2) find the next biggest elem to the found one
-			if (pred != null && root.val < pred.val) {// omitted on the smallest elem in BST
+			if (leftMost != null && root.val < leftMost.val) {// omitted on the smallest elem in BST
 				y = root;
 				if (x == null)
-					x = pred;
+					x = leftMost;
 				else
 					break;
 			}
-			pred = root;
+			leftMost = root;
 			root = root.right;
 		}
 
