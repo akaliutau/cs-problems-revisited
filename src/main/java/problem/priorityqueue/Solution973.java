@@ -1,4 +1,4 @@
-package problem.dividenconquer;
+package problem.priorityqueue;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -23,6 +23,9 @@ import java.util.PriorityQueue;
  * 2) and the origin is sqrt(8). Since sqrt(8) < sqrt(10), (-2, 2) is closer to
  * the origin. We only want the closest K = 1 points from the origin, so the
  * answer is just [[-2,2]]
+ * 
+ * IDEA:
+ * use a data structure with ordering by distance to the point (0,0)
  * 
  */
 public class Solution973 {
