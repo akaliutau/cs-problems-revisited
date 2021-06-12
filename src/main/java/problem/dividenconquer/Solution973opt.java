@@ -49,22 +49,25 @@ public class Solution973opt {
 				continue;
 			}
 			int[] p = points.get(i);
-			if (dist(p) <= dist(pivot)) {// closer than pivot (swap it with the )
+			if (dist(p) <= dist(pivot)) {// closer than pivot
 				closer.add(p);
 			}else {
 				farer.add(p);
 			}
 		}
+		// NOTE: we have not added pivot yet
+		// closer | pivot | farer
+		
 		if (k == closer.size() + 1) {
-            closer.add(pivot);
+			res.add(pivot);
 			res.addAll(closer);
 			return;
 		} else if (k < closer.size()) {// found more than needed
 			find(closer, k, res);
 		} else {                       // found less than needed
 			res.addAll(closer);        // intermediate ans
-            farer.add(pivot);
-			find(farer,  k - closer.size(), res);
+            farer.add(pivot); // <-- will loose pivot if not add
+			find(farer,  k - closer.size(), res);// NOTE: 
 		}
 	}
 

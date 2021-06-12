@@ -36,7 +36,7 @@ import java.util.Arrays;
  * [6,5,4,3,2,1]
  *      |
  *      
- * [6,5,4] [3,2,1]
+ * [6,5,4] [3,2,1] <-- cut off the last day with job array == 3  + all the rest n-1 days 
  * 
  * 
  * [6,5] [4,3,2,1]

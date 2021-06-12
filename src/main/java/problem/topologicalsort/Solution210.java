@@ -19,45 +19,49 @@ import java.util.Queue;
  * If there are many valid answers, return any of them. If it is impossible to
  * finish all courses, return an empty array.
  * 
+ * IDEA:
+ * 1. build dynamic statistics hash-table depStat containing statistics about dependencies
+ * 2. use graph in the form of hash map  dep => list of courses for fast access - acceleration
+ * 
  */
 public class Solution210 {
 
 	public int[] findOrder(int numCourses, int[][] prerequisites) {
-		Map<Integer, List<Integer>> adjList = new HashMap<>();
-		int[] indegree = new int[numCourses];
+		Map<Integer, List<Integer>> graph = new HashMap<>();
+		int[] depStat = new int[numCourses];
 		int[] topologicalOrder = new int[numCourses];
 
 		// Create the adjacency list representation of the graph
 		for (int i = 0; i < prerequisites.length; i++) {
-			int dest = prerequisites[i][0];
-			int src = prerequisites[i][1];
-			adjList.computeIfAbsent(src, k -> new ArrayList<>()).add(dest);
+			int course = prerequisites[i][0];
+			int dep = prerequisites[i][1];
+			graph.computeIfAbsent(dep, k -> new ArrayList<>()).add(course);
 
 			// Record in-degree of each vertex
-			indegree[dest] += 1;
+			depStat[course] += 1;
 		}
 
-		// Add all vertices with 0 in-degree to the queue
+		// Add all vertices with 0 dependencies to the queue
 		Queue<Integer> q = new LinkedList<>();
 		for (int i = 0; i < numCourses; i++) {
-			if (indegree[i] == 0) {
-				q.add(i);
+			if (depStat[i] == 0) {
+				q.add(i);// only courses without dependencies will be added
 			}
 		}
 
 		int i = 0;
 		// Process until the Q becomes empty
 		while (!q.isEmpty()) {
-			int node = q.remove();
-			topologicalOrder[i++] = node;
+			int node = q.poll();
+			topologicalOrder[i++] = node; // add to the result
 
-			// Reduce the in-degree of each neighbor by 1
-			if (adjList.containsKey(node)) {
-				for (Integer neighbor : adjList.get(node)) {
-					indegree[neighbor]--;
+			// after course removal update depStat
+			if (graph.containsKey(node)) {
+				for (Integer neighbor : graph.get(node)) {// reduce the dependency index (in-degree) of each neighbor by 1
+					depStat[neighbor]--;
 
-					// If in-degree of a neighbor becomes 0, add it to the Q
-					if (indegree[neighbor] == 0) {
+					// If dependency index of a neighbor becomes 0, add it to the Q
+					if (depStat[neighbor] == 0) {
 						q.add(neighbor);
 					}
 				}

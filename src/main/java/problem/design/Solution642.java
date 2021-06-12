@@ -64,6 +64,8 @@ import java.util.Map;
  * the sentence "i a" should be saved as a historical sentence in system. And
  * the following input will be counted as a new search.
  * 
+ * IDEA:
+ * 
  * 
  */
 public class Solution642 {
@@ -91,22 +93,22 @@ public class Solution642 {
 		public List<String> input(char c) {
 			List<String> res = new ArrayList<>();
 			if (c == '#') {// user clicked search again
-				freq.put(curSentence, freq.getOrDefault(curSentence, 0) + 1);// update statistics and reset
+				freq.compute(curSentence, (k, v) -> v == 0 ? 0 : v + 1);// update statistics and reset
 				curSentence = "";
 			} else {
-				List<Node> list = new ArrayList<>();
 				curSentence += c;
 
+				List<Node> list = new ArrayList<>();
 				// find candidates
 				for (String key : freq.keySet()) {
 					if (key.indexOf(curSentence) == 0) {
-						list.add(new Node(key, freq.get(key)));
+						list.add(new Node(key, freq.get(key)));// note: just for convenience
 					}
 				}
 				// get top 3 by frequency
 				Comparator<Node> byTimes = (o, p) -> Integer.compare(p.times, o.times);
 				Comparator<Node> bySentence = (o, p) -> o.sentence.compareTo(p.sentence);
-				Collections.sort(list, byTimes.thenComparing(bySentence));
+				Collections.sort(list, byTimes.thenComparing(bySentence));// first compare by size, and if found equal, sort lexicographically
 
 				for (int i = 0; i < Math.min(3, list.size()); i++) {
 					res.add(list.get(i).sentence);

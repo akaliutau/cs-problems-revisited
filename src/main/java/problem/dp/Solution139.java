@@ -14,8 +14,11 @@ import java.util.Queue;
  * dict = [cat, cats, and, dog ]
  *             catsanddog
  *            /         \
- * 		   sanddog     anddog
+ * 		   sanddog     anddog   <-- substring queued for analysis after 1st iteration
  *        		
+ * IDEA:
+ * 1. iterate through all cuts (total n)
+ * 2. use BFS to add incrementally possible cuts  
  * 
  */
 public class Solution139 {

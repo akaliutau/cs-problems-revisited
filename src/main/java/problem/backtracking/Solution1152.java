@@ -50,7 +50,7 @@ import java.util.Set;
  * The 3-sequence ("cart", "maps", "home") was visited at least once by 1 user.
  * 
  * IDEA: generate smart statistics
- * 1) generate all possible ordered permutations of visited sites, save freqs for each combination
+ * 1) generate all possible ORDERED permutations of visited sites, save freqs for each combination
  * 2) pick up the combination with the max freq
  */
 public class Solution1152 {
@@ -77,7 +77,7 @@ public class Solution1152 {
 		return false;
 	}
 
-	void helper(int currIdx, List<String> websites, List<String> currList, Map<List<String>, Integer> freqMap,
+	void dfs(int currIdx, List<String> websites, List<String> currList, Map<List<String>, Integer> freqMap,
 			Set<List<String>> visited) {
 		
 		if (currList.size() == 3) {// ready to add to statistics
@@ -92,7 +92,7 @@ public class Solution1152 {
 		// else continue chaining and backtracking
 		for (int i = currIdx; i < websites.size(); i++) {
 			currList.add(websites.get(i));// add candidate
-			helper(i + 1, websites, currList, freqMap, visited);
+			dfs(i + 1, websites, currList, freqMap, visited);
 			currList.remove(currList.size() - 1);
 		}
 	}
@@ -116,10 +116,10 @@ public class Solution1152 {
 		// backtracking, found all possible patterns
 		Map<List<String>, Integer> freqMap = new HashMap<>();
 		for (List<String> list : nameToWebsiteVisit.values()) {// for each user
-			helper(0, list, new ArrayList<>(), freqMap, new HashSet<>());
+			dfs(0, list, new ArrayList<>(), freqMap, new HashSet<>());
 		}
 		
-		// find the lower freq pattern and return it
+		// find the higher freq pattern and return it
 		int maxFreq = 0;
 		List<String> result = new ArrayList<>();
 		for (List<String> lst : freqMap.keySet()) {
@@ -129,6 +129,8 @@ public class Solution1152 {
 				result = lst;
 			} else if (freq == maxFreq && isLexicographicallySmaller(lst, result)) {
 				result = lst;
+			}else {
+				// ignore all low-frequencies
 			}
 		}
 		return result;

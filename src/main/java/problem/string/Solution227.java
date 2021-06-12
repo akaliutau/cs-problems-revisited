@@ -8,6 +8,9 @@ import java.util.Stack;
  * f.e.
  * 
  * 3 - 2*2
+ *    \  \
+ *     \  when met '*', process '-' 
+ * 
  * 
  *  stack  num        numSign
  *  []      3            +  <-- this is what we are going to assign to number on the TOP OF STACK after number parsing
@@ -20,7 +23,10 @@ import java.util.Stack;
  *  reduce [3, -4] -> -1
  *  
  *  IDEA:
- *  sign is always coming BEFORE number  
+ *  1. sign is always coming BEFORE number (no sign in the beginning can be interpreted as a '+')
+ *  2. when sign is met, perform operation with data on the top of Stack using PREVIOUS operator 
+ *  3. 
+ *  
  * 
  */
 public class Solution227 {
@@ -37,17 +43,18 @@ public class Solution227 {
         int n = s.length();
         if (n > 0) {
             Stack<Integer> stack = new Stack<>();
-            char numSign = '+';// last op is always summing
-            int num = 0;
+            char numSign = '+'; //  <--------- last op is always summing
+            int num = 0; //    <-------------- lst parsed number
             for (int i = 0; i < n; i++) {
                 char c = s.charAt(i);
                 if (Character.isDigit(c)) {
                     num = num * 10 + (c - '0');
+                    continue;
                 }
-                if (isOperator(c) || i == n - 1) {
+                if (isOperator(c) || i == n - 1) {// Crucial moment: note we exec this block on c, but analyze operation on stack!
                     if (numSign == '+') {
-                        stack.push(num);
-                    } else if (numSign == '-') {
+                        stack.push(num);          // [3]
+                    } else if (numSign == '-') {  // [3, -2]
                         stack.push(-num);
                     } else if (numSign == '*') {
                         stack.push(stack.pop() * num);

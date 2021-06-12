@@ -43,7 +43,7 @@ public class Solution1010 {
 		int count = 0;
 		for (int t : time) {
 			int remainder = t % 60;// == mapping [song duration] => [0,59]
-			if (remainder == 0) { // can form pairs with each of previous songs
+			if (remainder == 0) { // can form pairs with each of previous songs of length 60 (because 60 maps to 0)
 				count += rem[0];
 			} else { 
 				count += rem[60 - remainder]; // check complimentary, f.e. if remainder = 40, we can form valid pair with all songs which have remainder = 20

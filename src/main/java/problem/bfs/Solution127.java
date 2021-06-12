@@ -59,15 +59,15 @@ public class Solution127 {
 	int minDist = Integer.MAX_VALUE; // looking for only shortest paths
 
 	// used to calculate all possible words which can be built from word by replacing only 1 symbol
-	List<String> pathsFrom(String word, Map<Integer, List<String>> linkedWords, Set<String> visited) {
+	List<String> pathsFrom(String word, Map<Integer, List<String>> graph, Set<String> visited) {
 		Set<String> ans = new HashSet<>();
 		char[] orig = word.toCharArray();
 		for (int i = 0; i < word.length(); i++) {
 			char[] key = orig.clone();
 			key[i] = '?';
 			int hashCode = Arrays.hashCode(key);
-			if (linkedWords.containsKey(hashCode)) {
-				for (String w : linkedWords.get(hashCode)) {
+			if (graph.containsKey(hashCode)) {
+				for (String w : graph.get(hashCode)) {
 					if (!visited.contains(w)) {
 						ans.add(w);
 					}
@@ -84,19 +84,21 @@ public class Solution127 {
 		if (!words.contains(endWord)) {
 			return ans;
 		}
+		
+		
 		// building graph
 		// "?og" => [dog, cog, log]
 		// "d?g" => dog
 		// "do?" => dog
 
-		Map<Integer, List<String>> linkedWords = new HashMap<>();
+		Map<Integer, List<String>> graph = new HashMap<>();
 		for (String word : wordList) {// iterate through all words we have
 			char[] orig = word.toCharArray();
 			for (int i = 0; i < word.length(); i++) {
 				char[] key = orig.clone();
 				key[i] = '?';
 				int hashCode = Arrays.hashCode(key);
-				linkedWords.computeIfAbsent(hashCode, k -> new ArrayList<>()).add(word);
+				graph.computeIfAbsent(hashCode, k -> new ArrayList<>()).add(word);
 			}
 		}
 
@@ -133,7 +135,7 @@ public class Solution127 {
 				// mark processed word as visited
 				visited.add(word);
 				// get variations and link them to the current node
-				List<String> linked = pathsFrom(word, linkedWords, visited);
+				List<String> linked = pathsFrom(word, graph, visited);
 				for (String w : linked) {
 					q.add(new Node(w, node));
 				}

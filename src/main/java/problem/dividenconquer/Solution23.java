@@ -5,6 +5,9 @@ import problem.model.ListNode;
 /**
  * You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.
  * 
+ * IDEA:
+ * Use paired merge + dummy head technique
+ * 
  */
 public class Solution23 {
 
@@ -39,14 +42,21 @@ public class Solution23 {
             }
 
             prev.next = temp;
-            prev = prev.next;
+            prev = prev.next;// make newly added node the last one
         }
         return res.next;
     }
 
+    /**
+     * returns the result of merging lists on [start, end]
+     * @param lists
+     * @param start
+     * @param end
+     * @return
+     */
     public ListNode mergeSublist(ListNode[] lists, int start, int end) {
         if (start == end) {
-            return lists[start];
+            return lists[start];// if nothing to merge, return list itself
         }
 
         int mid = (end + start) / 2;
