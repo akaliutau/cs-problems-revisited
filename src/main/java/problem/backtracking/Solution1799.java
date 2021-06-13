@@ -91,7 +91,6 @@ public class Solution1799 {
 	}
 
 
-
 	public int maxScore(int[] nums) {
 		res = 0;
 		n = nums.length / 2;
