@@ -26,6 +26,9 @@ import java.util.Stack;
  * asteroids = [-5, 10, -5] Output: [-5, 10]
  * 
  * IDEA:
+ *  Use stack to collect asteroids flying in one direction, and 
+ *  update this stack each time the opposite direction is met
+ *  
  *  1) consider only one direction
  *  2) for each negative asteroid:
  *       check it's survival 
@@ -39,11 +42,11 @@ public class Solution735 {
 		for (int asteroid : asteroids) {
 			boolean bothdestroyed = false;
 			// check each negative asteroid for collision
-			if (asteroid < 0) {
+			if (asteroid < 0) {// update stack
 				while (!stack.isEmpty() && stack.peek() > 0) {// check only positive
 					if (stack.peek() < Math.abs(asteroid)) {// compare sizes
 						stack.pop();
-						continue;// asteroid wins and survives
+						continue;// asteroid defeated the one on the stack and continue to go through all the rest
 					} else if (stack.peek() == Math.abs(asteroid)) {
 						stack.pop();
 						bothdestroyed = true;

@@ -30,6 +30,10 @@ package problem.math;
  * and M (1000) to make 400 and 900. Given an integer, convert it to a roman
  * numeral.
  * 
+ * IDEA: 
+ * 1. consider Roman number as a block (container) to hold a specific amount of items
+ * 2. define how many times it is necessary to add up the current block, if reached a smaller number, decrease the index
+ * 
  */
 public class Solution12 {
 

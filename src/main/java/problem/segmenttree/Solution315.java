@@ -25,7 +25,11 @@ import java.util.List;
  * 
  *                       [0 5 2 6 1]
  *                 
- *   [0,6: 0]                  [0,6: 1]                 
+ *   [0,6: 0]  - initial array, no segments added
+ *   
+ *   after adding 1 the tree will look like:
+ *   
+ *                    		   [0,6: 1]                 
  *                          /           \
  *                      [0,3:1]          [4,6:0] 
  *                      /     \

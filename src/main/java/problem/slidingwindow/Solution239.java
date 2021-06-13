@@ -21,8 +21,24 @@ package problem.slidingwindow;
  *  1  3  3| -3  5  5|  6  7     :: left  
  *  3  3 -1|  5  5  3|  7  7     :: right
  *  
+ *  
+ *  In details:
+ *  [-3  5  3]
+ *            [6  3  6]  <-- non-overlapping windows are not a problem
+ *  
+ *   <-------------
+ *       |  | 
+ *  [-3  5  3]             + pre-calculated 
+ *      [5  3  6]
+ *            [6  3  6]    + pre-calculated 
+ *             |
+ *       ------------->   
+ *      [5  3][6]  
+ *       max1  max2   
+ *        max = max(max1, max2)   
+ *                           
  *  IDEA: 
- *  split on k-blocks and use partial sums to speed up 
+ *  split on k-blocks and use partial maxs to speed up 
  */
 public class Solution239 {
 

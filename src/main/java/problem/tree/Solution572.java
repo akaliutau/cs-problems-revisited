@@ -18,7 +18,8 @@ import problem.model.TreeNode;
  * 
  * 3) the same is true for each underlying level
  * 
- * IDEA: consider each node in s as node and check subtrees on equality
+ * IDEA: 
+ * consider each node in s as node and check subtrees on equality
  * 
  * There are 2 dfs processes:
  * 1) dfs - needed to init the 2nd dfs with root @ the same level || asymmetric

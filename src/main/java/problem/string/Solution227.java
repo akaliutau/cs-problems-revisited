@@ -36,11 +36,11 @@ public class Solution227 {
     }
 
     public int calculate(String s) {
-        int result = 0;
         if (s == null) {
             return 0;
         }
         int n = s.length();
+        int result = 0;
         if (n > 0) {
             Stack<Integer> stack = new Stack<>();
             char numSign = '+'; //  <--------- last op is always summing

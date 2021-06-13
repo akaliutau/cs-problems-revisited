@@ -18,6 +18,8 @@ import java.util.PriorityQueue;
  * Output: ["i", "love"] Explanation: "i" and "love" are the two most frequent
  * words. Note that "i" comes before "love" due to a lower alphabetical order.
  * 
+ * IDEA:
+ * collect stats, form a PQ from the records
  * 
  */
 public class Solution692 {

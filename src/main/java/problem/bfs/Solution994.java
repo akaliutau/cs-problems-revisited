@@ -66,10 +66,10 @@ public class Solution994 {
 
 		int sum = 0;
 
-		for (int[] row : grid) {// edge cases
+		for (int[] row : grid) {// edge cases - f.e. all fresh
 			for (int v : row) {
 				sum += v;
-				if (v == 1) {
+				if (v == 1) {// still fresh tomato found
 					return -1;
 				}
 			}

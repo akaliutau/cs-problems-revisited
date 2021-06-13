@@ -16,6 +16,8 @@ import java.util.Map;
  * (range from 0 to n-1) where random pointer points to, or null if it does not
  * point to any node.
  * 
+ * IDEA:
+ * 
  */
 public class Solution138 {
 
@@ -56,6 +58,7 @@ public class Solution138 {
 		node.next = copyRandomList(head.next);
 		node.random = copyRandomList(head.random);
 
+		// return ref to the newly created Node
 		return node;
 	}
 

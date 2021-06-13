@@ -4,7 +4,7 @@ package problem.unionfind;
  * 
  * Given n nodes labeled from 0 to n - 1 and a list of undirected edges (each
  * edge is a pair of nodes), write a function to find the number of connected
- * components in an undirected graph.
+ * distinctSets in an undirected graph.
  * 
  * Example 1:
  * 
@@ -16,46 +16,61 @@ package problem.unionfind;
  * 
  * Output: 2
  * 
+ * IDEA:
+ * 
+ *  building subsets:
+ *  
+ *  (0,1) : 0 <- 0, 1 <- 1           => 0 <- 1, set rank(0) = 1
+ *  (1,2):  0 <- 1 <- 1,  2 <- 2     => 0 <- 1 and 0 <- 2
+ *  
+ *  
+ * 
+ * 
+ * 
  */
 public class Solution323 {
 
 	static class Graph {
-		int[] rank;
-		int[] parent;
-		int components;
+		int[] rank;   // the same as height
+		int[] parent; // contains the reference to the root node of component [i]
+		int distinctSets;
 
 		public Graph(int n) {
 			rank = new int[n];
 			parent = new int[n];
-			components = 0;
+			distinctSets = n;
 			for (int i = 0; i < n; i++) {
-				parent[i] = i;
+				parent[i] = i;// each node is a parent for itself
 			}
 		}
 
 		public int find(int x) {
-			if (parent[x] == x) {
+			if (parent[x] == x) {// found parent/root
 				return x;
 			}
-			return parent[x] = find(parent[x]);
+			parent[x] = find(parent[x]);
+			return parent[x];
 		}
 
 		public boolean union(int x, int y) {
 			int px = find(x);
 			int py = find(y);
-			if (px == py) {
+			if (px == py) {// x & y belongs to the same set, drop this tie as it changes nothing
 				return false;
 			}
+			// x & y are in the different set
+			// px & py are their parents
 			// to make tree balanced
-			if (rank[px] > rank[py]) {
+			if (rank[px] > rank[py]) {// wins the parent with highest rank, i.e. px
 				parent[py] = px;
 			} else if (rank[py] > rank[px]) {
 				parent[px] = py;
-			} else {// to trigger rebalance
-				parent[py] = px;
-				rank[px] = rank[px] + 1;
+			} else {// if heights are equal, choose one  random
+				parent[py] = px; // now node with ref py has a parent => route for y is longer 
+				rank[px] ++;     // now the parent px has more advantages (provides a shorter path)
 			}
-			components++;
+			// we are merging 2 subsets into 1 set
+			distinctSets--;
 			return true;
 		}
 
@@ -66,7 +81,7 @@ public class Solution323 {
 		for (int[] edge : edges) {
 			g.union(edge[0], edge[1]);
 		}
-		return n - g.components;
+		return g.distinctSets;
 	}
 
 

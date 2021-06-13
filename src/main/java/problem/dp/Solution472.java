@@ -24,33 +24,43 @@ import java.util.Set;
  * Input: ["cat","cats","catsdogcats","dog" Output: ["catsdogcats","dogcatsdog"]
  * 
  * IDEA:
+ * we are cutting prefix at each level, filtering out all invalid prefixes 
  * 
+ * Let m = avr length of word
+ * Len n = # of words
+ * 
+ * 1st iteration - m cycles
+ * 2nd iteration - m-1 cycles
+ * 
+ * m + (m-1) + (m-2) + ... + 1 = m * (m - 1) / 2
+ * 
+ * 
+ * O(n * m^2/2)
  * 
  */
 public class Solution472 {
 
-	static boolean findWord(String str, int from, Set<String> hset, List<String> result) {
-		String s = str.substring(from);
-		if (s.isEmpty()) {
+	static boolean checkSuffix(String str, int from, Set<String> hset, List<String> result) {
+		String suffix = str.substring(from);
+		if (suffix.isEmpty()) {
 			return false;
 		}
 
-		/* Add to the result if last part of the string is found */
-		if (from != 0 && hset.contains(s)) {// str = catsdogcats - > cats + dogcats - NOT TRUE
-			result.add(str);
+		// Add to the result if last part of the string is found 
+		if (from != 0 && hset.contains(suffix)) {// str = catsdogcats - > cats + dogcats - NOT TRUE
+			result.add(str);// NOTE: we are adding initial string
 			return true;
 		}
 
-		StringBuilder sb = new StringBuilder();
-		sb.append(s.charAt(0));// dogcats
-		for (int i = 1; i < s.length(); i++) {
-			/* Check if we can complete the string using smaller words recursively */
-			if (hset.contains(sb.toString())) {
-				if (findWord(str, from + i, hset, result)) {// try catsdogcats as cats + dog + [cats]
+		for (int i = 1; i <= suffix.length(); i++) {
+			String prefix = suffix.substring(0,i);
+			// we go further if and only if prefix is a valid word
+			if (hset.contains(prefix)) {
+				// if suffix is a valid word
+				if (checkSuffix(str, from + i, hset, result)) {// try catsdogcats as cats + dog + [cats]
 					return true;
 				}
 			}
-			sb.append(s.charAt(i));
 		}
 
 		return false;
@@ -58,14 +68,13 @@ public class Solution472 {
 
 	public List<String> findAllConcatenatedWordsInADict(String[] words) {
 		Set<String> hset = new HashSet<>();
-		List<String> res = new ArrayList<>();
-
 		for (String s : words) {
 			hset.add(s);
 		}
 
+		List<String> res = new ArrayList<>();
 		for (String s : words) {
-			findWord(s, 0, hset, res);
+			checkSuffix(s, 0, hset, res);
 		}
 
 		return res;

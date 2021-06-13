@@ -16,12 +16,16 @@ import java.util.Map;
  * prerequisites = [[1,0]] Output: true Explanation: There are a total of 2
  * courses to take. To take course 1 you should have finished course 0. So it is
  * possible.
+ * 
+ * IDEA:
+ * Start from courses with 0 dependencies
+ * 
  */
 public class Solution207 {
 
     static class Node {
-        public Integer in = 0;
-        public List<Integer> out = new LinkedList<Integer>();
+        public Integer dep = 0;
+        public List<Integer> courses = new LinkedList<Integer>();
     }
 
     public boolean canFinish(int numCourses, int[][] prerequisites) {
@@ -35,10 +39,10 @@ public class Solution207 {
         // build the graph first
         for (int[] relation : prerequisites) {
             // relation[1] -> relation[0]
-            Node prevCourse = graph.computeIfAbsent(relation[1], c -> new Node());
-            Node nextCourse = graph.computeIfAbsent(relation[0], c -> new Node());
-            prevCourse.out.add(relation[0]);
-            nextCourse.in += 1;
+            Node dep = graph.computeIfAbsent(relation[1], c -> new Node());
+            Node courseToTake = graph.computeIfAbsent(relation[0], c -> new Node());
+            dep.courses.add(relation[0]);
+            courseToTake.dep += 1;
         }
 
         // We start from courses that have no prerequisites.
@@ -46,7 +50,7 @@ public class Solution207 {
         LinkedList<Integer> queue = new LinkedList<Integer>();
         for (Map.Entry<Integer, Node> entry : graph.entrySet()) {
             Node node = entry.getValue();
-            if (node.in == 0) {
+            if (node.dep == 0) {
                 queue.add(entry.getKey());
             }
         }
@@ -55,12 +59,12 @@ public class Solution207 {
         while (queue.size() > 0) {
             Integer course = queue.pop();
 
-            for (Integer nextCourse : graph.get(course).out) {
-                Node childNode = graph.get(nextCourse);
-                childNode.in --;
+            for (Integer courseToTake : graph.get(course).courses) {
+                Node childNode = graph.get(courseToTake);
+                childNode.dep --;
                 removedEdges += 1;
-                if (childNode.in == 0) {
-                    queue.add(nextCourse);
+                if (childNode.dep == 0) {// add to queue if and only if no dependencies
+                    queue.add(courseToTake);
                 }
             }
         }

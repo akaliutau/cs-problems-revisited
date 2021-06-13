@@ -26,6 +26,24 @@ import java.util.Map;
  * 
  * Output: ["eat","oath"]
  * 
+ * IDEA:
+ * 1. Use trie to fast access all words which start from specific prefix
+ * 2. Simultaneously traverse board and trie structure 
+ * 
+ *     b
+ *      \
+ *       o
+ *        \
+ *         o
+ *          \
+ *           k --> [book]
+ *            \
+ *             i
+ *              \
+ *               s
+ *                \
+ *                 h --> [bookish]
+ * 
  */
 public class Solution212 {
 
@@ -46,7 +64,7 @@ public class Solution212 {
 			node.word = word; // store words in Trie
 		}
 
-		ArrayList<String> result = new ArrayList<>();
+		List<String> result = new ArrayList<>();
 
 		// Backtracking starting for each cell in the board
 		for (int row = 0; row < board.length; ++row) {
@@ -60,8 +78,8 @@ public class Solution212 {
 		return result;
 	}
 
-	void backtracking(int row, int col, char[][] board, TrieNode parent, ArrayList<String> result) {
-		Character letter = board[row][col];
+	void backtracking(int row, int col, char[][] board, TrieNode parent, List<String> result) {
+		char letter = board[row][col];
 		TrieNode currNode = parent.children.get(letter);
 
 		if (currNode.word != null) {

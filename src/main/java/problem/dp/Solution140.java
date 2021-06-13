@@ -14,6 +14,9 @@ import java.util.Set;
  * Input: s = "catsanddog" wordDict = ["cat", "cats", "and", "sand", "dog"]
  * Output: [ "cats and dog", "cat sand dog" ] 
  * 
+ * IDEA:
+ * 
+ * 
  * catsanddog
  *    |   |
  *  start end = 7  
@@ -34,11 +37,15 @@ import java.util.Set;
  * 10  []
  * ]
  * 
- * 
+ * O(n)
  */
 public class Solution140 {
 
-    class Solution {
+   		static class Words {
+   			List<String> list = new ArrayList<>();
+   		}
+
+   	
         protected Set<String> wordSet;
 
         private void updateCharSet(String s, Set<Character> charSet) {
@@ -57,40 +64,37 @@ public class Solution140 {
                 updateCharSet(word, wordCharSet);
             }
 
-            // quick check on the sets of characters
+            // quick check on the sets of characters - not necessary, just an optimization
             if (!wordCharSet.containsAll(stringCharSet)) {
                 return new ArrayList<>();
             }
 
             int len = s.length();
             // contains a list of all possible cuts for [0,l)
-            List<List<String>> dp = new ArrayList<>(len + 1);// dp[i] the answer for the question if cut at i
+            Words[] dp = new Words[len + 1];// dp[i] the answer for the question if sentence's length is limited to i
             
             for (int i = 0; i < len + 1; ++i) {
-                List<String> emptyList = new ArrayList<>();
-                dp.add(emptyList);
+                dp[i] = new Words();
             }
-            dp.get(0).add("");
+            dp[0].list.add("");
 
-            for (int end = 1; end < len + 1; ++end) {
+            for (int end = 1; end < len + 1; end++) {
                 List<String> sublist = new ArrayList<>();
 
-                // fill up the values in the dp array.
-                for (int start = 0; start < end; ++start) {
-                    String word = s.substring(start, end);
-                    if (wordSet.contains(word)) {
-                        for (String subsentence : dp.get(start)) {
-                            sublist.add((subsentence + " " + word).trim());
+                // fill up the values in the dp array - split the word into to 2 = head + tail
+                for (int start = 0; start < end; start++) {
+                    String tail = s.substring(start, end);
+                    if (wordSet.contains(tail)) {
+                        for (String subsentence : dp[start].list) {
+                            sublist.add((subsentence + " " + tail).trim());
                         }
                     }
                 }
-                dp.set(end, sublist);
+                dp[end].list = sublist;
             }
 
-            return dp.get(len);
+            return dp[len].list;
         }
-    }
-
   
 
 }

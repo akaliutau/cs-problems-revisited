@@ -6,6 +6,8 @@ import problem.model.ListNode;
  * Merge two sorted linked lists and return it as a new sorted list. 
  * The new list should be made by splicing together the nodes of the first two lists.
  * 
+ * IDEA:
+ *  use dummy head
  */
 public class Solution21 {
 	

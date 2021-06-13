@@ -30,7 +30,7 @@ import java.util.Arrays;
  * 
  * IDEA:
  * 
- * use greedy approach
+ * use greedy approach - use all biggest units first, then smaller, and so on
  * 
  */
 public class Solution1710 {
@@ -38,9 +38,9 @@ public class Solution1710 {
 		Arrays.parallelSort(boxTypes, (o,p) -> p[1] - o[1]);
 		int units = 0;
 		for (int[] boxType : boxTypes) {
-			int boxes = Math.min(truckSize, boxType[0]);
+			int boxes = Math.min(truckSize, boxType[0]);// try to use box on maximum
 			truckSize -= boxes;
-			units += boxes * boxType[1];
+			units += boxes * boxType[1];// calculate gain in units
 			if (truckSize == 0) {
 				break;
 			}

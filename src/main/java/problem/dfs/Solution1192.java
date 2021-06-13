@@ -19,8 +19,10 @@ import java.util.Map;
  * Return all critical connections in the network in any order
  * 
  * IDEA:
+ * Have to mark all connections which are included into loop
+ * 
  * critical conn = node which has been passed twice (at least)
- * 1) relaxation decrease min time to the lowest time on the loop (if any)
+ * 1) relaxation decrease min visitTime to the lowest visitTime on the loop (if any)
  *  f.e. A->B->C->A
  *       1  2  3  1
  *       1  1  1  1
@@ -32,22 +34,22 @@ import java.util.Map;
  */
 public class Solution1192 {
 
-	private static void dfs(Map<Integer, List<Integer>> graph, boolean[] visited, int[] time, int prevNode, int curNode,
+	private static void dfs(Map<Integer, List<Integer>> graph, boolean[] visited, int[] visitTime, int prevNode, int curNode,
 			int curTime, List<List<Integer>> results) {
-		time[curNode] = curTime;
+		visitTime[curNode] = curTime;// always growing on each call
 		visited[curNode] = true;
 		for (int neighbor : graph.get(curNode)) {
 			if (neighbor == prevNode) {// omit previous (parent) node
 				continue;
 			}
 			if (!visited[neighbor]) {
-				dfs(graph, visited, time, curNode, neighbor, curTime + 1, results);
+				dfs(graph, visited, visitTime, curNode, neighbor, curTime + 1, results);
 			}
 			// relaxation equation - each node in the loop will be relaxed
 			// as a result all nodes in loop will have the same value
-			time[curNode] = Math.min(time[curNode], time[neighbor]);
-			// Compare time AFTER relaxation
-			if (time[neighbor] > time[curNode]) {
+			visitTime[curNode] = Math.min(visitTime[curNode], visitTime[neighbor]);// the lowest among all nodes
+			// IMPORTANT: Compare visitTime AFTER relaxation
+			if (visitTime[neighbor] > visitTime[curNode]) {
 				results.add(Arrays.asList(curNode, neighbor));
 			}
 		}
@@ -63,15 +65,12 @@ public class Solution1192 {
 			graph.computeIfAbsent(cur, k -> new ArrayList<>()).add(ref);
 			graph.computeIfAbsent(ref, k -> new ArrayList<>()).add(cur);
 		}
-		int[] time = new int[n];
-		for (int i = 0; i < n; ++i) {
-			time[i] = i;
-		}
+		int[] visitTime = new int[n];
 		boolean[] visited = new boolean[n];
 		int prevNode = -1;
 		int curNode = 0;
 		int curRank = 0;
-		dfs(graph, visited, time, prevNode, curNode, curRank, res);
+		dfs(graph, visited, visitTime, prevNode, curNode, curRank, res);
 		return res;
 	}
 
