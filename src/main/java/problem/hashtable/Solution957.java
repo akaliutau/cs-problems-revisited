@@ -1,7 +1,5 @@
 package problem.hashtable;
 
-import problem.utils.Utils;
-
 /**
  * There are 8 prison cells in a row, and each cell is either occupied or
  * vacant.
@@ -37,6 +35,10 @@ import problem.utils.Utils;
  * Day 6: [0, 0, 1, 0, 1, 1, 0, 0]
  * Day 7: [0, 0, 1, 1, 0, 0, 0, 0]
  * 
+ * IDEA:
+ * 
+ * 1. convert cells' state into 8-bit number, total 256 states
+ * 
  */
 public class Solution957 {
 
@@ -58,7 +60,7 @@ public class Solution957 {
 		boolean cycle = false;
 		int cycleLen = 0;
 		int[] history = new int[256];
-		history[cycleLen] = prison;
+		history[0] = prison;
 		while (day > 0) {
 			int left = prison >> 1;
 			int right = prison << 1;
@@ -69,7 +71,7 @@ public class Solution957 {
 				break;
 			}
 			states[newPrison] = true;
-			if (newPrison == prison) {
+			if (newPrison == prison) {// state is not changing anymore
 				found = true;
 				break;
 			}

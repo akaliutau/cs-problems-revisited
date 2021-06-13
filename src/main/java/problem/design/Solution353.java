@@ -96,7 +96,7 @@ public class Solution353 {
 			this.foodPos = new ArrayList<>(Arrays.asList(food));
 			this.deque = new LinkedList<>();
 
-			currentPos = new int[] { 0, 0 };
+			currentPos = new int[] { 0, 0 };// start position
 		}
 
 		/**
@@ -109,9 +109,9 @@ public class Solution353 {
 
 		public int move(String direction) {
 
-			int[] currentFood = foodPos.size() > 0 ? foodPos.get(0) : new int[] { -1, -1 };
+			int[] tgtFoodCell = foodPos.size() > 0 ? foodPos.get(0) : new int[] { -1, -1 };
 
-			int[] next = dirMap.get(direction);
+			int[] next = dirMap.get(direction);// convert command to numerical direction
 
 			int x = currentPos[0] + next[0];
 			int y = currentPos[1] + next[1];
@@ -124,12 +124,13 @@ public class Solution353 {
 			deque.add(x + ":" + y);
 
 			// the result of execution of this block:
-			// 1) score up, length increased
-			// 2) score the same, length the same
-			if (currentFood[0] == x && currentFood[1] == y) {
+			// either
+			// 1) score up, length increased, head moved
+			// 2) score the same, length the same, head moved, tail moved
+			if (tgtFoodCell[0] == x && tgtFoodCell[1] == y) {
 				foodPos.remove(0);
 				score++;
-			} else {// no inc in length, remove head
+			} else {// no inc in length, remove block @ tail
 				deque.poll();
 			}
 

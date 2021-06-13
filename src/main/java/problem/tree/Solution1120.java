@@ -26,6 +26,8 @@ public class Solution1120 {
 			this.count = count;
 		}
 	}
+	
+	double average = Integer.MIN_VALUE;
 
 	Result dfs(TreeNode root) {
 		if (root == null) {
@@ -47,7 +49,6 @@ public class Solution1120 {
 		return new Result(sum, count);
 	}
 
-	double average = Integer.MIN_VALUE;
 
 	public double maximumAverageSubtree(TreeNode root) {
 		dfs(root);

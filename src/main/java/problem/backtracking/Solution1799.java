@@ -28,10 +28,10 @@ import java.util.HashMap;
  * 
  * IDEA:
  * 
- * This is pure backtracking solution (i.e. BF):
+ * This is pure backtracking solution (i.e. Brute Force with filter):
  * 
- * A. try to build an optimal sequence using set for already seen positions and chaining the available ones
- * B. use bit masking for state vector
+ * A. try to build an optimal sequence using set for already seen positions and chaining the available ones from free slots
+ * B. use bit masking for state vector (can use boolean array instead)
  * 
  * Euclide algorithm:
  * 
@@ -67,18 +67,17 @@ public class Solution1799 {
 		}
 
 		int n = nums.length;
-		int val = 0, res = 0;
+		int res = 0;
 		
 		for (int j = 0; j < n; j++) {
             int jbit = 1 << j;
 			if ((set & jbit) == 0) {
 				for (int k = j + 1; k < n; k++) {
                     int kbit = 1 << k;
-					val = 0;
 					if ((set & kbit) == 0) {
 						set |= jbit;
 						set |= kbit;
-						val = i * (gcd(nums[j], nums[k])) + track(nums, i + 1, set);
+						int val = i * (gcd(nums[j], nums[k])) + track(nums, i + 1, set);
 						res = Math.max(res, val);
 						set ^= jbit;
 						set ^= kbit;

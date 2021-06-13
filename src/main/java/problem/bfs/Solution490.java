@@ -20,6 +20,10 @@ import java.util.Queue;
  * 
  */
 public class Solution490 {
+	
+	static boolean valid(int[][] maze, int x, int y, int n, int m) {
+		return x >= 0 && y >= 0 && x < n && y < m && maze[x][y] == 0;
+	}
 
 	public boolean hasPath(int[][] maze, int[] start, int[] destination) {
 		int n = maze.length;
@@ -37,15 +41,15 @@ public class Solution490 {
 			if (s[0] == destination[0] && s[1] == destination[1])
 				return true;
 			for (int[] dir : dirs) {
-				int x = s[0] + dir[0];
-				int y = s[1] + dir[1];
-				while (x >= 0 && y >= 0 && x < n && y < m && maze[x][y] == 0) {// until hit the wall
+				int x = s[0];
+				int y = s[1];
+				while (valid(maze, x + dir[0], y + dir[1], n, m)) {// until hit the wall
 					x += dir[0];
 					y += dir[1];
 				}
-				if (!visited[x - dir[0]][y - dir[1]]) {
-					queue.add(new int[] { x - dir[0], y - dir[1] });
-					visited[x - dir[0]][y - dir[1]] = true;
+				if (!visited[x][y]) {
+					queue.add(new int[] { x, y });
+					visited[x][y] = true;
 				}
 			}
 		}
