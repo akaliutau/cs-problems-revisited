@@ -61,13 +61,13 @@ import java.util.List;
  */
 public class Solution315 {
 	
-	static class Node {
+	static class Segment {
 		int[] range;
 		int count = 0;
-		Node left;
-		Node right;
+		Segment left;
+		Segment right;
 		
-		public Node(int min, int max) {
+		public Segment(int min, int max) {
 			this.range = new int[] {min, max};
 		}
 		
@@ -76,39 +76,39 @@ public class Solution315 {
 		}
         		@Override
 		public String toString() {
-			return "Node [range=" + Arrays.toString(range) + ", count=" + count + "]";
+			return "Segment [range=" + Arrays.toString(range) + ", count=" + count + "]";
 		}
 
 	}
 	
 	static class SegmentTree {
-		Node root;
+		Segment root;
 		
 		public SegmentTree(int min, int max) {
-			this.root = new Node(min, max);
+			this.root = new Segment(min, max);
 		}
 		
 		public void add(int num) {
 			add(this.root, num);
 		}
 		
-		private void add(Node node, int num) {
-			node.count ++;
-			if (!node.isLeaf()) {
-				int mid = (node.range[0] + node.range[1] ) / 2;
-				if (node.left == null) {
-					node.left = new Node(node.range[0], mid);
+		private void add(Segment segm, int num) {
+			segm.count ++;
+			if (!segm.isLeaf()) {
+				int mid = (segm.range[0] + segm.range[1] ) / 2;
+				if (segm.left == null) {
+					segm.left = new Segment(segm.range[0], mid);
 				}
-				if (node.right == null) {
-					node.right = new Node(mid, node.range[1]);
+				if (segm.right == null) {
+					segm.right = new Segment(mid, segm.range[1]);
 				}
-				if (inRange(num, node.left.range)) {
-					add(node.left, num);
-				}else if (inRange(num, node.right.range)) {
-					add(node.right, num);
+				if (inRange(num, segm.left.range)) {
+					add(segm.left, num);
+				}else if (inRange(num, segm.right.range)) {
+					add(segm.right, num);
 				}
 			}else{
-                System.out.println(num + "->" +node);
+                System.out.println(num + "->" +segm);
             }
 		}
 		
@@ -122,16 +122,16 @@ public class Solution315 {
 			return ans[0];
 		}
 		
-		private void find(Node node, int num, int[] res) {
-            if (node == null){
+		private void find(Segment segm, int num, int[] res) {
+            if (segm == null){
                 return;
             }
-			if (inRange(num, node.range)) {
-				find(node.left, num, res);
-				find(node.right, num, res);
+			if (inRange(num, segm.range)) {
+				find(segm.left, num, res);
+				find(segm.right, num, res);
 			}else {
-				if (num >= node.range[1]) {
-					res[0] += node.count;
+				if (num >= segm.range[1]) {
+					res[0] += segm.count;
 				}
 			}
 		}

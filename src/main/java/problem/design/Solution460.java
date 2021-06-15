@@ -29,6 +29,12 @@ import java.util.Map;
  * 
  * Note, that the tricky part is node migration (from group to group)
  * 
+ * When we GET node, then
+ * 1) find and remove it from data structure
+ * 2) calc new frequency
+ * 3) add it to the new group
+ * 
+ * 
  */
 public class Solution460 {
 
@@ -69,9 +75,11 @@ public class Solution460 {
 		int maxSize;
 		int size;
 
+		// helper structures
 		Map<Integer, LinkedList<Node>> counter; // groups nodes by frequency
 		Map<Integer, Node> nodeMap;             // mapping key => node for fast access
 
+		// sequence structure (all that does not fit must be evicted, and position is determined by statistics)
 		Node head;// points to the first node in cache
 		Node tail;// points to the last node in cache
 
@@ -100,13 +108,13 @@ public class Solution460 {
 
 			if (nodes.size() > 0) {
 				Node node1 = nodes.peekFirst();
-				requestedNode.chain(node1);
+				requestedNode.chain(node1);// bubble up requested node to the top, Note: use a 3rd structure
 				if (requestedNode == tail) {
 					tail = node1;
 				}
 			}
 
-			requestedNode.count += 1;
+			requestedNode.count ++;
 
 			LinkedList<Node> updatesNodes = counter.computeIfAbsent(requestedNode.count, k -> new LinkedList<>());
 			

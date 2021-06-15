@@ -22,12 +22,13 @@ package problem.dfs;
  * 
  * IDEA:
  * use transitive feature of dfs to detect and fill out the friend circle - the same as in islands problem
+ * because all connections will be marked as visited and removed from dfs
  * 
  */
 public class Solution547 {
 
     void dfs(int[][] adj, boolean[] visited, int i) {
-        for (int j = 0; j < adj.length; j++) {
+        for (int j = 0; j < adj.length; j++) {// note: we are going though ALL nodes!
             if (adj[i][j] == 1 && !visited[j]) {
                 visited[j] = true;
                 dfs(adj, visited, j);
@@ -40,7 +41,7 @@ public class Solution547 {
         boolean[] visited = new boolean[n];
         int count = 0;
         for (int i = 0; i < n; i++) {
-            if (!visited[i]) {
+            if (!visited[i]) {// start dfs here
                 dfs(adj, visited, i);// build a tree of connections as big as possible
                 count++;// will be limited naturally by max=n
             }
