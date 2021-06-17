@@ -26,10 +26,15 @@ package problem.misc;
  */
 public class Solution1826 {
 	
+	/**
+	 *  Hypothesis: sensor1 is failing
+	 *  Try to investigate this case, and return -1 in the 1st elem of result if some discrepancy found,
+	 *  or 0 plus pointers if all ok 
+	 */
 	static int[] check(int[] sensor1, int[] sensor2) {
 	       int i1 = 0, i2 = 0, n = sensor1.length;
 	        
-	        // finding the first miss match index;
+	        // finding the first miss match index
 	        while(i1 < n){
 	            if(sensor1[i1] == sensor2[i2]){
 	                i2++;
@@ -38,10 +43,13 @@ public class Solution1826 {
 	                break;
 	            }
 	        }
+	        // if the first miss match index is the last one, then we cannot say anything 
 	        if(i1 == n - 1 || i1 == n){
 	            return new int[] {-1, i1, i2};
 	        }
 	        
+	        // else difference has been found somewhere in the middle
+	        // drop the difference
 	        i1 ++;
 	        while(i1 < n){
 	            if(sensor1[i1] != sensor2[i2]){
@@ -53,6 +61,7 @@ public class Solution1826 {
 	        }
 	        return new int[] {0, i1, i2};
 	}
+	
 	public int badSensor(int[] sensor1, int[] sensor2) {
 		int n = sensor1.length;
 		int[] res1 = check(sensor1, sensor2);
@@ -60,7 +69,7 @@ public class Solution1826 {
 		if (res1[0] == -1 || res1[0] == -1) {
 			return -1;
 		}
-		if (res1[0] == 0 && res1[0] == 0 && res1[1] == n && res2[1] == n ) {
+		if (res1[0] == 0 && res2[0] == 0 && res1[1] == n && res2[1] == n ) {
 			return -1;
 		}
 		return res1[1] == n ? 2 : 1;

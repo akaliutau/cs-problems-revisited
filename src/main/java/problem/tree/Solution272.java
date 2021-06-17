@@ -13,8 +13,9 @@ import problem.model.TreeNode;
  * the answer in any order.
  * 
  * IDEA:
- * 
- * 
+ * Use PriorityQueue as a filter of size k which will accumulate only the closest elements
+ * and filter out all the distant ones
+ * Note the importance of in-order traversing:
  *
  */
 public class Solution272 {
@@ -25,7 +26,7 @@ public class Solution272 {
                     
         inorder(r.left, nums, pq, k);
         pq.add(r.val);
-        if (pq.size() > k) {
+        if (pq.size() > k) {// at the end PQ will accumulate only the closest elements
         	pq.remove();
         }
         inorder(r.right, nums, pq, k);
@@ -34,8 +35,8 @@ public class Solution272 {
     public List<Integer> closestKValues(TreeNode root, double target, int k) {
         List<Integer> nums = new ArrayList<>();
         
-        // init heap 'less close element first'
-        Queue<Integer> heap = new PriorityQueue<>((o1, o2) -> Math.abs(o1 - target) > Math.abs(o2 - target) ? -1 : 1);
+        // heap: 'more distant element is on the top'
+        Queue<Integer> heap = new PriorityQueue<>((o, p) -> Math.abs(o - target) > Math.abs(p - target) ? -1 : 1);
         inorder(root, nums, heap, k);
         
         return new ArrayList<>(heap);
