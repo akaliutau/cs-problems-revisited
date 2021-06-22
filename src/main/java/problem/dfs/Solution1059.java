@@ -23,13 +23,13 @@ public class Solution1059 {
 
 	int n = 10010;
 	int[] destMap = new int[n], oneway = new int[n];
-	int[] idSrc = new int[n];// id of all source nodes
+	int[] idSrc = new int[n];     // IDs of all source nodes
 	int idx = 0;
 
-	void add(int src, int dest) {// forming linked list of nodes, f.e. [0,1], [1,2]
+	void add(int src, int dest) { // forming linked list of nodes, f.e. [0,1], [1,2]
 		destMap[idx] = dest;      // destMap[0] = 1
-		oneway[idx] = idSrc[src];// oneway[0] = -1 - always = -1, if only 1 path exists
-		idSrc[src] = idx;    // idSrc[0] = 0
+		oneway[idx] = idSrc[src]; // oneway[0] = -1 - always = -1, if only 1 path exists
+		idSrc[src] = idx;         // idSrc[0] = 0
 		idx++;
 	}
 
@@ -44,14 +44,14 @@ public class Solution1059 {
 		}
 		seen[node] = true;
 		int id = idSrc[node];
-		while (id != -1) {// go through all possibilities
+		while (id != -1) {        // go through all possibilities
 			int j = destMap[id];
 			if (!dfs(j, dest)) {
 				return false;
 			}
 			id = oneway[id];
 		}
-		seen[node] = false;// backtracking
+		seen[node] = false;      // backtracking
 		return true;
 	}
 
