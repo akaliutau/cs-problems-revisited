@@ -15,7 +15,7 @@ import java.util.Map;
  * IDEA:
  * use Brute force with memoization
  * 1. start from the source
- * 2. 
+ * 2. for each pair (node, limit) build the optimal path
  * 
  * 
  * 
