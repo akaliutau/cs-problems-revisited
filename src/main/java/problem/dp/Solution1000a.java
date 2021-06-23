@@ -98,7 +98,7 @@ public class Solution1000a {
 		}
 		// choose optimal variant from block [left, right] and choose the best one
 		int ans = Integer.MAX_VALUE;
-		for (int i = left; i < right; i += k - 1) {
+		for (int i = left; i < right; i += k - 1) {// note the increase on blocksize
 			ans = Math.min(ans, cost(stones, memo, k, left, i) +
 					            cost(stones, memo, k, i + 1, right));
 		}

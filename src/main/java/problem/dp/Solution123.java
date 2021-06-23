@@ -29,7 +29,7 @@ public class Solution123 {
         int rightMax = prices[n - 1];
 
         int[] leftProfits = new int[n];
-        // pad the right DP array with an additional zero for convenience.
+        // fill out the right DP array with an additional zeros for convenience.
         int[] rightProfits = new int[n + 1];
 
         // construct the bidirectional DP array
