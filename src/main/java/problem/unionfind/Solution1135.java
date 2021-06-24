@@ -56,7 +56,7 @@ public class Solution1135 {
         Arrays.sort(connections, (a, b) -> a[2] - b[2]);
         Graph g = new Graph(n);
         
-        for (int[] e : connections)
+        for (int[] e : connections) {
             if (g.find(e[0]) != g.find(e[1])) {// e[0] and e[1] are not in the same set yet
                 ans += e[2];
                 cnt++;
@@ -65,6 +65,7 @@ public class Solution1135 {
                     break;
                 }
             }
+        }
         return cnt == n - 1 ? ans : -1;
     }
 

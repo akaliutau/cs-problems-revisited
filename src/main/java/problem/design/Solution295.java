@@ -7,7 +7,7 @@ import java.util.Queue;
  * [41, 35, 62, 5, 97, 108] 
  * 
  * IDEA:
- * 1) to calculate median only centroid or central element is needed
+ * 1) note that in order to calculate median only centroid or central element are needed
  * 
  * 
  * Adding  41 MaxHeap lower: [41]         MinHeap higher: []            Median is 41 
@@ -43,6 +43,9 @@ public class Solution295 {
             lower.add(higher.peek());
 
             higher.poll();
+            
+            // we passed num through 2 heaps, now the lower heap accumulated all values
+            // balance this!
 
             if (higher.size() < lower.size()) {// balance to keep size ratio 50-50
                 higher.add(lower.peek());

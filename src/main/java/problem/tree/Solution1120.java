@@ -14,6 +14,7 @@ import problem.model.TreeNode;
  * just collect state during traversing
  * for each node calculate the avg using stats about childs + current node
  * 
+ * NOTE: we cannot transfer the same object across all branches, as sums in left/right are not correlate  
  */
 public class Solution1120 {
 

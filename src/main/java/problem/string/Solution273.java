@@ -4,7 +4,7 @@ package problem.string;
  * Convert a non-negative integer num to its English words representation.
  * 
  * IDEA:
- *  process phrase recursively
+ * process number recursively, starting from the biggest
  */
 public class Solution273 {
 

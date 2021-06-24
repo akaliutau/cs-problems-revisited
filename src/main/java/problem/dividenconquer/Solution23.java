@@ -7,7 +7,7 @@ import problem.model.ListNode;
  * 
  * IDEA:
  * Use paired merge + dummy head technique
- * 
+ * 1. divide all list on pairs, merge them, then form new pairs from merges, and so on
  */
 public class Solution23 {
 
@@ -20,6 +20,7 @@ public class Solution23 {
 
         ListNode prev = new ListNode(0);
         ListNode res = prev;
+        
         while (l1 != null || l2 != null) {
             if (l1 == null) {
                 prev.next = l2;
@@ -32,7 +33,7 @@ public class Solution23 {
             int val1 = l1.val;
             int val2 = l2.val;
 
-            ListNode temp = null;
+            ListNode temp = null;// new elem of merged list
             if (val1 < val2) {
                 temp = new ListNode(val1);
                 l1 = l1.next;
@@ -44,6 +45,7 @@ public class Solution23 {
             prev.next = temp;
             prev = prev.next;// make newly added node the last one
         }
+        
         return res.next;
     }
 

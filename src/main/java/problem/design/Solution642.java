@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 /**
  * Design a search autocomplete system for a search engine. Users may input a
@@ -20,8 +21,8 @@ import java.util.Map;
  * have the same degree of hot, you need to use ASCII-code order (smaller one
  * appears first). If less than 3 hot sentences exist, then just return as many
  * as you can. When the input is a special character, it means the sentence
- * ends, and in this case, you need to return an empty list. Your job is to
- * implement the following functions:
+ * ends, and in this case, you need to return an empty dynamicList. Your job is
+ * to implement the following functions:
  * 
  * The constructor function:
  * 
@@ -72,49 +73,65 @@ public class Solution642 {
 
 	static class Node {
 		String sentence;
+		int idx;
 		int times;
 
-		Node(String st, int t) {
+		Node(String st, int id, int t) {
 			sentence = st;
+			idx = id;
 			times = t;
 		}
 	}
 
 	class AutocompleteSystem {
-		private Map<String, Integer> freq = new HashMap<>();// freq sentence => times
-		private String curSentence = "";// sentence typed by user
+		private Map<String, Node> freq = new HashMap<>();// freq sentence => times
+		private String curSentence = "";
+		int idx = 0;
+		// get top 3 by frequency
+		Comparator<Node> byTimes = (o, p) -> o.times - p.times;
+		Comparator<Node> bySentence = (o, p) -> p.sentence.compareTo(o.sentence);
 
 		public AutocompleteSystem(String[] sentences, int[] times) {
 			for (int i = 0; i < sentences.length; i++) {
-				freq.put(sentences[i], times[i]);
+				freq.put(sentences[i], new Node(sentences[i], i, times[i]));
+				idx++;
 			}
 		}
 
 		public List<String> input(char c) {
-			List<String> res = new ArrayList<>();
+			List<Node> res = new ArrayList<>();
 			if (c == '#') {// user clicked search again
-				freq.compute(curSentence, (k, v) -> v == 0 ? 0 : v + 1);// update statistics and reset
+				if (freq.containsKey(curSentence)) {
+					freq.get(curSentence).times++;
+				} else {
+					freq.put(curSentence, new Node(curSentence, idx++, 1));
+				}
 				curSentence = "";
 			} else {
 				curSentence += c;
 
-				List<Node> list = new ArrayList<>();
+				PriorityQueue<Node> dynamicList = new PriorityQueue<>(byTimes.thenComparing(bySentence));
 				// find candidates
 				for (String key : freq.keySet()) {
-					if (key.indexOf(curSentence) == 0) {
-						list.add(new Node(key, freq.get(key)));// note: just for convenience
+					if (key.startsWith(curSentence)) {
+						dynamicList.add(freq.get(key));// note: just for convenience
+					}
+					if (dynamicList.size() > 3) {
+						dynamicList.poll();
 					}
 				}
-				// get top 3 by frequency
-				Comparator<Node> byTimes = (o, p) -> Integer.compare(p.times, o.times);
-				Comparator<Node> bySentence = (o, p) -> o.sentence.compareTo(p.sentence);
-				Collections.sort(list, byTimes.thenComparing(bySentence));// first compare by size, and if found equal, sort lexicographically
 
-				for (int i = 0; i < Math.min(3, list.size()); i++) {
-					res.add(list.get(i).sentence);
-				}
+				res.addAll(dynamicList);
 			}
-			return res;
+			Comparator<Node> byTimesRev = (o, p) -> p.times - o.times;
+			Comparator<Node> bySentenceNat = (o, p) -> o.sentence.compareTo(p.sentence);
+			Collections.sort(res, byTimesRev.thenComparing(bySentenceNat));
+			List<String> ret = new ArrayList<>();
+			res.forEach(node -> 
+				ret.add(node.sentence)
+			);
+
+			return ret;
 		}
 	}
 
@@ -123,6 +140,5 @@ public class Solution642 {
 	 * AutocompleteSystem obj = new AutocompleteSystem(sentences, times);
 	 * List<String> param_1 = obj.input(c);
 	 */
-
 
 }

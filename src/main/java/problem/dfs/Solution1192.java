@@ -21,7 +21,16 @@ import java.util.Map;
  * IDEA:
  * Have to mark all connections which are included into loop
  * 
- * critical conn = node which has been passed twice (at least)
+ * critical conn = node which has 2 connections (at least)
+ * The time at node can be relaxed if and only if there is some alternative connection 
+ * WITH ALREADY SEEN NODES (== in the past)
+ * 
+ *     A  <--- t = 0
+ *    / \ 
+ *   C - B   <--- t = 1   
+ *   |     <--- t = 2
+ *   D
+ * 
  * 1) relaxation decrease min visitTime to the lowest visitTime on the loop (if any)
  *  f.e. A->B->C->A
  *       1  2  3  1
@@ -49,7 +58,7 @@ public class Solution1192 {
 			// as a result all nodes in loop will have the same value
 			visitTime[curNode] = Math.min(visitTime[curNode], visitTime[neighbor]);// the lowest among all nodes
 			// IMPORTANT: Compare visitTime AFTER relaxation
-			if (visitTime[neighbor] > visitTime[curNode]) {
+			if (visitTime[neighbor] > curTime) {// neighbor is still in the future
 				results.add(Arrays.asList(curNode, neighbor));
 			}
 		}

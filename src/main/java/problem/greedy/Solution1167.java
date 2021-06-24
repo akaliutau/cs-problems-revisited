@@ -46,10 +46,9 @@ import java.util.stream.Collectors;
  *    =========
  *   ==  ======   <-- Note, that 1 + 1 + 6 < (1+6) + (1+6), so use this observation to minimize total sum
  *  = =  === ===
- *  S = 2 x s1 + 2 x s2 
+ *  (4 x size1 + size2) vs. (2 x size1 + 2 x size2) 
  *  
- *  S = 4 x s1 + 2 x s2 
- *  S = 2 x s1 + 4 x s2 
+
  *  
  *  We have to add bigger blocks as rare as possible
  */
