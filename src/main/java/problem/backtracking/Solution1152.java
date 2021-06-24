@@ -84,7 +84,7 @@ public class Solution1152 {
 			if (visited.contains(currList)) {
 				return;
 			}
-			List<String> copy = new ArrayList<>(currList);
+			List<String> copy = new ArrayList<>(currList);// currList contains the dynamic sequence
 			visited.add(copy);
 			freqMap.compute(copy, (k,v) -> v == null ? 1 : v + 1);
 			return;

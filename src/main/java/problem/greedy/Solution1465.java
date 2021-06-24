@@ -26,30 +26,30 @@ public class Solution1465 {
 		
 		// define the array to hold deltas between slices
 		// for n cuts we have n + 1 slices
-		long[] hInt = new long[hCuts + 1];
+		long[] hGaps = new long[hCuts + 1];
 		Arrays.sort(horizontalCuts);
-		hInt[0] = horizontalCuts[0];// the size of the very first slice is the 1st cut
+		hGaps[0] = horizontalCuts[0];// the size of the very first slice is the 1st cut
 		for (int i = 1; i < hCuts; i++) {
-			hInt[i] = horizontalCuts[i] - horizontalCuts[i - 1];
+			hGaps[i] = horizontalCuts[i] - horizontalCuts[i - 1];
 		}
-		hInt[hCuts] = h - horizontalCuts[hCuts - 1];// tail
+		hGaps[hCuts] = h - horizontalCuts[hCuts - 1];// tail
 		
-		long[] vInt = new long[vCuts + 1];
+		long[] vGaps = new long[vCuts + 1];
 		Arrays.sort(verticalCuts);
-		vInt[0] = verticalCuts[0];
+		vGaps[0] = verticalCuts[0];
 		for (int i = 1; i < vCuts; i++) {
-			vInt[i] = verticalCuts[i] - verticalCuts[i - 1];
+			vGaps[i] = verticalCuts[i] - verticalCuts[i - 1];
 		}
-		vInt[vCuts] = w - verticalCuts[vCuts - 1];
+		vGaps[vCuts] = w - verticalCuts[vCuts - 1];
 
 		long maxh = 0;
 		for (int i = 0; i <= hCuts; i++) {
-			maxh = Math.max(maxh, hInt[i]);
+			maxh = Math.max(maxh, hGaps[i]);// find the max horizontal gap
 		}
 
 		long maxv = 0;
 		for (int i = 0; i <= vCuts; i++) {
-			maxv = Math.max(maxv, vInt[i]);
+			maxv = Math.max(maxv, vGaps[i]);
 		}
 		long area = (long) (maxh * maxv) % 1000000007;
 		return (int) area;

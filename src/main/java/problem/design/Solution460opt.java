@@ -1,9 +1,7 @@
 package problem.design;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
-import java.util.Queue;
 import java.util.TreeMap;
 
 /**
@@ -61,9 +59,9 @@ import java.util.TreeMap;
  *   0         ->   [30, 20]
  *   1         ->   [10, 15]
  *   
- *   
+ *   NOTE: optimized version, to pass TLE test
  */
-public class Solution460 {
+public class Solution460opt {
 
 	class LFUCache {
 
@@ -72,19 +70,61 @@ public class Solution460 {
 			int key;
 			int value;
 			int count = 0;
+			
+			Node prev;
+			Node next;
 
 			Node(int key, int value) {
 				this.key = key;
 				this.value = value;
 			}
+			
+			public void remove() {
+				prev.next = next;
+				next.prev = prev;
+			}
 
+		}
+		
+		class DList {
+			Node head;
+			Node tail;
+			
+			public DList() {
+				head = new Node(0, 0);
+				tail = new Node(0, 0);
+				head.next = tail;
+				tail.prev = head;
+			}
+			
+			public Node poll() {
+				if (tail.prev == head) {
+					return null;
+				}
+				Node ret = tail.prev;
+				tail.prev = ret.prev;
+				tail.prev.next = tail;
+				return ret;
+			}
+			
+			public void add(Node node) {
+				node.prev = head;
+				node.next = head.next;
+				head.next = node;
+			}
+			
+			public boolean isEmpty() {
+				return head.next == tail;
+			}
+			
+			
 		}
 
 		int maxSize;
 		int size;
 
 		// helper structures
-		TreeMap<Integer, LinkedList<Node>> freq; // groups group by frequency - each group is a list of group
+		TreeMap<Integer, DList> freq; // groups group by frequency - each group is a list of group
 		Map<Integer, Node> nodeMap;          // mapping key => node for fast access
 
 
@@ -107,15 +147,15 @@ public class Solution460 {
 
 			Node requestedNode = nodeMap.get(key);// requested node
 			
-			Queue<Node> group = freq.get(requestedNode.count);
-			group.remove(requestedNode);
+			DList group = freq.get(requestedNode.count);
+			requestedNode.remove();
             if (group.isEmpty()){
                 freq.remove(requestedNode.count);
             }
 
 			requestedNode.count ++;
 
-			Queue<Node> newGroup = freq.computeIfAbsent(requestedNode.count, k -> new LinkedList<>());
+			DList newGroup = freq.computeIfAbsent(requestedNode.count, k -> new DList());
 			newGroup.add(requestedNode);
 
 			return requestedNode.value;
@@ -144,7 +184,7 @@ public class Solution460 {
 
 			Node node = new Node(key, value);
 			nodeMap.put(key, node);
-			freq.computeIfAbsent(node.count, k -> new LinkedList<>()).offer(node);
+			freq.computeIfAbsent(node.count, k -> new DList()).add(node);
             size ++;
 		}
 	}
