@@ -25,7 +25,13 @@ public class ReferenceGenerator {
 	static final String prefix = "Solution";
 	
 	static final Set<String> dropRecords = new HashSet<>(Arrays.asList("Database"));
-
+	
+	static final Map<String,String> map = new HashMap<>();
+	
+	static {
+		map.put("Depth-First Search", "DFS");
+		map.put("Breadth-First Search", "BFS");
+	}
 
 	public static void main(String[] args) throws IOException {
 		Path path = Paths.get("list.txt");
@@ -86,7 +92,13 @@ public class ReferenceGenerator {
 				sb.append(c);
 			}
 		}
-		return sb.toString();
+		String ret = sb.toString().replace("  ", " ");
+		for (String key : map.keySet()) {
+			if (ret.contains(key)) {
+				ret = ret.replace(key, map.get(key));
+			}
+		}
+		return ret;
 	}
 
 
