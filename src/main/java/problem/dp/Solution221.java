@@ -41,7 +41,7 @@ public class Solution221 {
 				dp[i][j] = matrix[i][j] - '0';// 1 || 0
 				if (dp[i][j] == 1) {
 					// == [number of 1 in col/row] + cur status
-					// min method will guarantee the reset on any bigger than 2x2 square
+					// min method will guarantee the reset to 0 (dp will be 1) on any bigger than 2x2 square
 					dp[i][j] = Math.min(dp(dp, i - 1, j), Math.min(dp(dp, i, j - 1), dp(dp, i - 1, j - 1))) + 1;
 					size = Math.max(size, dp[i][j]);
 				}
