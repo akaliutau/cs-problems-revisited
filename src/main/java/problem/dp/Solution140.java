@@ -37,7 +37,7 @@ import java.util.Set;
  * 10  []
  * ]
  * 
- * O(n)
+ * O(n^2 + 2^n)
  */
 public class Solution140 {
 
@@ -85,7 +85,7 @@ public class Solution140 {
                 for (int start = 0; start < end; start++) {
                     String tail = s.substring(start, end);
                     if (wordSet.contains(tail)) {
-                        for (String subsentence : dp[start].list) {
+                        for (String subsentence : dp[start].list) {// this could lead to 2^n overall complexity
                             sublist.add((subsentence + " " + tail).trim());
                         }
                     }
