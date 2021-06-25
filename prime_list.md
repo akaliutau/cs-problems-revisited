@@ -109,7 +109,7 @@ Reference index
 
 [Problem 1328](./src/main/java/problem/palindrome/Solution1328.java) (String Greedy)
 
-[Problem 1000](N/A) (Array Dynamic Programming)
+[Problem 1000](./src/main/java/problem/dp/Solution1000.java) (Array Dynamic Programming)
 
 [Problem 227](./src/main/java/problem/string/Solution227.java) (Math String Stack)
 

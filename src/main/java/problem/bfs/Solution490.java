@@ -40,7 +40,7 @@ public class Solution490 {
 			int[] s = queue.remove();
 			if (s[0] == destination[0] && s[1] == destination[1])
 				return true;
-			for (int[] dir : dirs) {
+			for (int[] dir : dirs) {// start traversing in all directions in the same time
 				int x = s[0];
 				int y = s[1];
 				while (valid(maze, x + dir[0], y + dir[1], n, m)) {// until hit the wall

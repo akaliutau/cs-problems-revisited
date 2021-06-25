@@ -72,7 +72,7 @@ package problem.dp;
  *     
  *      
  */
-public class Solution1000a {
+public class Solution1000 {
 	
 	int sum(int[] stones, int left, int right) {
 		int s = 0;
@@ -99,8 +99,8 @@ public class Solution1000a {
 		// choose optimal variant from block [left, right] and choose the best one
 		int ans = Integer.MAX_VALUE;
 		for (int i = left; i < right; i += k - 1) {// note the increase on blocksize
-			ans = Math.min(ans, cost(stones, memo, k, left, i) +
-					            cost(stones, memo, k, i + 1, right));
+			ans = Math.min(ans, cost(stones, memo, k, left, i         ) +
+					            cost(stones, memo, k,     i + 1, right));
 		}
 		if (k == 2 || len % (k - 1) == 1) { // here len can be only > k
 			ans += sum(stones, left, right);// sum of end piles is always the same 

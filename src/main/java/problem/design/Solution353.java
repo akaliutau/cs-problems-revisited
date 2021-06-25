@@ -117,17 +117,17 @@ public class Solution353 {
 			int y = currentPos[1] + next[1];
 			currentPos = new int[] { x, y };
 
-			if (x == height || y == width || x < 0 || y < 0 || deque.contains((x + ":" + y))) {
+			if (x == height || y == width || x < 0 || y < 0 || deque.contains((x + ":" + y))) {// end of game condition
 				return -1;
 			}
 
-			deque.add(x + ":" + y);
+			deque.add(x + ":" + y);// length of snake increased on 1 segment
 
 			// the result of execution of this block:
 			// either
 			// 1) score up, length increased, head moved
 			// 2) score the same, length the same, head moved, tail moved
-			if (tgtFoodCell[0] == x && tgtFoodCell[1] == y) {
+			if (tgtFoodCell[0] == x && tgtFoodCell[1] == y) {// consume the food
 				foodPos.remove(0);
 				score++;
 			} else {// no inc in length, remove block @ tail

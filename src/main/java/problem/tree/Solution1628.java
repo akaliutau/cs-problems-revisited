@@ -18,7 +18,8 @@ import java.util.Stack;
  * IDEA:
  * 
  * 1. if integer, then just add node to stack
- * 2. Else create operation node with left and rigth child nodes 
+ * 2. Else create operation node with left and right child nodes (note the order as  / and - operations are not associative)
+ *  (associative operation is a calculation that gives the same result regardless of the way the numbers are grouped)
  *
  */
 public class Solution1628 {

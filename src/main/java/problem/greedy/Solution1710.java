@@ -22,11 +22,13 @@ import java.util.Arrays;
  * Input: boxTypes = [[1,3],[2,2],[3,1]], truckSize = 4 Output: 8 
  * 
  * Explanation:
- * There are: - 1 box of the first type that contains 3 units. - 2 boxes of the
- * second type that contain 2 units each. - 3 boxes of the third type that
- * contain 1 unit each. You can take all the boxes of the first and second
- * types, and one box of the third type. The total number of units will be = (1
- * * 3) + (2 * 2) + (1 * 1) = 8. *
+ * There are: 
+ * - 1 box of the first type that contains 3 units. 
+ * - 2 boxes of the second type that contain 2 units each. 
+ * - 3 boxes of the third type that contain 1 unit each. 
+ * 
+ * You can take all the boxes of the first and second
+ * types, and one box of the third type. The total number of units will be = (1 * 3) + (2 * 2) + (1 * 1) = 8. 
  * 
  * IDEA:
  * 
@@ -38,6 +40,9 @@ public class Solution1710 {
 		Arrays.parallelSort(boxTypes, (o,p) -> p[1] - o[1]);
 		int units = 0;
 		for (int[] boxType : boxTypes) {
+			// could be 2 options:
+			// truckSize less than number of available boxes, then use truckSize
+			// overwise use all available boxes
 			int boxes = Math.min(truckSize, boxType[0]);// try to use box on maximum
 			truckSize -= boxes;
 			units += boxes * boxType[1];// calculate gain in units

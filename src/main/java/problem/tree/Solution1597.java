@@ -1,5 +1,8 @@
 package problem.tree;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 /**
  * 
  * A binary expression tree is a kind of binary tree used to represent
@@ -44,7 +47,15 @@ package problem.tree;
  *             /   \
  *            2     3 * (3 - 1)
  *            
+ *              [+]         <-- must be the root 
+ *             /   \
+ *            2     [*]
+ *                 /   \  
+ *                3   (3 - 1)
+ *            
+ *            
  *  Note: order of operators is important!
+ *      because  + and - operators must be the last to be executed, they must be found first
  */
 public class Solution1597 {
 	
@@ -69,50 +80,47 @@ public class Solution1597 {
 	}
 	
 	Node build(char[] str, int left, int right) {
+		
+		// end of recursion
         if (left > right) return null;
 
         if (left == right) {
             return new Node(str[left]);
         }
 
-       int p = 0, idx = left, min = left, div = left, mul = left;
+        // building tree
+        int parCount = 0;
+        int idx = left;
+        TreeMap<Integer,Integer> operators = new TreeMap<>();
         
         while (idx < right) {
             if (str[idx] == '(') {
-                p++;
+            	parCount++;
             } else if (str[idx] == ')') {
-                p--;
-            } else if (str[idx] == '+' && p == 0) {
-				// found the root location
-                break;
-            } else if (str[idx] == '-' && p == 0) {
-                min = idx;
-            } else if (str[idx] == '*' && p == 0) {
-                mul = idx;
-            } else if (str[idx] == '/' && p == 0) {
-                div = idx;
+            	parCount--;
+            } else if (str[idx] == '+' && parCount == 0) {// root = + sign on the top level
+            	operators.put(0, idx);
+            } else if (str[idx] == '-' && parCount == 0) {
+            	operators.put(1, idx);
+            } else if (str[idx] == '*' && parCount == 0) {
+            	operators.put(2, idx);
+            } else if (str[idx] == '/' && parCount == 0) {
+            	operators.put(3, idx);
             }
             idx++;
         }
         Node root = null;
 		
-        if (idx > left && idx < right) {
+        if (!operators.isEmpty()) {
+        	Map.Entry<Integer, Integer> op = operators.firstEntry();
+            idx = op.getValue();
             root = new Node(str[idx]);
-        } else if (min > left && min < right) {
-            root = new Node(str[min]);
-            idx = min;
-        } else if (mul > left && mul < right) {
-            root = new Node(str[mul]);
-            idx = mul;
-        } else if (div > left && div < right) {
-            root = new Node(str[div]);
-            idx = div;
         } else if (str[left] == '(' && str[right] == ')') {
             return build(str, left + 1, right - 1);
         }
 		
         root.left = build(str, left, idx - 1);
-        root.right = build(str, idx + 1, right);
+        root.right =      build(str, idx + 1, right);
         
         return root;
     }

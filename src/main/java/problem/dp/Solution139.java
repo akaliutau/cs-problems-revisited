@@ -17,9 +17,12 @@ import java.util.Queue;
  * 		   sanddog     anddog   <-- substring queued for analysis after 1st iteration
  *        		
  * IDEA:
+ * Brute force: O(n!) because need to iterate through all possible cuts
+ * 
  * 1. iterate through all cuts (total n)
  * 2. use BFS to add incrementally possible cuts  
  * 
+ * O(n * m), where n = length of orig string, m = # of words in dictionary 
  */
 public class Solution139 {
 
@@ -34,18 +37,18 @@ public class Solution139 {
 			pos = positions.poll();
 			for (String word : wordDict) {
 				if (s.startsWith(word, pos)) {
-					int nextPos = pos + word.length();
-					if (n == nextPos) {
+					int nextCut = pos + word.length();
+					if (n == nextCut) {
 						return true;
 					}
-					if (!visitedPositions[nextPos]) {
-						positions.add(nextPos);
-						visitedPositions[nextPos] = true;
+					if (!visitedPositions[nextCut]) {
+						positions.add(nextCut);
+						visitedPositions[nextCut] = true;
 					}
 				}
 			}
 		}
-		return pos == n;
+		return false; 
 
 	}
 
