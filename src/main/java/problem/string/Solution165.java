@@ -41,22 +41,23 @@ public class Solution165 {
 		}
 
 		@Override
-		public int compareTo(Version v) {
-			int minLen = Math.min(version.length, v.version.length);
+		public int compareTo(Version other) {
+			int minLen = Math.min(version.length, other.version.length);
 			for (int i = 0; i < minLen; i++) {
-				if (version[i] > v.version[i]) {
+				if (version[i] > other.version[i]) {
 					return 1;
-				} else if (version[i] < v.version[i]) {
+				} else if (version[i] < other.version[i]) {
 					return -1;
 				}
 			}
+			// if we are here, all versions are equal so far
 			// if still equal check the tail
-			if (version.length < v.version.length) {
-				if (isNotZeroPart(v.version, version.length)) {
+			if (version.length < other.version.length) {
+				if (isNotZeroPart(other.version, version.length)) {
 					return -1;
 				}
 			} else {
-				if (isNotZeroPart(version, v.version.length)) {
+				if (isNotZeroPart(version, other.version.length)) {
 					return 1;
 				}
 

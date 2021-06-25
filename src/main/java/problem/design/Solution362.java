@@ -43,7 +43,6 @@ public class Solution362 {
 
 		Map<Integer, Integer> lookUp;
 
-		/** Initialize your data structure here. */
 		public HitCounter() {
 			lookUp = new HashMap<>();
 		}
@@ -54,7 +53,7 @@ public class Solution362 {
 		 * @param timestamp - The current timestamp (in seconds granularity).
 		 */
 		public synchronized void hit(int timestamp) {
-			lookUp.put(timestamp, lookUp.getOrDefault(timestamp, 0) + 1);// EDGE case:  hits arrive roughly at the same time, then value in lookUp map > 1
+			lookUp.compute(timestamp, (k, v) -> v == null ? 1 : v + 1);// EDGE case:  hits arrive roughly at the same time, then value in lookUp map > 1
 		}
 
 		/**
@@ -68,11 +67,11 @@ public class Solution362 {
 			// calculated the oldest value for timestamp
 			int lowerBoundary = Math.max(0, timestamp - 300);
 			// all the hits that is less than equal to 300. return count.
-			for (int key : lookUp.keySet()) {
-				if (key > lowerBoundary) {// count only those distance to the current moment is less than 300
-					ctr += lookUp.get(key);
+			for (int time : lookUp.keySet()) {
+				if (time > lowerBoundary) {// events occured after moment in the past @ (t - 300)
+					ctr += lookUp.get(time);
 				} else {
-					lookUp.remove(key); // clearing off the old hit records.
+					lookUp.remove(time); // purge old hit records.
 				}
 			}
 			return ctr;

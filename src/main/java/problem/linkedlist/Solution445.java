@@ -8,7 +8,7 @@ import problem.model.ListNode;
  * The most significant digit comes first and each of their nodes contain a single digit. 
  * Add the two numbers and return it as a linked list.
  * 
- * Idea: reverse lists:
+ * IDEA: reverse lists:
  * 
  *         n1 -> n2 - > n3
  *               |   

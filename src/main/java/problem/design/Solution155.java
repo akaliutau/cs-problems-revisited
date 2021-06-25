@@ -23,24 +23,20 @@ public class Solution155 {
 
 	static class MinStack {
 		private List<Integer> stack = new ArrayList<>();
-		private Integer minElem = Integer.MAX_VALUE;
+		private Integer latestMinElem = Integer.MAX_VALUE;
 
-		/** initialize your data structure here. */
 		public MinStack() {
-
 		}
 
 		public void push(int x) {
 			stack.add(x);
-			if (x < minElem) {
-				minElem = x;
-			}
+			latestMinElem = Math.min(latestMinElem, x);
 		}
 
 		public void pop() {
 			int elem = top();
 			stack.remove(stack.size() - 1);
-			if (elem == minElem) {
+			if (elem == latestMinElem) {
 				updateMin();
 			}
 		}
@@ -50,13 +46,14 @@ public class Solution155 {
 		}
 
 		public int getMin() {
-			return minElem;
+			return latestMinElem;
 		}
 
+		// look up in the past
 		private void updateMin() {
-			minElem = Integer.MAX_VALUE;
+			latestMinElem = Integer.MAX_VALUE;
 			for (int i = 0; i < stack.size(); i++) {
-				minElem = Math.min(minElem, stack.get(i));
+				latestMinElem = Math.min(latestMinElem, stack.get(i));
 			}
 		}
 	}
