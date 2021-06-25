@@ -59,6 +59,7 @@
 1481,ArrayHash TableGreedySortingCounting,Medium
 829,MathEnumeration,Hard
 909,ArrayBreadth-First SearchMatrix,Medium
+909a,ArrayBreadth-First SearchMatrix,Medium
 56,ArraySorting,Medium
 221,ArrayDynamic ProgrammingMatrix,Medium
 588,Hash TableStringDesignTrie,Hard

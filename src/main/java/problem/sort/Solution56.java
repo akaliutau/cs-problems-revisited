@@ -15,7 +15,7 @@ import java.util.LinkedList;
  * 
  * try to grow interval as much as possible (until there is intersection)
  * 
- * when such situation has been reached, add completed interval to the answer list
+ * when such situation has been reached, mark the current interval as completed and add it to the answer list
  * 
  * NOTE: sorting by left edge is needed
  * 

@@ -35,6 +35,9 @@ import java.util.List;
  * 
  * Output: [null,[],null,null,["a"],"hello"]
  * 
+ * IDEA:
+ * 
+ * 
  * 
  */
 public class Solution588 {

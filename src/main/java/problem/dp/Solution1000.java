@@ -62,7 +62,7 @@ package problem.dp;
  *           [5]     [6][1]           [2,5]     [5]  
  *           
  *    
- *  3. On each iteration the length decreases on (k-1):
+ *  3. On each iteration the length decreases on (k-1), because we merge k blocks into 1:
  *     len
  *     len - (k-1)
  *     len - 2*(k-1) 
@@ -70,7 +70,7 @@ package problem.dp;
  *     ...
  *     len - t*(k-1) = 1, => len % (k-1) == 1
  *     
- *      
+ *     MOD(len - t*(k-1)) = MOD(1)
  */
 public class Solution1000 {
 	
@@ -97,13 +97,18 @@ public class Solution1000 {
 			return memo[left][right];
 		}
 		// choose optimal variant from block [left, right] and choose the best one
+		// we are splitting block [left,right] using mid point at i
 		int ans = Integer.MAX_VALUE;
 		for (int i = left; i < right; i += k - 1) {// note the increase on blocksize
 			ans = Math.min(ans, cost(stones, memo, k, left, i         ) +
 					            cost(stones, memo, k,     i + 1, right));
 		}
+		
+		// this block covers the situation [k * n][size < k]
+		// tail will give the cost 0 (see line 89)
+		// so the cost of merge [left, right] will be sum(k*n block) + sum (size < k block)
 		if (k == 2 || len % (k - 1) == 1) { // here len can be only > k
-			ans += sum(stones, left, right);// sum of end piles is always the same 
+			ans += sum(stones, left, right); 
 		}
 		memo[left][right] = ans;
 		return memo[left][right];

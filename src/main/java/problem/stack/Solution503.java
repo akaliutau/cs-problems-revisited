@@ -23,10 +23,10 @@ import java.util.Stack;
  * 
  * array              stack     result
  * -------------------------------------------
- * [1, 2,  1]        []        [0,0,-1]
+ * [1, 2,  1]        [1]        [0,0,-1]
  *         |
  *         
- * [1, 2,  1]        [2]       [0,-1,-1] <-- '1' has been removed, '2' was added during normal cycle
+ * [1, 2,  1]        [2]       [0,-1,-1] <-- '1' has been removed, update result, then '2' was added
  *     |
  *         
  * [1, 2,  1]        [2,1]     [2,-1,-1] <-- first hit, '1' was added during normal cycle
@@ -34,7 +34,7 @@ import java.util.Stack;
  *  
  * In order to get the correct answer, the 2nd round is needed
  *  
- * [1, 2,  1]        [2,1]     [2,-1, 2] <-- second hit, first '1' has been removed, then last '1' was added during normal cycle
+ * [1, 2,  1]        [2]     [2,-1, 2] <-- second hit, first '1' has been removed, update result, then last '1' was added
  *         |
  *  and so on
  *         
