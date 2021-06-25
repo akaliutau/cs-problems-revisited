@@ -10,9 +10,11 @@ import java.util.Stack;
  * 
  * FreqStack has two functions:
  * 
- * push(int x), which pushes an integer x onto the stack. pop(), which removes
- * and returns the most frequent element in the stack. If there is a tie for
- * most frequent element, the element closest to the top of the stack is removed
+ * push(int x), which pushes an integer x onto the stack. 
+ * 
+ * pop(), which removes and returns the most frequent element in the stack. 
+ * 
+ * If there is a tie for most frequent element, the element closest to the top of the stack is removed
  * and returned.
  * 
  * 
@@ -36,7 +38,14 @@ import java.util.Stack;
  * 
  * pop() -> returns 4. The stack becomes [5,7].
  * 
+ * IDEA:
+ * build step structure which holds frequency for each element
  * 
+ *           3
+ *       1   0
+ *       0   1   1   7
+ * ____________________  
+ * group 1   2   3   4
  */
 public class Solution895 {
 
@@ -52,17 +61,15 @@ public class Solution895 {
 		}
 
 		public void push(int x) {
-			int f = freq.getOrDefault(x, 0) + 1;
-			freq.put(x, f);
-			if (f > maxfreq) {
-				maxfreq = f;
-			}
-			group.computeIfAbsent(f, z -> new Stack<>()).push(x);
+			int newFreq = freq.getOrDefault(x, 0) + 1;
+			freq.put(x, newFreq);// update frequency for element x 
+			maxfreq = Math.max(maxfreq, newFreq);
+			group.computeIfAbsent(newFreq, z -> new Stack<>()).push(x);
 		}
 
 		public int pop() {
 			int x = group.get(maxfreq).pop();
-			freq.put(x, freq.get(x) - 1);
+			freq.compute(x, (k,v) -> v - 1);// update frequency for element x 
 			if (group.get(maxfreq).size() == 0) {// there are always elems of all frequencies from [0, maxfreq]
 				maxfreq--;
 			}

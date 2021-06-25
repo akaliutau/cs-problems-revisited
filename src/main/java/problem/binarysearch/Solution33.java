@@ -6,6 +6,10 @@ package problem.binarysearch;
  * (i.e., [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]). If target is found in
  * the array return its index, otherwise, return -1
  * 
+ * IDEA:
+ *  cut the array in half and analyze the parts
+ * 
+ * 
  * [4,5,6,7,0,1,2]
  *  |     | 
  *  case 1
@@ -26,15 +30,15 @@ public class Solution33 {
             int mid = start + (end - start) / 2;
             if (nums[mid] == target) {
                 return mid;
-            } else if (nums[end] >= nums[start]) {// the offset is not in [start, end]
+            } else if (nums[start] <= nums[end]) {// the offset is not in [start, end]
                 if (nums[start] <= target  && target < nums[mid]) {// tgt in growing part
                     end = mid - 1;
                 } else {
                     start = mid + 1;
                 }
             } else {
-                if (target <= nums[end] && target > nums[mid]) {
-                    start = mid + 1;// safe to update right
+                if (nums[mid] < target && target <= nums[end]) {
+                    start = mid + 1;// safe to update right as target somewhere to the right of mid
                 } else {
                     end = mid - 1;
                 }

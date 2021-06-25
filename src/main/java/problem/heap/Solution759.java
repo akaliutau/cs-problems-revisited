@@ -36,18 +36,20 @@ import java.util.PriorityQueue;
  * [-inf, 1], [3, 4], [10, inf]. 
  * 
  * We discard any intervals that contain inf as they
- * aren't finite.
+ * aren't finite. So method should return [3, 4]
  * 
  * IDEA:
- * 
+ * 1. sort all intervals by start, and during traversing notice the gap between end of previous interval (must be updated) 
+ *    and the start of the new one
  * 
  */
 public class Solution759 {
 
     static class Schedule {
-        int employee, interval;
+        int employee;
+        Interval interval;
 
-        Schedule(int employee, int i) {
+        Schedule(int employee, Interval i) {
             this.employee = employee;
             interval = i;
         }
@@ -69,29 +71,27 @@ public class Solution759 {
 
     public List<Interval> employeeFreeTime(List<List<Interval>> avails) {
         List<Interval> free = new ArrayList<>();
-        Comparator<Schedule> byStart = (a, b) -> avails.get(a.employee).get(a.interval).start - avails.get(b.employee).get(b.interval).start;
+        Comparator<Schedule> byStart = (a, b) -> a.interval.start - b.interval.start;
 
         PriorityQueue<Schedule> pq = new PriorityQueue<Schedule>(byStart);
         int emplid = 0;
-        int lastEnd = Integer.MAX_VALUE; // global last end across all schs
+        int prevEnd = Integer.MAX_VALUE; // global last end across all schedule
 
-        for (List<Interval> employee : avails) {// one can add all intervals at once, but more optimal to use only 0 (smaller heap -> faster processing)
-            pq.add(new Schedule(emplid++, 0));
-            lastEnd = Math.min(lastEnd, employee.get(0).start);// the earliest start must be > lastEnd
+        for (List<Interval> intervals : avails) {// one can add all intervals at once, but more optimal to use only 0 (smaller heap -> faster processing)
+        	for (Interval interval :  intervals) {
+        		pq.add(new Schedule(emplid, interval));
+                prevEnd = Math.min(prevEnd, interval.start);// the earliest start must be > prevEnd
+        	}
+        	emplid ++;
         }
 
         while (!pq.isEmpty()) {
-            Schedule sch = pq.poll();
-            Interval iv = avails.get(sch.employee).get(sch.interval);
-            if (lastEnd < iv.start) {
-                free.add(new Interval(lastEnd, iv.start));
+            Schedule sch = pq.poll();// get schedule sorted by start, i.e. no earlier start possible
+            Interval iv = sch.interval;
+            if (prevEnd < iv.start) {
+                free.add(new Interval(prevEnd, iv.start));
             }
-            lastEnd = Math.max(lastEnd, iv.end);// shift lastEnd
-            
-            sch.interval ++;
-            if (sch.interval < avails.get(sch.employee).size()) {// get next avail if any for this empl
-                pq.add(sch);
-            }
+            prevEnd = Math.max(prevEnd, iv.end);// update prevEnd, usually it's shifted further
         }
 
         return free;

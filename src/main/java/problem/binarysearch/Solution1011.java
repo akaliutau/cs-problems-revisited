@@ -9,15 +9,15 @@ package problem.binarysearch;
  * weights). We may not load more weight than the maximum weight capacity of the
  * ship.
  * 
- * Return the least weight capacity of the ship that will result in all the
+ * Return the minimal weight capacity of the ship that will result in all the
  * packages on the conveyor belt being shipped within D days.
  * 
  * 
  * 
  * Example 1:
  * 
- * Input: weights = [1,2,3,4,5,6,7,8,9,10], D = 5 Output: 15 Explanation: A ship
- * capacity of 15 is the minimum to ship all the packages in 5 days like this:
+ * Input: weights = [1,2,3,4,5,6,7,8,9,10], D = 5 Output: 15 
+ * Explanation: A ship capacity of 15 is the minimum to ship all the packages in 5 days like this:
  * 1st day: 1, 2, 3, 4, 5 
  * 2nd day: 6, 7 
  * 3rd day: 8 
@@ -25,10 +25,21 @@ package problem.binarysearch;
  * 5th day: 10
  * 
  * Note that the cargo must be shipped in the order given, so using a ship of
- * capacity 14 and splitting the packages into parts like (2, 3, 4, 5), (1, 6,
- * 7), (8), (9), (10) is not allowed
+ * capacity 14 and splitting the packages into parts like 
+ * (2, 3, 4, 5), 
+ * (1, 6, 7), 
+ * (8), 
+ * (9), 
+ * (10) 
+ * is not allowed
  * 
  * IDEA:
+ * Brute force in this situation:
+ * 1)analyze all possible chunks of different size, total D, and calculate the maximums across all chunks
+ * 
+ * 2)Reverse approach: calculate the range [min,max] of all possible tonnage and calculate the possibility to do the job for all tonnage
+ * 
+ * use 2nd approach with binary search:
  * 1) calc the boundaries for capacity of the ship
  * 2) use binary search to find the golden point
  * 
@@ -48,7 +59,7 @@ public class Solution1011 {
 		int d = 1;
 		int sum = 0;
 		for (int weight : weights) {
-			if (sum + weight > k) {// if overweight, close the previous sum and inc the day counter
+			if (sum + weight > k) {// if overweight, reset the previous sum and inc the day counter
 				sum = 0;
 				d++;
 			}

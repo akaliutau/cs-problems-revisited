@@ -13,7 +13,7 @@ package problem.array;
  * Input: [1,2,3,4] Output: [24,12,8,6]
  * 
  * 
- * IDEA: prefix product technique
+ * IDEA: prefix product technique, in this case - running product
  * 
  * Instead of dividing the product of all the numbers in the array by the number
  * at a given index to get the corresponding product, we can make use of the
@@ -31,7 +31,7 @@ public class Solution238 {
 
 		res[0] = 1;
 		for (int i = 1; i < n; i++) {
-			res[i] = res[i - 1] * nums[i - 1]; // from left side
+			res[i] = res[i - 1] * nums[i - 1]; // running product from left side
 		}
 
 		int right = 1;

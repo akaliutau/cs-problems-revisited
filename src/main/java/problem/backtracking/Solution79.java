@@ -29,7 +29,7 @@ public class Solution79 {
 		}
 
 		boolean found = false;
-		// mark the path before the next exploration
+		// backtracking: mark the path before the next exploration in order to avoid repetition
 		char curLet = word.charAt(index);
 		board[row][col] = '#';
 
