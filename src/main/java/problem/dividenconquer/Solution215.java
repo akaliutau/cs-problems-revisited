@@ -9,6 +9,12 @@ package problem.dividenconquer;
  * 
  * Input: [3,2,1,5,6,4] and k = 2 Output: 5
  * 
+ * IDEA:
+ * use partitioning on order to find chunks of size k
+ * [left] 5 [right]
+ *           \
+ *            size = k-1
+ *            
  */
 public class Solution215 {
 

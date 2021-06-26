@@ -63,7 +63,7 @@ public class Solution314 {
 			return output;
 		}
 
-		Map<Integer, List<Integer>> columnTable = new HashMap<>();
+		Map<Integer, List<Integer>> columnTable = new HashMap<>();// one can use TreeMap
 		// Pair of node and its column offset
 		Queue<Pair> queue = new ArrayDeque<>();
 		int column = 0;
@@ -81,8 +81,8 @@ public class Solution314 {
 					columnTable.put(column, new ArrayList<>());
 				}
 				columnTable.get(column).add(root.val);
-				minColumn = Math.min(minColumn, column);
-				maxColumn = Math.max(maxColumn, column);
+				minColumn = Math.min(minColumn, column);// one can use TreeMap instead
+				maxColumn = Math.max(maxColumn, column);// NOTE: this approach is O(1), more efficient
 
 				queue.add(new Pair(root.left, column - 1));
 				queue.add(new Pair(root.right, column + 1));

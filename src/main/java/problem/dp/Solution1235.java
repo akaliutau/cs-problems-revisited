@@ -18,7 +18,7 @@ import java.util.Arrays;
  * use DP (Brute Force + memoization)
  * 
  * 1. sort jobs by the time of start
- * 2. investigate 2 possibilities:
+ * 2. investigate 2 possibilities (make the choice):
  *    1) pick up current job in the row and attach the next one which starts not earlier then this ends (use binary search)
  *    2) do not pick up current job (skipProfit)
  * 3. make the choice - choose the best and update the memo

@@ -20,13 +20,13 @@ import java.util.Set;
 
 public class ReferenceGenerator {
 
-	static final String templ = "[Problem %s](%s) (%s)";
+	static final String templ = "%d. [Problem %s](%s) (%s)";
 	static final Path path = Paths.get("./src/");
 	static final String prefix = "Solution";
 	
 	static final Set<String> dropRecords = new HashSet<>(Arrays.asList("Database"));
 	
-	static final Map<String,String> map = new HashMap<>();
+	static final Map<String,String> map = new HashMap<>(); 
 	
 	static {
 		map.put("Depth-First Search", "DFS");
@@ -58,7 +58,7 @@ public class ReferenceGenerator {
 					if (ref.equals("N/A")) {
 						missing[0] ++;
 					}
-					String outLine = String.format(templ, parts[0], ref, getTags(parts[1]));
+					String outLine = String.format(templ, counter[0], parts[0], ref, getTags(parts[1]));
 					try {
 						writer.write(outLine + "\n\n");
 						counter[0] ++;

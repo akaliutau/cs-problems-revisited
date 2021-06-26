@@ -68,7 +68,7 @@ import java.util.Arrays;
  */
 public class Solution1335 {
 	
-	int s(int d, int j, int[] jobDifficulty, int[][] dp) {
+	int dfs(int d, int j, int[] jobDifficulty, int[][] dp) {
 		if (d > j) {
 			return -1;
 		}
@@ -94,7 +94,7 @@ public class Solution1335 {
 		// finding the optimal solution via BF
 		// take the tail of array: jobDifficulty
 		for (int job = j-1; job >= 0; job--) {
-			int difficulty = s(d-1, job, jobDifficulty, dp);// in the 1st iteration == j-1
+			int difficulty = dfs(d-1, job, jobDifficulty, dp);// in the 1st iteration == j-1
 			// max of the tail
 			max = Math.max(max, jobDifficulty[job+1]);// in the 1st iteration == j
 			
@@ -114,7 +114,7 @@ public class Solution1335 {
 		for (int i = 0; i < d; i++)
 			Arrays.fill(dp[i], -1);
 		
-		return s(d-1, n-1, jobDifficulty, dp);
+		return dfs(d-1, n-1, jobDifficulty, dp);
 	}
 	
 

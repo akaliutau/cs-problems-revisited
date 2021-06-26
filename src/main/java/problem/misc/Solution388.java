@@ -17,6 +17,10 @@ import java.util.Deque;
  * "dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext" Output: 20 Explanation: We have
  * only one file and its path is "dir/subdir2/file.ext" of length 20. The path
  * "dir/subdir1" doesn't contain any files.
+ * 
+ * IDEA:
+ * 
+ * 
  */
 public class Solution388 {
 

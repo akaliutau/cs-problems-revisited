@@ -24,7 +24,11 @@ import java.util.Stack;
  * Input: s = " 6-4 / 2 " Output: 4
  * 
  * IDEA:
- * interpret blocks inside () using standard calc
+ * main idea: interpret blocks inside () using standard calculator
+ * the point is to start from the top-level brackets, and replace this block by the result of calculations, 
+ * 
+ * invoke evaluator on inner string inside brackets 
+ *  
  *   ( 1     8   )
  *   i i+1   j-1 j
  * 
@@ -48,7 +52,7 @@ public class Solution772 {
 			if (c == '(') {
 				int leftCnt = 1;
 				int j = i + 1;
-				while (j < s.length() && leftCnt > 0) {
+				while (j < s.length() && leftCnt > 0) {// identify the block in round brackets
 					if (s.charAt(j) == '(') {
 						++leftCnt;
 					} else if (s.charAt(j) == ')') {

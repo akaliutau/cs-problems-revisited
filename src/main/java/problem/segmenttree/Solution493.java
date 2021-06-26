@@ -16,7 +16,15 @@ package problem.segmenttree;
  * 
  * Input: nums = [2,4,3,5,1] Output: 3
  * 
- * IDEA: use segment tree for 2 * [1,3,2,3,1], and standard query for num
+ * IDEA: 
+ * for each [i] we have to search all numbers at [i+1, end] looking for nums[i] > 2 * nums[j]
+ * each found number (nums[i], nums[j])
+ * 
+ * We can use Segment Tree data structure to hold all numbers 2 * nums[i] seen so far,
+ * and to query this tree against nums[i]
+ * 
+ * In technical:
+ * use segment tree for 2 * [1,3,2,3,1], and standard query for num
  * 
  *
  */

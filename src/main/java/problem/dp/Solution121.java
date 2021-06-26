@@ -18,6 +18,9 @@ package problem.dp;
  * on day 5 (price = 6), profit = 6-1 = 5. Not 7-1 = 6, as selling price needs
  * to be larger than buying price.
  * 
+ * IDEA:
+ * max profit at any time = cur_price  - min price seen so far
+ * 
  */
 public class Solution121 {
 

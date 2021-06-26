@@ -21,6 +21,12 @@ import java.util.PriorityQueue;
  * int popMax() Retrieves the maximum element in the stack and removes it. 
  * 
  * If there is more than one maximum element, only remove the top-most one.
+ * 
+ * IDEA:
+ * 1. use PriorityQueue to track the max element 
+ *   with additional index to track the order if there >1 maximum elements
+ *   
+ * 2. use DoublyLinked list to hold elements in the stack
  *
  */
 public class Solution716 {
@@ -40,23 +46,22 @@ public class Solution716 {
 			}
 		}
 
-		/** initialize your data structure here. */
 		Node head;
 		Node tail;
 		PriorityQueue<Node> queue;
-		int order;
+		int index;
 
 		public MaxStack() {
 			head = null;
 			tail = null;
-			order = 0;
+			index = 0;
 			queue = new PriorityQueue<>((o, p) -> {
 				return o.value == p.value ? p.index - o.index : p.value - o.value;
 			});
 		}
 
 		public void push(int x) {
-			Node node = new Node(x, order++, tail);
+			Node node = new Node(x, index++, tail);
 			if (tail == null) {
 				head = node;
 				tail = node;
