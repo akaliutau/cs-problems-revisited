@@ -35,10 +35,10 @@ package problem.slidingwindow;
  *       ------------->   
  *      [5  3][6]  
  *       max1  max2   
- *        max = max(max1, max2)   
+ *    overall_max = max(max1, max2)   
  *                           
  *  IDEA: 
- *  split on k-blocks and use partial maxs to speed up 
+ *  split on k-blocks and use partial maximums to speed up 
  */
 public class Solution239 {
 
@@ -61,7 +61,7 @@ public class Solution239 {
             if (i % k == 0) {
                 left[i] = nums[i]; // block_start
             }else {
-                left[i] = Math.max(left[i - 1], nums[i]);
+                left[i] = Math.max(left[i - 1], nums[i]); // running maximum
             }
         }
 
@@ -73,7 +73,7 @@ public class Solution239 {
             if ((j + 1) % k == 0) {
                 right[j] = nums[j]; // block_end
             }else {
-                right[j] = Math.max(right[j + 1], nums[j]);
+                right[j] = Math.max(right[j + 1], nums[j]);// running maximum
             }
         }
 

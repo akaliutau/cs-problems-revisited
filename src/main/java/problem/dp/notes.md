@@ -29,7 +29,14 @@ If min/max must be defined during calculations:
 
 1. Start from BF
 
-2. During construction of solution determine the very first step - all the rest part will be a sub-problem
+2. During construction of solution determine the very first step - the recursive function
+   all the rest parts will be sub-problems, reflecting the first step
 
 3. Define recursive function and memoization data structure
+
+## Note about memo data structure:
+ 
+Memoize the state, which is fully defined by mutated parameters in the recursive function
+
+Do not use backtracking with memoization, as it could filter out optimal solution (memoization itself caches repetitions)
 

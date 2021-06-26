@@ -40,15 +40,15 @@ import java.util.Set;
  */
 public class Solution472 {
 
-	static boolean checkSuffix(String str, int from, Set<String> hset, List<String> result) {
-		String suffix = str.substring(from);
+	static boolean checkSuffix(String word, int from, Set<String> hset, List<String> result) {
+		String suffix = word.substring(from);// generate a suffix from word
 		if (suffix.isEmpty()) {
 			return false;
 		}
 
 		// Add to the result if last part of the string is found 
 		if (from != 0 && hset.contains(suffix)) {// str = catsdogcats - > cats + dogcats - NOT TRUE
-			result.add(str);// NOTE: we are adding initial string
+			result.add(word);// NOTE: we are adding initial string
 			return true;
 		}
 
@@ -57,7 +57,7 @@ public class Solution472 {
 			// we go further if and only if prefix is a valid word
 			if (hset.contains(prefix)) {
 				// if suffix is a valid word
-				if (checkSuffix(str, from + i, hset, result)) {// try catsdogcats as cats + dog + [cats]
+				if (checkSuffix(word, from + i, hset, result)) {// try catsdogcats as cats + dog + [cats]
 					return true;
 				}
 			}

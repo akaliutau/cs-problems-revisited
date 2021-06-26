@@ -18,6 +18,9 @@ package problem.dp;
  * 
  * IDEA:
  * Build solution from blocks 2x2
+ * if there is any 0 (violation of solidness), then drop the size to 1
+ * 
+ * 
  */
 public class Solution221 {
 
@@ -41,8 +44,11 @@ public class Solution221 {
 				dp[i][j] = matrix[i][j] - '0';// 1 || 0
 				if (dp[i][j] == 1) {
 					// == [number of 1 in col/row] + cur status
-					// min method will guarantee the reset on any bigger than 2x2 square
-					dp[i][j] = Math.min(dp(dp, i - 1, j), Math.min(dp(dp, i, j - 1), dp(dp, i - 1, j - 1))) + 1;
+					// min method will guarantee the reset to 0 (dp will be 1) on any bigger than 2x2 square
+					int left = dp(dp, i - 1, j);
+					int top = dp(dp, i, j - 1);
+					int topleft = dp(dp, i - 1, j - 1);
+					dp[i][j] = Math.min(left, Math.min(top, topleft)) + 1;
 					size = Math.max(size, dp[i][j]);
 				}
 			}

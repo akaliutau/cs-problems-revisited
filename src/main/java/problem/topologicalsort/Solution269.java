@@ -18,6 +18,8 @@ import java.util.Queue;
  * 2) topologically sort them 
  * 3) output ordered letters 
  * 
+ * Detail example:
+ * 
  * Input: [ "wrt", "wrf", "er", "ett", "rftt" ] 
  * Output: "wertf"
  * 
@@ -33,53 +35,54 @@ public class Solution269 {
     public String alienOrder(String[] words) {
 
         // Step 0: Create data structures and find all unique letters.
-        Map<Character, List<Character>> adjList = new HashMap<>();
-        Map<Character, Integer> counts = new HashMap<>();// map of all chars we have
+        Map<Character, List<Character>> graph = new HashMap<>();
+        Map<Character, Integer> numberOfReferences = new HashMap<>();// map of all chars we have
         for (String word : words) {
             for (char c : word.toCharArray()) {
-                counts.put(c, 0);
-                adjList.put(c, new ArrayList<>());
+                numberOfReferences.put(c, 0);
+                graph.put(c, new ArrayList<>());
             }
         }
 
         // Step 1: Find all edges.
         for (int i = 0; i < words.length - 1; i++) {
+        	// pick up a pair of words
             char[] word1 = words[i].toCharArray();
             char[] word2 = words[i + 1].toCharArray();
             // Check that word2 is not a prefix of word1.
-            if (word1.length > word2.length && words[i].startsWith(words[i + 1])) {
+            if (word1.length > word2.length && words[i].startsWith(words[i + 1])) {// some letters will be without references
                 return "";
             }
             // Find the first non match and insert the corresponding relation.
             for (int j = 0; j < Math.min(word1.length, word2.length); j++) {
                 if (word1[j] != word2[j]) {
-                    adjList.get(word1[j]).add(word2[j]);
-                    counts.compute(word2[j], (k, v) -> v + 1);
+                    graph.get(word1[j]).add(word2[j]);                     // let1 -> let2, so let2 has been referenced by 1 letters (at least)
+                    numberOfReferences.compute(word2[j], (k, v) -> v + 1); // record this fact
                     break;
                 }
             }
         }
 
-        // Step 2: Breadth-first search.
+        // Step 2: topological sort
         StringBuilder sb = new StringBuilder();
         Queue<Character> queue = new LinkedList<>();
-        for (Character c : counts.keySet()) {
-            if (counts.get(c).equals(0)) {
+        for (Character c : numberOfReferences.keySet()) {
+            if (numberOfReferences.get(c).equals(0)) {
                 queue.add(c);
             }
         }
         while (!queue.isEmpty()) {
             Character c = queue.remove();
             sb.append(c);
-            for (Character next : adjList.get(c)) {
-                counts.compute(next, (k,v) -> v - 1);
-                if (counts.get(next).equals(0)) {
+            for (Character next : graph.get(c)) {
+                numberOfReferences.compute(next, (k,v) -> v - 1);
+                if (numberOfReferences.get(next).equals(0)) {
                     queue.add(next);
                 }
             }
         }
 
-        if (sb.length() < counts.size()) {// some chars are non-mapped
+        if (sb.length() < numberOfReferences.size()) {// some chars are non-mapped
             return "";
         }
         return sb.toString();

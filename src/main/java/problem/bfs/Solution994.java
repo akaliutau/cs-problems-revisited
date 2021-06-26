@@ -66,7 +66,7 @@ public class Solution994 {
 
 		int sum = 0;
 
-		for (int[] row : grid) {// edge cases - f.e. all fresh
+		for (int[] row : grid) {// edge cases - f.e. all fresh or forms isolated areas of fresh tomatos
 			for (int v : row) {
 				sum += v;
 				if (v == 1) {// still fresh tomato found

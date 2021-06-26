@@ -21,7 +21,8 @@ package problem.dfs;
  * is in a friend circle. So return 2.
  * 
  * IDEA:
- * use transitive feature of dfs to detect and fill out the friend circle - the same as in islands problem
+ * 1. All circles of friends are the same as interconnected islands - use DFS to count them
+ * 2. use transitive feature of dfs to detect and fill out the friend circle - the same as in islands problem
  * because all connections will be marked as visited and removed from dfs
  * 
  */

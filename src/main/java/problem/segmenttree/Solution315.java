@@ -25,9 +25,9 @@ import java.util.List;
  * 
  *                       [0 5 2 6 1]
  *                 
- *   [0,6: 0]  - initial array, no segments added
+ *   [0,6: 0]  - initial array in format [range: counter], here is an example when no segments added
  *   
- *   after adding 1 the tree will look like:
+ *   after adding num=1, the tree will look like:
  *   
  *                    		   [0,6: 1]                 
  *                          /           \
@@ -42,7 +42,7 @@ import java.util.List;
  * query(6) = 1 <-- Time = O(log n)
  * add(6)
  *                     
- * 
+ * Solution: Build tree dynamically calculating intermediate results 
  * 
  * Acceleration:
  * 
@@ -74,11 +74,6 @@ public class Solution315 {
 		public boolean isLeaf() {
 			return range[1] - range[0] <= 1;
 		}
-        		@Override
-		public String toString() {
-			return "Segment [range=" + Arrays.toString(range) + ", count=" + count + "]";
-		}
-
 	}
 	
 	static class SegmentTree {
@@ -97,7 +92,7 @@ public class Solution315 {
 			if (!segm.isLeaf()) {
 				int mid = (segm.range[0] + segm.range[1] ) / 2;
 				if (segm.left == null) {
-					segm.left = new Segment(segm.range[0], mid);
+					segm.left = new Segment(segm.range[0], mid);// we are NOT including right boundary
 				}
 				if (segm.right == null) {
 					segm.right = new Segment(mid, segm.range[1]);
@@ -130,7 +125,7 @@ public class Solution315 {
 				find(segm.left, num, res);
 				find(segm.right, num, res);
 			}else {
-				if (num >= segm.range[1]) {
+				if (num >= segm.range[1]) {// custom logic which solve the problem
 					res[0] += segm.count;
 				}
 			}

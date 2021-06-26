@@ -22,37 +22,34 @@ public class Solution17 {
 	 * @param suffix
 	 * @return
 	 */
-	static List<String> add(String prefix, String suffix) {
+ 	static List<String> add(String prefix, String first) {
 		List<String> lstRes = new ArrayList<>();
-		for (int i = 0; i < prefix.length(); i++) {
-			lstRes.add(prefix.charAt(i) + suffix);
+		for (int i = 0; i < first.length(); i++) {
+			lstRes.add(prefix + first.charAt(i));
 		}
 		return lstRes;
 	}
-
+	
 	public List<String> letterCombinations(String digits) {
-		String[] map = { "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wyxz" };
+		String[] map = {"", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wyxz"};
 		char[] digs = digits.toCharArray();
 		List<String> res = new ArrayList<>();
-		for (int i = digs.length - 1; i > -1; i--) {
+		for (int i = 0; i < digs.length; i++) {
 			int d = (digs[i] - '0') - 1;
-			if (d < 1) {// drop 0
+			if (d < 1) {
 				continue;
 			}
 			List<String> lst = new ArrayList<>();
-			for (String s : res) {// generate all possible combinations on the bases of existing ones
-				lst.addAll(add(map[d], s));
+			for (String s : res) {
+				lst.addAll(add(s, map[d]));
 			}
 			if (res.isEmpty()) {
-				res = add(map[d], "");// covers the very first iteration
-			} else {
+				res = add("", map[d]);
+			}else {
 				res = lst;
 			}
 		}
 		return res;
 
 	}
-
-
-
 }

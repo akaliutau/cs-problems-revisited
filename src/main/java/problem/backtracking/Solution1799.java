@@ -28,18 +28,20 @@ import java.util.HashMap;
  * 
  * IDEA:
  * 
- * This is pure backtracking solution (i.e. Brute Force with filter):
+ * This is pure backtracking solution (i.e. Brute Force with filter). It's possible only because n < 32
  * 
  * A. try to build an optimal sequence using set for already seen positions and chaining the available ones from free slots
- * B. use bit masking for state vector (can use boolean array instead)
+ * B. use bit masking for state vector (one can use boolean array instead)
  * 
- * Euclide algorithm:
+ * NOTE: Euclide algorithm:
  * 
  * gcd(12, 4):
  * 
  * 12 % 4 == 0 => gcd=4
  * 
  * 12 % 8 != 0 => gcd(12, 8) = gcd(8, 4) = 4
+ * 
+ * O(n^2 * n) = O(n^3)
  *
  */
 public class Solution1799 {
@@ -71,13 +73,13 @@ public class Solution1799 {
 		
 		for (int j = 0; j < n; j++) {
             int jbit = 1 << j;
-			if ((set & jbit) == 0) {
+			if ((set & jbit) == 0) {        // position j is not taken yet
 				for (int k = j + 1; k < n; k++) {
                     int kbit = 1 << k;
-					if ((set & kbit) == 0) {
+					if ((set & kbit) == 0) {// position k is not taken yet
 						set |= jbit;
 						set |= kbit;
-						int val = i * (gcd(nums[j], nums[k])) + track(nums, i + 1, set);
+						int val = i * (gcd(nums[j], nums[k])) + track(nums, i + 1, set);// possible at most n levels of recursion
 						res = Math.max(res, val);
 						set ^= jbit;
 						set ^= kbit;

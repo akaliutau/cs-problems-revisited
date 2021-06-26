@@ -7,13 +7,13 @@ package problem.math;
  * 
  * Example 1:
  * 
- * Input: n = 5 Output: 2 Explanation: 5 = 5 = 2 + 3 *
+ * Input: n = 5 Output: 2 Explanation: 5 = 5 = 2 + 3 
  * 
  * IDEA: 
  * Mathematical: Decrease N Gradually, O( sqrt{N} ) time
  * 
  * At each step, we check if N can be composed by the sum of k consecutive numbers, 
- * i.e. N = (x + 1) + (x + 2) + ... + (x + k) = xk + (1 + 2 + ... + k)
+ * i.e. N = (x + 1) + (x + 2) + ... + (x + k) = xk + (1 + 2 + ... + k) = xk + k * (k + 1) / 2
  * 
  * N = 15, N = (x + 1) + (x + 2) + ... + (x + k)
  * 

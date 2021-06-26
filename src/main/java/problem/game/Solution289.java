@@ -13,7 +13,11 @@ package problem.game;
  * 3) Any live cell with more than three live neighbors dies, as if by over-population.. 
  * 4) Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
  * 
- * IDEA: use newVal=2 and newVal-1 for transitions 0->1 and 1->0 appropriately 
+ * IDEA: 
+ * 
+ * use intermediate values for calculations of newborn or dead cells
+ * 
+ * use newVal=2 and newVal=-1 for transitions 0->1 and 1->0 appropriately 
  */
 public class Solution289 {
 
@@ -30,8 +34,8 @@ public class Solution289 {
                 // For each cell count the number of live neighbors.
                 int liveNeighbors = 0;
 
-                for (int i = 0; i < 3; i++) {
-                    for (int j = 0; j < 3; j++) {
+                for (int i = 0; i < 3; i++) {    // Indices for neighbors table
+                    for (int j = 0; j < 3; j++) {// Indices for neighbors table
 
                         if (!(neighbors[i] == 0 && neighbors[j] == 0)) {
                             int r = (row + neighbors[i]);
@@ -48,11 +52,11 @@ public class Solution289 {
 
                 // Rule 1 or Rule 3
                 if ((board[row][col] == 1) && (liveNeighbors < 2 || liveNeighbors > 3)) {
-                    board[row][col] = -1;// 1 -> 0
+                    board[row][col] = -1;// meaning that 1 -> 0 in the future
                 }
                 // Rule 4
                 if (board[row][col] == 0 && liveNeighbors == 3) {
-                    board[row][col] = 2;// 0 -> 1
+                    board[row][col] = 2;// meaning that 0 -> 1 in the future
                 }
             }
         }
@@ -63,7 +67,7 @@ public class Solution289 {
                 if (board[row][col] > 0) {
                     board[row][col] = 1;
                 } else {
-                    board[row][col] = 0;
+                    board[row][col] = 0;// all -1 will be erased
                 }
             }
         }

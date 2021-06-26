@@ -51,6 +51,39 @@ public class Solution212 {
 		Map<Character, TrieNode> children = new HashMap<>();
 		String word = null;
 	}
+	
+	void backtracking(int row, int col, char[][] board, TrieNode parent, List<String> result) {
+		char letter = board[row][col];
+		TrieNode currNode = parent.children.get(letter);
+
+		if (currNode.word != null) {
+			result.add(currNode.word);
+			currNode.word = null;// one can use Set for collector instead
+		}                        // Note: we are continue the process!
+
+		board[row][col] = '#';
+
+		int[] rowOffset = {-1, 0, 1,  0 };
+		int[] colOffset = { 0, 1, 0, -1 };
+		for (int i = 0; i < 4; ++i) {
+			int r = row + rowOffset[i];
+			int c = col + colOffset[i];
+			if (r < 0 || r >= board.length || c < 0 || c >= board[0].length) {
+				continue;
+			}
+			// use trie to decide to go further in recursion
+			if (currNode.children.containsKey(board[r][c])) {
+				backtracking(r, c, board, currNode, result);
+			}
+		}
+
+		board[row][col] = letter;// restore letter for backtracking
+
+		if (currNode.children.isEmpty()) {
+			parent.children.remove(letter);
+		}
+	}
+
 
 	public List<String> findWords(char[][] board, String[] words) {
 
@@ -78,37 +111,6 @@ public class Solution212 {
 		return result;
 	}
 
-	void backtracking(int row, int col, char[][] board, TrieNode parent, List<String> result) {
-		char letter = board[row][col];
-		TrieNode currNode = parent.children.get(letter);
-
-		if (currNode.word != null) {
-			result.add(currNode.word);
-			currNode.word = null;
-		}
-
-		board[row][col] = '#';
-
-		int[] rowOffset = {-1, 0, 1,  0 };
-		int[] colOffset = { 0, 1, 0, -1 };
-		for (int i = 0; i < 4; ++i) {
-			int r = row + rowOffset[i];
-			int c = col + colOffset[i];
-			if (r < 0 || r >= board.length || c < 0 || c >= board[0].length) {
-				continue;
-			}
-			// use trie to decide to go further in recursion
-			if (currNode.children.containsKey(board[r][c])) {
-				backtracking(r, c, board, currNode, result);
-			}
-		}
-
-		board[row][col] = letter;// restore letter for backtracking
-
-		if (currNode.children.isEmpty()) {
-			parent.children.remove(letter);
-		}
-	}
 
 
 

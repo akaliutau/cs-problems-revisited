@@ -32,7 +32,9 @@ import java.util.Stack;
  * Input: expression = "!(f)" Output: true*
  * 
  * IDEA:
- * 
+ * 1. collect the data in the stack, dropping ( , ) and , from processing
+ * 2. evaluate expression each time the ) is met, copy the result back to stack
+ * 3. use reduce technique on data, copy data to a separate queue for convenience
  * 
  */
 public class Solution1106 {
@@ -60,7 +62,7 @@ public class Solution1106 {
 			char c = expression.charAt(i);
 
 			if (c == ')') {
-
+				// transfer all data to perform operations on to separate queue
 				Queue<Character> q = new LinkedList<>();
 				while (!ops.contains(st.peek())) {
 					q.add(st.pop());
@@ -68,20 +70,23 @@ public class Solution1106 {
 
 				Character op = st.pop();
 
-				while (q.size() > 1) {
+				// reduce block
+				// repeat until size 1 reached
+				while (q.size() > 1) {// never executed for operation == !
 					boolean b1 = toBoolean(q.poll());
 					boolean b2 = toBoolean(q.poll());
 
 					if (op == '&') {
-						q.offer(toString(b1 && b2));
+						q.add(toString(b1 && b2));
 					} else if (op == '|') {
-						q.offer(toString(b1 || b2));
+						q.add(toString(b1 || b2));
 					}
 				}
 
+				// push the final result
 				if (op == '&' || op == '|') {
 					st.push(q.poll());
-				} else {
+				} else if (op == '!'){
 					st.push(invert(q.poll()));
 				}
 

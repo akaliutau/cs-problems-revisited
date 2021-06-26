@@ -45,9 +45,9 @@ import java.util.Arrays;
  *  ...        ooooo
  *  p-k        ooooo
  *             |   |
- *             i   n = r
+ *             i   n = r  <-- range or number of balls of different color 
  *             
- *  p * r + (p - 1) * r + ... = r * (sum(p) - sum(p-k-1))              
+ *  p * r + (p - 1) * r + ... = r *(p + (p-1) + (p-2) + ... + (p-k)) = r * (sum(p) - sum(p-k-1))              
  */
 public class Solution1648 {
 	
@@ -63,7 +63,7 @@ public class Solution1648 {
         int curPrice = inventory[i];
         long sum = 0;
         while (ordersLeft > 0) {
-            while (i > 0 && inventory[i - 1] == curPrice) {// find the beginning of curPrice
+            while (i > 0 && inventory[i - 1] == curPrice) {// find the number of balls of different color
                 --i;
             }
             int prevPrice = i == 0 ? 0 : inventory[i - 1];

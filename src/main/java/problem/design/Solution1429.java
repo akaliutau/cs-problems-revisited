@@ -30,7 +30,7 @@ import java.util.Queue;
  * is now [2,3,5,5,2,3] firstUnique.showFirstUnique(); // return -1
  * 
  * IDEA:
- * 1) use queue as a buffer, which is processed on showFirstUnique invoke
+ * 1) use queue as a buffer, which is processed each time when showFirstUnique() is invoked
  * 2) use a map structure to hold info about uniqueness
  * 
  */

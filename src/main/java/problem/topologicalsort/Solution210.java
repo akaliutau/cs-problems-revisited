@@ -20,7 +20,7 @@ import java.util.Queue;
  * finish all courses, return an empty array.
  * 
  * IDEA:
- * 1. build dynamic statistics hash-table depStat containing statistics about dependencies
+ * 1. build dynamic statistics hash-table dependencies containing statistics about dependencies
  * 2. use graph in the form of hash map  dep => list of courses for fast access - acceleration
  * 
  */
@@ -28,7 +28,7 @@ public class Solution210 {
 
 	public int[] findOrder(int numCourses, int[][] prerequisites) {
 		Map<Integer, List<Integer>> graph = new HashMap<>();
-		int[] depStat = new int[numCourses];
+		int[] dependencies = new int[numCourses];
 		int[] topologicalOrder = new int[numCourses];
 
 		// Create the adjacency list representation of the graph
@@ -38,13 +38,13 @@ public class Solution210 {
 			graph.computeIfAbsent(dep, k -> new ArrayList<>()).add(course);
 
 			// Record in-degree of each vertex
-			depStat[course] += 1;
+			dependencies[course] ++;
 		}
 
 		// Add all vertices with 0 dependencies to the queue
 		Queue<Integer> q = new LinkedList<>();
 		for (int i = 0; i < numCourses; i++) {
-			if (depStat[i] == 0) {
+			if (dependencies[i] == 0) {
 				q.add(i);// only courses without dependencies will be added
 			}
 		}
@@ -55,13 +55,13 @@ public class Solution210 {
 			int node = q.poll();
 			topologicalOrder[i++] = node; // add to the result
 
-			// after course removal update depStat
+			// after course removal update dependencies
 			if (graph.containsKey(node)) {
 				for (Integer neighbor : graph.get(node)) {// reduce the dependency index (in-degree) of each neighbor by 1
-					depStat[neighbor]--;
+					dependencies[neighbor]--;
 
 					// If dependency index of a neighbor becomes 0, add it to the Q
-					if (depStat[neighbor] == 0) {
+					if (dependencies[neighbor] == 0) {
 						q.add(neighbor);
 					}
 				}

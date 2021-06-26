@@ -11,7 +11,9 @@ import java.util.List;
  * either:
  * 
  * Each word after the identifier will consist only of lowercase letters, or;
- * Each word after the identifier will consist only of digits. We will call
+ * Each word after the identifier will consist only of digits. 
+ * 
+ * We will call
  * these two varieties of logs letter-logs and digit-logs. It is guaranteed that
  * each log has at least one word after its identifier.
  * 
@@ -31,7 +33,7 @@ import java.util.List;
  * dig","dig1 8 1 5 1","dig2 3 6"]
  * 
  * IDEA:
- * 
+ * analyze prefixes and suffices
  * 
  * 
  */

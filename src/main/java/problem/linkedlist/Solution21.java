@@ -7,7 +7,7 @@ import problem.model.ListNode;
  * The new list should be made by splicing together the nodes of the first two lists.
  * 
  * IDEA:
- *  use dummy head
+ * 1. use dummy head, as it helps to solve problem with edge cases
  */
 public class Solution21 {
 	

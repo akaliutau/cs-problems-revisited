@@ -111,11 +111,11 @@ public class Solution146 {
 		public void put(int key, int value) {
 			Node node = cache.get(key);
 
-			if (node == null) {
+			if (node == null) {// create new cached entry 
 				Node newNode = new Node(key, value);
 
 				cache.put(key, newNode);
-				addNode(newNode);
+				addNode(newNode); // note that newly added entries will be right at the head from the very beginning
 
 				++size;
 

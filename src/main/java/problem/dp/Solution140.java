@@ -15,11 +15,14 @@ import java.util.Set;
  * Output: [ "cats and dog", "cat sand dog" ] 
  * 
  * IDEA:
+ * 1. defining sub-problem: consider index = 7:
  * 
+ * [catsand] + dog - we can get the answer for catsanddog if we know it for catsand:
+ * just check the tail = substring(index,len) against dictionary, and if it's true, create the answer from all combinations
  * 
  * catsanddog
  *    |   |
- *  start end = 7  
+ *  start len = 7  
  * dp flow:
  * 
  * dp: [
@@ -37,7 +40,7 @@ import java.util.Set;
  * 10  []
  * ]
  * 
- * O(n)
+ * O(n^2 + 2^n)
  */
 public class Solution140 {
 
@@ -69,31 +72,31 @@ public class Solution140 {
                 return new ArrayList<>();
             }
 
-            int len = s.length();
+            int length = s.length();
             // contains a list of all possible cuts for [0,l)
-            Words[] dp = new Words[len + 1];// dp[i] the answer for the question if sentence's length is limited to i
+            Words[] dp = new Words[length + 1];// dp[i] the answer for the question if sentence's length is limited to i
             
-            for (int i = 0; i < len + 1; ++i) {
+            for (int i = 0; i < length + 1; ++i) {
                 dp[i] = new Words();
             }
             dp[0].list.add("");
 
-            for (int end = 1; end < len + 1; end++) {
+            for (int len = 1; len < length + 1; len++) {
                 List<String> sublist = new ArrayList<>();
 
                 // fill up the values in the dp array - split the word into to 2 = head + tail
-                for (int start = 0; start < end; start++) {
-                    String tail = s.substring(start, end);
+                for (int start = 0; start < len; start++) {
+                    String tail = s.substring(start, len);
                     if (wordSet.contains(tail)) {
-                        for (String subsentence : dp[start].list) {
+                        for (String subsentence : dp[start].list) {// this could lead to 2^n overall complexity - aaaa [a, aa, aaa]
                             sublist.add((subsentence + " " + tail).trim());
                         }
                     }
                 }
-                dp[end].list = sublist;
+                dp[len].list = sublist;
             }
 
-            return dp[len].list;
+            return dp[length].list;
         }
   
 

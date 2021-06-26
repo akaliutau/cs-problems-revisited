@@ -3,6 +3,8 @@ package problem.design;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
+import java.util.TreeMap;
 
 /**
  * https://en.wikipedia.org/wiki/Least_frequently_used
@@ -23,18 +25,43 @@ import java.util.Map;
  * to zero when the item is removed.
  * 
  * IDEA:
- * use 2 structures to track nodes:
+ * use 2 structures to track group:
  * 1) map for fast access
- * 2) nodes grouped by frequency
+ * 2) group grouped by frequency
  * 
  * Note, that the tricky part is node migration (from group to group)
  * 
  * When we GET node, then
- * 1) find and remove it from data structure
+ * 1) find and remove it from frequency map structure
  * 2) calc new frequency
- * 3) add it to the new group
+ * 3) add it to the new group at frequency map structure
  * 
  * 
+ * Lets assume we have the following set:
+ * 
+ * frequency |    Node
+ * -----------------
+ *   0         ->   [10, 20, 25]  explain: most resent key must be at head, and all older keys - at the tail
+ *   1         ->   [15]
+ *   
+ *   
+ *   HEAD -> 10 -> 20 -> 15 -> TAIL
+ *   
+ * On adding 30:
+ * 
+ * frequency |    Node
+ * -----------------
+ *   0         ->   [30, 10, 20]
+ *   1         ->   [15]
+ *    
+ * On get 10:
+ * 
+ * frequency |    Node
+ * -----------------
+ *   0         ->   [30, 20]
+ *   1         ->   [10, 15]
+ *   
+ *   
  */
 public class Solution460 {
 
@@ -44,44 +71,22 @@ public class Solution460 {
 		class Node {
 			int key;
 			int value;
-			int count;
-
-			Node prev;
-			Node next;// == null if no next node
+			int count = 0;
 
 			Node(int key, int value) {
 				this.key = key;
 				this.value = value;
 			}
 
-			// attach to this node the next one
-			void chain(Node node) {
-				node.prev = this;
-				next = node;
-			}
-
-			// remove from 2-linked list
-			void remove() {
-				if (next != null) {
-					next.prev = prev;
-				}
-
-				if (prev != null) {
-					prev.next = next;
-				}
-			}
 		}
 
 		int maxSize;
 		int size;
 
 		// helper structures
-		Map<Integer, LinkedList<Node>> counter; // groups nodes by frequency
-		Map<Integer, Node> nodeMap;             // mapping key => node for fast access
+		TreeMap<Integer, LinkedList<Node>> freq; // groups group by frequency - each group is a list of group
+		Map<Integer, Node> nodeMap;          // mapping key => node for fast access
 
-		// sequence structure (all that does not fit must be evicted, and position is determined by statistics)
-		Node head;// points to the first node in cache
-		Node tail;// points to the last node in cache
 
 		int minCount;
 
@@ -90,10 +95,9 @@ public class Solution460 {
 			minCount = 0;
 			size = 0;
 
-			counter = new HashMap<>();
+			freq = new TreeMap<>();
 			nodeMap = new HashMap<>();
 
-			head = null;
 		}
 
 		public int get(int key) {
@@ -102,31 +106,17 @@ public class Solution460 {
 			}
 
 			Node requestedNode = nodeMap.get(key);// requested node
-
-			LinkedList<Node> nodes = counter.get(requestedNode.count);
-			nodes.remove(requestedNode);
-
-			if (nodes.size() > 0) {
-				Node node1 = nodes.peekFirst();
-				requestedNode.chain(node1);// bubble up requested node to the top, Note: use a 3rd structure
-				if (requestedNode == tail) {
-					tail = node1;
-				}
-			}
+			
+			Queue<Node> group = freq.get(requestedNode.count);
+			group.remove(requestedNode);
+            if (group.isEmpty()){
+                freq.remove(requestedNode.count);
+            }
 
 			requestedNode.count ++;
 
-			LinkedList<Node> updatesNodes = counter.computeIfAbsent(requestedNode.count, k -> new LinkedList<>());
-			
-			if (updatesNodes.size() > 0) {
-				Node node1 = updatesNodes.peekLast();
-				node1.chain(requestedNode);
-				if (node1 == tail) {
-					tail = requestedNode;
-				}
-			}
-
-			updatesNodes.offer(requestedNode);
+			Queue<Node> newGroup = freq.computeIfAbsent(requestedNode.count, k -> new LinkedList<>());
+			newGroup.add(requestedNode);
 
 			return requestedNode.value;
 		}
@@ -145,53 +135,17 @@ public class Solution460 {
 			}
 
 			if (size == maxSize) {
-				int count = tail.count;
-				Node node = counter.get(count).pollFirst();
-				remove(node);
-
+				int count = freq.firstKey();
+                //System.out.println("first key = " + count);
+				Node node = freq.get(count).poll();
 				nodeMap.remove(node.key);
-
-				counter.get(node.count).remove(node);
+                size --;
 			}
 
-			Node node = addToTail(key, value);
-
-			nodeMap.put(key, node);
-
-			counter.computeIfAbsent(node.count, k -> new LinkedList<>()).offer(node);
-		}
-
-		void remove(Node node) {
-			node.remove();
-
-			if (head == node) {
-				head = head.next;
-				if (head != null) {
-					head.prev = null;
-				}
-			}
-
-			if (tail == node) {
-				tail = node.prev;
-			}
-
-			size--;
-		}
-
-		Node addToTail(int key, int value) {
 			Node node = new Node(key, value);
-
-			if (head == null) {
-				head = node;
-				tail = head;
-			} else {
-				tail.chain(node);
-				tail = node;
-			}
-
-			size++;
-
-			return node;
+			nodeMap.put(key, node);
+			freq.computeIfAbsent(node.count, k -> new LinkedList<>()).offer(node);
+            size ++;
 		}
 	}
 

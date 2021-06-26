@@ -38,6 +38,19 @@ package problem.hashtable;
  * IDEA:
  * 
  * 1. convert cells' state into 8-bit number, total 256 states
+ * 2. after each change 3 outcomes are possible:
+ *   a) new state
+ *   b) stuck state (const)
+ *   c) cycle
+ *   
+ * # cycle | state
+ * ----------------  
+ *   0         13
+ *   1         15
+ *   2         16
+ *   3         13
+ *   4        ...
+ * 
  * 
  */
 public class Solution957 {
@@ -61,6 +74,7 @@ public class Solution957 {
 		int cycleLen = 0;
 		int[] history = new int[256];
 		history[0] = prison;
+		
 		while (day > 0) {
 			int left = prison >> 1;
 			int right = prison << 1;
@@ -80,8 +94,9 @@ public class Solution957 {
 			day--;
 
 		}
+		
 		if (!found && cycle) {
-			int offset = day % cycleLen;
+			int offset = day % cycleLen;// f.e. we have 2013 days left and cycle 10
 			if (cycleLen != 1) {
 				if (offset == 0) {
 					offset = cycleLen;

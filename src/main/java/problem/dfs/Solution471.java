@@ -42,6 +42,15 @@ import java.util.Map;
  * 
  * IDEA:
  * optimized brute force
+ * 
+ * subproblem: cut the string at some position and apply the logic recursively
+ * 				 		aabcaabcd
+ *               /              |       \
+ * 				/               |         \
+ * (a abcaabcd)             (aa bcaabcd)         (aab caabcd)       ...
+ * 
+ * 
+ * 
  * on each iteration:
  * 1. try to find repetitions (= a substring no bigger than 1/2)
  * 	  i.e. test the substring against condition:
@@ -72,6 +81,7 @@ public class Solution471 {
 
 
 	String dfs(String s, Map<String, String> memo) {
+		// process edge cases first
 		int n = s.length();
 		if (s == null || n < 5) {// if have aaaa or smaller return it because 4[a] have 4 symbols
 			return s;
@@ -80,23 +90,27 @@ public class Solution471 {
 			return memo.get(s);
 		}
 		
+		// main logic, consists from 2 choices
+		
+		// choice 1: leave string as is
 		String minEncoded = s;
 		
+		// choice 2: find repeated string
 		for (int i = n / 2; i < n; i++) {
 			String pattern = s.substring(i);
 			if (n % pattern.length() != 0) {
 				continue;
 			}
-			int repeats = countRepeats(s, pattern);
-			if (repeats * pattern.length() != n) {
+			int repeatedLength = countRepeats(s, pattern);
+			if (repeatedLength * pattern.length() != n) {
 				continue;
 			}
-			String encoded = repeats + "[" + dfs(pattern, memo) + "]";
+			String encoded = repeatedLength + "[" + dfs(pattern, memo) + "]";
 			if (encoded.length() < minEncoded.length()) {
 				minEncoded = encoded;
 			}
 		}
-		
+		// choice 3: cut string in 2 parts and apply recursively dfs
 		for (int i = 1; i < n; i++) {
 			String head = dfs(s.substring(0, i), memo);
 			String tail = dfs(s.substring(i), memo);

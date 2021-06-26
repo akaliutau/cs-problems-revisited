@@ -17,7 +17,7 @@ import java.util.Map;
  * point to any node.
  * 
  * IDEA:
- * 
+ * Use visited data structure to track already visited nodes; main logic is just DFS on all linked nodes
  */
 public class Solution138 {
 
@@ -34,7 +34,7 @@ public class Solution138 {
 	}
 
 	// HashMap which holds old nodes as keys and new nodes as its values.
-	Map<Node, Node> visitedHash = new HashMap<>();
+	Map<Node, Node> visited = new HashMap<>();
 
 	// returns a clone of head
 	public Node copyRandomList(Node head) {
@@ -45,13 +45,14 @@ public class Solution138 {
 
 		// If we have already processed the current node, then we simply return the
 		// cloned version of it.
-		if (visitedHash.containsKey(head)) {
-			return visitedHash.get(head);
+		if (visited.containsKey(head)) {
+			return visited.get(head);
 		}
 
+		// here we create a clone - note we are going to return this node as an answer
 		// Create a new node with the value same as old node. (i.e. copy the node)
 		Node node = new Node(head.val);
-		visitedHash.put(head, node);
+		visited.put(head, node);
 
 		// Recursively copy the remaining linked list starting once from the next
 		// pointer and then from the random pointer.

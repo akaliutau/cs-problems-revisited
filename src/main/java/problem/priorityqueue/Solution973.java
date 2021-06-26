@@ -25,7 +25,8 @@ import java.util.PriorityQueue;
  * answer is just [[-2,2]]
  * 
  * IDEA:
- * use a data structure with ordering by distance to the point (0,0)
+ * option1. use a data structure with ordering by distance to the point (0,0)
+ * option2. use partitioning
  * 
  */
 public class Solution973 {

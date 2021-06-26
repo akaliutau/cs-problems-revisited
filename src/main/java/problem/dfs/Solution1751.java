@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * You are given an array of events where events[i] = [startDayi, endDayi,
- * valuei]. The ith event starts at startDayi and ends at endDayi, and if you
+ * You are given an array of events where events[i] = [startDayi, prevEndDayi,
+ * valuei]. The ith event starts at startDayi and prevEnds at prevEndDayi, and if you
  * attend this event, you will receive a value of valuei. You are also given an
  * integer k which represents the maximum number of events you can attend.
  * 
  * You can only attend one event at a time. If you choose to attend an event,
- * you must attend the entire event. Note that the end day is inclusive: that
- * is, you cannot attend two events where one of them starts and the other ends
+ * you must attend the entire event. Note that the prevEnd day is inclusive: that
+ * is, you cannot attend two events where one of them starts and the other prevEnds
  * on the same day.
  * 
  * Return the maximum sum of values that you can receive by attending events.
@@ -22,7 +22,12 @@ import java.util.Map;
  * 
  * 
  * IDEA:
- * 1. try to form ALL possible segments taking into account all constraints laid
+ * optimized BF + DFS + memoization
+ * 
+ * 1. try to form ALL possible seqLengths taking into account all constraints laid
+ * 
+ * Here is a detail example:
+ * 
  *   initial: [4,3,1]
  *   
  *     4      3
@@ -30,7 +35,7 @@ import java.util.Map;
  *         1
  *      -------
  *      
- *  2. use greedy approach - always take the immediate NEXT segment, because
+ *  2. use greedy approach - always take the immediate NEXT seqLength, because
  *  
  *     when we consider 
  *     0 -> 1, val = 14 
@@ -50,25 +55,32 @@ import java.util.Map;
  */
 public class Solution1751 {
 	
-	int dfs(int[][] events, int pos, int segment, int k, int end, Map<String, Integer> memo) {
-		if (segment == k || pos == events.length) {
+	int dfs(int[][] events, int pos, int seqLength, int k, int prevEnd, Map<String, Integer> memo) {
+		if (seqLength == k || pos == events.length) {
 			return 0;
 		}
 
-		String key = segment + ":" + end;
+		String key = seqLength + ":" + prevEnd;
 		if (memo.get(key) != null) {
 			return memo.get(key);
 		}
 
-		// skip segment @ pos and continue @ pos + 1
-		// Note: segment counter does not increase
-		int max = dfs(events, pos + 1, segment, k, end, memo);
+		// make choice: 
+		// 1) either drop event: events[pos]
+		// 2) include events[pos] into sequence
 		
-		// if possible to chain to current segment, then chain it! 
-		if (events[pos][0] > end) {
+		// drop event at pos continue at pos + 1
+		// Note: seqLength counter does not increase
+		int max = dfs(events, pos + 1, seqLength, k, prevEnd, memo);
+		
+		// if possible to chain to current seqLength, then chain it! 
+		int eventStart = events[pos][0];
+		int eventEnd = events[pos][1];
+		
+		if (eventStart > prevEnd) {
 			int curValue = events[pos][2];
 			max = Math.max(max, 
-						curValue + dfs(events, pos + 1, segment + 1, k, events[pos][1], memo)
+						curValue + dfs(events, pos + 1, seqLength + 1, k, eventEnd, memo)
 							);
 		}
 
@@ -79,7 +91,7 @@ public class Solution1751 {
 	public int maxValue(int[][] events, int k) {
 		Arrays.sort(events, (o, p) -> o[0] == p[0] ? o[1] - p[1] : o[0] - p[0]);//by start, then shorter intervals go first
 
-		// <segment + ":" + end, sum>
+		// <seqLength + ":" + end => cost>
 		Map<String, Integer> memo = new HashMap<>();
 
 		return dfs(events, 0, 0, k, 0, memo);

@@ -15,7 +15,7 @@ package problem.design;
  * 
  * IDEA:
  * each player either increase by 1 the cell or descrease it
- * if some row| column | diag  reach sum with norm == ||n|| someone won
+ * if some  row | column | diagonal  reach sum with norm == ||n|| => someone won
  * 
  */
 public class Solution348 {

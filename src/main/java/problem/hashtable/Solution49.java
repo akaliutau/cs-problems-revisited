@@ -20,7 +20,7 @@ import java.util.Map;
  * [["bat"],["nat","tan"],["ate","eat","tea"]]
  * 
  * IDEA:
- * use hashes of statistics tables for appropriate words 
+ * use footprints (statistical representation) for appropriate words - see impl of class FootPrint 
  * 
  */
 public class Solution49 {

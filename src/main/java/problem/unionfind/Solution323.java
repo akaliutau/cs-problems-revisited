@@ -23,8 +23,9 @@ package problem.unionfind;
  *  (0,1) : 0 <- 0, 1 <- 1           => 0 <- 1, set rank(0) = 1
  *  (1,2):  0 <- 1 <- 1,  2 <- 2     => 0 <- 1 and 0 <- 2
  *  
+ *  in the beginning we have distinctSets consisting from n parts, 
+ *  each merge will decrease this number by 1
  *  
- * 
  * 
  * 
  */

@@ -11,8 +11,13 @@ import java.util.Random;
  * Design O(1) random generator
  * 
  * IDEA:
+ * To provide a uniform distribution of number to return
+ * we have to hold all numbers in list, and randomly pick up the element
+ * 
+ * Main performance issue when dealing with list - removing some element, as it leads to resizing
+ * 
  * 1) use map (number) => (its position in list) for fast access
- * 2) when removing element, exchange it first with the last in the list
+ * 2) when removing element, exchange it firstly with the last in the list
  * 
  */
 public class Solution380 {

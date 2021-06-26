@@ -32,7 +32,8 @@ package problem.math;
  * 
  * IDEA: 
  * 1. consider Roman number as a block (container) to hold a specific amount of items
- * 2. define how many times it is necessary to add up the current block, if reached a smaller number, decrease the index
+ * 2. define how many times it is necessary to add up the current block (== Roman number), 
+ * 3. if initial number to convert is still > 0, then  decrease the index in integers array
  * 
  */
 public class Solution12 {
