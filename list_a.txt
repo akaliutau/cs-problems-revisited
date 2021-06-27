@@ -1,0 +1,513 @@
+1041,MathStringSimulation,Medium
+937,ArrayStringSorting,Easy
+1152,ArrayHash TableSorting,Medium
+146,Hash TableLinked ListDesignDoubly-Linked List,Medium
+1465,ArrayGreedySorting,Medium
+1335,ArrayDynamic Programming,Hard
+472,StringDynamic ProgrammingDepth-First SearchTrie,Hard
+323,Depth-First SearchBreadth-First SearchUnion FindGraph,Medium
+547,Depth-First SearchBreadth-First SearchUnion FindGraph,Medium
+1010,ArrayHash TableCounting,Medium
+200,ArrayDepth-First SearchBreadth-First SearchUnion FindMatrix,Medium
+460,Hash TableLinked ListDesignDoubly-Linked List,Hard
+973,ArrayMathDivide and ConquerGeometrySortingHeap (Priority Queue)Quickselect,Medium
+1192,Depth-First SearchGraphBiconnected Component,Hard
+1167,ArrayGreedyHeap (Priority Queue),Medium
+1648,ArrayMathBinary SearchGreedySortingHeap (Priority Queue),Medium
+295,Two PointersDesignSortingHeap (Priority Queue)Data Stream,Hard
+127,Hash TableStringBreadth-First Search,Hard
+994,ArrayBreadth-First SearchMatrix,Medium
+23,Linked ListDivide and ConquerHeap (Priority Queue)Merge Sort,Hard
+1135,Union FindGraphHeap (Priority Queue)Minimum Spanning Tree,Medium
+273,MathStringRecursion,Hard
+572,TreeDepth-First SearchString MatchingBinary TreeHash Function,Easy
+642,StringDesignTrieData Stream,Hard
+42,ArrayTwo PointersDynamic ProgrammingStackMonotonic Stack,Hard
+253,ArrayTwo PointersGreedySortingHeap (Priority Queue),Medium
+1799,ArrayMathDynamic ProgrammingBacktrackingBit ManipulationNumber TheoryBitmask,Hard
+348,ArrayHash TableDesignMatrix,Medium
+1429,ArrayHash TableDesignQueueData Stream,Medium
+1,ArrayHash Table,Easy
+1120,TreeDepth-First SearchBinary Tree,Medium
+1628,MathStackTreeDesignBinary Tree,Medium
+140,Hash TableStringDynamic ProgrammingBacktrackingTrieMemoization,Hard
+1629,ArrayString,Easy
+212,ArrayStringBacktrackingTrieMatrix,Hard
+380,ArrayHash TableMathDesignRandomized,Medium
+139,Hash TableStringDynamic ProgrammingTrieMemoization,Medium
+138,Hash TableLinked List,Medium
+454,ArrayHash Table,Medium
+210,Depth-First SearchBreadth-First SearchGraphTopological Sort,Medium
+315,ArrayBinary SearchDivide and ConquerBinary Indexed TreeSegment TreeMerge SortOrdered Set,Hard
+1710,ArrayGreedySorting,Easy
+12,Hash TableMathString,Medium
+490,Depth-First SearchBreadth-First SearchGraph,Medium
+1091,ArrayBreadth-First SearchMatrix,Medium
+21,Linked ListRecursion,Easy
+1730,ArrayBreadth-First SearchMatrix,Medium
+692,Hash TableStringTrieSortingHeap (Priority Queue)Bucket SortCounting,Medium
+1597,StringStackTreeBinary Tree,Hard
+353,ArrayDesignQueueMatrix,Medium
+957,ArrayHash TableMathBit Manipulation,Medium
+207,Depth-First SearchBreadth-First SearchGraphTopological Sort,Medium
+1328,StringGreedy,Medium
+471,StringDynamic Programming,Hard
+1481,ArrayHash TableGreedySortingCounting,Medium
+503,ArrayStackMonotonic Stack,Medium
+1000,ArrayDynamic Programming,Hard
+239,ArrayQueueSliding WindowHeap (Priority Queue)Monotonic Queue,Hard
+829,MathEnumeration,Hard
+227,MathStringStack,Medium
+79,ArrayBacktrackingMatrix,Medium
+56,ArraySorting,Medium
+588,Hash TableStringDesignTrie,Hard
+221,ArrayDynamic ProgrammingMatrix,Medium
+898,ArrayDynamic ProgrammingBit Manipulation,Medium
+269,ArrayStringDepth-First SearchBreadth-First SearchGraphTopological Sort,Hard
+238,ArrayPrefix Sum,Medium
+1011,ArrayBinary Search,Medium
+815,ArrayHash TableBreadth-First Search,Hard
+909,ArrayBreadth-First SearchMatrix,Medium
+17,Hash TableStringBacktracking,Medium
+895,Hash TableStackDesignOrdered Set,Hard
+992,ArrayHash TableSliding WindowCounting,Hard
+121,ArrayDynamic Programming,Easy
+49,Hash TableStringSorting,Medium
+1166,Hash TableStringDesignTrie,Medium
+33,ArrayBinary Search,Medium
+314,Hash TableTreeDepth-First SearchBreadth-First SearchBinary Tree,Medium
+735,ArrayStack,Medium
+165,Two PointersString,Medium
+103,TreeBreadth-First SearchBinary Tree,Medium
+155,StackDesign,Easy
+289,ArrayMatrixSimulation,Medium
+1751,ArrayBinary SearchDynamic Programming,Hard
+901,StackDesignMonotonic StackData Stream,Medium
+445,Linked ListMathStack,Medium
+1603,DesignSimulationCounting,Easy
+215,ArrayDivide and ConquerSortingHeap (Priority Queue)Quickselect,Medium
+772,MathStringStackRecursion,Hard
+493,ArrayBinary SearchDivide and ConquerBinary Indexed TreeSegment TreeMerge SortOrdered Set,Hard
+759,ArraySortingHeap (Priority Queue),Hard
+1235,ArrayBinary SearchDynamic ProgrammingSorting,Hard
+1761,Graph,Hard
+1156,StringSliding Window,Medium
+135,ArrayGreedy,Hard
+15,ArrayTwo PointersSorting,Medium
+355,Hash TableLinked ListDesignHeap (Priority Queue),Medium
+362,ArrayHash TableBinary SearchDesignQueue,Medium
+767,Hash TableStringGreedySortingHeap (Priority Queue)Counting,Medium
+863,TreeDepth-First SearchBreadth-First SearchBinary Tree,Medium
+657,StringSimulation,Easy
+25,Linked ListRecursion,Hard
+841,Depth-First SearchBreadth-First SearchGraph,Medium
+1740,Hash TableTreeDepth-First SearchBreadth-First SearchBinary Tree,Medium
+1180,MathString,Easy
+987,Hash TableTreeDepth-First SearchBreadth-First SearchBinary Tree,Hard
+297,StringTreeDepth-First SearchBreadth-First SearchDesignBinary Tree,Hard
+224,MathStringStackRecursion,Hard
+4,ArrayBinary SearchDivide and Conquer,Hard
+615,Database,Hard
+716,Linked ListStackDesignDoubly-Linked ListOrdered Set,Easy
+18,ArrayTwo PointersSorting,Medium
+48,ArrayMathMatrix,Medium
+646,ArrayDynamic ProgrammingGreedySorting,Medium
+1360,MathString,Easy
+535,Hash TableStringDesignHash Function,Medium
+45,ArrayDynamic ProgrammingGreedy,Medium
+305,ArrayUnion Find,Hard
+98,TreeDepth-First SearchBinary Search TreeBinary Tree,Medium
+261,Depth-First SearchBreadth-First SearchUnion FindGraph,Medium
+124,Dynamic ProgrammingTreeDepth-First SearchBinary Tree,Hard
+823,ArrayHash TableDynamic Programming,Medium
+20,StringStack,Easy
+388,StringStackDepth-First Search,Medium
+134,ArrayGreedy,Medium
+1106,StringStackRecursion,Hard
+181,Database,Easy
+41,ArrayHash Table,Hard
+126,Hash TableStringBacktrackingBreadth-First Search,Hard
+694,Hash TableDepth-First SearchBreadth-First SearchUnion FindHash Function,Medium
+981,Hash TableStringBinary SearchDesign,Medium
+1244,Hash TableDesignSorting,Medium
+1405,StringGreedyHeap (Priority Queue),Medium
+381,ArrayHash TableMathDesignRandomized,Hard
+5,StringDynamic Programming,Medium
+1569,ArrayMathDivide and ConquerDynamic ProgrammingTreeUnion FindBinary Search TreeMemoizationCombinatoricsBinary Tree,Hard
+1138,Hash TableString,Medium
+347,ArrayHash TableDivide and ConquerSortingHeap (Priority Queue)Bucket SortCountingQuickselect,Medium
+1105,ArrayDynamic Programming,Medium
+794,ArrayString,Medium
+1559,ArrayDepth-First SearchBreadth-First SearchUnion FindMatrix,Hard
+1547,ArrayDynamic Programming,Hard
+123,ArrayDynamic Programming,Hard
+1222,ArrayMatrixSimulation,Medium
+437,TreeDepth-First SearchBinary Tree,Medium
+394,StringStackRecursion,Medium
+1236,StringDepth-First SearchBreadth-First SearchInteractive,Medium
+1024,ArrayDynamic ProgrammingGreedy,Medium
+188,ArrayDynamic Programming,Hard
+36,ArrayHash TableMatrix,Medium
+1600,Hash TableTreeDepth-First SearchDesign,Medium
+1233,ArrayStringTrie,Medium
+1071,MathString,Easy
+1344,Math,Medium
+695,ArrayDepth-First SearchBreadth-First SearchUnion FindMatrix,Medium
+545,TreeDepth-First SearchBinary Tree,Medium
+180,Database,Medium
+1496,Hash TableString,Easy
+632,ArrayHash TableGreedySliding WindowSortingHeap (Priority Queue),Hard
+970,Hash TableMath,Medium
+1511,Database,Easy
+337,Dynamic ProgrammingTreeDepth-First SearchBinary Tree,Medium
+378,ArrayBinary SearchSortingHeap (Priority Queue)Matrix,Medium
+733,ArrayDepth-First SearchBreadth-First SearchMatrix,Easy
+122,ArrayDynamic ProgrammingGreedy,Easy
+82,Linked ListTwo Pointers,Medium
+763,Hash TableTwo PointersStringGreedy,Medium
+1487,ArrayHash TableString,Medium
+3,Hash TableStringSliding Window,Medium
+1026,TreeDepth-First SearchBinary Tree,Medium
+1811,Database,Medium
+410,ArrayBinary SearchDynamic ProgrammingGreedy,Hard
+332,Depth-First SearchGraphEulerian Circuit,Medium
+209,ArrayBinary SearchSliding WindowPrefix Sum,Medium
+1229,ArrayTwo PointersSorting,Medium
+236,TreeDepth-First SearchBinary Tree,Medium
+84,ArrayStackMonotonic Stack,Hard
+99,TreeDepth-First SearchBinary Search TreeBinary Tree,Medium
+542,ArrayDynamic ProgrammingBreadth-First SearchMatrix,Medium
+1479,Database,Hard
+1333,ArraySorting,Medium
+715,DesignSegment TreeOrdered Set,Hard
+199,TreeDepth-First SearchBreadth-First SearchBinary Tree,Medium
+560,ArrayHash TablePrefix Sum,Medium
+1220,Dynamic Programming,Hard
+706,ArrayHash TableLinked ListDesignHash Function,Easy
+564,MathString,Hard
+279,MathDynamic ProgrammingBreadth-First Search,Medium
+1386,ArrayHash TableGreedyBit Manipulation,Medium
+341,StackTreeDepth-First SearchDesignQueueIterator,Medium
+218,ArrayDivide and ConquerBinary Indexed TreeSegment TreeLine SweepHeap (Priority Queue)Ordered Set,Hard
+185,Database,Hard
+754,MathBinary Search,Medium
+2,Linked ListMathRecursion,Medium
+1255,ArrayStringDynamic ProgrammingBacktrackingBit ManipulationBitmask,Hard
+721,ArrayStringDepth-First SearchBreadth-First SearchUnion Find,Medium
+53,ArrayDivide and ConquerDynamic Programming,Easy
+1044,StringBinary SearchSliding WindowRolling HashSuffix ArrayHash Function,Hard
+849,Array,Medium
+150,ArrayMathStack,Medium
+116,TreeDepth-First SearchBreadth-First SearchBinary Tree,Medium
+1270,Database,Medium
+685,Depth-First SearchBreadth-First SearchUnion FindGraph,Hard
+1190,StringStack,Medium
+449,StringTreeDepth-First SearchBreadth-First SearchDesignBinary Search TreeBinary Tree,Medium
+55,ArrayDynamic ProgrammingGreedy,Medium
+1155,Dynamic Programming,Medium
+284,ArrayDesignIterator,Medium
+387,Hash TableStringQueueCounting,Easy
+153,ArrayBinary Search,Medium
+836,MathGeometry,Easy
+1209,StringStack,Medium
+790,Dynamic Programming,Medium
+16,ArrayTwo PointersSorting,Medium
+1268,ArrayStringTrie,Medium
+277,Two PointersGreedyGraphInteractive,Medium
+1770,ArrayDynamic Programming,Medium
+400,MathBinary Search,Medium
+354,ArrayBinary SearchDynamic ProgrammingSorting,Hard
+1099,ArrayTwo PointersBinary SearchSorting,Easy
+826,ArrayTwo PointersBinary SearchGreedySorting,Medium
+230,TreeDepth-First SearchBinary Search TreeBinary Tree,Medium
+939,ArrayHash TableMathGeometrySorting,Medium
+50,MathRecursion,Medium
+1136,GraphTopological Sort,Medium
+72,StringDynamic Programming,Hard
+1636,ArrayHash TableSorting,Easy
+443,Two PointersString,Medium
+726,Hash TableStringStack,Hard
+1670,ArrayLinked ListDesignQueueData Stream,Medium
+528,MathBinary SearchPrefix SumRandomized,Medium
+14,String,Easy
+579,Database,Hard
+1087,StringBacktrackingBreadth-First Search,Medium
+582,ArrayHash TableTreeDepth-First SearchBreadth-First Search,Medium
+205,Hash TableString,Easy
+201,Bit Manipulation,Medium
+399,ArrayDepth-First SearchBreadth-First SearchUnion FindGraphShortest Path,Medium
+1783,Database,Medium
+986,ArrayTwo Pointers,Medium
+346,ArrayDesignQueueData Stream,Easy
+622,ArrayLinked ListDesignQueue,Medium
+63,ArrayDynamic ProgrammingMatrix,Medium
+373,ArrayHeap (Priority Queue),Medium
+37,ArrayBacktrackingMatrix,Hard
+316,StringStackGreedyMonotonic Stack,Medium
+658,ArrayTwo PointersBinary SearchSortingHeap (Priority Queue),Medium
+117,TreeDepth-First SearchBreadth-First SearchBinary Tree,Medium
+489,BacktrackingInteractive,Hard
+609,ArrayHash TableString,Medium
+349,ArrayHash TableTwo PointersBinary SearchSorting,Easy
+432,Hash TableLinked ListDesignDoubly-Linked List,Hard
+152,ArrayDynamic Programming,Medium
+11,ArrayTwo PointersGreedy,Medium
+1483,Binary SearchDynamic ProgrammingTreeDepth-First SearchBreadth-First SearchDesign,Hard
+91,StringDynamic Programming,Medium
+1110,TreeDepth-First SearchBinary Tree,Medium
+322,ArrayDynamic ProgrammingBreadth-First Search,Medium
+496,ArrayHash TableStackMonotonic Stack,Easy
+819,Hash TableString,Easy
+739,ArrayStackMonotonic Stack,Medium
+718,ArrayBinary SearchDynamic ProgrammingSliding WindowRolling HashHash Function,Medium
+1164,Database,Medium
+74,ArrayBinary SearchMatrix,Medium
+1596,Database,Medium
+720,ArrayHash TableStringTrieSorting,Medium
+262,Database,Hard
+775,ArrayMath,Medium
+312,ArrayDynamic Programming,Hard
+540,ArrayBinary Search,Medium
+1197,Breadth-First Search,Medium
+426,Linked ListStackTreeDepth-First SearchBinary Search TreeBinary TreeDoubly-Linked List,Medium
+1584,ArrayUnion FindMinimum Spanning Tree,Medium
+675,ArrayBreadth-First SearchHeap (Priority Queue)Matrix,Hard
+678,StringDynamic ProgrammingStackGreedy,Medium
+743,Depth-First SearchBreadth-First SearchGraphHeap (Priority Queue)Shortest Path,Medium
+54,ArrayMatrixSimulation,Medium
+641,ArrayLinked ListDesignQueue,Medium
+727,StringDynamic ProgrammingSliding Window,Hard
+1552,ArrayBinary SearchSorting,Medium
+154,ArrayBinary Search,Hard
+428,StringTreeDepth-First SearchBreadth-First Search,Hard
+438,Hash TableStringSliding Window,Medium
+1275,ArrayHash TableMatrixSimulation,Easy
+13,Hash TableMathString,Easy
+75,ArrayTwo PointersSorting,Medium
+1699,Database,Medium
+494,ArrayDynamic ProgrammingBacktracking,Medium
+787,Dynamic ProgrammingDepth-First SearchBreadth-First SearchGraphHeap (Priority Queue)Shortest Path,Medium
+86,Linked ListTwo Pointers,Medium
+543,TreeDepth-First SearchBinary Tree,Easy
+603,Database,Easy
+208,Hash TableStringDesignTrie,Medium
+19,Linked ListTwo Pointers,Medium
+206,Linked ListRecursion,Easy
+184,Database,Medium
+407,ArrayBreadth-First SearchHeap (Priority Queue)Matrix,Hard
+43,MathStringSimulation,Medium
+853,ArraySorting,Medium
+198,ArrayDynamic Programming,Medium
+1395,ArrayDynamic ProgrammingBinary Indexed Tree,Medium
+395,Hash TableStringDivide and ConquerSliding Window,Medium
+1060,ArrayBinary Search,Medium
+105,ArrayHash TableDivide and ConquerTreeBinary Tree,Medium
+31,ArrayTwo Pointers,Medium
+76,Hash TableStringSliding Window,Hard
+240,ArrayBinary SearchDivide and ConquerMatrix,Medium
+814,TreeDepth-First SearchBinary Tree,Medium
+100,TreeDepth-First SearchBreadth-First SearchBinary Tree,Easy
+636,ArrayStack,Medium
+329,Dynamic ProgrammingDepth-First SearchBreadth-First SearchGraphTopological SortMemoization,Hard
+442,ArrayHash Table,Medium
+162,ArrayBinary Search,Medium
+57,Array,Medium
+421,ArrayHash TableBit ManipulationTrie,Medium
+1647,StringGreedySorting,Medium
+149,Hash TableMathGeometry,Hard
+169,ArrayHash TableDivide and ConquerSortingCounting,Easy
+130,ArrayDepth-First SearchBreadth-First SearchUnion FindMatrix,Medium
+211,StringDepth-First SearchDesignTrie,Medium
+1143,StringDynamic Programming,Medium
+889,ArrayHash TableDivide and ConquerTreeBinary Tree,Medium
+366,TreeDepth-First SearchBinary Tree,Medium
+270,Binary SearchTreeDepth-First SearchBinary Search TreeBinary Tree,Easy
+1382,Divide and ConquerGreedyTreeDepth-First SearchBinary Search TreeBinary Tree,Medium
+133,Hash TableDepth-First SearchBreadth-First SearchGraph,Medium
+1248,MathSliding Window,Medium
+1047,StringStack,Easy
+232,StackDesignQueue,Easy
+235,TreeDepth-First SearchBinary Search TreeBinary Tree,Easy
+872,TreeDepth-First SearchBinary Tree,Easy
+287,ArrayTwo PointersBinary SearchBit Manipulation,Medium
+368,ArrayMathDynamic ProgrammingSorting,Medium
+300,ArrayBinary SearchDynamic Programming,Medium
+70,MathDynamic ProgrammingMemoization,Easy
+252,ArraySorting,Easy
+665,Array,Medium
+993,TreeDepth-First SearchBreadth-First SearchBinary Tree,Easy
+143,Linked ListTwo PointersStackRecursion,Medium
+274,ArraySortingCounting Sort,Medium
+1472,ArrayLinked ListStackDesignDoubly-Linked ListData Stream,Medium
+688,Dynamic Programming,Medium
+468,String,Medium
+1094,ArraySortingHeap (Priority Queue)SimulationPrefix Sum,Medium
+703,TreeDesignBinary Search TreeHeap (Priority Queue)Binary TreeData Stream,Easy
+979,TreeDepth-First SearchBinary Tree,Medium
+68,StringSimulation,Hard
+1312,StringDynamic Programming,Hard
+32,StringDynamic ProgrammingStack,Hard
+8,String,Medium
+1217,ArrayMathGreedy,Easy
+7,Math,Easy
+1539,ArrayBinary Search,Easy
+650,MathDynamic Programming,Medium
+403,ArrayDynamic Programming,Hard
+71,StringStack,Medium
+1376,TreeDepth-First SearchBreadth-First Search,Medium
+234,Linked ListTwo PointersStackRecursion,Easy
+120,ArrayDynamic Programming,Medium
+953,ArrayHash TableString,Easy
+38,String,Medium
+339,Depth-First SearchBreadth-First Search,Medium
+862,ArrayBinary SearchQueueSliding WindowHeap (Priority Queue)Prefix SumMonotonic Queue,Hard
+350,ArrayHash TableTwo PointersBinary SearchSorting,Easy
+244,ArrayHash TableTwo PointersStringDesign,Medium
+1314,ArrayMatrixPrefix Sum,Medium
+286,ArrayBreadth-First SearchMatrix,Medium
+887,MathBinary SearchDynamic Programming,Hard
+222,Binary SearchTreeDepth-First SearchBinary Tree,Medium
+1491,ArraySorting,Easy
+61,Linked ListTwo Pointers,Medium
+174,ArrayDynamic ProgrammingMatrix,Hard
+1329,ArraySortingMatrix,Medium
+128,ArrayHash TableUnion Find,Medium
+81,ArrayBinary Search,Medium
+785,Depth-First SearchBreadth-First SearchUnion FindGraph,Medium
+456,ArrayBinary SearchStackMonotonic StackOrdered Set,Medium
+682,ArrayStackSimulation,Easy
+64,ArrayDynamic ProgrammingMatrix,Medium
+912,ArrayDivide and ConquerSortingHeap (Priority Queue)Merge SortBucket SortRadix SortCounting Sort,Medium
+1254,ArrayDepth-First SearchBreadth-First SearchUnion FindMatrix,Medium
+285,TreeDepth-First SearchBinary Search TreeBinary Tree,Medium
+268,ArrayHash TableMathBit ManipulationSorting,Easy
+931,ArrayDynamic ProgrammingMatrix,Medium
+92,Linked List,Medium
+226,TreeDepth-First SearchBreadth-First SearchBinary Tree,Easy
+283,ArrayTwo Pointers,Easy
+173,StackTreeDesignBinary Search TreeBinary TreeIterator,Medium
+974,ArrayHash TablePrefix Sum,Medium
+77,ArrayBacktracking,Medium
+46,ArrayBacktracking,Medium
+621,ArrayHash TableGreedySortingHeap (Priority Queue)Counting,Medium
+713,ArraySliding Window,Medium
+93,StringBacktracking,Medium
+242,Hash TableStringSorting,Easy
+1122,ArrayHash TableSortingCounting Sort,Easy
+429,TreeBreadth-First Search,Medium
+203,Linked ListRecursion,Easy
+652,TreeDepth-First SearchBreadth-First SearchBinary Tree,Medium
+34,ArrayBinary Search,Medium
+783,TreeDepth-First SearchBreadth-First SearchBinary Search TreeBinary Tree,Easy
+796,StringString Matching,Easy
+28,Two PointersStringString Matching,Easy
+176,Database,Easy
+1306,ArrayDepth-First SearchBreadth-First Search,Medium
+383,Hash TableStringCounting,Easy
+22,StringDynamic ProgrammingBacktracking,Medium
+417,ArrayDepth-First SearchBreadth-First SearchMatrix,Medium
+1448,TreeDepth-First SearchBreadth-First SearchBinary Tree,Medium
+40,ArrayBacktracking,Medium
+112,TreeDepth-First SearchBinary Tree,Easy
+114,Linked ListStackTreeDepth-First SearchBinary Tree,Medium
+384,ArrayMathRandomized,Medium
+377,ArrayDynamic Programming,Medium
+39,ArrayBacktracking,Medium
+416,ArrayDynamic Programming,Medium
+627,Database,Easy
+1480,ArrayPrefix Sum,Easy
+402,StringStackGreedyMonotonic Stack,Medium
+877,ArrayMathDynamic ProgrammingGame Theory,Medium
+167,ArrayTwo PointersBinary Search,Easy
+590,StackTreeDepth-First Search,Easy
+1137,MathDynamic ProgrammingMemoization,Easy
+62,MathDynamic ProgrammingCombinatorics,Medium
+1249,StringStack,Medium
+617,TreeDepth-First SearchBreadth-First SearchBinary Tree,Easy
+628,ArrayMathSorting,Easy
+88,ArrayTwo PointersSorting,Easy
+875,ArrayBinary Search,Medium
+290,Hash TableString,Easy
+69,MathBinary Search,Easy
+10,StringDynamic ProgrammingRecursion,Hard
+698,ArrayDynamic ProgrammingBacktrackingBit ManipulationMemoizationBitmask,Medium
+109,Linked ListDivide and ConquerTreeBinary Search TreeBinary Tree,Medium
+160,Hash TableLinked ListTwo Pointers,Easy
+557,Two PointersString,Easy
+412,MathStringSimulation,Easy
+1277,ArrayDynamic ProgrammingMatrix,Medium
+179,StringGreedySorting,Medium
+424,Hash TableStringSliding Window,Medium
+225,StackDesignQueue,Easy
+448,ArrayHash Table,Easy
+85,ArrayDynamic ProgrammingStackMatrixMonotonic Stack,Hard
+328,Linked List,Medium
+202,Hash TableMathTwo Pointers,Easy
+196,Database,Easy
+334,ArrayGreedy,Medium
+204,ArrayMathEnumerationNumber Theory,Easy
+567,Hash TableTwo PointersStringSliding Window,Medium
+178,Database,Medium
+229,ArrayHash TableSortingCounting,Medium
+29,MathBit Manipulation,Medium
+73,ArrayHash TableMatrix,Medium
+110,TreeDepth-First SearchBinary Tree,Easy
+345,Two PointersString,Easy
+102,TreeBreadth-First SearchBinary Tree,Medium
+509,MathDynamic ProgrammingRecursionMemoization,Easy
+797,BacktrackingDepth-First SearchBreadth-First SearchGraph,Medium
+67,MathStringBit ManipulationSimulation,Easy
+516,StringDynamic Programming,Medium
+709,String,Easy
+111,TreeDepth-First SearchBreadth-First SearchBinary Tree,Easy
+1302,TreeDepth-First SearchBreadth-First SearchBinary Tree,Medium
+518,ArrayDynamic Programming,Medium
+278,Binary SearchInteractive,Easy
+175,Database,Easy
+1313,Array,Easy
+1351,ArrayBinary SearchMatrix,Easy
+136,ArrayBit Manipulation,Easy
+1869,String,Easy
+213,ArrayDynamic Programming,Medium
+172,Math,Easy
+523,ArrayHash TableMathPrefix Sum,Medium
+852,ArrayBinary Search,Easy
+51,ArrayBacktracking,Hard
+44,StringDynamic ProgrammingGreedyRecursion,Hard
+177,Database,Medium
+96,MathDynamic ProgrammingTreeBinary Search TreeBinary Tree,Medium
+844,Two PointersStringStackSimulation,Easy
+141,Hash TableLinked ListTwo Pointers,Easy
+78,ArrayBacktrackingBit Manipulation,Medium
+684,Depth-First SearchBreadth-First SearchUnion FindGraph,Medium
+144,StackTreeDepth-First SearchBinary Tree,Easy
+189,ArrayMathTwo Pointers,Medium
+752,ArrayHash TableStringBreadth-First Search,Medium
+647,StringDynamic Programming,Medium
+47,ArrayBacktracking,Medium
+125,Two PointersString,Easy
+792,Hash TableStringTrieSorting,Medium
+101,TreeDepth-First SearchBreadth-First SearchBinary Tree,Easy
+415,MathStringSimulation,Easy
+771,Hash TableString,Easy
+1365,ArrayHash TableSortingCounting,Easy
+66,ArrayMath,Easy
+680,Two PointersStringGreedy,Easy
+1431,Array,Easy
+746,ArrayDynamic Programming,Easy
+938,TreeDepth-First SearchBinary Search TreeBinary Tree,Easy
+118,ArrayDynamic Programming,Easy
+344,Two PointersStringRecursion,Easy
+108,ArrayDivide and ConquerTreeBinary Search TreeBinary Tree,Easy
+24,Linked ListRecursion,Medium
+876,Linked ListTwo Pointers,Easy
+576,Dynamic Programming,Medium
+871,ArrayDynamic ProgrammingGreedyHeap (Priority Queue),Hard
+729,DesignSegment TreeOrdered Set,Medium
+35,ArrayBinary Search,Easy
+217,ArrayHash TableSorting,Easy
+97,StringDynamic Programming,Medium
+104,TreeDepth-First SearchBreadth-First SearchBinary Tree,Easy
+94,StackTreeDepth-First SearchBinary Tree,Easy
+9,Math,Easy
+26,ArrayTwo Pointers,Easy

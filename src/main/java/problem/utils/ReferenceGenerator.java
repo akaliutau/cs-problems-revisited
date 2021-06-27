@@ -34,7 +34,7 @@ public class ReferenceGenerator {
 	}
 
 	public static void main(String[] args) throws IOException {
-		Path path = Paths.get("list.txt");
+		Path path = Paths.get("list_a.txt");
 
 		List<String> read = Files.readAllLines(path);
 		
