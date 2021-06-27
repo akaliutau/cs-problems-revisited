@@ -1,10 +1,9 @@
 package problem.bfs;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
@@ -24,102 +23,80 @@ import java.util.Set;
  *
  * IDEA:
  * 
- * We perform a breadth first search on bus numbers. When we start at S,
- * originally we might be able to board many buses, and if we end at T we may
- * have many targets for our goal state.
+ * Simulate the process of hops as a propagation between buses:
+ * 
+ * for src 1 -> 6
+ * #0: 1 -> 2 -> 7
+ * #1: 3 -> 6 -> 7
+ * 
+ * 1. create a stopsMap:
+ * 
+ * 1 => 0
+ * 2 => 0
+ * 7 => [0,1]
+ * 3 => 1
+ * 6 => 1
+ * 
+ * 2. find all the buses we can start from
+ * 3. start BFS using usedBuses to avoid using the same bus twice
+ * 
  * 
  * 
  * 
  */
 public class Solution815 {
+	
+    class Bus {
+		int bus;
+		int hopCount;
 
-	static class Point {
-
-		int node, depth;
-
-		public Point(int node, int depth) {
-			this.node = node;
-			this.depth = depth;
+		Bus(int bus, int count) {
+			this.bus = bus;
+			this.hopCount = count;
 		}
 	}
-
-	/**
-	 * Detects intersection of 2 sorted routes
-	 * f.e. 
-	 * [1, 2, 7], 
-	 * [3, 6, 7]
-	 */
-	boolean intersect(int[] route1, int[] route2) {
-		int i = 0, j = 0;
-		while (i < route1.length && j < route2.length) {
-			if (route1[i] == route2[j]) {
-				return true;
-			}
-			if (route1[i] < route2[j]) {
-				i++;
-			} else {
-				j++;
-			}
-		}
-		return false;
-	}
-
-	public int numBusesToDestination(int[][] routes, int src, int dest) {
-		if (src == dest) {
+	
+	public int numBusesToDestination(int[][] routes, int source, int target) {
+		Map<Integer, Set<Integer>> stopsMap = new HashMap<>();// stopsMap stop => all buses which can be used to reach this stop
+		if (source == target) {
 			return 0;
 		}
-		int n = routes.length;
-
-		List<List<Integer>> graph = new ArrayList<>();
-		for (int i = 0; i < n; ++i) {
-			Arrays.sort(routes[i]);
-			graph.add(new ArrayList<>());
+		for (int bus = 0; bus < routes.length; bus++) {
+			for (int stop : routes[bus]) {
+				stopsMap.computeIfAbsent(stop, s -> new HashSet<>()).add(bus);
+			}
 		}
-		Set<Integer> seen = new HashSet<>();
-		Set<Integer> targets = new HashSet<>();
-		Queue<Point> queue = new ArrayDeque<>();
 
-		// Build the bi-directional graph. Two buses are connected if
-		// they share at least one bus stop.
-		for (int i = 0; i < n; ++i) {
-			for (int j = i + 1; j < n; ++j) {
-				if (intersect(routes[i], routes[j])) {
-					graph.get(i).add(j);
-					graph.get(j).add(i);
+		Set<Integer> usedBuses = new HashSet<>();
+		Queue<Bus> q = new LinkedList<>();
+		for (int bus : stopsMap.get(source)) {// find all the buses we can start from
+			q.add(new Bus(bus, 1));
+		}
+		int hops = Integer.MAX_VALUE;  
+		while (!q.isEmpty()) {
+			int n = q.size();
+			for (int i = 0; i < n; i++) {
+				Bus currentBus = q.poll();// take the bus
+				if (!usedBuses.contains(currentBus.bus)) {
+					for (int stop : routes[currentBus.bus]) {// 
+						if (stop == target && currentBus.hopCount < hops) {
+							hops = currentBus.hopCount;
+                            break;
+						}
+						// find all buses we can switch to at this point
+						for (int bus : stopsMap.get(stop)) {
+							q.add(new Bus(bus, currentBus.hopCount + 1));
+						}
+					}
+					usedBuses.add(currentBus.bus);
 				}
 			}
+            if (hops != Integer.MAX_VALUE){
+                return hops;
+            }
 		}
-
-		// Initialize seen, queue, targets.
-		// seen represents whether a node has ever been enqueued to queue.
-		// queue handles our breadth first search.
-		// targets is the set of goal states we have.
-		for (int i = 0; i < n; ++i) {
-			if (Arrays.binarySearch(routes[i], src) >= 0) {
-				seen.add(i);
-				queue.offer(new Point(i, 0));
-			}
-			if (Arrays.binarySearch(routes[i], dest) >= 0)
-				targets.add(i);
-		}
-
-		while (!queue.isEmpty()) {
-			Point info = queue.poll();
-			int node = info.node, depth = info.depth;
-			if (targets.contains(node)) {
-				return depth + 1;
-			}
-			for (Integer nei : graph.get(node)) {
-				if (!seen.contains(nei)) {
-					seen.add(nei);
-					queue.offer(new Point(nei, depth + 1));
-				}
-			}
-		}
-
-		return -1;
+		
+		return hops == Integer.MAX_VALUE ? -1 : hops;
 	}
-
-
 
 }
