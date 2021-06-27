@@ -15,7 +15,7 @@ import java.util.Set;
  * forever.
  * 
  * We start at bus stop S (initially not on a bus), and we want to go to bus
- * stop T. Travelling by buses only, what is the least number of buses we must
+ * stop T. Traveling by buses only, what is the least number of buses we must
  * take to reach our destination? Return -1 if it is not possible.
  * 
  * Example: Input: routes = [[1, 2, 7], [3, 6, 7]] S = 1 T = 6 Output: 2

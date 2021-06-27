@@ -16,51 +16,59 @@ import java.util.List;
  * [1,0,-1,0,-2,2], target = 0 Output: [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
  * 
  * IDEA:
- * reduce the problem to n-1 case, then n-2 down to n = 2 for a list of sorted numbers
+ * 1. reduce the problem to n-1 case, then to n-2, and so on down to n = 2 for a list of sorted numbers
+ * 2. implemented as 2 nested for loops + 1 2 pointer for loop
+ * 
+ * detail example
+ * [1,0,-1,0,-2,2]
+ * [-2,-1,0,0,1,2]
+ * 
+ * [-2] -> [-1,0,0,1,2]
+ * 
+ * O(n^3)
+ * 
  */
 public class Solution18 {
     
-    int len;
-
-    List<List<Integer>> twoSum(int[] nums, int target, int start) {//Note: search on the sorted array
-        List<List<Integer>> res = new ArrayList<>();
-        int left = start, right = len - 1;
-        while (left < right) {
-            int sum = nums[left] + nums[right];
-            if (sum < target || (left > start && nums[left] == nums[left - 1])) {// on smaller sum or on equal elems
-                ++left;
-            } else if (sum > target || (right < len - 1 && nums[right] == nums[right + 1])) {
-                --right;
-            } else {// found it
-                res.add(Arrays.asList(nums[left++], nums[right--]));
-            }
-        }
-        return res;
-    }
-    
-    List<List<Integer>> kSum(int[] nums, int target, int start, int k) {
-        List<List<Integer>> res = new ArrayList<>();
-        if (start == len || nums[start] * k > target || target > nums[len - 1] * k)
-            return res;
-        if (k == 2) {// use > optimal way
-            return twoSum(nums, target, start);
-        }
-        for (int i = start; i < len; ++i) {
-            if (i == start || nums[i - 1] != nums[i]) {// this block is triggered only on the first elem or on change
-                for (List<Integer> set : kSum(nums, target - nums[i], i + 1, k - 1)) {// recursive call to decrease problem n-1 => n-2
-                    List<Integer> found = new ArrayList<>(Arrays.asList(nums[i]));
-                    found.addAll(set);
-                    res.add(found);
-                }
-            }
-        }
-        return res;
-    }
     
     public List<List<Integer>> fourSum(int[] nums, int target) {
-        len = nums.length;
+        int n = nums.length;
         Arrays.sort(nums);
-        return kSum(nums, target, 0, 4);
+        List<List<Integer>> quadruplets = new ArrayList<>();
+        for (int i = 0; i < n - 3; i++) {
+        	if (i > 0 && nums[i-1] == nums[i]) {
+        		continue;
+        	}
+            for (int j = i + 1; j < n - 2; j++) {
+            	if (j > i + 1 && nums[j-1] == nums[j]) {
+            		continue;
+            	}
+            	int left = j + 1;
+            	int right = n - 1;
+            	while (left < right) {
+                   	if (left > j + 1 && nums[left-1] == nums[left]) {
+                		continue;
+                	}
+                   	if (right < n - 1 && nums[right+1] == nums[right]) {
+                		continue;
+                	}
+                   	int sum = nums[i] + nums[j] + nums[left] + nums[right];
+                   	if (sum == target) {
+                   		quadruplets.add(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));
+                   		// found at i, j, left, right
+                   		// here we have control over left & right: as we have added them already, so advance indices
+                   		// case: [0,1,2,3], tgt = 3
+                   		left ++;
+                   		right --;
+                   	}else if (sum > target){
+                   		right --;
+                   	}else if (sum < target){
+                   		left ++;
+                   	}
+            	}
+            }
+        }
+        return quadruplets;
     }
  
 }

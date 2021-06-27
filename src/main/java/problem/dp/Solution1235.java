@@ -22,6 +22,8 @@ import java.util.Arrays;
  *    1) pick up current job in the row and attach the next one which starts not earlier then this ends (use binary search)
  *    2) do not pick up current job (skipProfit)
  * 3. make the choice - choose the best and update the memo
+ * 
+ * O(n^2) or O(n log n)
  *  
  */
 public class Solution1235 {
@@ -54,11 +56,22 @@ public class Solution1235 {
 		memo[idx] = maxProfit;
 		return maxProfit;
 	}
+	
+	// Linear Search
+	// find the job which starts AFTER target, starting from i = prevIndex
+	int findNextJob(Job[] jobs, int target, int from) {
+		for (int i = from; i < jobs.length; i++) {
+			if (jobs[i].start >= target) {
+				return i;
+			}
+		}
+		return -1;
+	}
 
 	// Binary Search
 	// 
-	int findNextJob(Job[] jobs, int target, int prevIndex) {
-		int low = prevIndex;
+	int findNextJobOpt(Job[] jobs, int target, int from) {
+		int low = from;
 		int high = jobs.length - 1;
 		int result = -1;
 		while (low <= high) {

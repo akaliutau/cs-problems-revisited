@@ -9,14 +9,34 @@ import java.util.Arrays;
  * You are giving candies to these children subjected to the following
  * requirements:
  * 
- * Each child must have at least one candy. Children with a higher rating get
- * more candies than their neighbors. What is the minimum candies you must give?
+ * Each child must have at least one candy. 
+ * 
+ * Children with a higher rating get more candies than their neighbors. 
+ * 
+ * What is the minimum candies you must give?
  * 
  * Example 1:
  * 
- * Input: [1,0,2] Output: 5 Explanation: You can allocate to the first, second
+ * Input: [1,0,2] Output: 5 
+ * Explanation: You can allocate to the first, second
  * and third child with 2, 1, 2 candies respectively.
  * 
+ * IDEA:
+ * 
+ * rating |  1 4 2      <--- ok with 1 pass
+ * rating |  6 4 2 5    <--- needed 2 passes   
+ * 
+ * start     1 1 1 1    <-- always start from '1 candy for everyone' 
+ * 
+ * ------------------> update the number of candies in accordance with left neighbor
+ *           1 1 1 2
+ * 
+ * <-----------------  update the number of candies in accordance with right neighbor
+ *           3 2 1 1
+ *           
+ * merge for all neighbors:
+ * 
+ *           3 2 1 2
  * 
  */
 public class Solution135 {
@@ -45,8 +65,5 @@ public class Solution135 {
 		return sum;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
 
 }

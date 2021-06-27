@@ -38,49 +38,51 @@ public class Solution716 {
 			public Node prev;
 			public Node next;
 
-			public Node(int value, int index, Node previous) {
+			public Node(int value, int index) {
 				this.value = value;
 				this.index = index;
-				this.prev = previous;
-				next = null;
 			}
 		}
 
 		Node head;
 		Node tail;
 		PriorityQueue<Node> queue;
-		int index;
+		int index; // used to establish an order in Nodes
 
 		public MaxStack() {
-			head = null;
-			tail = null;
+			head = new Node(0, 0);
+			tail = new Node(0, 0);
+            head.next = tail;
+            tail.prev = head;
 			index = 0;
 			queue = new PriorityQueue<>((o, p) -> {
 				return o.value == p.value ? p.index - o.index : p.value - o.value;
 			});
 		}
-
+		
+		
+		// attach to the last elem
 		public void push(int x) {
-			Node node = new Node(x, index++, tail);
-			if (tail == null) {
-				head = node;
-				tail = node;
-			} else {
-				tail.next = node;
-				tail = node;
-			}
+			Node node = new Node(x, index++);
+			
+			// bootstrapping
+			node.prev = tail.prev;
+			node.next = tail;
+			tail.prev.next = node;
+			tail.prev = node;
+			
 			queue.add(node);
 		}
 
 		public int pop() {
-			int value = tail.value;
-			queue.remove(tail);
-			removeNode(tail);
+			int value = tail.prev.value;
+			queue.remove(tail.prev);
+			removeNode(tail.prev);
 			return value;
 		}
 
 		public int top() {
-			return tail.value;
+			return tail.prev.value;
 		}
 
 		public int peekMax() {
@@ -94,21 +96,10 @@ public class Solution716 {
 		}
 
 		private void removeNode(Node node) {
-			if (head != node && tail != node) {
-				Node prev = node.prev;
-				Node next = node.next;
-				prev.next = next;
-				next.prev = prev;
-			} else {
-				if (node == head) {
-					head = head.next;
-				}
-				if (node == tail) {
-					tail = tail.prev;
-				}
-			}
-			node.prev = null;
-			node.next = null;
+			Node prev = node.prev;
+			Node next = node.next;
+			prev.next = next;
+			next.prev = prev;
 		}
 
 	}
