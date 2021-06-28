@@ -7,7 +7,8 @@ package problem.dp;
  *   ||
  *   lr 
  * 
- * 
+ * IDEA:
+ * expands from center, considering each i as a center
  * 
  */
 public class Solution5 {
@@ -42,10 +43,5 @@ public class Solution5 {
     }
 
  
-    public static void main(String[] arg) {
-
-        System.out.println();
-
-    }
-
+ 
 }

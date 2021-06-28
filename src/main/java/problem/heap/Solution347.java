@@ -1,9 +1,9 @@
 package problem.heap;
 
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
 
 /**
  * 
@@ -12,10 +12,15 @@ import java.util.PriorityQueue;
  * Example 1:
  * 
  * Input: nums = [1,1,1,2,2,3], k = 2 Output: [1,2]
+ * 
+ * IDEA:
+ * 1. use map for collecting stat and PriorityQueue to query the result
+ * 2. use partitioning
+ * 
  */
 public class Solution347 {
 
-	static class Elem {
+    static class Elem {
 		public int freq = 0;
 		public int num;
 
@@ -26,26 +31,58 @@ public class Solution347 {
 	}
 
 	public int[] topKFrequent(int[] nums, int k) {
-		int n = nums.length;
-		Comparator<Elem> byFreq = (o, p) -> Integer.compare(p.freq, o.freq);
-		PriorityQueue<Elem> queue = new PriorityQueue<>(n, byFreq);
+
 		Map<Integer, Elem> map = new HashMap<>();
-		for (int i : nums) {
-			if (!map.containsKey(i)) {
-				map.put(i, new Elem(i));
-			}
-			map.get(i).freq++;
+		for (int num : nums) {
+			map.computeIfAbsent(num, n -> new Elem(n)).freq++;
 		}
-		queue.addAll(map.values());
+		List<Elem> lst = new ArrayList<>(map.values());
+		int low = Integer.MAX_VALUE;
+		int high = 0;
+		for (Elem elem : lst) {
+			low = Math.min(low, elem.freq);
+			high = Math.max(high, elem.freq);
+		}
+		List<Elem> found = new ArrayList<>();
+        int count = k;
+		while (count > 0) {
+		    List<Elem> left = new ArrayList<>();
+		    List<Elem> right = new ArrayList<>();
+		    List<Elem> center = new ArrayList<>();
+			int mid = (low + high) / 2;
+			for (Elem elem : lst) {
+				if (elem.freq < mid) {
+					left.add(elem);
+				}else if (elem.freq > mid) {
+					right.add(elem);
+				}else{
+                    center.add(elem);
+                }
+			}
+			if (right.size() <= count) {
+				found.addAll(right);
+				count -= right.size();
+				high = mid;
+				lst = left;
+			}else {
+				low = mid;
+				lst = right;
+			}
+			
+            lst.addAll(center);
+            if (count == center.size()){// edge case - we will fail to divide central block, and there is ambiguity in determine the exact covergage
+                found.addAll(center);
+                count = 0;
+            }
+		}
+		
 		int[] res = new int[k];
 		for (int i = 0; i < k; i++) {
-			res[i] = queue.poll().num;
+			res[i] = found.get(i).num;
 		}
 
 		return res;
 
 	}
-
-	
 
 }

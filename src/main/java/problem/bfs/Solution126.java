@@ -45,7 +45,7 @@ import java.util.Set;
  * 2) bfs to find the shortest path
  * 
  */
-public class Solution127 {
+public class Solution126 {
 	class Node {
 		String word;
 		Node parent;
@@ -59,7 +59,7 @@ public class Solution127 {
 	int minDist = Integer.MAX_VALUE; // looking for only shortest paths
 
 	// used to calculate all possible words which can be built from word by replacing only 1 symbol
-	List<String> pathsFrom(String word, Map<Integer, List<String>> graph, Set<String> visited) {
+	List<String> getSeeds(String word, Map<Integer, List<String>> graph, Set<String> visited) {
 		Set<String> ans = new HashSet<>();
 		char[] orig = word.toCharArray();
 		for (int i = 0; i < word.length(); i++) {
@@ -135,7 +135,7 @@ public class Solution127 {
 				// mark processed word as visited
 				visited.add(word);
 				// get variations and link them to the current node
-				List<String> linked = pathsFrom(word, graph, visited);
+				List<String> linked = getSeeds(word, graph, visited);
 				for (String w : linked) {
 					q.add(new Node(w, node));
 				}

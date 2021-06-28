@@ -21,6 +21,13 @@ import java.util.Set;
  * 
  * Given the above grid map, return 1.
  * 
+ * IDEA:
+ * 1. variation on the topic of count separate islands, need to create a 2d fingerprint for shape
+ * 
+ *   oo              ooo
+ *    o                o
+ * 
+ * (0,1)(1,0)(1,1)  (1,0)(1,1)(1,2)(0,2)  <-- the same set of  pairs (x,y) means the same shape
  */
 public class Solution694 {
 
@@ -28,15 +35,16 @@ public class Solution694 {
 	boolean[][] seen;
 	int offset = Integer.MAX_VALUE;
 	int n = 0, m = 0;
+    
+    static String coord(int r, int c, int r0, int c0){
+        return String.format("%d:%d", r - r0, c - c0);
+    }
 
 	// relative position of point (r0,c0) will be the same for similar islands
-	public void trace(int r, int c, int r0, int c0, Set<Long> shapeFingerPrint) {
+	public void trace(int r, int c, int r0, int c0, Set<String> shapeFingerPrint) {
 		if (0 <= r && r < n && 0 <= c && c < m && grid[r][c] == 1 && !seen[r][c]) {
 			seen[r][c] = true;
-			// create a 2D fingerprint as
-			// (r-r0) in [0,n)
-			// (c-c0+offset) in (0, 2*m)
-			shapeFingerPrint.add((long) ((r - r0) * 2 * offset + (c - c0 + offset)));
+			shapeFingerPrint.add(coord(r,c,r0,c0));
 			trace(r + 1, c, r0, c0, shapeFingerPrint);
 			trace(r - 1, c, r0, c0, shapeFingerPrint);
 			trace(r, c + 1, r0, c0, shapeFingerPrint);
@@ -55,12 +63,12 @@ public class Solution694 {
 			return 0;
 		}
 		seen = new boolean[n][m];
-		Set<Set<Long>> shapes = new HashSet<>();
-		offset = m;// this offset is chosen due to
+		Set<Set<String>> shapes = new HashSet<>();
+		offset = m;// this offset is chosen due to 
 
 		for (int r = 0; r < n; r++) {
 			for (int c = 0; c < m; c++) {
-				Set<Long> shapeFingerPrint = new HashSet<>();
+				Set<String> shapeFingerPrint = new HashSet<>();
 				trace(r, c, r, c, shapeFingerPrint);
 				if (!shapeFingerPrint.isEmpty()) {
 					shapes.add(shapeFingerPrint);// equal sets will have the same result of equals call
@@ -70,6 +78,5 @@ public class Solution694 {
 
 		return shapes.size();
 	}
-
 
 }

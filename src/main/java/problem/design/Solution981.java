@@ -2,12 +2,16 @@ package problem.design;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.PriorityQueue;
 
 /**
  * Create a timebased key-value store class TimeMap, that supports two
- * operations. 1. set(string key, string value, int timestamp) Stores the key
- * and value, along with the given timestamp. 2. get(string key, int timestamp)
+ * operations.
+ *
+ * 1. set(string key, string value, int timestamp) 
+ * Stores the key and value, along with the given timestamp. 
+ * 
+ * 2. get(string key, int timestamp)
  * Returns a value such that set(key, value, timestamp_prev) was called
  * previously, with timestamp_prev <= timestamp. If there are multiple such
  * values, it returns the one with the largest timestamp_prev. If there are no
@@ -25,31 +29,44 @@ import java.util.TreeMap;
  * kv.set("foo", "bar2", 4); 
  * kv.get("foo", 4); // output "bar2" 
  * kv.get("foo", 5); //output "bar2"
+ * 
+ * IDEA:
+ * use PriorityQueue to track the latest elem
+ * 
  */
 public class Solution981 {
 
     class TimeMap {
 
-        Map<String, TreeMap<Integer, String>> map;
-
+    	class Entry{
+            String value;
+            int time;
+            public Entry(String value, int time) {
+                this.value = value;
+                this.time = time;
+            }
+        }
+        Map<String, PriorityQueue<Entry>> map;
         /** Initialize your data structure here. */
         public TimeMap() {
-            map = new HashMap<>();
+            this.map = new HashMap<>();
         }
-
+        
+        // O(1) 
         public void set(String key, String value, int timestamp) {
-            map.computeIfAbsent(key, v -> new TreeMap<>()).put(timestamp, value);
+    		// decrease order
+            map.putIfAbsent(key, new PriorityQueue<>((a,b) -> b.time - a.time));
+            map.get(key).add(new Entry(value, timestamp));
         }
-
+        
+        // TimeComplexity O(n)
         public String get(String key, int timestamp) {
-            if (!map.containsKey(key)) {
-                return "";
+            if (map.containsKey(key)){
+            	for (Entry tem : map.get(key)) {
+            		if (tem.time <= timestamp) return tem.value;
+            	}
             }
-            Map.Entry<Integer, String> entry = map.get(key).floorEntry(timestamp);
-            if (entry == null) {
-                return "";
-            }
-            return entry.getValue();
+            return "";
         }
     }
 

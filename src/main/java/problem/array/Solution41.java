@@ -9,7 +9,8 @@ package problem.array;
  * Input: nums = [1,2,0] Output: 3
  * 
  * IDEA:
- * 
+ * 1. analyze edge cases (<0, >n)
+ * 2. use hashmap to track all numbers
  * 
  */
 public class Solution41 {

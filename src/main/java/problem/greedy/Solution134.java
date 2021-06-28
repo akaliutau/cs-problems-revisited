@@ -32,29 +32,43 @@ package problem.greedy;
  * Therefore, return 3 as the starting index.
  * 
  * IDEA:
+ * gas:        [1, 2, 3, 4, 5, 0]
+ * cost:       [3, 4, 5, 1, 2, 0]
  * 
- * 
+ * tank_state: [1, 0, 0, 3, 2, 0]
+ *                    |  |
+ *                    |  pointer
+ *                    |
+ *                  reset here        
  */
 public class Solution134 {
 
 	public int canCompleteCircuit(int[] gas, int[] cost) {
-		int gasTank = 0;
 		int start = 0;
 		int n = gas.length;
-		int sum = 0;
+		int fuelBalance = 0;
 
+		long totalFuel = 0l;
+		long totalCost = 0l;
+		for (int i = 0; i < n; i++) {
+			totalFuel += gas[i];
+			totalCost += cost[i];
+		}
+		if (totalFuel < totalCost) {
+			return -1;
+		}
+		
 		for (int i = 0; i < n; i++) {
 
-			sum += gas[i] - cost[i];// global state of tank after transition i -> i + 1
-			gasTank += gas[i] - cost[i];// state of tank after transition i -> i + 1
+			fuelBalance += gas[i] - cost[i];// state of tank after transition i -> i + 1
 
-			if (gasTank < 0) {// we can try to start from point (i + 1) -> 0 -> i, i <-> i+1 is a broken chain in a circle
+			if (fuelBalance < 0) {// cannot reach point (i + 1) from (i), start from i+1
 				start = i + 1;
-				gasTank = 0;
+				fuelBalance = 0;
 			}
 
 		}
-		return sum < 0 ? -1 : start;
+		return start % n;
 	}
 
 }
