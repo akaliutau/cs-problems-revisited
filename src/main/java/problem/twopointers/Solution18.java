@@ -17,7 +17,7 @@ import java.util.List;
  * 
  * IDEA:
  * 1. reduce the problem to n-1 case, then to n-2, and so on down to n = 2 for a list of sorted numbers
- * 2. implemented as 2 nested for loops + 1 2 pointer for loop
+ * 2. implemented as 2 nested for loops + 1 2-pointer for loop
  * 
  * detail example
  * [1,0,-1,0,-2,2]
@@ -36,11 +36,11 @@ public class Solution18 {
         Arrays.sort(nums);
         List<List<Integer>> quadruplets = new ArrayList<>();
         for (int i = 0; i < n - 3; i++) {
-        	if (i > 0 && nums[i-1] == nums[i]) {
+        	if (i > 0 && nums[i-1] == nums[i]) {// drop equals
         		continue;
         	}
             for (int j = i + 1; j < n - 2; j++) {
-            	if (j > i + 1 && nums[j-1] == nums[j]) {
+            	if (j > i + 1 && nums[j-1] == nums[j]) {// drop equals
             		continue;
             	}
             	int left = j + 1;

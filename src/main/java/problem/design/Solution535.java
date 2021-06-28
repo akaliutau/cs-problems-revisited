@@ -15,6 +15,11 @@ import java.util.Random;
  * ensure that a URL can be encoded to a tiny URL and the tiny URL can be
  * decoded to the original URL.
  * 
+ * IDEA:
+ * 1. us a map random_int => url to hold the short url
+ * 2. cycle generator with check
+ * 
+ * 
  */
 public class Solution535 {
 

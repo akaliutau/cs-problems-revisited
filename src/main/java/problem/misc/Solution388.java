@@ -1,7 +1,6 @@
 package problem.misc;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.Stack;
 
 /**
  * We will represent the file system as a string where "\n\t" mean a
@@ -19,59 +18,54 @@ import java.util.Deque;
  * "dir/subdir1" doesn't contain any files.
  * 
  * IDEA:
- * 
+ * use the stack to build up the paths,
+ * and track the longest path as a peak of load of stack
  * 
  */
 public class Solution388 {
 
+	class Entry {
+        int level;
+        String name;
+        int len;
+        
+        public Entry(int level, String name, int len){
+            this.level = level;
+            this.name = name;
+            this.len = len + name.length();
+            if (len != 0){
+                this.len ++;
+            }
+        }
+        
+        public boolean isFile(){
+            return name.contains(".");
+        }
+    }
     public int lengthLongestPath(String input) {
-        if (input == null || input.length() == 0) {
+        if (input == null){
             return 0;
         }
+        String[] in = input.split("\n");
 
-        int curLen = 0;
-        int longest = 0;
-        Deque<Integer> stack = new ArrayDeque<>();
-        int i = 0, j = 0;
-
-        while (i < input.length()) {
-            int depth = 0;
-            // calc depth
-            while (input.charAt(j) == '\t') {
-                depth++;
-                j++;
+        Stack<Entry> stack = new Stack<>();
+        int maxLen = 0;
+        for (String entry : in){
+            int n = entry.length();
+            int i = 0;
+            while(i < n && entry.charAt(i) == '\t'){
+                i ++;
             }
-
-            // find the parent dir
-            while (stack.size() > depth) {
-                curLen -= stack.pollFirst();
+            while (!stack.isEmpty() && stack.peek().level >= i){
+                stack.pop();
             }
-
-            i = j;
-
-            // calc length && record if it's a file
-            boolean isFile = false;
-            while (j < input.length() && input.charAt(j) != '\n') {
-                if (input.charAt(j) == '.') {
-                    isFile = true;
-                }
-                j++;
-            }
-
-            // +1: to add a /
-            int len = j - i + 1;
-            curLen += len;
-
-            if (isFile) {
-                longest = Math.max(longest, curLen - 1);
-            }
-
-            // point to \t
-            j++;
-            i = j;
-            stack.offerFirst(len);
+            int len = stack.isEmpty() ? 0 : stack.peek().len;
+            stack.add(new Entry(i, entry.substring(i), len));
+            if (stack.peek().isFile())
+                maxLen = Math.max(maxLen, stack.peek().len);
         }
-
-        return longest;
+        
+        return maxLen;
+        
     }
 }

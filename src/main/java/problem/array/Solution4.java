@@ -21,6 +21,11 @@ package problem.array;
  * 
  * 1, 3, 3, 6, 7, 8, 9, 9 has the median 6.5.
  *          |  |
+ *          
+ * IDEA:
+ * 1. merge arrays before finding median 
+ * 2. consider all options as arrays can be of different length
+ *  
  */
 public class Solution4 {
 

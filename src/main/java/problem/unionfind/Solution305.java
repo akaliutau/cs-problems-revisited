@@ -14,7 +14,7 @@ import java.util.Set;
  * land. You are given an array positions where positions[i] = [ri, ci] is the
  * position (ri, ci) at which we should operate the ith operation.
  * 
- * Return an array of integers answer where answer[i] is the number of islands
+ * Return an array of integers answer where answer[i] is the number of islandsToJoin
  * after turning the cell (ri, ci) into a land.
  * 
  * An island is surrounded by water and is formed by connecting adjacent lands
@@ -23,16 +23,18 @@ import java.util.Set;
  * 
  * IDEA:
  * 
- * Analyze the neighbor islands and repaint them on merge
+ * Analyze all neighbors (islandsToJoin) and repaint them on merge
  * 
- * 3 3
+ * 3x3 board
  * 
  * 0 0 0    0 1 0    0 1 0    0 1 0    0 1 0    0 1 1    1 1 1    1 1 1   
  * 0 0 0    0 0 0    0 0 1    0 0 1    1 0 1    1 0 1    1 0 1    1 1 1
  * 0 0 0    0 0 0    0 0 0    0 1 0    0 1 0    0 1 0    0 1 0    0 1 0 
  * 
  * 0        1        2        3        4        3        2        1          
- *  
+ * 
+ *  Note: the color of repainting is not important; only solidness does matter
+ *  (i.e. all parts of the same island must have the same color)
  *  
  * [[0,1],[1,2],[2,1],[1,0],[0,2],[0,0],[1,1]]
  * 
@@ -40,7 +42,7 @@ import java.util.Set;
 public class Solution305 {
     static int[][] dirs = {{-1,0}, {1,0}, {0,-1}, {0,1}};
     
-    void repaint(int x, int y, int m, int n, int[][] map, int col){
+    void repaint(int x, int y, int m, int n, int[][] map, int col){// repaint all in touch
         map[x][y] = col;
         for (int[] dir : dirs){
             int nx = x + dir[0];
@@ -60,20 +62,21 @@ public class Solution305 {
         for (int[] pos : positions){
             int x = pos[0];
             int y = pos[1];
-            if (map[x][y] != 0){
+            if (map[x][y] != 0){// put value in the same dot
                 ans.add(count);
                 continue;
             }
-            Set<Integer> islands = new HashSet<>();
+            // put into empty cell and repaint neighbors
+            Set<Integer> islandsToJoin = new HashSet<>();
             for (int[] dir : dirs){
                 int nx = x + dir[0];
                 int ny = y + dir[1];
                 if (nx >=0 && ny >=0 && nx < m && ny < n && map[nx][ny] != 0){
-                    islands.add(map[nx][ny]);
+                    islandsToJoin.add(map[nx][ny]);
                 }
             }
-            List<Integer> ni = new ArrayList<>(islands);
-            if (ni.size() == 0){
+            List<Integer> ni = new ArrayList<>(islandsToJoin);
+            if (ni.size() == 0){//no neighbors
                 count ++;
                 map[x][y] = col ++;
             }else if (ni.size() == 1){

@@ -31,6 +31,9 @@ package problem.greedy;
  * Your gas is just enough to travel back to station 3.
  * Therefore, return 3 as the starting index.
  * 
+ * IDEA:
+ * 
+ * 
  */
 public class Solution134 {
 

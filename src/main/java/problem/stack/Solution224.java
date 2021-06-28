@@ -13,8 +13,8 @@ import java.util.Stack;
  * Input: "(1+(4+5+2)-3)+(6+8)" Output: 23
  * 
  * IDEA: 
- * look at the following symbols  +,- & ), \n as terminal operation
- * 
+ * 1. look at the following symbols  +, - , ) , \n as terminal operations, which trigger some changes on the stack
+ * 2. use 2 stacks for sign and number to memorize the last state
  * 
  * 
  *       4+5+2                           <--- stack level 2

@@ -1,7 +1,6 @@
 package problem.dfs;
 
 import problem.model.TreeNode;
-import problem.model.TreeNode;
 
 /**
  * Given a non-empty binary tree, find the maximum path sum.

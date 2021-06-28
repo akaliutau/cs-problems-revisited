@@ -10,11 +10,32 @@ import problem.model.ListNode;
  * list. If the number of nodes is not a multiple of k then left-out nodes, in
  * the end, should remain as it is.
  * 
+ * IDEA:
+ * 
+ * head ~ which will always point to the original head of the next set of k
+ * nodes.
+ * 
+ * revHead ~ which is basically the tail node of the original set of k nodes.
+ * Hence, this becomes the new head after reversal.
+ * 
+ * ktail ~ is the tail node of the previous set of k nodes after reversal.
+ * 
+ * newHead ~ acts as the head of the final list that we need to return as the
+ * output. Basically, this is the kth node from the beginning of the original
+ * list.
+ * 
+ * The core algorithm remains the same as before. Given the head, we first count
+ * k nodes. If we are able to find at least k nodes, we reverse them and get our
+ * revHead. 
+ * 
+ * At this point we check if we already have the variable ktail set or
+ * not. It won't be set when we reverse the very first set of k nodes. However,
+ * if this variable is set, then we attach ktail.next to the revHead.
+ * 
  */
 public class Solution25 {
 
 	ListNode reverseLinkedList(ListNode head, int k) {
-
 		// Reverse k nodes of the given linked list.
 		// This function assumes that the list contains
 		// at least k nodes.
@@ -23,25 +44,16 @@ public class Solution25 {
 
 		while (k > 0) {
 
-			// Keep track of the next node to process in the
-			// original list
 			ListNode next = ptr.next;
 
-			// Insert the node pointed to by "ptr"
-			// at the beginning of the reversed list
 			ptr.next = newHead;
 			newHead = ptr;
 
-			// Move on to the next node
 			ptr = next;
 
-			// Decrement the count of nodes to be reversed by 1
 			k--;
 		}
-
-		// Return the head of the reversed list
 		return newHead;
-
 	}
 
 	public ListNode reverseKGroup(ListNode head, int k) {
@@ -72,13 +84,11 @@ public class Solution25 {
 				// Reverse k nodes and get the new head
 				ListNode revHead = this.reverseLinkedList(head, k);
 
-				// newHead is the head of the final linked list
 				if (newHead == null) {
 					newHead = revHead;
 				}
 
-				// ktail is the tail of the previous block of
-				// reversed k nodes
+				// ktail is the tail of the previous block of reversed k nodes
 				if (ktail != null) {
 					ktail.next = revHead;
 				}
@@ -94,7 +104,5 @@ public class Solution25 {
 
 		return newHead == null ? head : newHead;
 	}
-
-
 
 }
