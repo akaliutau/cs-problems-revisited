@@ -15,7 +15,12 @@ package problem.design;
  * carType can be of three kinds: big, medium, or small, which are represented
  * by 1, 2, and 3 respectively. A car can only park in a parking space of its
  * carType. If there is no space available, return false, else park the car in
- * that size space and return true. *
+ * that size space and return true. 
+ * 
+ * IDEA:
+ * use separate counters for each type of car
+ * 
+ * 
  */
 public class Solution1603 {
 

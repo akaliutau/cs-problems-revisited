@@ -24,7 +24,8 @@ import java.util.Set;
  * Input: ["cat","cats","catsdogcats","dog" Output: ["catsdogcats","dogcatsdog"]
  * 
  * IDEA:
- * we are cutting prefix at each level, filtering out all invalid prefixes 
+ * we are cutting a prefix AND suffix at each level, filtering out all invalid variants
+ * if both  prefix AND suffix are valid, we are adding the initial word as a complex one
  * 
  * Let m = avr length of word
  * Len n = # of words

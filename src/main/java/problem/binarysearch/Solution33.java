@@ -14,6 +14,8 @@ package problem.binarysearch;
  *  |     | 
  *  case 1
  * 
+ * start  mid
+ *  /    /
  * [4,5,6,7,0,1,2]
  *  |   |   |   |
  *  case 2   case 2
@@ -30,8 +32,8 @@ public class Solution33 {
             int mid = start + (end - start) / 2;
             if (nums[mid] == target) {
                 return mid;
-            } else if (nums[start] <= nums[end]) {// the offset is not in [start, end]
-                if (nums[start] <= target  && target < nums[mid]) {// tgt in growing part
+            } else if (nums[start] <= nums[mid]) {
+                if (nums[start] <= target && target < nums[mid]) {// tgt in growing part
                     end = mid - 1;
                 } else {
                     start = mid + 1;

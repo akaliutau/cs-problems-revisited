@@ -28,12 +28,22 @@ import java.util.Map;
  * 
  * Here is a detail example:
  * 
- *   initial: [4,3,1]
+ *   initial: [4,3,1,2]
  *   
  *     4      3
  *   -----   -----
- *         1
- *      -------
+ *         1       2
+ *      -------  ----
+ *      
+ *  possible sequences:
+ *  [4,3]
+ *  [4,2]
+ *  [1,2]
+ *  
+ *  1a. Thoughts about constructing a key:
+ *  which combination of input parameters define the state?
+ *  it's seqLength and prevEnd
+ *  if we have a sequence of length = l ending at prevEnd, the tail will be the same as already calculated
  *      
  *  2. use greedy approach - always take the immediate NEXT seqLength, because
  *  
@@ -64,28 +74,30 @@ public class Solution1751 {
 		if (memo.get(key) != null) {
 			return memo.get(key);
 		}
-
+		// at this point we have to calculate profit for sequence after prevEnd
+		
+		
 		// make choice: 
 		// 1) either drop event: events[pos]
 		// 2) include events[pos] into sequence
 		
 		// drop event at pos continue at pos + 1
 		// Note: seqLength counter does not increase
-		int max = dfs(events, pos + 1, seqLength, k, prevEnd, memo);
+		int maxProfit = dfs(events, pos + 1, seqLength, k, prevEnd, memo);
 		
 		// if possible to chain to current seqLength, then chain it! 
 		int eventStart = events[pos][0];
 		int eventEnd = events[pos][1];
 		
 		if (eventStart > prevEnd) {
-			int curValue = events[pos][2];
-			max = Math.max(max, 
-						curValue + dfs(events, pos + 1, seqLength + 1, k, eventEnd, memo)
+			int curProfit = events[pos][2];
+			maxProfit = Math.max(maxProfit, 
+					curProfit + dfs(events, pos + 1, seqLength + 1, k, eventEnd, memo)
 							);
 		}
 
-		memo.put(key, max);
-		return max;
+		memo.put(key, maxProfit);
+		return maxProfit;
 	}
 
 	public int maxValue(int[][] events, int k) {
