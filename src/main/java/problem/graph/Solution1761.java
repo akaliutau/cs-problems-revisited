@@ -16,6 +16,8 @@ package problem.graph;
  * 
  * IDEA:
  * 
+ * use adjacency matrix as we only have to know that nodes u  and v connected or not
+ * 
  * 1. build adjacency matrix (connected) first:
  * 
  *    | 0 1 2 3 4 

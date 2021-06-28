@@ -23,6 +23,10 @@ import java.util.Arrays;
  *    2) do not pick up current job (skipProfit)
  * 3. make the choice - choose the best and update the memo
  * 
+ * Thoughts about memo structure:
+ *  
+ * int[] memo - contains the max profit obtained from jobs [i, i+1, ..., n-1] 
+ * 
  * O(n^2) or O(n log n)
  *  
  */
