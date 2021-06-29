@@ -1,7 +1,6 @@
 package problem.dfs;
 
 import problem.model.TreeNode;
-import problem.model.TreeNode;
 
 /**
  * The thief has found himself a new place for his thievery again. There is only
@@ -29,20 +28,21 @@ import problem.model.TreeNode;
  * value.
  * 
  * IDEA:
- * construct a repeatable situation where there is a need to make a choice
+ * for each node:
+ * to make a choice
  * 1) cost to rob this node and not robe neighbors
  * 2) cost not to rob this node, and investigate the cost of robbing neighbors in different combinations
  * 
  */
 public class Solution337 {
 
-	int[] helper(TreeNode node) {// returns the cost of action in the form [ifRob, ifNotRob]
+	int[] dfs(TreeNode node) {// returns the cost of action in the form [ifRob, ifNotRob]
 		// return [rob this node, not rob this node]
 		if (node == null) {
 			return new int[] { 0, 0 };
 		}
-		int left[] = helper(node.left);
-		int right[] = helper(node.right);
+		int left[] = dfs(node.left);
+		int right[] = dfs(node.right);
 		// if we rob this node, we cannot rob its children
 		int rob = node.val + left[1] + right[1];// == cost if rob this and do not rob neighbors
 		// else, we free to choose rob its children or not
@@ -52,7 +52,7 @@ public class Solution337 {
 	}
 
 	public int rob(TreeNode root) {
-		int[] answer = helper(root);
+		int[] answer = dfs(root);
 		return Math.max(answer[0], answer[1]);
 	}
 

@@ -1,5 +1,7 @@
 package problem.slidingwindow;
 
+import java.util.Arrays;
+
 /**
  * 
  * Given a string s, find the length of the longest substring without repeating
@@ -14,23 +16,28 @@ package problem.slidingwindow;
  * consider the block [i, j] without without repeating characters - 
  * look at the array from point j
  * 
+ * 
+ * 
  */
 public class Solution3 {
 
 	public int lengthOfLongestSubstring(String s) {
 		int n = s.length();
 		int ans = 0;
-		int[] index = new int[128]; // current index of character
+		int[] index = new int[128]; // last seen index of character
+		Arrays.fill(index, -1);
 		
 		char[] letters = s.toCharArray();
 		
 		// try to extend the range [i, j]
-		int lowestPossible = 0;// earliest possible start = MAX {indices of all letters in block}
+		int leftmost = 0;// earliest possible start = MAX {indices of all letters in block}
 		
 		for (int j = 0; j < n; j++) {
-		    lowestPossible = Math.max(index[letters[j]], lowestPossible);
-			ans = Math.max(ans, j - lowestPossible + 1);
-			index[letters[j]] = j + 1;
+			int lastSeenAt = index[letters[j]];// either -1 or position of letter in the past
+		    leftmost = Math.max(lastSeenAt + 1, leftmost);
+		    int len = j - leftmost + 1;
+			ans = Math.max(ans, len);
+			index[letters[j]] = j;
 		}
 		return ans;
 	}

@@ -13,51 +13,60 @@ package problem.binarysearch;
  * ], k = 8, return 13.
  * 
  * IDEA:
+ * 
+ * 1. use 2d binary search
+ * 
+ *    0  1  2  3  4  5
+ *   [1, 4, 5, 5, 8, 9]
+ *    |     |        |
+ *  low    mid       high
+ * 
+ *  compare:
+ *    elem < arr[mid]  => answer can be only [mid-1] and elements to the left, so update high = mid - 1
+ *    elem >= arr[mid] => answer must <em>include</em> elem, so set low = mid + 1  
+ *  
+ *  as a result this procedure will return the number of elems, LESS OR EQUAL to elem 
+ * 
+ * 
+ * 2. use partitioning on all elements in matrix (less efection, space complexity O(n))
+ * 
  */
 public class Solution378 {
 
-	int getElementsLesserThan(int mid, int[][] matrix) {
-		int count = 0;
-		for (int i = 0; i < matrix.length; i++) {
-			count += getCount(matrix[i], mid);
-		}
-		return count;
-	}
 
-	int getCount(int arr[], int x) {
+	int countElemsOnRow(int arr[], int elem) {
 		int low = 0;
 		int high = arr.length - 1;
-		int ans = arr.length;
-		if (x > arr[high]) {
-			return ans;
+		if (elem > arr[high]) {// if elem > max value on the raw, then return the whole line
+			return arr.length;
 		}
-		while (low <= high) {
+		
+		while (low <= high) { // Otherwise use binary search to find the break point 
 			int mid = low + (high - low) / 2;
-			if (arr[mid] <= x) {
+			if (arr[mid] <= elem) {
 				low = mid + 1;
 			} else {
-				ans = mid;
 				high = mid - 1;
 			}
 		}
 
-		return ans;
+		return low;
+	}
+	
+	int getElementsLesserThan(int mid, int[][] matrix) {
+		int count = 0;
+		for (int i = 0; i < matrix.length; i++) {
+			count += countElemsOnRow(matrix[i], mid);
+		}
+		return count;
 	}
 
 	public int kthSmallest(int[][] matrix, int k) {
 
 		int n = matrix.length;
 
-		int min = Integer.MAX_VALUE;
-		int max = Integer.MIN_VALUE;
-
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
-				min = Math.min(min, matrix[i][j]);
-				max = Math.max(max, matrix[i][j]);
-			}
-
-		}
+		int min = matrix[0][0];
+		int max =  matrix[n-1][n-1];
 
 		int low = min;
 		int high = max;
@@ -68,12 +77,10 @@ public class Solution378 {
 			if (midCount < k) {
 				low = mid + 1;
 			} else {
-				ans = mid;
 				high = mid - 1;
 			}
-
 		}
-		return ans;
+		return low;
 	}
 
 }

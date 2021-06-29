@@ -24,8 +24,16 @@ import java.util.List;
  * during traversing take care of upperBoundary for all letters seen so far
  * if it coincides with i, then => from [lastCut,curIdx] we have seen all letters
  * 
- * abca  dd
+ * 012345
+ * abcadd
  * 
+ * a => 3     <--- note: the last seen of 'a'
+ * b => 1
+ * c => 2
+ * d => 5
+ * 
+ * upperBoundary will be pushed up each time the last seen index of letter exceeds the limit
+ * if we traversed so far and we can cut here, and all letters seen so far will be under upperBoundary
  */
 public class Solution763 {
 	public List<Integer> partitionLabels(String s) {
@@ -39,13 +47,14 @@ public class Solution763 {
 		int start = 0;
 		List<Integer> result = new LinkedList<>();
 		for (int i = 0; i < n; i++) {
-			if (lastSeenAt[s.charAt(i) - 'a'] > upperBoundary) {
-				upperBoundary = lastSeenAt[s.charAt(i) - 'a'];
+			int curLetter = s.charAt(i) - 'a';
+			if (lastSeenAt[curLetter] > upperBoundary) {
+				upperBoundary = lastSeenAt[curLetter];
 			}
 
 			if (i == upperBoundary) {// triggers the cut
 				result.add(upperBoundary - start + 1);
-				start = i + 1;
+				start = i + 1; // update start after cut
 			}
 		}
 
