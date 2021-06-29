@@ -8,54 +8,49 @@ package problem.game;
  * contain the digits 1-9 without repetition. Each of the nine 3 x 3 sub-boxes
  * of the grid must contain the digits 1-9 without repetition.
  * 
- * 
+ * IDEA:
+ * 1. check every single row contains unique numbers
+ * 2. check every single column contains unique numbers
+ * 3. check every box 3x3 contains unique numbers
  */
 public class Solution36 {
 
-	public boolean isValidSudoku(char[][] board) {
+    public boolean isValidSudoku(char[][] board) {
 		// check rows
 		boolean[][] rowMap = new boolean[9][9];// 9 blocks of 9 different numbers
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 9; j++) {
-				if (board[i][j] != '.') {
-					int col = (int) board[i][j] - '0' - 1;
-					if (rowMap[i][col]) {
-						return false;
-					}
-					rowMap[i][col] = true;
-				}
-			}
-		}
 
 		// check columns
 		boolean[][] colMap = new boolean[9][9];
-		for (int i = 0; i < 9; i++) {// column
-			for (int j = 0; j < 9; j++) {
-				if (board[j][i] != '.') {
-					int row = (int) board[j][i] - '0' - 1;
-					if (colMap[row][i]) {
-						return false;
-					}
-					colMap[row][i] = true;
-				}
-			}
-		}
 
-		boolean[][] boxMap = new boolean[9][9];
 		// check sub-bocies
+		boolean[][] boxMap = new boolean[9][9];
+
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				if (board[i][j] != '.') {
-					int col = (int) board[i][j] - '0' - 1;
-					int box = 3 * (i / 3 - 1) + (j / 3 - 1) + 4;
-					if (boxMap[box][col]) {
+					int num = (int) board[i][j] - '0' - 1;
+					if (rowMap[i][num]) {// vector for row i
 						return false;
 					}
-					boxMap[box][col] = true;
+					rowMap[i][num] = true;
+                }
+				if (board[j][i] != '.') {
+					int num = (int) board[j][i] - '0' - 1;
+					if (colMap[i][num]) {// vector for column i
+						return false;
+					}
+					colMap[i][num] = true;
+                }
+				if (board[i][j] != '.') {
+					int num = (int) board[i][j] - '0' - 1;
+					int box = 3 * (i / 3) + j / 3 ; // id for specific box
+					if (boxMap[box][num]) {// vector for box
+						return false;
+					}
+					boxMap[box][num] = true;
 				}
 			}
 		}
-
 		return true;
 
 	}

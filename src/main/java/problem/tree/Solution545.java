@@ -1,7 +1,8 @@
 package problem.tree;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import problem.model.TreeNode;
 
@@ -41,67 +42,72 @@ import problem.model.TreeNode;
  * boundary. So order them in anti-clockwise without duplicates and we have
  * [1,3,4,2].
  * 
+ * IDEA:
+ * 1. perform pre-order traversing of the tree to add all leaves
+ * 2. add separately : left and right boundary (the right - using stack)
  * 
  */
 public class Solution545 {
 	
-	boolean isLeaf(TreeNode cur) {
-		return (cur.left == null && cur.right == null);
-	}
+	public boolean isLeaf(TreeNode t) {
+        return t.left == null && t.right == null;
+    }
 
-	boolean isRightBoundary(int flag) {
-		return (flag == 2);
-	}
+    void addLeaves(TreeNode root, List<Integer> collector) {
+        if (isLeaf(root)) {
+        	collector.add(root.val);
+        } else {
+            if (root.left != null) {
+                addLeaves(root.left, collector);
+            }
+            if (root.right != null) {
+                addLeaves(root.right, collector);
+            }
+        }
+    }
 
-	boolean isLeftBoundary(int flag) {
-		return (flag == 1);
-	}
+    public List<Integer> boundaryOfBinaryTree(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+        if (!isLeaf(root)) {
+            res.add(root.val);
+        }
+        // left boundary: go down till the first leaf
+        TreeNode node = root.left;
+        while (node != null) {
+            if (!isLeaf(node)) {
+                res.add(node.val);
+            }
+            if (node.left != null) {
+            	node = node.left;
+            } else {
+            	node = node.right;
+            }
 
-	boolean isRoot(int flag) {
-		return (flag == 0);
-	}
+        }
+        addLeaves(root, res);
+        Stack<Integer> s = new Stack<>();
+        // right boundary: go down till the first leaf, 
+        // but collect results in stack 
+        // as we are going to reverse list
 
-	int leftChildFlag(TreeNode cur, int flag) {
-		if (isLeftBoundary(flag) || isRoot(flag))
-			return 1;
-		else if (isRightBoundary(flag) && cur.right == null)
-			return 2;
-		else
-			return 3;
-	}
-
-	int rightChildFlag(TreeNode cur, int flag) {
-		if (isRightBoundary(flag) || isRoot(flag))
-			return 2;
-		else if (isLeftBoundary(flag) && cur.left == null)
-			return 1;
-		else
-			return 3;
-	}
-
-	void preorder(TreeNode cur, List<Integer> leftBoundary, List<Integer> rightBoundary, List<Integer> leaves,
-			int flag) {
-		if (cur == null)
-			return;
-		if (isRightBoundary(flag))
-			rightBoundary.add(0, cur.val);
-		else if (isLeftBoundary(flag) || isRoot(flag))
-			leftBoundary.add(cur.val);
-		else if (isLeaf(cur))
-			leaves.add(cur.val);
-		preorder(cur.left, leftBoundary, rightBoundary, leaves, leftChildFlag(cur, flag));
-		preorder(cur.right, leftBoundary, rightBoundary, leaves, rightChildFlag(cur, flag));
-	}
-
-
-	public List<Integer> boundaryOfBinaryTree(TreeNode root) {
-		List<Integer> leftBoundary = new LinkedList<>(), rightBoundary = new LinkedList<>(),
-				leaves = new LinkedList<>();
-		preorder(root, leftBoundary, rightBoundary, leaves, 0);
-		leftBoundary.addAll(leaves);
-		leftBoundary.addAll(rightBoundary);
-		return leftBoundary;
-	}
-
+        node = root.right;
+        while (node != null) {
+            if (!isLeaf(node)) {
+                s.push(node.val);
+            }
+            if (node.right != null) {
+            	node = node.right;
+            } else {
+            	node = node.left;
+            }
+        }
+        while (!s.empty()) {
+            res.add(s.pop());
+        }
+        return res;
+    }
 
 }

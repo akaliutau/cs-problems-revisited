@@ -21,7 +21,8 @@ package problem.dfs;
  * output: 6
  * 
  * IDEA:
- *  use dfs to traverse all cells
+ * 1. use dfs to traverse all cells
+ * 2. track maximum among all results
  * 
  */
 
