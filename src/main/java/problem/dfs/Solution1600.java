@@ -54,14 +54,26 @@ public class Solution1600 {
             parentMap = new HashMap<>();
             parentMap.put(kingName, root);
         }
+        
+        void dfs(Tree node, List<String> res) {
+            if (node == null)
+                return;
+
+            if (node.isAlive)
+                res.add(node.name);
+
+            for (Tree next : node.children) {
+                dfs(next, res);
+            }
+        }
 
         public void birth(String parentName, String childName) {
             if (!parentMap.containsKey(parentName))
                 return;
 
-            Tree node = parentMap.get(parentName);
+            Tree parent = parentMap.get(parentName);
             Tree child = new Tree(childName);
-            node.children.add(child);
+            parent.children.add(child);
             parentMap.put(childName, child);
         }
 
@@ -78,17 +90,7 @@ public class Solution1600 {
             return res;
         }
 
-        private void dfs(Tree node, List<String> res) {
-            if (node == null)
-                return;
-
-            if (node.isAlive)
-                res.add(node.name);
-
-            for (Tree next : node.children) {
-                dfs(next, res);
-            }
-        }
+        
 
     }
 }

@@ -14,8 +14,8 @@ import java.util.Map;
  * Input: nums = [1,1,1,2,2,3], k = 2 Output: [1,2]
  * 
  * IDEA:
- * 1. use map for collecting stat and PriorityQueue to query the result
- * 2. use partitioning
+ * Approach 1. use map for collecting stat and PriorityQueue to query the result
+ * Approach 2. use partitioning
  * 
  */
 public class Solution347 {
@@ -70,6 +70,7 @@ public class Solution347 {
 			}
 			
             lst.addAll(center);
+            
             if (count == center.size()){// edge case - we will fail to divide central block, and there is ambiguity in determine the exact covergage
                 found.addAll(center);
                 count = 0;

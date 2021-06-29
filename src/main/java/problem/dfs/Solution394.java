@@ -1,7 +1,7 @@
 package problem.dfs;
 
 /**
- * 
+ * decode string
  * Stack, DFS
  * 
  * Input: s = "3[a]2[bc]"
@@ -30,7 +30,7 @@ public class Solution394 {
 				String decoded = decode(cs);
 				// omit ']'
 				i++;
-				// process k[decoded] -> decoded + decoded + ... + decoded k times and append to the result
+				// append k[decoded] -> decoded + decoded + ... + decoded k times and append to the result
 				while (k-- > 0) {
 					result.append(decoded);
 				}

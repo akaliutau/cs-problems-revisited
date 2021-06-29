@@ -37,26 +37,28 @@ package problem.slidingwindow;
  */
 public class Solution1004 {
 
-    public int longestOnes(int[] arr, int k) {
-        int left = 0;
-        for (int right = 0; right < arr.length; right++) {
-            // If we included a zero in the window we reduce the value of K.
-            // Since K is the maximum zeros allowed in a window.
-            if (arr[right] == 0)
-                k--;
-            // A negative K denotes we have consumed all allowed flips and window has
-            // more than allowed zeros, thus increment left pointer by 1 to keep the window
-            // size same.
-            if (k < 0) {
-                // If the left element to be thrown out is zero we increase K.
-                if (arr[left] == 0)
-                    k++;
-                left++;
-            }
-        }
-        return arr.length - left;
-    }
-
-  
+	 public int longestOnes(int[] arr, int k) {
+	        int left = 0;
+	        int len = 0;
+	        for (int right = 0; right < arr.length; right++) {
+	            // If we included a zero in the window we reduce the value of K.
+	            // Since K is the maximum zeros allowed in a window.
+	            if (arr[right] == 0)
+	                k--;
+	            // A negative K denotes we have consumed all allowed flips and window has
+	            // more than allowed zeros, thus increment left pointer by 1 to keep the window
+	            // size same.
+	            if (k < 0) {
+	                // If the left element to be thrown out is zero we increase K.
+	                if (arr[left] == 0)
+	                    k++;
+	                left++;
+	            }
+	            if (k >= 0) {
+	            	len = Math.max(len, right - left + 1);
+	            }
+	        }
+	        return len;
+	    }   
 
 }

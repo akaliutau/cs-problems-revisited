@@ -56,8 +56,9 @@ public class Solution1236 {
 			res.add(url);
 			List<String> urlsInWebPage = htmlParser.getUrls(url);
 			urlsInWebPage.forEach(childUrl -> {
+				//  we shouldn't jump to other sites           avoid duplicates 
 				if (getHostName(childUrl).equals(hostUrl) && !res.contains(childUrl)) {// extract host name and compare it with the host
-					queue.offer(childUrl);
+					queue.add(childUrl);
 				}
 			});
 		}

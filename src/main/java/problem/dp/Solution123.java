@@ -15,7 +15,16 @@ package problem.dp;
  *  0 0 2 2 2 3 3 4     
  *  
  *  IDEA:
- *  
+ *  1. divide the array on 2 parts and compute the best transaction on each range, 
+ *  f.e.
+ *  [3,3,5,0,0,3,1,4]
+ *         |
+ *  find      find
+ *  best      trans on this range 
+ *  trans
+ *          
+ *  to achieve this we have to calc a structure which will contain the best transaction
+ *  on [0, i]  and on [i, n-1] 
  *          
  */
 public class Solution123 {
@@ -28,24 +37,25 @@ public class Solution123 {
         int leftMin = prices[0];
         int rightMax = prices[n - 1];
 
-        int[] leftProfits = new int[n];
+        int[] firstTransProfit = new int[n];
         // fill out the right DP array with an additional zeros for convenience.
-        int[] rightProfits = new int[n + 1];
+        int[] secondTransProfit = new int[n + 1];
 
-        // construct the bidirectional DP array
+        // profit on the 1st part
         for (int l = 1; l < n; ++l) {
-            leftProfits[l] = Math.max(leftProfits[l - 1], prices[l] - leftMin);
+            firstTransProfit[l] = Math.max(firstTransProfit[l - 1], prices[l] - leftMin);
             leftMin = Math.min(leftMin, prices[l]);
         }
-
+        
+        // profit on the 2nd part
         for (int r = n - 2; r > -1; r--) {
-            rightProfits[r] = Math.max(rightProfits[r + 1], rightMax - prices[r]);
+            secondTransProfit[r] = Math.max(secondTransProfit[r + 1], rightMax - prices[r]);
             rightMax = Math.max(rightMax, prices[r]);
         }
 
         int maxProfit = 0;
         for (int i = 0; i < n; ++i) {
-            maxProfit = Math.max(maxProfit, leftProfits[i] + rightProfits[i + 1]);
+            maxProfit = Math.max(maxProfit, firstTransProfit[i] + secondTransProfit[i + 1]);
         }
         return maxProfit;
     }
