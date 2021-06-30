@@ -18,6 +18,9 @@ import problem.model.ListNode;
  * Input: l1 = [2,4,3], l2 = [5,6,4] Output: [7,0,8] Explanation: 342 + 465 =
  * 807
  * 
+ * IDEA:
+ *  traverse both lists simultaneously, and use carry to transfer the sum's excess
+ * 
  * 
  */
 public class Solution2 {
@@ -44,8 +47,5 @@ public class Solution2 {
 		return dummyHead.next;
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
 
 }
