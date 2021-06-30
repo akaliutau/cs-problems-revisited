@@ -5,15 +5,18 @@ import java.util.HashMap;
 /**
  * Given an array of integers and an integer k, you need to find the total
  * number of continuous subarrays whose sum equals to k. 
+ * 
  * Example 1: Input:nums =
- * [1,1,1], k = 2 Output: 2 sum array 
+ * [1,1,1], k = 2 Output: 2 
+ * 
+ * sum array 
  * 
  * [1,2,3] 
  * 
  * The idea behind this approach is as follows: If
- * the cumulative sum(represented by sum[i] for sum ith index) upto two indices
+ * the cumulative sum(represented by sum[i] for sum ith index) up to two indices
  * is the same, the sum of the elements lying in between those indices is zero.
- * Extending the same thought further, if the cumulative sum upto two indices,
+ * Extending the same thought further, if the cumulative sum up to two indices,
  * say i and j is at a difference: sum[i]−sum[j]=tgt, the sum of elements lying
  * between indices i and j is tgt 
  * 
@@ -35,7 +38,7 @@ public class Solution560 {
             int partSum = sum - k;
             // if true, then at some point in the past we already had a sum_j = partSum
             // sum in between = sum - (sum - k) = k
-            // just compose all possible arrays with current point, i.e. (j1,i), (j2,i), ... (jn,i) where n = count in map
+            // just compose all possible arrays with current point, i.e. (j_1,i), (j_2,i), ... (j_n,i) where n = count in map
             if (map.containsKey(partSum)) {
                 count += map.get(partSum);
             }

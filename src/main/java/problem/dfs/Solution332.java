@@ -24,7 +24,7 @@ import java.util.Stack;
  * "SFO", "SJC"]
  * 
  * IDEA:
- *  try all possible routes using dfs and conditions provided
+ * 1. try all possible routes using dfs and conditions provided
  *  
  */
 public class Solution332 {
@@ -49,9 +49,11 @@ public class Solution332 {
 
     }
 
+    // DFS using stack to build dynamically the route 
+    // return true if and only if it was possible to build the route
     boolean fly(String src, Stack<String> path, int len) {
         int curLen = path.size();
-        if (!flights.containsKey(src)) {
+        if (!flights.containsKey(src)) {// early exit
             return curLen == len;
         }
         if (curLen == len) {

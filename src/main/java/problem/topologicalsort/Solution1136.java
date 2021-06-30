@@ -29,42 +29,42 @@ import java.util.Queue;
 public class Solution1136 {
 
 	public int minimumSemesters(int n, int[][] relations) {
-		int[] inCount = new int[n + 1];
+		int[] dependencies = new int[n + 1];
 		List<List<Integer>> graph = new ArrayList<>(n + 1);
 		for (int i = 0; i < n + 1; ++i) {
 			graph.add(new ArrayList<>());
 		}
 		for (int[] relation : relations) {
 			graph.get(relation[0]).add(relation[1]);
-			inCount[relation[1]]++;
+			dependencies[relation[1]]++;
 		}
 		int step = 0;
 		int studiedCount = 0;
 		Queue<Integer> toDo = new LinkedList<>();
 		for (int node = 1; node < n + 1; node++) {
-			if (inCount[node] == 0) {
+			if (dependencies[node] == 0) {
 				toDo.add(node);
 			}
 		}
 		// start learning with BFS
 		while (!toDo.isEmpty()) {
-			// start new semester
+			// start new semester == start new layer
 			step++;
 			int l = toDo.size();
 			for (int i = 0; i < l; i++) {
 				Integer node = toDo.poll();
 				studiedCount++;
 				for (int endNode : graph.get(node)) {
-					inCount[endNode]--;
-					// if all prerequisite courses learned
-					if (inCount[endNode] == 0) {
+					dependencies[endNode]--;
+					// if all prerequisite courses have been learned
+					if (dependencies[endNode] == 0) {
 						toDo.add(endNode);
 					}
 				}
 			}
 		}
 
-		// check if learn all courses
+		// check if learn all courses - could be cyclic dependencies
 		return studiedCount == n ? step : -1;
 	}
 

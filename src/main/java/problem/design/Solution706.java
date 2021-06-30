@@ -15,6 +15,8 @@ import java.util.List;
  * for the key. remove(key) : Remove the mapping for the value key if this map
  * contains the mapping for the key.
  * 
+ * IDEA:
+ * 
  * 
  */
 public class Solution706 {

@@ -70,7 +70,7 @@ public class Solution378 {
 
 		int low = min;
 		int high = max;
-		int ans = -1;
+
 		while (low <= high) {
 			int mid = low + (high - low) / 2;
 			int midCount = getElementsLesserThan(mid, matrix);

@@ -23,7 +23,7 @@ import problem.model.TreeNode;
  *         5   4    <--- bfs level 2
  * 
  * IDEA:
- *  1) use BFS traversing type for tree (i.e. by layers)
+ *  1) use BFS traversing type for tree (i.e. layer by layer)
  *  2) in this type of traversal the last element in layer obviously will be the rightmost 
  * 
  */

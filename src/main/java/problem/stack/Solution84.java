@@ -56,7 +56,7 @@ import java.util.Stack;
  * In this approach, we maintain a stack. Initially, we push a -1 onto the stack to mark the end. 
  * We start with the leftmost bar and keep pushing the current bar's index onto the stack until we get two successive numbers in descending order, 
  * i.e. until we get a[i−1] > a[i]. Now, we start popping the numbers from the stack until we hit a number stack[j] on the stack 
- * such that a [stack[j]]≤a[i]. Every time we pop, we find out the area of rectangle formed using the current element as the height of the rectangle
+ * such that a [stack[j]] <= a[i]. Every time we pop, we find out the area of rectangle formed using the current element as the height of the rectangle
  *  and the difference between the the current element's index pointed to in the original array and the element stack[top−1]−1 as the width
  * 
  * 

@@ -36,7 +36,7 @@ public class Solution542 {
 		if (rows == 0)
 			return matrix;
 		int cols = matrix[0].length;
-		int[][] dist = new int[rows][cols];
+		int[][] dist = new int[rows][cols]; // each element (i,j) contains the distance from (i, j) till the nearest 0 
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
 				dist[i][j] = Integer.MAX_VALUE;
