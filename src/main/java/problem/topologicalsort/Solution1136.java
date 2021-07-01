@@ -35,8 +35,8 @@ public class Solution1136 {
 			graph.add(new ArrayList<>());
 		}
 		for (int[] relation : relations) {
-			graph.get(relation[0]).add(relation[1]);
-			dependencies[relation[1]]++;
+			graph.get(relation[0]).add(relation[1]);// prevCoursei -> nextCoursei, i.e. 
+			dependencies[relation[1]]++;            // have to update number of dependencies for nextCoursei
 		}
 		int step = 0;
 		int studiedCount = 0;

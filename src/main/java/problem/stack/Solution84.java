@@ -1,6 +1,6 @@
 package problem.stack;
 
-import java.util.Stack;
+import java.util.PriorityQueue;
 
 /**
  * Given n non-negative integers representing the histogram's bar height where
@@ -17,6 +17,9 @@ import java.util.Stack;
  *  oooo
  * ooooo
  * 
+ * lets hist = {width, height}
+ * in the beginning:
+ * {1,2} {1,1} {1,5} {1,6} {1,2} {1,3}
  * 
  *    o
  *   oo
@@ -24,6 +27,11 @@ import java.util.Stack;
  *   oo o
  * o oooo
  * oooooo
+ * 
+ * merge pairs starting from the tallest one (in the current moment)
+ * update max rectangle as width X height
+ * 
+ * {1,2} {1,1} {2,5} {1,2} {1,3}
  * 
  * One of the situation:
  *    o
@@ -33,10 +41,13 @@ import java.util.Stack;
  *   oooo
  *  ooooo
  * 
- * Can truncate from left to right, because bars in the middle are the HIGHEST 
+ * Can truncate from left to right, because bars in the middle are the HIGHEST and form the peak
  * 6X1 = 6
  * 5X2 = 10
  * 
+ * {1,2} {1,1} {2,5} {1,2} {1,3}
+ * {1,2} {1,1} {3,2} {1,3}
+ * {1,2} {1,1} {4,2}
  * 
  * after
  * 
@@ -62,36 +73,86 @@ import java.util.Stack;
  * 
  */
 public class Solution84 {
-
-	public int largestRectangleArea(int[] heights) {
-		Stack<Integer> barIndex = new Stack<>();
-		// index of the highest leftmost bar
-		// stack is used to collect only the bars in asc order by their heights
-		barIndex.push(-1);
+	
+	class HNode {
+		int h;
+		int w;
+		HNode prev;
+		HNode next;
 		
-		int maxarea = 0;
-		int n = heights.length;
-		for (int i = 0; i < n; ++i) {
-			// 1st it stack: {2}
-			// 2nd it stack: {1,5,6}
-			while (barIndex.peek() != -1 && heights[barIndex.peek()] >= heights[i]) {// iterate until find a bar lower than current one (i.e. truncate)
-                int idx = barIndex.pop();
-                int h = heights[idx];
-                int w = i - barIndex.peek() - 1;// width excluding the first elem, if no elems then w = i
-				maxarea = Math.max(maxarea, h * w);// the height of right bar is higher => area is defined by left
-			}
-			// here we have a normalized stack, all bars lower than ith
-			barIndex.push(i);
+		public HNode(int h, int w) {
+			this.h = h;
+			this.w = w;
 		}
-		// n it stack: {1,2,3}
-		while (barIndex.peek() != -1) {
-            int idx = barIndex.pop();
-            int w = n - 1 - barIndex.peek();
-			maxarea = Math.max(maxarea, heights[idx] * w);
-			
-		}
-		return maxarea;
+        
+        @Override
+        public String toString(){
+            return "[" + h + ", " + w + "]";  
+        }
+        
 	}
-
+	
+	boolean merge(HNode main, HNode aux) {
+        System.out.println(main.toString() + " + " + aux.toString());
+        if (aux.h > 0){
+		    main.h = Math.min(main.h, aux.h);
+		    main.w ++;
+    		aux.prev.next = aux.next;
+	    	aux.next.prev = aux.prev;
+        }
+        return aux.h > 0;
+	}
+	
+	public int largestRectangleArea(int[] heights) {
+        if (heights.length == 1){
+            return heights[0];
+        }
+		HNode head = new HNode(-1, 0);
+		HNode tail = new HNode(-1, 0);
+		head.next = tail;
+		tail.prev = head;
+		HNode last = head;
+		PriorityQueue<HNode> pq = new PriorityQueue<>((o,p) -> p.h - o.h);
+		
+        int merges = 0;
+		for (int h : heights) {
+            merges ++;
+			HNode node = new HNode(h, 1);
+			node.prev = last;
+			node.next = last.next;
+			last.next = node;
+            if (last.prev != null)
+			    last.prev.next = node;
+			last = node;
+			pq.add(node);
+		}
+        if (merges == 1){
+            return pq.poll().h;
+        }
+		int maxRect = 0;
+		while(merges-- > 1) {
+			HNode node = pq.poll();
+			HNode left = node.prev;
+			HNode right = node.next;
+			int hLeft = node.prev == head ? -1 : node.prev.h;
+			int hRight = node.next == tail ? -1 : node.next.h;
+            System.out.println(merges + ":" + hLeft + " + " + hRight);
+            boolean merged = true;
+            if (hLeft == -1){
+			    merged = merge(node, right);
+            }else if (hRight == -1){
+			    merged = merge(node, left);
+            }else if (hLeft <= hRight) {
+			    merged = merge(node, right);
+			}else {
+			    merged = merge(node, left);
+			}
+			maxRect = Math.max(maxRect, node.h * node.w);
+            if (merged)
+			    pq.add(node);
+		}
+		return maxRect;
+		
+	}
 
 }

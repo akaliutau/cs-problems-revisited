@@ -16,18 +16,18 @@ import java.util.List;
  * contains the mapping for the key.
  * 
  * IDEA:
- * 
+ * 1. use bucket to hold the chained pairs 
  * 
  */
 public class Solution706 {
 
 	class Pair<U, V> {
-		public U first;
-		public V second;
+		public U key;
+		public V value;
 
-		public Pair(U first, V second) {
-			this.first = first;
-			this.second = second;
+		public Pair(U key, V value) {
+			this.key = key;
+			this.value = value;
 		}
 	}
 
@@ -40,8 +40,8 @@ public class Solution706 {
 
 		public Integer get(Integer key) {
 			for (Pair<Integer, Integer> pair : this.bucket) {
-				if (pair.first.equals(key))
-					return pair.second;
+				if (pair.key.equals(key))
+					return pair.value;
 			}
 			return -1;
 		}
@@ -49,8 +49,8 @@ public class Solution706 {
 		public void update(Integer key, Integer value) {
 			boolean found = false;
 			for (Pair<Integer, Integer> pair : this.bucket) {
-				if (pair.first.equals(key)) {
-					pair.second = value;
+				if (pair.key.equals(key)) {
+					pair.value = value;
 					found = true;
 				}
 			}
@@ -60,7 +60,7 @@ public class Solution706 {
 
 		public void remove(Integer key) {
 			for (Pair<Integer, Integer> pair : this.bucket) {
-				if (pair.first.equals(key)) {
+				if (pair.key.equals(key)) {
 					this.bucket.remove(pair);
 					break;
 				}
@@ -72,7 +72,6 @@ public class Solution706 {
 		private int keySpace;
 		private List<Bucket> table;
 
-		/** Initialize your data structure here. */
 		public MyHashMap() {
 			this.keySpace = 1000;
 			this.table = new ArrayList<Bucket>();
@@ -106,8 +105,5 @@ public class Solution706 {
 		}
 	}
 
-	public static void main(String[] arg) {
-		System.out.println(true);
-	}
 
 }

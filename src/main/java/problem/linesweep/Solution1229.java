@@ -22,36 +22,46 @@ import java.util.List;
  * 
  * Example 1:
  * 
- * Input: slots1 = [[10,50],[60,120],[140,210]], 
+ * Input: 
+ * slots1 =       [[10,50],[60,120],[140,210]], 
  * slots2 =        [[0,15],[60,70]],
  * duration = 8 Output: [60,68]
  * 
  * IDEA:
- * 
- * 
- * 
+ * 1. sort intervals
+ * 2. use 2 indexes to find a such pair that:
+ *    a) both intervals are big enough                    <-- if false, we can safely drop this interval as it  
+ *    b) overlapping and overlapping length >= duration
+ *    
+ *    [o0, o1]
+ *      [p0, p1]
+ *    | |    | |
+ *       \  /
+ *       here is an overlapping area => left boundary = max(o0,p0),  right boundary = min(o1,p1)
  */
 public class Solution1229 {
 	
+	// detects the fact of collision of 2 intervals
 	boolean overlaps(int[] a, int[] b) {
 		return b[0] <= a[0] && a[0] <= b[1] || a[0] <= b[0] && b[0] <= a[1];
 	}
 
 	/**
-	 * Only for overlapping intervals
-	 * @param a
-	 * @param b
-	 * @return
+	 * call this if and inly if for overlapping intervals
 	 */
-	int getDuration(int[] a, int[] b) {
+	int getCommonDuration(int[] a, int[] b) {
 		int start = Math.max(a[0], b[0]);
 		int end = Math.min(a[1], b[1]);
 		return end - start;
 	}
+	
+	int length(int[] a) {
+		return a[1] - a[0];
+	}
 
 	public List<Integer> minAvailableDuration(int[][] slots1, int[][] slots2, int duration) {
-		Comparator<int[]> byStart = (a, b) -> Integer.compare(a[0], b[0]);
-		Comparator<int[]> byEnd = (a, b) -> Integer.compare(a[1], b[1]);
+		Comparator<int[]> byStart = (o, p) -> Integer.compare(o[0], p[0]);
+		Comparator<int[]> byEnd = (o, p) -> Integer.compare(o[1], p[1]);
 		
 		Arrays.sort(slots1, byStart.thenComparing(byEnd));
 		Arrays.sort(slots2, byStart.thenComparing(byEnd));
@@ -62,24 +72,24 @@ public class Solution1229 {
 		while (s1 < slots1.length && s2 < slots2.length) {
 			int[] interval1 = slots1[s1];
 			int[] interval2 = slots2[s2];
-			if (interval1[1] - interval1[0] < duration) {// wrong - interval too small
+			if (length(interval1) < duration) {// wrong - interval too small
 				s1++;
-			} else if (interval2[1] - interval2[0] < duration) {// wrong - interval too small
+			} else if (length(interval2) < duration) {// wrong - interval too small
 				s2++;
-			} else if (overlaps(interval1, interval2) && getDuration(interval1, interval2) >= duration) {// can get here, if 1) both intervals are big enough 2) overlapping 3) overlap >= duration
+			} else if (overlaps(interval1, interval2) && getCommonDuration(interval1, interval2) >= duration) {// this block got executed on 1) both intervals are big enough 2) overlapping 3) overlap >= duration
 				int start = Math.max(interval1[0], interval2[0]);
 				result.add(start);
 				result.add(start + duration);
 				return result;
-			} else {
-				if (interval1[0] < interval2[0]) {// omit that started the earliest
+			} else {// this block got executed on failed intervals - advance the earliest pointer 
+				if (interval1[0] < interval2[0]) {// omit the interval which started earlier
 					s1++;
 				} else {
 					s2++;
 				}
 			}
 		}
-		return result;// returns empty list
+		return result;// always returns empty list
 	}
 
 	

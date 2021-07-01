@@ -25,6 +25,9 @@ import java.util.HashMap;
  * new entry in the hashmap corresponding to that sum. If the same sum occurs
  * again, we increment the count corresponding to that sum in the hashmap.
  * 
+ * IDEA:
+ * 
+ * 
  */
 public class Solution560 {
 
