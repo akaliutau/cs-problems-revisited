@@ -17,6 +17,15 @@ import java.util.stream.Collectors;
  * 
  * IDEA:
  * the point is to find such mid that is the center of [mid, mid + k] - this will be the answer most close to the ideal one
+ * detail example:
+ * consider the original array and we have to find a smaller (of the same) window  
+ * 
+ * all possible windows of size 3:
+ * [1,2,3,4,5]
+ * [1,2,3]
+ *   [2,3,4]      <--- the best one, as 3 is near center of window => add ths array as a result
+ *     [3,4,5]
+ * 
  * 
  * [1,2,3,4,5, 6] [1,3]
  *  |   |

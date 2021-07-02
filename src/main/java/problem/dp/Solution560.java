@@ -13,20 +13,18 @@ import java.util.HashMap;
  * 
  * [1,2,3] 
  * 
- * The idea behind this approach is as follows: If
- * the cumulative sum(represented by sum[i] for sum ith index) up to two indices
- * is the same, the sum of the elements lying in between those indices is zero.
- * Extending the same thought further, if the cumulative sum up to two indices,
- * say i and j is at a difference: sum[i]−sum[j]=tgt, the sum of elements lying
- * between indices i and j is tgt 
+ * The idea behind this approach is as follows: 
  * 
- * We traverse over the array numsnums and keep
+ * We traverse over the array nums and keep
  * on finding the cumulative sum. Every time we encounter a new sum, we make a
  * new entry in the hashmap corresponding to that sum. If the same sum occurs
  * again, we increment the count corresponding to that sum in the hashmap.
  * 
  * IDEA:
+ * 1. complementary sum + cumulative add up:
  * 
+ * [1]  <-- have array
+ * [2]  <-- having an element 2 we can compose only 1 pair with complementary sum, namely 1-2, => increase the count of subarrays on 1
  * 
  */
 public class Solution560 {
@@ -45,7 +43,7 @@ public class Solution560 {
             if (map.containsKey(partSum)) {
                 count += map.get(partSum);
             }
-            map.put(sum, map.getOrDefault(sum, 0) + 1);
+            map.compute(sum, (u,v) -> v == null ? 0 : v + 1);
         }
         return count;
     }

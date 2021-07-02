@@ -1,6 +1,7 @@
 package problem.stack;
 
-import java.util.PriorityQueue;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * Given n non-negative integers representing the histogram's bar height where
@@ -16,7 +17,7 @@ import java.util.PriorityQueue;
  *   ooo
  *  oooo
  * ooooo
- * 
+ * 			
  * lets hist = {width, height}
  * in the beginning:
  * {1,2} {1,1} {1,5} {1,6} {1,2} {1,3}
@@ -27,132 +28,42 @@ import java.util.PriorityQueue;
  *   oo o
  * o oooo
  * oooooo
+ *  \  |
+ *   | if we are here, we can use all held h's as the basis for rectangle and track back 
+ *   \ 
+ *    until we meet this elem   
  * 
- * merge pairs starting from the tallest one (in the current moment)
- * update max rectangle as width X height
+ * the stack state:
+ * [2]       <-- variants: 2X1
+ * [1]
+ * [1,5]
+ * [1,5,6]
+ * [1,2]     <-- variants: 6X1, 5X2, 1X3 - note the monotonic decrease of h and increase of w - this is the core of algorithm
+ * [1,2,3]   <-- variants: 3X1, 2X2, 1X3
  * 
- * {1,2} {1,1} {2,5} {1,2} {1,3}
- * 
- * One of the situation:
- *    o
- *   oo
- *   oo
- *   oo o
- *   oooo
- *  ooooo
- * 
- * Can truncate from left to right, because bars in the middle are the HIGHEST and form the peak
- * 6X1 = 6
- * 5X2 = 10
- * 
- * {1,2} {1,1} {2,5} {1,2} {1,3}
- * {1,2} {1,1} {3,2} {1,3}
- * {1,2} {1,1} {4,2}
- * 
- * after
- * 
- *   o
- *  oo
- * ooo
- * 
- * 
- * 012345
- * 
- * stack:
- * [-1,0]
- * 
- * 
- * IDEA: truncate asc seq of bars
- * 
- * In this approach, we maintain a stack. Initially, we push a -1 onto the stack to mark the end. 
- * We start with the leftmost bar and keep pushing the current bar's index onto the stack until we get two successive numbers in descending order, 
- * i.e. until we get a[i−1] > a[i]. Now, we start popping the numbers from the stack until we hit a number stack[j] on the stack 
- * such that a [stack[j]] <= a[i]. Every time we pop, we find out the area of rectangle formed using the current element as the height of the rectangle
- *  and the difference between the the current element's index pointed to in the original array and the element stack[top−1]−1 as the width
  * 
  * 
  */
 public class Solution84 {
 	
-	class HNode {
-		int h;
-		int w;
-		HNode prev;
-		HNode next;
-		
-		public HNode(int h, int w) {
-			this.h = h;
-			this.w = w;
-		}
-        
-        @Override
-        public String toString(){
-            return "[" + h + ", " + w + "]";  
-        }
-        
-	}
-	
-	boolean merge(HNode main, HNode aux) {
-        System.out.println(main.toString() + " + " + aux.toString());
-        if (aux.h > 0){
-		    main.h = Math.min(main.h, aux.h);
-		    main.w ++;
-    		aux.prev.next = aux.next;
-	    	aux.next.prev = aux.prev;
-        }
-        return aux.h > 0;
-	}
-	
 	public int largestRectangleArea(int[] heights) {
-        if (heights.length == 1){
-            return heights[0];
+        if (heights == null || heights.length == 0) return 0;
+        final int n = heights.length;
+        int res = 0;
+        Deque<Integer> stack = new ArrayDeque<>();// stack to hold pointers to the heights array
+        
+        for (int curPos = 0; curPos <= n; curPos++) {
+            int curHeight = curPos == n ? 0 : heights[curPos];  // add a 0 height bar in the end
+            // While the current height is less than the height in stack, pop the element as calculate the area.
+            while (!stack.isEmpty() && curHeight <= heights[stack.peek()]) {
+                int h = heights[stack.pop()];  // Get height in the top stack.
+                int j = stack.isEmpty() ? 0 : stack.peek() + 1;  // Get the most left bar that use h.
+                int area = h * (curPos - j);
+                res = Math.max(res, area);
+            }
+            stack.push(curPos);
         }
-		HNode head = new HNode(-1, 0);
-		HNode tail = new HNode(-1, 0);
-		head.next = tail;
-		tail.prev = head;
-		HNode last = head;
-		PriorityQueue<HNode> pq = new PriorityQueue<>((o,p) -> p.h - o.h);
-		
-        int merges = 0;
-		for (int h : heights) {
-            merges ++;
-			HNode node = new HNode(h, 1);
-			node.prev = last;
-			node.next = last.next;
-			last.next = node;
-            if (last.prev != null)
-			    last.prev.next = node;
-			last = node;
-			pq.add(node);
-		}
-        if (merges == 1){
-            return pq.poll().h;
-        }
-		int maxRect = 0;
-		while(merges-- > 1) {
-			HNode node = pq.poll();
-			HNode left = node.prev;
-			HNode right = node.next;
-			int hLeft = node.prev == head ? -1 : node.prev.h;
-			int hRight = node.next == tail ? -1 : node.next.h;
-            System.out.println(merges + ":" + hLeft + " + " + hRight);
-            boolean merged = true;
-            if (hLeft == -1){
-			    merged = merge(node, right);
-            }else if (hRight == -1){
-			    merged = merge(node, left);
-            }else if (hLeft <= hRight) {
-			    merged = merge(node, right);
-			}else {
-			    merged = merge(node, left);
-			}
-			maxRect = Math.max(maxRect, node.h * node.w);
-            if (merged)
-			    pq.add(node);
-		}
-		return maxRect;
-		
-	}
+        return res;
+    }
 
 }

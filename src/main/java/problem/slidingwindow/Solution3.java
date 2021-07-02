@@ -33,11 +33,12 @@ public class Solution3 {
 		int leftmost = 0;// earliest possible start = MAX {indices of all letters in block}
 		
 		for (int j = 0; j < n; j++) {
-			int lastSeenAt = index[letters[j]];// either -1 or position of letter in the past
+			int curLetter = letters[j];
+			int lastSeenAt = index[curLetter];// either -1 or position of letter in the past
 		    leftmost = Math.max(lastSeenAt + 1, leftmost);
 		    int len = j - leftmost + 1;
 			ans = Math.max(ans, len);
-			index[letters[j]] = j;
+			index[curLetter] = j;
 		}
 		return ans;
 	}
