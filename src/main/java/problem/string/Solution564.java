@@ -13,16 +13,23 @@ import java.util.List;
  * Example 1: Input: "123" Output: "121"
  * 
  * IDEA:
+ * 1. Palindrome is symmetric relatively middle point, so cut off the half and generate available options:
+ * 
+ *     123     -->   half is   12,   12-1,   12+1
+ * 
+ * Palindrome are:             121   111     131 
+ * 
+ * there two edge cases in addition:
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
  * 
  */
 public class Solution564 {
 
-    /**
-     * Builds palindrome from half
-     * @param left
-     * @param even
-     * @return
-     */
     Long getPalindrome(long left, boolean even) {
         long res = left;
         if (!even) {

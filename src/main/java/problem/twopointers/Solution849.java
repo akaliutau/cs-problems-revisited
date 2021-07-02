@@ -21,6 +21,9 @@ package problem.twopointers;
  * 1) use 2 indecies which point to the left and right persons
  * 2) dynamically update these pointers, calculate min distance on each empty place
  * 
+ * 1111000000011
+ *    |       |
+ * seenLeft   seenRight  
  */
 public class Solution849 {
 
@@ -32,9 +35,9 @@ public class Solution849 {
         for (int i = 0; i < n; ++i) {
             if (seats[i] == 1) {
                 seenLeft = i;
-            } else {// triggered on empty seat
+            } else {// this block is triggered on empty seat
                 seenRight = Math.max(seenRight, i);
-                while (seenRight < n && seats[seenRight] == 0) {// find seenRight 1 (after i)
+                while (seenRight < n && seats[seenRight] == 0) {// find seenRight 1 (after i) - a costly operation, but executed only once pre all i-loop
                     seenRight++;
                 }
                 // now: if no persons, seenRight=n else seenRight=index(seat with 1)
