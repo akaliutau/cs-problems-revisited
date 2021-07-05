@@ -21,7 +21,7 @@ import java.util.List;
  * 
  * there two edge cases in addition:
  * 
- * 
+ * 1000 - closest palindromes are 1001 and 999
  * 
  * 
  * 

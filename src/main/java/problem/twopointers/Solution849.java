@@ -19,7 +19,8 @@ package problem.twopointers;
  * 
  * IDEA:
  * 1) use 2 indecies which point to the left and right persons
- * 2) dynamically update these pointers, calculate min distance on each empty place
+ * 2) dynamically update these pointers (note this is not necessary happening on each cycle), calculate min distance on each empty place
+ * 3) note, the position of virtual alex is updated on each cycle, but this is not true for his neighbors
  * 
  * 1111000000011
  *    |       |
