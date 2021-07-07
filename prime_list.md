@@ -35,7 +35,7 @@ Reference index
 
 16. [Problem 295](./src/main/java/problem/design/Solution295.java) (Two Pointers Design Sorting Heap ( Priority Queue) Data Stream)
 
-17. [Problem 127](./src/main/java/problem/bfs/Solution127.java) (Hash Table String BFS)
+17. [Problem 127](N/A) (Hash Table String BFS)
 
 18. [Problem 994](./src/main/java/problem/bfs/Solution994.java) (Array BFS Matrix)
 
@@ -201,11 +201,11 @@ Reference index
 
 99. [Problem 863](./src/main/java/problem/bfs/Solution863.java) (Tree DFS BFS Binary Tree)
 
-100. [Problem 657](N/A) (String Simulation)
+100. [Problem 657](./src/main/java/problem/math/Solution657.java) (String Simulation)
 
 101. [Problem 25](./src/main/java/problem/linkedlist/Solution25.java) (Linked List Recursion)
 
-102. [Problem 841](N/A) (DFS BFS Graph)
+102. [Problem 841](./src/main/java/problem/bfs/Solution841.java) (DFS BFS Graph)
 
 103. [Problem 1740](./src/main/java/problem/tree/Solution1740.java) (Hash Table Tree DFS BFS Binary Tree)
 
@@ -223,9 +223,9 @@ Reference index
 
 110. [Problem 18](./src/main/java/problem/twopointers/Solution18.java) (Array Two Pointers Sorting)
 
-111. [Problem 48](N/A) (Array Math Matrix)
+111. [Problem 48](./src/main/java/problem/array/Solution48.java) (Array Math Matrix)
 
-112. [Problem 646](N/A) (Array Dynamic Programming Greedy Sorting)
+112. [Problem 646](./src/main/java/problem/dp/Solution646.java) (Array Dynamic Programming Greedy Sorting)
 
 113. [Problem 1360](N/A) (Math String)
 
@@ -253,7 +253,7 @@ Reference index
 
 125. [Problem 41](./src/main/java/problem/array/Solution41.java) (Array Hash Table)
 
-126. [Problem 126](N/A) (Hash Table String Backtracking BFS)
+126. [Problem 126](./src/main/java/problem/bfs/Solution126.java) (Hash Table String Backtracking BFS)
 
 127. [Problem 694](./src/main/java/problem/dfs/Solution694.java) (Hash Table DFS BFS Union Find Hash Function)
 
@@ -261,29 +261,29 @@ Reference index
 
 129. [Problem 1244](./src/main/java/problem/design/Solution1244.java) (Hash Table Design Sorting)
 
-130. [Problem 1405](N/A) (String Greedy Heap ( Priority Queue))
+130. [Problem 1405](./src/main/java/problem/priorityqueue/Solution1405.java) (String Greedy Heap ( Priority Queue))
 
-131. [Problem 381](N/A) (Array Hash Table Math Design Randomized)
+131. [Problem 381](./src/main/java/problem/design/Solution381.java) (Array Hash Table Math Design Randomized)
 
 132. [Problem 5](./src/main/java/problem/dp/Solution5.java) (String Dynamic Programming)
 
-133. [Problem 1569](N/A) (Array Math Divide and Conquer Dynamic Programming Tree Union Find Binary Search Tree Memoization Combinatorics Binary Tree)
+133. [Problem 1569](./src/main/java/problem/active/Solution1569.java) (Array Math Divide and Conquer Dynamic Programming Tree Union Find Binary Search Tree Memoization Combinatorics Binary Tree)
 
-134. [Problem 1138](N/A) (Hash Table String)
+134. [Problem 1138](./src/main/java/problem/robots/Solution1138.java) (Hash Table String)
 
 135. [Problem 347](./src/main/java/problem/heap/Solution347.java) (Array Hash Table Divide and Conquer Sorting Heap ( Priority Queue) Bucket Sort Counting Quickselect)
 
 136. [Problem 1105](./src/main/java/problem/dp/Solution1105.java) (Array Dynamic Programming)
 
-137. [Problem 794](N/A) (Array String)
+137. [Problem 794](./src/main/java/problem/game/Solution794.java) (Array String)
 
-138. [Problem 1559](N/A) (Array DFS BFS Union Find Matrix)
+138. [Problem 1559](./src/main/java/problem/dfs/Solution1559.java) (Array DFS BFS Union Find Matrix)
 
-139. [Problem 1547](N/A) (Array Dynamic Programming)
+139. [Problem 1547](./src/main/java/problem/dp/Solution1547.java) (Array Dynamic Programming)
 
 140. [Problem 123](./src/main/java/problem/dp/Solution123.java) (Array Dynamic Programming)
 
-141. [Problem 1222](N/A) (Array Matrix Simulation)
+141. [Problem 1222](./src/main/java/problem/bfs/Solution1222.java) (Array Matrix Simulation)
 
 142. [Problem 437](./src/main/java/problem/tree/Solution437.java) (Tree DFS Binary Tree)
 
@@ -299,11 +299,11 @@ Reference index
 
 148. [Problem 1600](./src/main/java/problem/dfs/Solution1600.java) (Hash Table Tree DFS Design)
 
-149. [Problem 1233](N/A) (Array String Trie)
+149. [Problem 1233](./src/main/java/problem/trie/Solution1233.java) (Array String Trie)
 
-150. [Problem 1071](N/A) (Math String)
+150. [Problem 1071](./src/main/java/problem/math/Solution1071.java) (Math String)
 
-151. [Problem 1344](N/A) (Math)
+151. [Problem 1344](./src/main/java/problem/math/Solution1344.java) (Math)
 
 152. [Problem 695](./src/main/java/problem/dfs/Solution695.java) (Array DFS BFS Union Find Matrix)
 
@@ -313,7 +313,7 @@ Reference index
 
 155. [Problem 632](./src/main/java/problem/twopointers/Solution632.java) (Array Hash Table Greedy Sliding Window Sorting Heap ( Priority Queue))
 
-156. [Problem 970](N/A) (Hash Table Math)
+156. [Problem 970](./src/main/java/problem/math/Solution970.java) (Hash Table Math)
 
 157. [Problem 337](./src/main/java/problem/dfs/Solution337.java) (Dynamic Programming Tree DFS Binary Tree)
 
@@ -333,11 +333,11 @@ Reference index
 
 165. [Problem 1026](./src/main/java/problem/tree/Solution1026.java) (Tree DFS Binary Tree)
 
-166. [Problem 410](N/A) (Array Binary Search Dynamic Programming Greedy)
+166. [Problem 410](./src/main/java/problem/dp/Solution410.java) (Array Binary Search Dynamic Programming Greedy)
 
 167. [Problem 332](./src/main/java/problem/dfs/Solution332.java) (DFS Graph Eulerian Circuit)
 
-168. [Problem 209](N/A) (Array Binary Search Sliding Window Prefix Sum)
+168. [Problem 209](./src/main/java/problem/active/Solution209.java) (Array Binary Search Sliding Window Prefix Sum)
 
 169. [Problem 1229](./src/main/java/problem/linesweep/Solution1229.java) (Array Two Pointers Sorting)
 
@@ -349,15 +349,15 @@ Reference index
 
 173. [Problem 542](./src/main/java/problem/bfs/Solution542.java) (Array Dynamic Programming BFS Matrix)
 
-174. [Problem 1333](N/A) (Array Sorting)
+174. [Problem 1333](./src/main/java/problem/design/Solution1333.java) (Array Sorting)
 
-175. [Problem 715](N/A) (Design Segment Tree Ordered Set)
+175. [Problem 715](./src/main/java/problem/active/Solution715.java) (Design Segment Tree Ordered Set)
 
 176. [Problem 199](./src/main/java/problem/tree/Solution199.java) (Tree DFS BFS Binary Tree)
 
 177. [Problem 560](./src/main/java/problem/dp/Solution560.java) (Array Hash Table Prefix Sum)
 
-178. [Problem 1220](N/A) (Dynamic Programming)
+178. [Problem 1220](./src/main/java/problem/dp/Solution1220.java) (Dynamic Programming)
 
 179. [Problem 706](./src/main/java/problem/design/Solution706.java) (Array Hash Table Linked List Design Hash Function)
 
@@ -365,7 +365,7 @@ Reference index
 
 181. [Problem 279](N/A) (Math Dynamic Programming BFS)
 
-182. [Problem 1386](N/A) (Array Hash Table Greedy Bit Manipulation)
+182. [Problem 1386](./src/main/java/problem/bitmanipulation/Solution1386.java) (Array Hash Table Greedy Bit Manipulation)
 
 183. [Problem 341](N/A) (Stack Tree DFS Design Queue Iterator)
 
@@ -375,7 +375,7 @@ Reference index
 
 186. [Problem 2](./src/main/java/problem/linkedlist/Solution2.java) (Linked List Math Recursion)
 
-187. [Problem 1255](N/A) (Array String Dynamic Programming Backtracking Bit Manipulation Bitmask)
+187. [Problem 1255](./src/main/java/problem/backtracking/Solution1255.java) (Array String Dynamic Programming Backtracking Bit Manipulation Bitmask)
 
 188. [Problem 721](./src/main/java/problem/unionfind/Solution721.java) (Array String DFS BFS Union Find)
 
@@ -433,7 +433,7 @@ Reference index
 
 215. [Problem 50](N/A) (Math Recursion)
 
-216. [Problem 1136](N/A) (Graph Topological Sort)
+216. [Problem 1136](./src/main/java/problem/topologicalsort/Solution1136.java) (Graph Topological Sort)
 
 217. [Problem 72](./src/main/java/problem/dp/Solution72.java) (String Dynamic Programming)
 
@@ -451,7 +451,7 @@ Reference index
 
 224. [Problem 1087](./src/main/java/problem/backtracking/Solution1087.java) (String Backtracking BFS)
 
-225. [Problem 582](N/A) (Array Hash Table Tree DFS BFS)
+225. [Problem 582](./src/main/java/problem/tree/Solution582.java) (Array Hash Table Tree DFS BFS)
 
 226. [Problem 205](./src/main/java/problem/string/Solution205.java) (Hash Table String)
 
@@ -583,7 +583,7 @@ Reference index
 
 290. [Problem 240](./src/main/java/problem/dividenconquer/Solution240.java) (Array Binary Search Divide and Conquer Matrix)
 
-291. [Problem 814](N/A) (Tree DFS Binary Tree)
+291. [Problem 814](./src/main/java/problem/tree/Solution814.java) (Tree DFS Binary Tree)
 
 292. [Problem 100](./src/main/java/problem/tree/Solution100.java) (Tree DFS BFS Binary Tree)
 
@@ -613,7 +613,7 @@ Reference index
 
 305. [Problem 889](N/A) (Array Hash Table Divide and Conquer Tree Binary Tree)
 
-306. [Problem 366](./src/main/java/problem/topologicalsort/Solution366.java) (Tree DFS Binary Tree)
+306. [Problem 366](./src/main/java/problem/tree/Solution366.java) (Tree DFS Binary Tree)
 
 307. [Problem 270](./src/main/java/problem/tree/Solution270.java) (Binary Search Tree DFS Binary Search Tree Binary Tree)
 
@@ -623,7 +623,7 @@ Reference index
 
 310. [Problem 1248](N/A) (Math Sliding Window)
 
-311. [Problem 1047](N/A) (String Stack)
+311. [Problem 1047](./src/main/java/problem/stack/Solution1047.java) (String Stack)
 
 312. [Problem 232](N/A) (Stack Design Queue)
 
@@ -697,7 +697,7 @@ Reference index
 
 347. [Problem 350](N/A) (Array Hash Table Two Pointers Binary Search Sorting)
 
-348. [Problem 244](N/A) (Array Hash Table Two Pointers String Design)
+348. [Problem 244](./src/main/java/problem/design/Solution244.java) (Array Hash Table Two Pointers String Design)
 
 349. [Problem 1314](N/A) (Array Matrix Prefix Sum)
 
@@ -787,9 +787,9 @@ Reference index
 
 392. [Problem 40](N/A) (Array Backtracking)
 
-393. [Problem 112](./src/main/java/problem/active/Solution112.java) (Tree DFS Binary Tree)
+393. [Problem 112](N/A) (Tree DFS Binary Tree)
 
-394. [Problem 114](./src/main/java/problem/active/Solution114.java) (Linked List Stack Tree DFS Binary Tree)
+394. [Problem 114](N/A) (Linked List Stack Tree DFS Binary Tree)
 
 395. [Problem 384](./src/main/java/problem/design/Solution384.java) (Array Math Randomized)
 
@@ -883,7 +883,7 @@ Reference index
 
 440. [Problem 709](N/A) (String)
 
-441. [Problem 111](./src/main/java/problem/active/Solution111.java) (Tree DFS BFS Binary Tree)
+441. [Problem 111](N/A) (Tree DFS BFS Binary Tree)
 
 442. [Problem 1302](./src/main/java/problem/tree/Solution1302.java) (Tree DFS BFS Binary Tree)
 
@@ -897,7 +897,7 @@ Reference index
 
 447. [Problem 136](N/A) (Array Bit Manipulation)
 
-448. [Problem 1869](N/A) (String)
+448. [Problem 1869](./src/main/java/problem/active/Solution1869.java) (String)
 
 449. [Problem 213](./src/main/java/problem/dp/Solution213.java) (Array Dynamic Programming)
 
