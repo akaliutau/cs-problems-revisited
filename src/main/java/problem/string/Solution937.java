@@ -62,10 +62,6 @@ public class Solution937 {
 			suffix = String.join(" ", parts);
 		}
 
-		public String getSuffix() {
-			return suffix;
-		}
-
 	}
 
 	public String[] reorderLogFiles(String[] logs) {
@@ -81,7 +77,7 @@ public class Solution937 {
 				letter.add(log);
 			}
 		}
-		Comparator<Log> byWord = (o, p) -> o.getSuffix().compareToIgnoreCase(p.getSuffix());
+		Comparator<Log> byWord = (o, p) -> o.suffix.compareToIgnoreCase(p.suffix);
 		Comparator<Log> byKey = (o, p) -> o.key.compareToIgnoreCase(p.key);
 		letter.sort(byWord.thenComparing(byKey));
 		String[] res = new String[logs.length];

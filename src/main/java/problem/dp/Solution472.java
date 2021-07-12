@@ -49,7 +49,7 @@ public class Solution472 {
 
 		// Add to the result if last part of the string is found 
 		if (from != 0 && hset.contains(suffix)) {// str = catsdogcats - > cats + dogcats - NOT TRUE
-			result.add(word);// NOTE: we are adding initial string
+			result.add(word);// NOTE: we are NOT adding initial string
 			return true;
 		}
 

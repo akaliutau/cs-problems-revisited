@@ -35,7 +35,7 @@ Reference index
 
 16. [Problem 295](./src/main/java/problem/design/Solution295.java) (Two Pointers Design Sorting Heap ( Priority Queue) Data Stream)
 
-17. [Problem 127](N/A) (Hash Table String BFS)
+17. [Problem 127](./src/main/java/problem/bfs/Solution127.java) (Hash Table String BFS)
 
 18. [Problem 994](./src/main/java/problem/bfs/Solution994.java) (Array BFS Matrix)
 
@@ -253,7 +253,7 @@ Reference index
 
 125. [Problem 41](./src/main/java/problem/array/Solution41.java) (Array Hash Table)
 
-126. [Problem 126](./src/main/java/problem/bfs/Solution126.java) (Hash Table String Backtracking BFS)
+126. [Problem 126](N/A) (Hash Table String Backtracking BFS)
 
 127. [Problem 694](./src/main/java/problem/dfs/Solution694.java) (Hash Table DFS BFS Union Find Hash Function)
 

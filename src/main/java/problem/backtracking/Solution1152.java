@@ -115,8 +115,8 @@ public class Solution1152 {
 
 		// backtracking, found all possible patterns
 		Map<List<String>, Integer> freqMap = new HashMap<>();
-		for (List<String> list : nameToWebsiteVisit.values()) {// for each user
-			dfs(0, list, new ArrayList<>(), freqMap, new HashSet<>());
+		for (List<String> list : nameToWebsiteVisit.values()) {        // for each user
+			dfs(0, list, new ArrayList<>(), freqMap, new HashSet<>()); // NOTE: we are resetting hashset for each user
 		}
 		
 		// find the higher freq pattern and return it

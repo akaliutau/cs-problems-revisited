@@ -45,7 +45,7 @@ import java.util.Set;
  * 2) bfs to find the shortest path
  * 
  */
-public class Solution126 {
+public class Solution127 {
 	class Node {
 		String word;
 		Node parent;

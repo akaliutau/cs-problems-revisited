@@ -136,7 +136,6 @@ public class Solution460 {
 
 			if (size == maxSize) {
 				int count = freq.firstKey();
-                //System.out.println("first key = " + count);
 				Node node = freq.get(count).poll();
 				nodeMap.remove(node.key);
                 size --;
@@ -144,7 +143,7 @@ public class Solution460 {
 
 			Node node = new Node(key, value);
 			nodeMap.put(key, node);
-			freq.computeIfAbsent(node.count, k -> new LinkedList<>()).offer(node);
+			freq.computeIfAbsent(node.count, k -> new LinkedList<>()).add(node);
             size ++;
 		}
 	}
