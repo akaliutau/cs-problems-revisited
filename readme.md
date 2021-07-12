@@ -2,7 +2,7 @@
 About 
 ============
 
-This is one of my everlasting side projects. I have been solving CS puzzles to master my algorithmic skills and to reflect about perfect solution for various CS problems.
+This is one of my everlasting side projects. I solve CS puzzles to master my algorithmic skills and to reflect about perfect solution for various CS problems.
 For the last 10 years I have solved in total 2000+ problems. This repository contains about 500 of them, mostly of mid-level complexity
 
 
