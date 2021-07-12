@@ -18,36 +18,27 @@ import java.util.Arrays;
  */
 public class Solution205 {
 
-    public boolean isIsomorphic(String s, String t) {
-        int[] mapping = new int[256];
-        boolean[] mapped = new boolean[256];
-        Arrays.fill(mapping, -1);
-
-        if (s.length() != t.length()) {
-            return false;
-        }
-
-        for (int i = 0; i < s.length(); i++) {
-            int from = s.charAt(i);
-            int dest = t.charAt(i);
-            
-            if (mapping[from] == -1) {// mapping absent
-                if (!mapped[dest]) {// dest is not mapped yet
-                    mapping[from] = dest;
-                    mapped[dest] = true;
-                }else {
+	public boolean isIsomorphic(String s, String t) {
+        int n = s.length();
+        int[] mapped = new int[256];
+        Arrays.fill(mapped, -1);
+        boolean[] usedChars = new boolean[256];
+        for (int i = 0; i < n; i++){
+            int sChar = s.charAt(i);
+            int tChar = t.charAt(i);
+            if (mapped[sChar] == -1){
+                if (usedChars[tChar]){
                     return false;
                 }
-            }else {// have mapping
-               if (mapping[from] != dest) {// break only if error
+                mapped[sChar] = tChar;
+                usedChars[tChar] = true;
+            }else{
+                if (mapped[sChar] != tChar){
                     return false;
                 }
             }
         }
-        // mapping has been built, no errors so far
         return true;
     }
-
-  
 
 }
