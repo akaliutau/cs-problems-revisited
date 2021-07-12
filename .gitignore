@@ -1,5 +1,6 @@
 /target/
 /src/main/java/problem/active/
+/src/main/java/problem/active2/
 !.mvn/wrapper/maven-wrapper.jar
 *.db
 
