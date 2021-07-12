@@ -21,7 +21,9 @@ import java.util.Queue;
  * 
  * IDEA:
  * 1. build dynamic statistics hash-table dependencies containing statistics about dependencies
- * 2. use graph in the form of hash map  dep => list of courses for fast access - acceleration
+ * 2. use graph in the form of 
+ *    hash map:  dep => list of courses for fast access 
+ *    for acceleration
  * 
  */
 public class Solution210 {
@@ -34,7 +36,7 @@ public class Solution210 {
 		// Create the adjacency list representation of the graph
 		for (int i = 0; i < prerequisites.length; i++) {
 			int course = prerequisites[i][0];
-			int dep = prerequisites[i][1];
+			int dep    = prerequisites[i][1];
 			graph.computeIfAbsent(dep, k -> new ArrayList<>()).add(course);
 
 			// Record in-degree of each vertex
@@ -50,7 +52,7 @@ public class Solution210 {
 		}
 
 		int i = 0;
-		// Process until the Q becomes empty
+		// Process until the Queue becomes empty
 		while (!q.isEmpty()) {
 			int node = q.poll();
 			topologicalOrder[i++] = node; // add to the result
@@ -60,7 +62,7 @@ public class Solution210 {
 				for (Integer neighbor : graph.get(node)) {// reduce the dependency index (in-degree) of each neighbor by 1
 					dependencies[neighbor]--;
 
-					// If dependency index of a neighbor becomes 0, add it to the Q
+					// If dependency index of a neighbor becomes 0, add it to the Queue
 					if (dependencies[neighbor] == 0) {
 						q.add(neighbor);
 					}
