@@ -16,6 +16,10 @@ import java.util.Queue;
  * 
  * IDEA:
  * dynamically update endings using PQ to track the earliest ending
+ *  [0,                  30]
+ *       [5, 10]                <-- this one is ended @10 < 30
+ *               [15, 20]       <-- can be dropped because 15 > 10
+ * 
  */
 public class Solution253 {
 
@@ -47,9 +51,6 @@ public class Solution253 {
 			if (start >= endings.peek()) {// end of all previous ones if and only if it ended earlier
 				endings.poll();// drop the previous interval
 			}
-			// If a new slot is to be assigned, then also we add to the heap,
-			// If an old slot is allocated, then also we have to add to the heap with new
-			// ending time.
 			endings.add(end);
 		}
 

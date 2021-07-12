@@ -59,7 +59,7 @@ public class Solution212 {
 		if (currNode.word != null) {
 			result.add(currNode.word);
 			currNode.word = null;// one can use Set for collector instead
-		}                        // Note: we are continue the process!
+		}                        // Note: we continue the process, because there can be other words deeper in the tree
 
 		board[row][col] = '#';
 

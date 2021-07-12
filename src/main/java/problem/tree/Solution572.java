@@ -23,7 +23,7 @@ import problem.model.TreeNode;
  * 
  * There are 2 DFS processes:
  * 1) dfs - needed to init the 2nd dfs with root @ the same level || asymmetric
- * 2) equals - actual check on tree's equality
+ * 2) equals (dfs by type) - actual check on tree's equality
  * 
  * complexity: in worst case O(n^2)
  */

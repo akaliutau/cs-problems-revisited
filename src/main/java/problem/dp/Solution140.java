@@ -84,7 +84,7 @@ public class Solution140 {
             for (int len = 1; len < length + 1; len++) {
                 List<String> sublist = new ArrayList<>();
 
-                // fill up the values in the dp array - split the word into to 2 = head + tail
+                // fill up the values in the dp array - split the word into 2 = head + tail (we already have known the answer for head)
                 for (int start = 0; start < len; start++) {
                     String tail = s.substring(start, len);
                     if (wordSet.contains(tail)) {

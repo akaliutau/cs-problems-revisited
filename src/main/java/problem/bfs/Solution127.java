@@ -58,7 +58,11 @@ public class Solution127 {
 
 	int minDist = Integer.MAX_VALUE; // looking for only shortest paths
 
-	// used to calculate all possible words which can be built from word by replacing only 1 symbol
+	// used to find all possible words which can be built from word by replacing only 1 symbol
+	// "?og" => [dog, cog, log]
+	// "d?g" => dog
+	// "do?" => dog
+
 	List<String> getSeeds(String word, Map<Integer, List<String>> graph, Set<String> visited) {
 		Set<String> ans = new HashSet<>();
 		char[] orig = word.toCharArray();

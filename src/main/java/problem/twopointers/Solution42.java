@@ -5,7 +5,7 @@ package problem.twopointers;
  * Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
  * 
  * IDEA:
- * 1. the vertical bar of water at point i is defined as the highest available level at this point (line 33)
+ * 1. the vertical bar of water at point i is defined as the highest available level at this point (line 34)
  * 2. for each position define the highest wall seen so far by iterating from the left and by iterating from the right
  * 
  */

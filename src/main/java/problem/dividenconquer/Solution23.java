@@ -19,7 +19,7 @@ public class Solution23 {
         }
 
         ListNode prev = new ListNode(0);
-        ListNode res = prev;
+        ListNode toReturn = prev;
         
         while (l1 != null || l2 != null) {
             if (l1 == null) {
@@ -46,7 +46,7 @@ public class Solution23 {
             prev = prev.next;// make newly added node the last one
         }
         
-        return res.next;
+        return toReturn.next;
     }
 
     /**

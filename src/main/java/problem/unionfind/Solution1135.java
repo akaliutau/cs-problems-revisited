@@ -51,14 +51,14 @@ public class Solution1135 {
 
     public int minimumCost(int n, int[][] connections) {
         int cnt = 0;
-        int ans = 0;
+        int totalCost = 0;
         
         Arrays.sort(connections, (a, b) -> a[2] - b[2]);
         Graph g = new Graph(n);
         
         for (int[] e : connections) {
             if (g.find(e[0]) != g.find(e[1])) {// e[0] and e[1] are not in the same set yet
-                ans += e[2];
+                totalCost += e[2];
                 cnt++;
                 g.union(e[0], e[1]);
                 if (cnt == n - 1) {// connected all cities
@@ -66,7 +66,7 @@ public class Solution1135 {
                 }
             }
         }
-        return cnt == n - 1 ? ans : -1;
+        return cnt == n - 1 ? totalCost : -1;
     }
 
 }

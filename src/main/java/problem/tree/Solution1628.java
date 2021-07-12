@@ -67,7 +67,7 @@ public class Solution1628 {
 
 	/**
 	 * This is the TreeBuilder class. You can treat it as the driver code that takes
-	 * the postinfix input and returns the expression tree represnting it as a Node.
+	 * the postinfix input and returns the expression tree representing it as a Node.
 	 */
 
 	static class TreeBuilder {

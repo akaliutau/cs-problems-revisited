@@ -22,12 +22,16 @@ import java.util.Queue;
  * Input:
  * ["FirstUnique","showFirstUnique","add","showFirstUnique","add","showFirstUnique","add","showFirstUnique"]
  * [[[2,3,5]],[],[5],[],[2],[],[3],[]] Output: [null,2,null,2,null,3,null,-1]
- * Explanation: FirstUnique firstUnique = new FirstUnique([2,3,5]);
- * firstUnique.showFirstUnique(); // return 2 firstUnique.add(5); // the queue
- * is now [2,3,5,5] firstUnique.showFirstUnique(); // return 2
+ * Explanation: 
+ * 
+ * FirstUnique firstUnique = new FirstUnique([2,3,5]);
+ * firstUnique.showFirstUnique(); // return 2 
+ * firstUnique.add(5); // the queue is now [2,3,5,5] 
+ * firstUnique.showFirstUnique(); // return 2
  * firstUnique.add(2); // the queue is now [2,3,5,5,2]
- * firstUnique.showFirstUnique(); // return 3 firstUnique.add(3); // the queue
- * is now [2,3,5,5,2,3] firstUnique.showFirstUnique(); // return -1
+ * firstUnique.showFirstUnique(); // return 3 
+ * firstUnique.add(3); // the queue is now [2,3,5,5,2,3] 
+ * firstUnique.showFirstUnique(); // return -1
  * 
  * IDEA:
  * 1) use queue as a buffer, which is processed each time when showFirstUnique() is invoked
