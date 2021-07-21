@@ -51,7 +51,7 @@ public class Solution503 {
 		for (int i = 2 * n - 1; i > -1; --i) {
 			int curIdx = i % n;
 			
-			//loop: a filter to remove all (smaller then cur) elements from stack
+			//loop: a filter to remove all (smaller than cur) elements from stack
 			while (!stack.empty() && nums[stack.peek()] <= nums[curIdx]) {
 				stack.pop();
 			}

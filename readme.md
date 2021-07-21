@@ -9,7 +9,7 @@ For the last 10 years I have solved in total 2000+ problems. This repository con
 Overview
 ===========
 
-The package <b> problem </b> contains solutions of some medium-level complexity com.problems. The main accent is made on optimization and simplicity of solution. All problems are grouped by category (total 39 categories):
+The package <b> problem </b> contains solutions of some medium-level complexity problems. The main accent is made on optimization and simplicity of solution. All problems are grouped by category (total 39 categories):
 
 array <br/>
 backtracking <br/>

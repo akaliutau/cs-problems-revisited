@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 /**
  * There are a total of numCourses courses you have to take, labeled from 0 to
@@ -47,7 +48,7 @@ public class Solution207 {
 
         // We start from courses that have no prerequisites.
         int totalDeps = prerequisites.length;
-        LinkedList<Integer> queue = new LinkedList<Integer>();
+        Queue<Integer> queue = new LinkedList<>();
         for (Map.Entry<Integer, Course> entry : graph.entrySet()) {
             Course node = entry.getValue();
             if (node.dep == 0) {// we can add this course
@@ -57,7 +58,7 @@ public class Solution207 {
 
         int completedCourses = 0;
         while (queue.size() > 0) {
-            Integer course = queue.pop();
+            Integer course = queue.poll();
 
             for (Integer courseToTake : graph.get(course).courses) {
                 Course childCourse = graph.get(courseToTake);
