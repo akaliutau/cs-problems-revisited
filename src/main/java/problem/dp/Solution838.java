@@ -24,7 +24,7 @@ package problem.dp;
  * 
  * Example 1:
  * 
- * Input: dominoes = "RR.L" Output: "RR.L" 
+ * Input: dominos = "RR.L" Output: "RR.L" 
  * 
  * Explanation: The first domino expends no additional force on the second domino.
  * 
@@ -44,6 +44,10 @@ package problem.dp;
  *                   
  * IDEA2:
  * 
+ * RR.L
+ * 4430  <-- forces from R (populated from left side)
+ * 
+ * 0034  <-- forces from L (populated from right side)
  *                  
  */
 public class Solution838 {
