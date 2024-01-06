@@ -11,4 +11,4 @@ Trees
    
    2.3 Use caching techniques
    
-   2.4 Define main logic with recursion calls
+   2.4 Define main logic with further recursion calls

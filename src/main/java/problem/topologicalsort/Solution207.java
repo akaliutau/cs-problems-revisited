@@ -19,7 +19,8 @@ import java.util.Queue;
  * possible.
  * 
  * IDEA:
- * Start from courses with 0 dependencies
+ * 1) Start from courses with 0 dependencies = add them to initial queue
+ * 2) Then until queue has elements: on each processing - update deps and potentially add new elems to queue
  * 
  */
 public class Solution207 {

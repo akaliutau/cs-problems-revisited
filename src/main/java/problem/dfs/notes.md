@@ -5,11 +5,11 @@ Main idea - traverse through all variants one by one, has strong relation to Bac
 
 Best problems to apply this approach to should have the following features:
 
-1. there must be multiple ways to solve problem, and it is necessary to find the optimal one
+1. there must be multiple ways to solve problem, and it is necessary to find the _optimal_ one
 
 2. the whole space of variants can be represented by the tree of possibilities
 
-3. every path can be segmented
+3. every path can be _segmented_
 
 
 Algorithm:
