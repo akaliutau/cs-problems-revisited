@@ -12,8 +12,7 @@ import java.util.List;
  * 0 and 255, separated by single dots and cannot have leading zeros. For
  * example, "0.1.2.201" and "192.168.1.1" are valid IP addresses and
  * "0.011.255.245", "192.168.1.312" and "192.168@1.1" are invalid IP addresses.
- * 
- * 
+ *
  * 
  * Example 1:
  * 
@@ -39,7 +38,7 @@ public class Solution93 {
 		int m = segment.length();
 		if (m > 3)
 			return false;
-		return (segment.charAt(0) != '0') ? (Integer.valueOf(segment) <= 255) : (m == 1);
+		return (segment.charAt(0) != '0') ? (Integer.parseInt(segment) <= 255) : (m == 1);
 	}
 
 	void addResult(int cutPos) {

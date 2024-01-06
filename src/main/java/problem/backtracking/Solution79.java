@@ -23,12 +23,13 @@ public class Solution79 {
 			return true;
 		}
 		
-		// exit condition for the case if smth went wrong
+		// exit condition for the case if something went wrong or letter is wrong
 		if (row < 0 || row == rows || col < 0 || col == cols || board[row][col] != word.charAt(index)) {
 			return false;
 		}
 
 		boolean found = false;
+		// letter is correct!
 		// backtracking: mark the path before the next exploration in order to avoid repetition
 		char curLet = word.charAt(index);
 		board[row][col] = '#';
@@ -40,7 +41,7 @@ public class Solution79 {
 			}
 		}
 
-		board[row][col] = curLet;
+		board[row][col] = curLet;// restore the state
 		return found;
 	}
 

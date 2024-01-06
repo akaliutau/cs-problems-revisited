@@ -7,9 +7,9 @@ Best problems to apply this approach to should have the following features:
 
 1. there must be multiple ways to solve problem, and it is necessary to find the optimal one
 
-2. the whole space of variants can be represented by the tree of possibilities
+2. the whole space of variants can be represented by the tree of possibilities, traversed using DFS
 
-3. every path can be segmented
+3. every path can be segmented into steps/chunks
 
 
 Algorithm:
@@ -23,8 +23,10 @@ Algorithm:
   2.2 constraint violation
   
 3. if this point has been reached, choose in a consistent way how to lay out the next segment of path; 
-   note it in seen map or similar data structure to avoid infinite loop
+   mark it as `seen` in a map or similar data structure to avoid infinite loop
    
 4. make recursive call
 
 5. clear up seen map to restore initial state 
+
+6. (Optional) if the knowledge of actual path is required, the best structure is Stack

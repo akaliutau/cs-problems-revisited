@@ -30,7 +30,7 @@ import java.util.Set;
  * "I am joy today but was sorrow yesterday"]
  * 
  * IDEA:
- * 
+ * Backtracking on graph (i.e. Graph traversal + dfs)
  * 
  */
 public class Solution1258 {
@@ -58,9 +58,11 @@ public class Solution1258 {
         String cur = arr[idx];
         if (graph.containsKey(cur)) {
             List<String> syn = new ArrayList<>();
-            Set<String> visited = new HashSet<>();
+
+            Set<String> visited = new HashSet<>(); // used only to get synonyms
             getSynFor(syn, visited, cur);// returns syn for happy + happy itself (note the last condition)
-            Collections.sort(syn);
+
+            Collections.sort(syn); // results already will be sorted due to how we build the answer list
             for (String neigh : syn) {
                 placeHolder[idx] = neigh;
                 dfs(res, placeHolder, arr, idx + 1);

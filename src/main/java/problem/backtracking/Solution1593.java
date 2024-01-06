@@ -40,7 +40,7 @@ public class Solution1593 {
 
 	int ans = 0;
 
-	void dfs(String s, Set<String> set) {
+	void dfs(String s, Set<String> set) { // set is to guarantee uniqueness
 		int n = s.length();
 		if (s.equals("")) {
 			ans = Math.max(ans, set.size());
@@ -48,7 +48,7 @@ public class Solution1593 {
 		}
 		for (int end = 1; end <= n; end++) {
 			String substr = s.substring(0, end);
-			if (!set.contains(substr)) {// omit all wrong possibilities
+			if (!set.contains(substr)) {// parts must be unique! => omit all wrong possibilities
 				set.add(substr);
 				dfs(s.substring(end), set);// cut off the first part and continue the procedure with the tail
 				set.remove(substr);// backtracking

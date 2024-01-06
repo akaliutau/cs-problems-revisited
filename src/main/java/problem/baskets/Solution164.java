@@ -20,7 +20,8 @@ import java.util.Arrays;
  * 
  * IDEA:
  * 
- * 1. maximum gap must be greater or equal to  [(max - min ) / (n - 1)], because the smallest value can be achieved on equal buckets; and inequality leads to disbalance
+ * 1. maximum gap must be greater or equal to  [(max - min ) / (n - 1)],
+ *    because the smallest value can be achieved on equal buckets; and inequality leads to disbalance
  * 2. map all numbers to the buckets; collect only max and min values in minBasket and maxBasket arrays
  * 3. iterate through all buckets and calc difference () as gap 
  * 
