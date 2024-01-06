@@ -12,7 +12,7 @@ package problem.array;
  * Example: Input: nums = [2, 1, 4, 3] left = 2 right = 3 Output: 3 
  * 
  * Explanation:
- * There are three subarrays that meet the requirements: [2], [2, 1], [3].
+ * There are three subarrays that meet the requirements: [2], [2, 1], [3] = C([2], [1], [2, 1], [3]) - C([1])
  * 
  * IDEA:
  * 1. count the total amount of arrays lower then upper_boundary:
@@ -20,7 +20,8 @@ package problem.array;
  *  [2, 1, 4, 3]
  *   ----     --  <3
  *   
- *   
+ *   Let C(0, limit) - the number of arrays with max element <= limit
+ *   Then the answer  = C(0, ceil) - C(0, floor-1)
  *
  */
 public class Solution795 {

@@ -8,6 +8,7 @@ package problem.array;
  * constant extra memory. Example 1: Input: nums = [1,2,3] Output: [1,3,2]
  * 
  * [1,3,5,4]
+ *
  * [1,4,5,3] -> [1,4,3,5] reverse
  * 
  * 
@@ -16,7 +17,14 @@ package problem.array;
  * 3    ooo
  * 2    ooo
  * 1   oooo
- * 
+ *
+ * Algorithm:
+ *
+ * 1) find the 1st unordered pair in growing seq of digits
+ * 2) get the point to elem just before this pair
+ * 3) find the digit which is bigger than the pin-pointed one in after sequence
+ * 4) swap
+ *
  * IDEA:
  * 0) represent visually a number as a histogram 
  * 1) find a peak 

@@ -31,7 +31,7 @@ public class Solution128 {
 
         for (int num : numsSet) {
         	// check that num is a beginning of some streak
-            if (!numsSet.contains(num - 1)) {// this block is executed if and only if num is the FIRST element (i.e. [num-1] is absent)
+            if (!numsSet.contains(num - 1)) {// this block is executed if and only if num IS THE FIRST element (i.e. [num-1] is absent)
                 int currentNum = num;
                 int curSubseq = 1;// num is an elem
 

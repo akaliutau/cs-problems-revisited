@@ -35,7 +35,7 @@ public class Solution238 {
 		}
 
 		int right = 1;
-		for (int i = n - 1; i >= 0; i--) {
+		for (int i = n - 1; i >= 0; i--) {// running product from right side - O(1) instead res_right array
 			res[i] = res[i] * right;
 			right *= nums[i];
 		}

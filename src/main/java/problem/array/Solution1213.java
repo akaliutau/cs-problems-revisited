@@ -17,6 +17,12 @@ import java.util.List;
  * IDEA:
  * 1. find and advance the smallest index first (at any time)
  * 2. equalize one by one
+ * [1,2,3,4,5]
+ * [1,2,5,7,9]
+ * [1,3,4,5,8]
+ *
+ * it#0: 1
+ * it#2: 2 < 3 - even if 2 first elems are equal, the 3rd breaks this and we need to advance the wnd index
  *
  */
 public class Solution1213 {
@@ -40,7 +46,7 @@ public class Solution1213 {
 					i++;
 				} else if (arr2[j] < arr3[l]) {
 					j++;
-				} else {
+				} else { // probably the 3rd elem is too small? then advance its index
 					l++;
 				}
 

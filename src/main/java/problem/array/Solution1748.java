@@ -24,10 +24,10 @@ public class Solution1748 {
 		Set<Integer> unique = new HashSet<>();
 		for (int num : nums) {
 			unique.add(num);
+			seen.add(num);
 			if (seen.contains(num)) {
 				unique.remove(num);
 			}
-			seen.add(num);
 		}
 
 		int sum = 0;

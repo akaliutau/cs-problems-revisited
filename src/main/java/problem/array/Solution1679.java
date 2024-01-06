@@ -44,10 +44,11 @@ public class Solution1679 {
 			int compl = k - num;
 			if (compl == num && stat.get(num) > 1) {// edge case when num + num == k, need at least 2 elems of num
 				ans ++;
-				stat.compute(num, (u,v) -> v - 2);
+				stat.compute(num, (u,v) -> v - 2); // update statistics
 			}else if (stat.containsKey(compl) && stat.get(compl) > 0 && stat.get(num) > 0 && compl != num) {
+				// statistics table should contain BOTH numbers
 				ans ++;
-				stat.compute(num, (u,v) -> v - 1);
+				stat.compute(num, (u,v) -> v - 1); // update statistics
 				stat.compute(compl, (u,v) -> v - 1);
 			}
 		}		

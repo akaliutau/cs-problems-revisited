@@ -14,8 +14,7 @@ package problem.array;
  * 
  * Example 1:
  * 
- * Input: A = [1,0,2] Output: true Explanation: There is 1 global inversion, and
- * 1 local inversion.
+ * Input: A = [1,0,2] Output: true Explanation: There is 1 global inversion, and 1 local inversion.
  *
  * IDEA:
  * 1) any local inversion is a global inversion as well => in IdealPermutation ALL inversions are LOCAL

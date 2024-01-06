@@ -9,8 +9,8 @@ package problem.array;
  * maximum is 1.
  * 
  * IDEA:
- * introduce a limit for max function
- * 
+ * 1) introduce a limit for max function (ie. max element with additional constraint) - to find the 2nd biggest
+ * 2) repeat to find the 3rd, 4th, etc
  */
 public class Solution414 {
     

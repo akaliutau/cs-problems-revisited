@@ -17,7 +17,7 @@ package problem.array;
  * 
  * IDEA:
  * 
- * 
+ * iterate once and calculate the running sum
  *
  */
 public class Solution1800 {

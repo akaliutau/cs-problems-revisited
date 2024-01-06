@@ -26,7 +26,7 @@ public class Solution88 {
 		int pos = nums1.length - 1;
 
 		while (pos > -1) {
-			if (pos2 > -1 && pos1 > -1) {
+			if (pos2 > -1 && pos1 > -1) { // if there are elems in both arrays, just poll the biggest and continue
 				if (nums2[pos2] > nums1[pos1]) {
 					nums1[pos] = nums2[pos2];
 					pos2--;
@@ -34,10 +34,10 @@ public class Solution88 {
 					nums1[pos] = nums1[pos1];
 					pos1--;
 				}
-			} else if (pos2 > -1 && pos1 < 0) {
+			} else if (pos2 > -1) { // otherwise just copy the tail
 				nums1[pos] = nums2[pos2];
 				pos2--;
-			} else if (pos1 > -1 && pos2 < 0) {
+			} else if (pos1 > -1) {
 				nums1[pos] = nums1[pos1];
 				pos1--;
 			}

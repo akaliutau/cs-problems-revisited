@@ -27,8 +27,7 @@ import java.util.Arrays;
  * 
  * 
  * 
- * Example 1: Input: A = [1], K = 0 Output: 0 Explanation: B =
- * [1]
+ * Example 1: Input: A = [1], K = 0 Output: 0 Explanation: B = [1]
  */
 public class Solution910 {
 

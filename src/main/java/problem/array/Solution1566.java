@@ -20,10 +20,10 @@ package problem.array;
  * 
  * b1   b2   b3  
  * 
- * Go though block [b_i], comparing it simultaneously with block [b_i+1]
+ * Go through block [b_i], simultaneously comparing it with block [b_i+1]
  * if total length of filled cells ==   (k - 1) * m, pattern found
  * 
- * Like so:
+ * The computing schema:
  * b1 -> b2 (use 2 pointers inside blocks b1 & b2 to go through each elem of each block)
  * b2 -> b3
  * 
