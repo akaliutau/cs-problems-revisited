@@ -27,8 +27,9 @@ import java.util.Map;
  * Output: ["eat","oath"]
  * 
  * IDEA:
- * 1. Use trie to fast access all words which start from specific prefix
- * 2. Simultaneously traverse board and trie structure 
+ * 1. Use BOTH sprawling and trie (i.e. traverse 2 structures at the same time)
+ * 2. Use trie to fast access all words which start from specific prefix
+ * 3. Simultaneously traverse board and trie structure
  * 
  *     b
  *      \
@@ -53,15 +54,16 @@ public class Solution212 {
 	}
 	
 	void backtracking(int row, int col, char[][] board, TrieNode parent, List<String> result) {
+		// initiate the sprawling
 		char letter = board[row][col];
 		TrieNode currNode = parent.children.get(letter);
 
 		if (currNode.word != null) {
-			result.add(currNode.word);
+			result.add(currNode.word); // found the word!
 			currNode.word = null;// one can use Set for collector instead
 		}                        // Note: we continue the process, because there can be other words deeper in the tree
 
-		board[row][col] = '#';
+		board[row][col] = '#'; // mark as seen (previous value is in letter; Note, one can use seen map here)
 
 		int[] rowOffset = {-1, 0, 1,  0 };
 		int[] colOffset = { 0, 1, 0, -1 };

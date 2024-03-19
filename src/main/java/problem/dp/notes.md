@@ -32,7 +32,7 @@ If min/max must be defined during calculations:
 2. During construction of solution determine the very first step - the recursive function
    all the rest parts will be sub-problems, reflecting the first step
 
-3. Define recursive function and memoization data structure
+3. Define _recursive function_ and memoization data structure
 
 ## Note about memo data structure:
  

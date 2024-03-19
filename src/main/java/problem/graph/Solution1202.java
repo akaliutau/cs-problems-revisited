@@ -15,13 +15,20 @@ import java.util.List;
  * 
  * Explanation: Swap s[0] and s[3], s = "bcad"
  * Swap s[1] and s[2], s = "bacd"
- * 
+ *
+ * Graph formulation:
+ * 1) each node - the letter
+ * 2) each edge - path to another letter
+ *
+ *
+ *
  * IDEA:
  * 1) build a network of bi-directional connections between letters
- * 2) for each node-letter: traverse through all graph and find the connected set
- *    f.e. for the example case it should be
+ * 2) for each node-letter: traverse through all graph and find the connected distributed link
+ *    f.e. for the case above it should be
  *     d <-> b , c <-> a
- * 3) sort and re-map all subsets
+ * 3) sort letters in ink in ASC order
+ * 4) use index to map nad override letters in orig string
  * 
  */
 public class Solution1202 {
@@ -39,7 +46,7 @@ public class Solution1202 {
         
     }
     
-      static void find(Letter node, List<Letter> visited) {
+      static void find(Letter node, List<Letter> visited) { // used only to find all linked letters (without order)
         for (Letter n : node.next) {
             if  (n.visited) {
                 continue;
@@ -69,10 +76,10 @@ public class Solution1202 {
             linked.add(node);
             node.visited = true;
             find(node, linked);
-            Collections.sort(linked, (o,p) -> o.id - p.id);
+            linked.sort((o, p) -> o.id - p.id);
             List<Letter> chain = new ArrayList<>(linked);
             
-            Collections.sort(chain, (o,p) -> o.letter - p.letter);
+            chain.sort((o, p) -> o.letter - p.letter);
             
             // transfer and map sorted letters to old ones
             char[] vals = new char[chain.size()];

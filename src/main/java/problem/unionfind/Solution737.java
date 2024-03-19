@@ -43,7 +43,7 @@ public class Solution737 {
                 parent[i] = i;
         }
 
-        public int find(int x) {
+        public int find(int x) { // eventually returns the super-parent, and can be used to test the nodes are in the same set
             if (parent[x] != x)
                 parent[x] = find(parent[x]);
             return parent[x];

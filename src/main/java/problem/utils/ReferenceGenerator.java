@@ -3,30 +3,20 @@ package problem.utils;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.SimpleFileVisitor;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class ReferenceGenerator {
 
-	static final String templ = "%d. [Problem %s](%s) (%s)";
-	static final Path path = Paths.get("./src/");
-	static final String prefix = "Solution";
+	private static final String templ = "%d. [Problem %s](%s) (%s)";
+	private static final Path path = Paths.get("./src/");
+	private static final String prefix = "Solution";
 	
-	static final Set<String> dropRecords = new HashSet<>(Arrays.asList("Database"));
+	private static final Set<String> dropRecords = new HashSet<>(Arrays.asList("Database"));
 	
-	static final Map<String,String> map = new HashMap<>(); 
+	private static final Map<String,String> map = new HashMap<>();
 	
 	static {
 		map.put("Depth-First Search", "DFS");
@@ -48,10 +38,10 @@ public class ReferenceGenerator {
 		Path out = Paths.get("prime_list.md");
 		final int[] counter = new int[1];
 		final int[] missing = new int[1];
-		try (BufferedWriter writer = Files.newBufferedWriter(out, Charset.forName("UTF-8"))) {
+		try (BufferedWriter writer = Files.newBufferedWriter(out, StandardCharsets.UTF_8)) {
 			writer.write("Reference index \n");
 			writer.write("==================== \n\n");
-			read.stream().forEach(line -> {
+			read.forEach(line -> {
 				String[] parts = line.split(",");
 				if (!dropRecords.contains(parts[1].trim())){
 					String ref = getRef(filesMap.get(parts[0]));
@@ -73,14 +63,14 @@ public class ReferenceGenerator {
 		System.out.println("Index generated, " + counter[0] + " records added, " + missing[0] + " missing");
 	}
 	
-	static String getRef(Path path) {
+	private static String getRef(Path path) {
 		if (path == null) {
 			return "N/A";
 		}
 		return path.toString().replace(File.separator, "/");
 	}
 	
-	static String getTags(String str) {
+	private static String getTags(String str) {
 		StringBuilder sb = new StringBuilder();
 		if (str != null) {
 			for (char c : str.toCharArray()) {
@@ -102,7 +92,7 @@ public class ReferenceGenerator {
 	}
 
 
-	static List<Path> getAllFiles() {
+	private static List<Path> getAllFiles() {
 		List<Path> files = new ArrayList<>();
 
 		try {
